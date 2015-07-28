@@ -1,2 +1,6 @@
 # crispy-octo-moo
-Meteor walkthrough.
+Meteor/Ionic walkthrough.
+
+# References:
+
+https://ccoenraets.github.io/ionic-tutorial/ionic-facebook-integration.html
