@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['ngOpenFB'])
+angular.module('starter.controllers', ['starter.services','ngOpenFB'])
 
     .controller('AppCtrl', function ($scope, $ionicModal, $timeout, ngFB) {
 
@@ -53,16 +53,41 @@ angular.module('starter.controllers', ['ngOpenFB'])
         };
     })
 
-    .controller('PlaylistsCtrl', function ($scope) {
-        $scope.playlists = [
-            {title: 'Reggae', id: 1},
-            {title: 'Chill', id: 2},
-            {title: 'Dubstep', id: 3},
-            {title: 'Indie', id: 4},
-            {title: 'Rap', id: 5},
-            {title: 'Cowbell', id: 6}
-        ];
+    .controller('SessionCtrl', function($scope, $stateParams, Session) {
+        $scope.session = Session.get({sessionId: $stateParams.sessionId});
     })
 
-    .controller('PlaylistCtrl', function ($scope, $stateParams) {
-    });
+    .controller('ProfileCtrl', function ($scope, ngFB) {
+        ngFB.api({
+            path: '/me',
+            params: {fields: 'id,name'}
+        }).then(
+            function (user) {
+                $scope.user = user;
+            },
+            function (error) {
+                alert('Facebook error: ' + error.error_description);
+            });
+    })
+
+    .controller('SessionCtrl', function ($scope, $stateParams, Session, ngFB) {
+        $scope.share = function (event) {
+            ngFB.api({
+                method: 'POST',
+                path: '/me/feed',
+                params: {
+                    message: "I'll be attending: '" + $scope.session.title + "' by " +
+                    $scope.session.speaker
+                }
+            }).then(
+                function () {
+                    alert('The session was shared on Facebook');
+                },
+                function () {
+                    alert('An error occurred while sharing this session on Facebook');
+                });
+        };
+    })
+
+    ;
+
