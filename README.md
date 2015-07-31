@@ -6,3 +6,5 @@ Meteor/Ionic walkthrough.
 https://ccoenraets.github.io/ionic-tutorial/ionic-facebook-integration.html
 
 https://developer.linkedin.com/docs/js-sdk
+
+https://github.com/ccoenraets/OpenFB
