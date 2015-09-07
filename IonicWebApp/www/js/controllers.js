@@ -51,13 +51,8 @@ angular.module('starter.controllers', [])
         ///Default behaviors
         ///FB User profile vars
         $rootScope.user = null;
-        $rootScope.name = null;
-        $rootScope.relationship_status = null;
-        $rootScope.work_status = null;
-        $rootScope.birthday = null;
-        $rootScope.location = null;
-        $rootScope.education = null;
-        $rootScope.family = null;
+        $rootScope.userMore = null;
+        $rootScope.userPermissions = null;
         ////test post.
 
 ///
@@ -85,14 +80,46 @@ angular.module('starter.controllers', [])
                                 $rootScope.hideLoading();
                             });
                         ///
-                        //ngFB.api('/me/permissions', function (response) {
-                        //    console.log(response);
-                        //} );
-                        //LoadInfo();
+                        ngFB.api({
+                            path: '/me/permissions',
+                            params: {}
+                        }).then(
+                            function (response) {
+                                $rootScope.userPermissions = response;
+                                console.log("$rootScope.userPermissions:",$rootScope.userPermissions);
+                                $rootScope.hideLoading();
+                                //if can load more informations
+                                $scope.loadMoreFbInfo();
+                            },
+                            function (error) {
+                                alert('Facebook error: ' + error.error_description);
+                                $rootScope.hideLoading();
+                            });
                     } else {
                         alert('Facebook login failed');
                     }
                 });
+        };
+        $scope.loadMoreFbInfo = function() {
+            $rootScope.showLoading();
+            ngFB.api({
+                path: '/me',
+                params: {fields: 'id,name,email,relationship_status,work,birthday,location,education, posts, family'}
+            }).then(
+                function ($response) {
+                    $rootScope.userMore = $response;
+                    console.log("$rootScope.userMore:",$rootScope.userMore);
+                    $rootScope.hideLoading();
+                    //Accept the more fbInfo
+                },
+                function (error) {
+                    alert('Facebook error: ' + error.error_description);
+                    $rootScope.hideLoading();
+                });
+            ///
+            //ngFB.api('/me/permissions', function (response) {
+            //    console.log(response);
+            //} );
         };
     })
     .controller('DashCtrl', function ($scope, $rootScope) {
@@ -114,8 +141,7 @@ angular.module('starter.controllers', [])
         //$scope.chats = Chats.all();
     })
 
-    .controller('AccountSettingsCtrl', function ($scope, $stateParams, Chats) {
-        $scope.chat = Chats.get($stateParams.chatId);
+    .controller('AccountSettingsCtrl', function ($scope, $stateParams) {
     })
 
     .controller('DealsCtrl', function ($scope) {

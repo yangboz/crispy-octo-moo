@@ -1,78 +1,87 @@
 <ion-view view-title="Account Overview">
-  <ion-nav-buttons side="right">
-      <button class="button icon-right ion-gear-a" ui-sref="tab.account-settings">
-      </button>
-  </ion-nav-buttons>
-  <ion-content>
+    <ion-nav-buttons side="right">
+        <button class="button icon-right ion-gear-a" ui-sref="tab.account-settings">
+        </button>
+    </ion-nav-buttons>
+    <ion-content>
 
-      <div class="list card">
+        <div class="list card">
 
-          <div class="item item-avatar">
-              <img src="http://graph.facebook.com/{{$root.user.id}}/picture?width=270&height=270">
-              <h2>{{$root.user.name}}</h2>
-              <p>Married to AABB</p>
-              <p>Have <b>3</b> children</p>
-              <p>Annual income: <b>$44,332</b></p>
-          </div>
+            <div class="item item-avatar">
+                <img ng-src="http://graph.facebook.com/{{$root.user.id}}/picture?width=270&height=270"/>
 
-          <div class="item item-body">
-              <p>
-                  Projected Tax Credits: $10,500
-              </p>
-              <p>
-                  City: {{$root.user.city}}
-              </p>
-              <p>
-                  Residents: 30 Years.
-              </p>
-              <p>
-                  Occupation: Movie star.
-              </p>
-            <b>
-              <p>
-                  Family:
-              </p>
-            </b>
-              <p>
-                  Wife's profession: Super Model
-              </p>
-              <p>
-              <h3>First child</h3>
-              <p>
-                  Name: Hammer Jack
-              </p>
-              <p>
-                  Age: 3 years old
-              </p>
-              <h3>Second child</h3>
-              <p>
-                  Name: Oldi Jack
-              </p>
-              <p>
-                  Age: 1 years old
-              </p>
-              <b>
-                  <p>
-                      Location:
-                  </p>
-              </b>
-              <p>
-                City: HollyWood,CA
-              </p>
-          </div>
+                <h2>{{$root.user.name}}</h2>
 
-      </div>
-    <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/accounts/{{chat.id}}">
-        <img ng-src="{{chat.face}}">
-        <h2>{{chat.name}}</h2>
-        <p>{{chat.lastText}}</p>
-        <i class="icon ion-chevron-right icon-accessory"></i>
+                <p>{{$root.userMore.relationship_status}}</p>
 
-        <ion-option-button class="button-assertive" ng-click="remove(chat)">
-          Delete
-        </ion-option-button>
-      </ion-item>
-    </ion-list>
-  </ion-content>
+                <p>Have <b>3</b> children</p>
+
+                <p>Annual income: <b>$44,332</b></p>
+            </div>
+
+            <div class="item item-body">
+                <p>
+                    Projected Tax Credits: $10,500
+                </p>
+
+                <p>
+                    City: {{$root.user.city}}
+                </p>
+
+                <p>
+                    Residents: birthday at {{$root.userMore.birthday}} Years.
+                </p>
+
+                <p>
+                    Occupation: Movie star.
+                </p>
+                <b>
+                    <p>
+                        Family: {{ $root.userMore.family.data[0].name +'('+ $root.userMore.family.data[0].relationship +
+                        ')' }}
+                    </p>
+                </b>
+
+                <p>
+                    Wife's profession: Super Model
+                </p>
+
+                <p>
+
+                <h3>First child</h3>
+
+                <p>
+                    Name: Hammer Jack
+                </p>
+
+                <p>
+                    Age: 3 years old
+                </p>
+
+                <h3>Second child</h3>
+
+                <p>
+                    Name: Oldi Jack
+                </p>
+
+                <p>
+                    Age: 1 years old
+                </p>
+                <b>
+                    <p>
+                        Location: {{$root.userMore.location.name}}
+                    </p>
+                </b>
+
+                <p>
+                    Work status: first at {{$root.userMore.work[0].employer.name}}
+                </p>
+
+                <p>
+                    Education: {{$root.userMore.education[0].school.name +'('+ $root.userMore.education[0].type + ')'}}
+                </p>
+            </div>
+
+        </div>
+    </ion-content>
 </ion-view>

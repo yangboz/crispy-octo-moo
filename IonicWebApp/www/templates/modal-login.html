@@ -1,5 +1,19 @@
-<label class="item" ng-controller="LoginModalCtrl">
-    <button class="button button-block button-positive" ng-click="fbLogin()">
-        Login with Facebook
-    </button>
-</label>
+<div class="modal" ng-controller="LoginModalCtrl">
+    <ion-header-bar>
+        <h1 class="title">LOGIN</h1>
+
+        <div class="buttons">
+            <button class="button button-clear ion-close-round" ng-show="false" ng-click=""></button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <!--<form ng-submit="submitBtnClickHandler()">-->
+
+        <div class="list">
+            <button class="button button-block button-positive" ng-click="fbLogin()">
+                <i class="icon ion-social-facebook">    Login with Facebook</i>
+            </button>
+        </div>
+        <!--</form>-->
+    </ion-content>
+</div>
