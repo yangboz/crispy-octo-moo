@@ -49,16 +49,46 @@ angular.module('starter.controllers', [])
             // Execute action
         });
         ///Default behaviors
+        ///FB User profile vars
+        $rootScope.user = null;
+        $rootScope.name = null;
+        $rootScope.relationship_status = null;
+        $rootScope.work_status = null;
+        $rootScope.birthday = null;
+        $rootScope.location = null;
+        $rootScope.education = null;
+        $rootScope.family = null;
+        ////test post.
 
 ///
     })
     .controller('LoginModalCtrl', function ($scope, $rootScope,ngFB) {
         $scope.fbLogin = function () {
+            $rootScope.showLoading();
             ngFB.login({scope: 'public_profile,email, user_location, user_relationships, user_education_history, user_work_history, user_birthday, user_posts'}).then(
                 function (response) {
                     if (response.status === 'connected') {
-                        console.log('Facebook login succeeded');
+                        console.log('Facebook User login succeeded');
                         $rootScope.loginModal.hide();
+                        ///
+                        ngFB.api({
+                            path: '/me',
+                            params: {fields: 'id,name'}
+                        }).then(
+                            function (user) {
+                                $rootScope.user = user;
+                                console.log("$rootScope.user:",$rootScope.user);
+                                $rootScope.hideLoading();
+                            },
+                            function (error) {
+                                alert('Facebook error: ' + error.error_description);
+                                $rootScope.hideLoading();
+                            });
+                        ///
+                        //ngFB.api('/me/permissions', function (response) {
+                        //    console.log(response);
+                        //} );
+                        //LoadInfo();
                     } else {
                         alert('Facebook login failed');
                     }
@@ -72,7 +102,7 @@ angular.module('starter.controllers', [])
     .controller('UpdatesCtrl', function ($scope) {
     })
 
-    .controller('AccountsCtrl', function ($scope, Chats) {
+    .controller('AccountsCtrl', function ($scope) {
         // With the new view caching in Ionic, Controllers are only called
         // when they are recreated or on app start, instead of every page change.
         // To listen for when this page is active (for example, to refresh data),
@@ -81,10 +111,7 @@ angular.module('starter.controllers', [])
         //$scope.$on('$ionicView.enter', function(e) {
         //});
 
-        $scope.chats = Chats.all();
-        $scope.remove = function (chat) {
-            Chats.remove(chat);
-        };
+        //$scope.chats = Chats.all();
     })
 
     .controller('AccountSettingsCtrl', function ($scope, $stateParams, Chats) {

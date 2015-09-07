@@ -8,8 +8,8 @@
       <div class="list card">
 
           <div class="item item-avatar">
-              <img src="img/icon_a_04.png">
-              <h2>Marty McFly</h2>
+              <img src="http://graph.facebook.com/{{$root.user.id}}/picture?width=270&height=270">
+              <h2>{{$root.user.name}}</h2>
               <p>Married to AABB</p>
               <p>Have <b>3</b> children</p>
               <p>Annual income: <b>$44,332</b></p>
@@ -20,7 +20,7 @@
                   Projected Tax Credits: $10,500
               </p>
               <p>
-                  City: HollyWood,CA
+                  City: {{$root.user.city}}
               </p>
               <p>
                   Residents: 30 Years.
