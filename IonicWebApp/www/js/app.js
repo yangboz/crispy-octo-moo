@@ -5,9 +5,12 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngOpenFB'])
 
-  .run(function ($ionicPlatform) {
+  .run(function ($ionicPlatform, ngFB) {
+
+      ngFB.init({appId: '759417430835351'});//crispy-octo-moo:1153014161379784
+
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -55,7 +58,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         views: {
           'tab-updates': {
             templateUrl: 'templates/tab-updates.html',
-            controller: 'SettingsCtrl'
+            controller: 'UpdatesCtrl'
           }
         }
       })
