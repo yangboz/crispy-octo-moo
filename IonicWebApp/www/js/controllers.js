@@ -13,17 +13,32 @@ angular.module('starter.controllers', [])
             $ionicLoading.hide();
         };
         ///LoginModal
-        $rootScope.loginModal = undefined;
-        $ionicModal.fromTemplateUrl('templates/modal-login.html', {
+        ////LinkedIn
+        $rootScope.loginModal_li = undefined;
+        $ionicModal.fromTemplateUrl('templates/modal-login-li.html', {
+            scope: $scope,
+            backdropClickToClose: true,
+            animation: 'slide-in-up'
+        }).then(function (modal) {
+            console.log("modal-login-li.html initialization.");
+            $rootScope.loginModal_li = modal;
+            //Login Modal show();
+            if (!window.localStorage["li_ls_crispy_octo_moo"]) {
+                $rootScope.loginModal_li.show();
+            }
+        });
+        ////Facebook
+        $rootScope.loginModal_fb = undefined;
+        $ionicModal.fromTemplateUrl('templates/modal-login-fb.html', {
             scope: $scope,
             backdropClickToClose: false,
             animation: 'slide-in-up'
         }).then(function (modal) {
-            console.log("modal-login.html initialization.");
-            $rootScope.loginModal = modal;
+            console.log("modal-login-fb.html initialization.");
+            $rootScope.loginModal_fb = modal;
             //Login Modal show();
             if (!window.localStorage["fb_ls_crispy_octo_moo"]) {
-                $rootScope.loginModal.show();
+                $rootScope.loginModal_fb.show();
             }
         });
         ///Modal related clean up.
@@ -38,7 +53,8 @@ angular.module('starter.controllers', [])
         });
         //Cleanup the modal when we're done with it!
         $scope.$on('$destroy', function () {
-            $rootScope.loginModal.remove();
+            $rootScope.loginModal_fb.remove();
+            $rootScope.loginModal_li.remove();
         });
         // Execute action on hide modal
         $scope.$on('modal.hidden', function () {
@@ -70,14 +86,14 @@ angular.module('starter.controllers', [])
 
 ///
     })
-    .controller('LoginModalCtrl', function ($scope, $rootScope,ngFB) {
+    .controller('LoginModalCtrl', function ($scope, $rootScope,ngFB ,$linkedIn) {
         $scope.fbLogin = function () {
             $rootScope.showLoading();
             ngFB.login({scope: 'public_profile,email, user_location, user_relationships, user_education_history, user_work_history, user_birthday, user_posts'}).then(
                 function (response) {
                     if (response.status === 'connected') {
                         console.log('Facebook User login succeeded');
-                        $rootScope.loginModal.hide();
+                        $rootScope.loginModal_fb.hide();
                         ///
                         ngFB.api({
                             path: '/me',
@@ -127,13 +143,28 @@ angular.module('starter.controllers', [])
                 },
                 function (error) {
                     alert('Facebook error: ' + error.error_description);
-                    $rootScope.hideLoading();
                 });
             ///
             //ngFB.api('/me/permissions', function (response) {
             //    console.log(response);
             //} );
         };
+        //@see: https://developer.linkedin.com/docs/js-sdk
+        $scope.liLogin = function () {
+            $rootScope.showLoading();
+            $linkedIn.authorize();
+            if($linkedIn.isAuthorized())
+            {
+                $rootScope.hideLoading();
+                console.log("LinkedIn authorized success!",$linkedIn);
+                $rootScope.loginModal_li.hide();
+                ///dump linkedIn info
+                console.log("$linkedIn.profile()",$linkedIn.profile());
+            }else{
+                $rootScope.hideLoading();
+                alert('LinkedIn authorized fail: ' + $linkedIn);
+            }
+        }
     })
     .controller('DashCtrl', function ($scope, $rootScope) {
 

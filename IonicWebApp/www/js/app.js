@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngOpenFB'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngOpenFB', 'ngLinkedIn'])
 
     .run(function ($ionicPlatform, ngFB) {
 
@@ -26,7 +26,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         });
     })
 
-    .config(function ($stateProvider, $urlRouterProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $linkedInProvider) {
 
         // Ionic uses AngularUI Router which uses the concept of states
         // Learn more here: https://github.com/angular-ui/ui-router
@@ -104,4 +104,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/tab/dash');
 
+        //ngLinkedIn
+        $linkedInProvider.set('appKey', '77nayor82qqip3')
+            .set('scope', 'r_basicprofile r_emailaddress rw_company_admin w_share r_network')
+            .set('authorize', true);
     });
