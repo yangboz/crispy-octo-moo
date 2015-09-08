@@ -19,7 +19,7 @@ angular.module('starter.controllers', [])
             backdropClickToClose: false,
             animation: 'slide-in-up'
         }).then(function (modal) {
-            console.log("modal-login.html init!!!");
+            console.log("modal-login.html initialization.");
             $rootScope.loginModal = modal;
             //Login Modal show();
             if (!window.localStorage["fb_ls_crispy_octo_moo"]) {
@@ -53,6 +53,19 @@ angular.module('starter.controllers', [])
         $rootScope.user = null;
         $rootScope.userMore = null;
         $rootScope.userPermissions = null;
+        ////Category values(single selection)
+        $rootScope.incomeCategories = [];
+        $rootScope.prefIncomeCategory = null;
+        $rootScope.filingCategories = [];
+        $rootScope.prefFilingCategory = null;
+        $rootScope.childrenCategories = [];
+        $rootScope.prefChildrenCategory = null;
+        $rootScope.childrenKeywords = [];
+        $rootScope.prefChildrenKeyword = null;
+        $rootScope.mortgageInterests = [];
+        $rootScope.prefMortgageInterest = null;
+        $rootScope.EVCredits = [];
+        $rootScope.prefEVCredit = null;
         ////test post.
 
 ///
@@ -141,11 +154,71 @@ angular.module('starter.controllers', [])
         //$scope.chats = Chats.all();
     })
 
-    .controller('AccountSettingsCtrl', function ($scope, $stateParams) {
+    .controller('AccountSettingsCtrl', function ($scope, $rootScope,IncomeCategoryService,FilingCategoryService,
+                                                 ChildrenCategoryService,EVCreditService,MortgageInterestService,
+                                                 ChildrenKeywordsService,EITCCreditService,Enum,$ionicPopup) {
+        //ng-model
+        //@see: http://odetocode.com/blogs/scott/archive/2013/06/19/using-ngoptions-in-angularjs.aspx
+        ///IncomeCategory
+        console.log("Enum.relationshipStatus[0].value:",Enum.relationshipStatus[0].value);
+        $rootScope.incomeCategories = IncomeCategoryService.get(Enum.relationshipStatus[0].value);//Default setting(Married).
+        console.log("$rootScope.incomeCategories:",$rootScope.incomeCategories);
+        $scope.setIncomeCategorySelected = function (value) {
+            $rootScope.prefIncomeCategory = value;
+            console.log("$rootScope.prefIncomeCategory:",$rootScope.prefIncomeCategory);
+        };
+        ///FilingCategory
+        $rootScope.filingCategories = FilingCategoryService.get(Enum.relationshipStatus[0].value);//Default setting(Married).
+        console.log("$rootScope.filingCategories:",$rootScope.filingCategories);
+        $scope.setFilingCategorySelected = function (value) {
+            $rootScope.prefFilingCategory = value;
+            console.log("$rootScope.prefFilingCategory:",$rootScope.prefFilingCategory);
+        };
+        ///ChildrenCategory
+        $rootScope.childrenCategories = ChildrenCategoryService.all();//Default setting(all).
+        console.log("$rootScope.childrenCategories:",$rootScope.childrenCategories);
+        $scope.setChildrenCategorySelected = function (value) {
+            $rootScope.prefChildrenCategory = value;
+            console.log("$rootScope.prefChildrenCategory:",$rootScope.prefChildrenCategory);
+        };
+        ///ChildrenKeywords
+        $rootScope.childrenKeywords = ChildrenKeywordsService.all();//Default setting(all).
+        console.log("$rootScope.childrenKeywords:",$rootScope.childrenKeywords);
+        $scope.setChildrenKeywordSelected = function (value) {
+            $rootScope.prefChildrenKeyword = value;
+            console.log("$rootScope.prefChildrenKeyword:",$rootScope.prefChildrenKeyword);
+        };
+        ///MortgageInterest
+        $rootScope.mortgageInterests = MortgageInterestService.all();//Default setting(all).
+        console.log("$rootScope.mortgageInterests:",$rootScope.mortgageInterests);
+        $scope.setMortgageInterestSelected = function (value) {
+            $rootScope.prefMortgageInterest = value;
+            console.log("$rootScope.prefMortgageInterest:",$rootScope.prefMortgageInterest);
+        };
+        ///EVCredit
+        $rootScope.EVCredits = EVCreditService.all();//Default setting(all).
+        console.log("$rootScope.EVCredits:",$rootScope.EVCredits);
+        $scope.setEVCreditSelected = function (value) {
+            $rootScope.prefEVCredit = value;
+            console.log("$rootScope.prefEVCredit:",$rootScope.prefEVCredit);
+        };
+        ///EITCCreditService calculate
+        $scope.EITCCreditCalculate = function(){
+            var result = EITCCreditService.get($rootScope.userMore,$rootScope.prefChildrenCategory,$rootScope.prefIncomeCategory);
+            $ionicPopup.alert({
+                title: 'Congratulations!',
+                content: result
+            }).then(function(res) {
+                console.log('EITCCreditService calculated result:',result);
+            });
+        }
     })
-
-    .controller('DealsCtrl', function ($scope) {
+    .controller('AccountInvitesCtrl', function ($scope, $rootScope, $stateParams) {
         $scope.settings = {
             enableFriends: true
         };
+    })
+
+    .controller('DealsCtrl', function ($scope) {
+
     });

@@ -7,72 +7,66 @@
         </div>
     </ion-header-bar>
     <ion-content>
-        <p>...<i class="icon ion-ios-paperplane"></i>...Invite your friends and help them save on their purchases!</p>
-        <ul class="list">
+        <p>...<i class="icon ion-ios-gear-outline"></i>...Category deals and help yourself save on it!</p>
+        <div class="list">
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    Income category:
+                </div>
+                <select ng-model="$root.prefIncomeCategory"
+                        ng-options="item.label for item in $root.incomeCategories"
+                        ng-change="setIncomeCategorySelected($root.prefIncomeCategory)">
+                </select>
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    Filing category:
+                </div>
+                <select ng-model="$root.prefFilingCategory"
+                        ng-options="item.label for item in $root.filingCategories"
+                        ng-change="setFilingCategorySelected($root.prefFilingCategory)">
+                </select>
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    Children number:
+                </div>
+                <select ng-model="$root.prefChildrenCategory"
+                        ng-options="item.label for item in $root.childrenCategories"
+                        ng-change="setChildrenCategorySelected($root.prefChildrenCategory)">
+                </select>
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    Children keyword:
+                </div>
+                <select ng-model="$root.prefChildrenKeyword"
+                        ng-options="item.label for item in $root.childrenKeywords"
+                        ng-change="setChildrenKeywordSelected($root.prefChildrenKeyword)">
+                </select>
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    Mortgage interest:
+                </div>
+                <select ng-model="$root.prefMortgageInterest"
+                        ng-options="item.label for item in $root.mortgageInterests"
+                        ng-change="setMortgageInterestSelected($root.prefMortgageInterest)">
+                </select>
+            </label>
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    EVCredit pref:
+                </div>
+                <select ng-model="$root.prefEVCredit"
+                        ng-options="item.label for item in $root.EVCredits"
+                        ng-change="setEVCreditSelected($root.prefEVCredit)">
+                </select>
+            </label>
+        </div>
 
-            <li class="item item-toggle">
-                <i class="icon ion-social-facebook"></i>
-                FACEBOOK
-                <label class="toggle">
-                    <input type="checkbox" checked>
-
-                    <div class="track">
-                        <div class="handle"></div>
-                    </div>
-                </label>
-            </li>
-
-            <li class="item item-toggle">
-                <i class="icon ion-social-twitter"></i>
-                TWITTER
-                <label class="toggle">
-                    <input type="checkbox" checked>
-
-                    <div class="track">
-                        <div class="handle"></div>
-                    </div>
-                </label>
-            </li>
-
-            <li class="item item-toggle">
-                <i class="icon ion-social-linkedin"></i>
-                LINKED-IN
-                <label class="toggle">
-                    <input type="checkbox" checked>
-
-                    <div class="track">
-                        <div class="handle"></div>
-                    </div>
-                </label>
-            </li>
-
-            <li class="item item-toggle">
-                <i class="icon ion-social-google"></i>
-                GMAIL
-                <label class="toggle">
-                    <input type="checkbox">
-
-                    <div class="track">
-                        <div class="handle"></div>
-                    </div>
-                </label>
-            </li>
-
-            <li class="item item-toggle">
-                <i class="icon ion-social-yahoo"></i>
-                YAHOO
-                <label class="toggle">
-                    <input type="checkbox">
-
-                    <div class="track">
-                        <div class="handle"></div>
-                    </div>
-                </label>
-            </li>
-
-        </ul>
         <label class="item">
-            <button class="button button-block button-positive" type="submit" ng-click="">INVITE</button>
+            <button class="button button-block button-positive" type="submit" ng-click="EITCCreditCalculate()">CALCULATE</button>
         </label>
     </ion-content>
 </ion-view>
