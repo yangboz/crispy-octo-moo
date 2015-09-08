@@ -7,4 +7,6 @@ https://ccoenraets.github.io/ionic-tutorial/ionic-facebook-integration.html
 
 https://developer.linkedin.com/docs/js-sdk
 
+https://github.com/boketto/ngLinkedIn
+
 https://github.com/ccoenraets/OpenFB
