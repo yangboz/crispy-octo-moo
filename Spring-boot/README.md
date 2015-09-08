@@ -3,6 +3,17 @@ Spring-boot + MongoDb + Facbook4J
 
 Using Mongo database with Spring-boot to resolve without FB keyword insight API problem.
 
+How to Run?
+===========
+
+mvn spring-boot:run -Dspring.profiles.active=local
+
+How to Play?
+===========
+
+http://localhost:8083/api/static/index.html
+
+
 References:
 ===========
 

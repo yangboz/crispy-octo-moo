@@ -1,7 +1,5 @@
 package crispy_octo_moo;
 
-import org.neo4j.ogm.session.Session;
-import org.neo4j.ogm.session.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +15,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.SimpleCommandLinePropertySource;
-import org.springframework.data.neo4j.config.Neo4jConfiguration;
-import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
-import org.springframework.data.neo4j.server.Neo4jServer;
-import org.springframework.data.neo4j.server.RemoteServer;
 import org.springframework.data.repository.query.QueryLookupStrategy;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -39,37 +33,13 @@ import javax.annotation.PostConstruct;
 // @ComponentScan
 @SpringBootApplication
 
-@EnableNeo4jRepositories(basePackages = "face_bank.repository", queryLookupStrategy = QueryLookupStrategy.Key.CREATE_IF_NOT_FOUND)
 @EnableTransactionManagement
-public class Application extends Neo4jConfiguration{
+public class Application{
 
     private final Logger log = LoggerFactory.getLogger(Application.class);
 
     @Autowired
     private Environment env;
-
-    @Override
-    @Bean
-    public Neo4jServer neo4jServer() {
-        log.info("Initialising server connection");
-        return new RemoteServer("http://localhost:7474");
-        //return new InProcessServer();
-    }
-
-    @Override
-    @Bean
-    public SessionFactory getSessionFactory() {
-        log.info("Initialising Session Factory");
-        return new SessionFactory("face_bank.domain");
-    }
-
-    @Override
-    @Bean
-    @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
-    public Session getSession() throws Exception {
-        log.info("Initialising session-scoped Session Bean");
-        return super.getSession();
-    }
 
     /**
      * Initializes registrar.
@@ -102,7 +72,8 @@ public class Application extends Neo4jConfiguration{
     /**
      * Set a default profile if it has not been set
      */
-    private static void addDefaultProfile(SpringApplication app, SimpleCommandLinePropertySource source) {
+    @SuppressWarnings("unused")
+	private static void addDefaultProfile(SpringApplication app, SimpleCommandLinePropertySource source) {
         if (!source.containsProperty("spring.profiles.active")) {
             app.setAdditionalProfiles(Constants.SPRING_PROFILE_DEVELOPMENT);
         }
