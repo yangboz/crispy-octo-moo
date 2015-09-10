@@ -86,7 +86,7 @@ angular.module('starter.controllers', [])
 
 ///
     })
-    .controller('LoginModalCtrl', function ($scope, $rootScope,ngFB ,$linkedIn) {
+    .controller('LoginModalCtrl', function ($scope, $rootScope,ngFB ,$linkedIn, UserService,$log) {
         $scope.fbLogin = function () {
             $rootScope.showLoading();
             ngFB.login({scope: 'public_profile,email, user_location, user_relationships, user_education_history, user_work_history, user_birthday, user_posts'}).then(
@@ -103,6 +103,13 @@ angular.module('starter.controllers', [])
                                 $rootScope.user = user;
                                 console.log("$rootScope.user:",$rootScope.user);
                                 $rootScope.hideLoading();
+                                //Synchronize the user info
+                                UserService.save($rootScope.user, function (response) {
+                                    $log.debug("UserService.save() success!", response);
+                                }, function (error) {
+                                    // failure handler
+                                    $log.error("UserService.save() failed:", JSON.stringify(error));
+                                });
                             },
                             function (error) {
                                 alert('Facebook error: ' + error.error_description);

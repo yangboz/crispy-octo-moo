@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngOpenFB', 'ngLinkedIn'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngOpenFB', 'ngLinkedIn','ngCordova','ngResource'])
 
     .run(function ($ionicPlatform, ngFB) {
 
@@ -24,6 +24,28 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                 StatusBar.styleLightContent();
             }
         });
+    })
+    //Support RESTful PATCH
+    //@see: http://stackoverflow.com/questions/20305615/configure-angularjs-module-to-send-patch-request
+    .config(['$httpProvider', function ($httpProvider) {
+        $httpProvider.defaults.headers.patch = {
+            'Content-Type': 'application/json;charset=utf-8'
+        }
+        //@see: http://forum.ionicframework.com/t/ionicloading-in-http-interceptor/4599/7
+        $httpProvider.interceptors.push('TrendicityInterceptor');
+    }])
+    ////$log configure
+    .config(['$logProvider', function ($logProvider) {
+        $logProvider.debugEnabled(true);
+        //TODO:https://github.com/ThomasBurleson/angularjs-logDecorator
+    }])
+    ///ENV_config
+    .constant('CONFIG_ENV', {
+        'api_endpoint_base': 'http://localhost:8083/api/',
+        //'api_endpoint_base': DynamicEnvironment.get('api_endpoint_base'),
+        'api_endpoint': 'http://localhost:8083/api/v1/',
+        //'api_endpoint': DynamicEnvironment.get('api_endpoint_base') + '/',
+        'api_version': '0.0.1'
     })
 
     .config(function ($stateProvider, $urlRouterProvider, $linkedInProvider) {

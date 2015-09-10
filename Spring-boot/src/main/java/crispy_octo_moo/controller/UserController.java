@@ -33,7 +33,7 @@ import facebook4j.FacebookFactory;
  * @author yangboz
  */
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/v1/user")
 public class UserController {
 
 	// ==============

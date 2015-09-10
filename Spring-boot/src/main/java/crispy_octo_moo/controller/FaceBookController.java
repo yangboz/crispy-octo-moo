@@ -31,7 +31,7 @@ import facebook4j.FacebookFactory;
  * @author yangboz
  */
 @RestController
-@RequestMapping("/api/fb")
+@RequestMapping("/v1/fb")
 public class FaceBookController {
 
 	// ==============

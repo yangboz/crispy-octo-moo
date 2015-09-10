@@ -145,6 +145,16 @@ angular.module('starter.services', [])
             }
         };
     })
+    //UserService
+    .factory('UserService', function ($resource, CONFIG_ENV) {
+        var data = $resource(
+            CONFIG_ENV.api_endpoint  + "user/:Id",
+            {Id: "@Id"},
+            {
+                "update": {method: "PUT"}
+            })
+        return data;
+    })
 //@see http://stackoverflow.com/questions/16627860/angular-js-and-ng-swith-when-emulating-enum
     .factory('Enum', [function () {
         var service = {
@@ -183,4 +193,42 @@ angular.module('starter.services', [])
         };
         return service;
     }])
-;
+///@see: http://forum.ionicframework.com/t/ionicloading-in-http-interceptor/4599/7
+    .factory('TrendicityInterceptor',
+    function ($injector, $q, $log) {
+
+        var hideLoadingModalIfNecessary = function () {
+            var $http = $http || $injector.get('$http');
+            if ($http.pendingRequests.length === 0) {
+                $injector.get('$ionicLoading').hide();
+            }
+        };
+
+        return {
+            request: function (config) {
+                $injector.get('$ionicLoading').show();
+
+                // Handle adding the access_token or auth request.
+
+                return config;
+            },
+            requestError: function (rejection) {
+                hideLoadingModalIfNecessary();
+                return $q.reject(rejection);
+            },
+            response: function (response) {
+                hideLoadingModalIfNecessary();
+                return response;
+            },
+            responseError: function (rejection) {
+                hideLoadingModalIfNecessary();
+                //http status code check
+                $log.error("detected what appears to be an Instagram auth error...", rejection);
+                if (rejection.status == 400) {
+                    rejection.status = 401; // Set the status to 401 so that angular-http-auth inteceptor will handle it
+                }
+                return $q.reject(rejection);
+            }
+        };
+    }
+);

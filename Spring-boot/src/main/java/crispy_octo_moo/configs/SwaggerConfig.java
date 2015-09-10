@@ -29,17 +29,17 @@ public class SwaggerConfig {
 	      return new SwaggerSpringMvcPlugin(this.springSwaggerConfig)
 	            .apiInfo(apiInfo())
 //	            .pathProvider(pathProvider)
-	            .includePatterns("/api/.*");
+	            .includePatterns("/v1/.*");
 	   }
 
 	    private ApiInfo apiInfo() {
 	      ApiInfo apiInfo = new ApiInfo(
-	              "face_bank Restful API",
-	              "API for face_bank",
-	              "face_bank API terms of service",
+	              "Crispy-octo-moo Restful API",
+	              "API for Crispy-octo-moo",
+	              "Crispy-octo-moo API terms of service",
 	              "youngwelle@gmail.com",
-	              "face_bank API Licence Type",
-	              "face_bank API License URL"
+	              "Crispy-octo-moo API Licence Type",
+	              "Crispy-octo-moo API License URL"
 	        );
 	      return apiInfo;
 	    }
