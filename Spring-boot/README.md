@@ -23,5 +23,7 @@ https://developers.facebook.com/docs/keyword_insights/
 
 http://facebook4j.org/en/code-examples.html
 
+http://projects.spring.io/spring-social/
+
 http://www.javacodegeeks.com/2013/03/customize-spring-social-connect-framework-for-mongodb.html
 
