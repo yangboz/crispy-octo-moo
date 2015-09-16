@@ -27,3 +27,5 @@ http://projects.spring.io/spring-social/
 
 http://www.javacodegeeks.com/2013/03/customize-spring-social-connect-framework-for-mongodb.html
 
+https://github.com/exacode/spring-social-mongodb
+
