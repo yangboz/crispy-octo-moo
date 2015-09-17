@@ -3,8 +3,6 @@
  */
 package crispy_octo_moo.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 import javax.ws.rs.core.MediaType;
 
@@ -15,17 +13,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wordnik.swagger.annotations.ApiOperation;
 
-import crispy_octo_moo.Constants;
 import crispy_octo_moo.domain.User;
 import crispy_octo_moo.dto.JsonObject;
 import crispy_octo_moo.repository.UserRepository;
-import facebook4j.Facebook;
-import facebook4j.FacebookFactory;
 
 /**
  * The Class UserController.
@@ -35,7 +29,7 @@ import facebook4j.FacebookFactory;
 @RestController
 @RequestMapping("/v1/user")
 public class UserController {
-
+	
 	// ==============
 	// PRIVATE FIELDS
 	// ==============
@@ -43,7 +37,7 @@ public class UserController {
 	// Autowire an object of type UserDao
 	@Autowired
 	private UserRepository _userDao;
-
+	
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON)
 	@ApiOperation(httpMethod = "POST", value = "Response a string describing if the user info is successfully created or not.")
 	public JsonObject create(@RequestBody @Valid User user) {
@@ -76,4 +70,13 @@ public class UserController {
 		this._userDao.delete(id);
 		return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
 	}
+	///Login,@see: http://porterhead.blogspot.co.uk/2013/01/writing-rest-services-in-java-part-4.html
+//	@RequestMapping(value = "login/{providerId}", method = RequestMethod.POST)
+//	@ApiOperation(httpMethod = "POST", value = "Response a result if the  OAuth2Request is successfully updated or not.")
+//	public JsonObject socialLogin(@PathVariable("providerId") String providerId,OAuth2Request request) {
+//		OAuth2ConnectionFactory<?> connectionFactory = (OAuth2ConnectionFactory<?>) connectionFactoryLocator.getConnectionFactory(providerId);
+//        Connection<?> connection = connectionFactory.createConnection(new AccessGrant(request.getAccessToken()));
+//        AuthenticatedUserToken token = userService.socialLogin(connection);
+//        return getLoginResponse(token);
+//	}
 }

@@ -155,6 +155,25 @@ angular.module('starter.services', [])
             })
         return data;
     })
+    //ConnectService
+    .factory('ConnectService', function ($resource, CONFIG_ENV) {
+        var data = $resource(
+            CONFIG_ENV.api_endpoint  + "connect/:providerId",
+            {providerId: "@providerId"},
+            {
+                "update": {method: "PUT"}
+            })
+        return data;
+    })
+    //FbUserProfileService
+    .factory('FbUserProfileService', function ($resource, CONFIG_ENV) {
+        var data = $resource(
+            CONFIG_ENV.api_endpoint  + "connect/facebook/profile/:Token",
+            {Token: "@Token"},
+            {
+            })
+        return data;
+    })
 //@see http://stackoverflow.com/questions/16627860/angular-js-and-ng-swith-when-emulating-enum
     .factory('Enum', [function () {
         var service = {

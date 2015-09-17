@@ -86,7 +86,7 @@ angular.module('starter.controllers', [])
 
 ///
     })
-    .controller('LoginModalCtrl', function ($scope, $rootScope,ngFB ,$linkedIn, UserService,$log) {
+    .controller('LoginModalCtrl', function ($scope, $rootScope,ngFB ,$linkedIn, UserService,$log,FbUserProfileService) {
         $scope.fbLogin = function () {
             $rootScope.showLoading();
             ngFB.login({scope: 'public_profile,email, user_location, user_relationships, user_education_history, user_work_history, user_birthday, user_posts'}).then(
@@ -94,6 +94,9 @@ angular.module('starter.controllers', [])
                     if (response.status === 'connected') {
                         console.log('Facebook User login succeeded');
                         $rootScope.loginModal_fb.hide();
+                        //
+                        var access_token =  response.authResponse.accessToken;
+                        $log.debug('Facebook login succeeded, got access token: ',access_token);
                         ///
                         ngFB.api({
                             path: '/me',
@@ -103,12 +106,19 @@ angular.module('starter.controllers', [])
                                 $rootScope.user = user;
                                 console.log("$rootScope.user:",$rootScope.user);
                                 $rootScope.hideLoading();
-                                //Synchronize the user info
+                                //Synchronize the user info testing
                                 UserService.save($rootScope.user, function (response) {
                                     $log.debug("UserService.save() success!", response);
                                 }, function (error) {
                                     // failure handler
                                     $log.error("UserService.save() failed:", JSON.stringify(error));
+                                });
+                                //UserProfile testing.
+                                FbUserProfileService.get(access_token, function (response) {
+                                    $log.debug("FbUserProfileService.get() success!", response);
+                                }, function (error) {
+                                    // failure handler
+                                    $log.error("FbUserProfileService.get() failed:", JSON.stringify(error));
                                 });
                             },
                             function (error) {
