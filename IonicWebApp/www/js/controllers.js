@@ -107,14 +107,14 @@ angular.module('starter.controllers', [])
                                 console.log("$rootScope.user:",$rootScope.user);
                                 $rootScope.hideLoading();
                                 //Synchronize the user info testing
-                                UserService.save($rootScope.user, function (response) {
-                                    $log.debug("UserService.save() success!", response);
-                                }, function (error) {
-                                    // failure handler
-                                    $log.error("UserService.save() failed:", JSON.stringify(error));
-                                });
+                                //UserService.save($rootScope.user, function (response) {
+                                //    $log.debug("UserService.save() success!", response);
+                                //}, function (error) {
+                                //    // failure handler
+                                //    $log.error("UserService.save() failed:", JSON.stringify(error));
+                                //});
                                 //UserProfile testing.
-                                FbUserProfileService.get(access_token, function (response) {
+                                FbUserProfileService.save({'userId':user.id,'token':access_token}, function (response) {
                                     $log.debug("FbUserProfileService.get() success!", response);
                                 }, function (error) {
                                     // failure handler

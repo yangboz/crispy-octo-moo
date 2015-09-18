@@ -168,8 +168,8 @@ angular.module('starter.services', [])
     //FbUserProfileService
     .factory('FbUserProfileService', function ($resource, CONFIG_ENV) {
         var data = $resource(
-            CONFIG_ENV.api_endpoint  + "connect/facebook/profile/:Token",
-            {Token: "@Token"},
+            CONFIG_ENV.api_endpoint  + "connect/facebook/profile/",
+            {},
             {
             })
         return data;

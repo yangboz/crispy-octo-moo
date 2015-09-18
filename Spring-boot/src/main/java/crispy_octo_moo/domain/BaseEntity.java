@@ -42,7 +42,7 @@ public abstract class BaseEntity implements Serializable {
     }
     
     @Version
-    private int version;
+    private Long version;
 
     /**
      *  All objects will have a unique UUID which allows for the decoupling from DB generated ids
@@ -92,7 +92,7 @@ public abstract class BaseEntity implements Serializable {
         return getUuid().toString();
     }
 
-    public int getVersion() {
+    public Long getVersion() {
         return version;
     }
 
