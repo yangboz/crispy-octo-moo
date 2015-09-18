@@ -8,6 +8,11 @@ public class User {
 	private String id;
 	private String name;
 	
+	// Indicate if a use has a valid facebook account, the default is true, as facebook login is mandatory 
+	private Boolean FacebookAccountExist = true;
+	// Indicate if a use has a valid linkedin account
+	private Boolean LinkedInAccountExist = false;
+	
 	public String getId() {
 		return id;
 	}
@@ -19,6 +24,18 @@ public class User {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public Boolean getFacebookAccountExist() {
+		return FacebookAccountExist;
+	}
+	public void setFacebookAccountExist(Boolean facebookAccountExist) {
+		FacebookAccountExist = facebookAccountExist;
+	}
+	public Boolean getLinkedInAccountExist() {
+		return LinkedInAccountExist;
+	}
+	public void setLinkedInAccountExist(Boolean linkedInAccountExist) {
+		LinkedInAccountExist = linkedInAccountExist;
 	}
 
 }
