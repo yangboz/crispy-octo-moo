@@ -3,17 +3,21 @@
         <h1 class="title">LOGIN</h1>
 
         <div class="buttons">
-            <button class="button button-clear ion-close-round" ng-show="true" ng-click="$root.loginModal_li.hide()"></button>
+            <button class="button button-clear ion-close-round" ng-show="false" ng-click="$root.loginModal_li.hide()"></button>
         </div>
     </ion-header-bar>
     <ion-content>
         <!--<form ng-submit="submitBtnClickHandler()">-->
 
-        <div class="list">
+        <div class="list" align="center">
             <button class="button button-block button-positive" ng-click="liLogin()">
                 <i class="icon ion-social-linkedin">    Login with LinkedIn</i>
             </button>
+            <button class="button button-clear button-positive" ng-click="$root.loginModal_li.hide()">
+                SKIP
+            </button>
         </div>
+
         <!--</form>-->
     </ion-content>
 </div>
