@@ -1,5 +1,5 @@
 package crispy_octo_moo.domain;
 
-public class UserDeals {
+public class Snap415UserDeals {
 
 }

@@ -38,7 +38,7 @@ angular.module('starter.controllers', [])
             $rootScope.loginModal_fb = modal;
             //Login Modal show();
             if (!window.localStorage["fb_ls_crispy_octo_moo"]) {
-                $rootScope.loginModal_fb.show();
+                //$rootScope.loginModal_fb.show();
             }
         });
         ///Modal related clean up.
@@ -86,7 +86,7 @@ angular.module('starter.controllers', [])
 
 ///
     })
-    .controller('LoginModalCtrl', function ($scope, $rootScope,ngFB ,$linkedIn, UserService,$log,FbUserProfileService) {
+    .controller('LoginModalCtrl', function ($scope, $rootScope,ngFB ,$linkedIn, UserService,$log,FbUserService,LiUserService) {
         $scope.fbLogin = function () {
             $rootScope.showLoading();
             ngFB.login({scope: 'public_profile,email, user_location, user_relationships, user_education_history, user_work_history, user_birthday, user_posts'}).then(
@@ -113,12 +113,12 @@ angular.module('starter.controllers', [])
                                 //    // failure handler
                                 //    $log.error("UserService.save() failed:", JSON.stringify(error));
                                 //});
-                                //UserProfile testing.
-                                FbUserProfileService.save({'userId':user.id,'token':access_token}, function (response) {
-                                    $log.debug("FbUserProfileService.get() success!", response);
+                                //Sync the Facebook user profile.
+                                FbUserService.save({'userId':user.id,'token':access_token}, function (response) {
+                                    $log.debug("FbUserService.get() success!", response);
                                 }, function (error) {
                                     // failure handler
-                                    $log.error("FbUserProfileService.get() failed:", JSON.stringify(error));
+                                    $log.error("FbUserService.get() failed:", JSON.stringify(error));
                                 });
                             },
                             function (error) {
@@ -169,14 +169,34 @@ angular.module('starter.controllers', [])
         //@see: https://developer.linkedin.com/docs/js-sdk
         $scope.liLogin = function () {
             $rootScope.showLoading();
-            $linkedIn.authorize();
+            //@see: http://blog.ionic.io/oauth-ionic-ngcordova/
+            //@see: https://github.com/nraboy/ng-cordova-oauth
+            //$cordovaOauth.linkedin("77nayor82qqip3", "UJOUycxP5UgdD3da", ["r_basicprofile", "r_network", "r_emailaddress",
+            //    "rw_company_admin", "w_share rw_nus"]).then(function(result) {
+            //    console.log("Response LinkedIn Object -> " + JSON.stringify(result));
+            //}, function(error) {
+            //    console.log("Error -> " + error);
+            //});
+            //$cordovaOauth.linkedin(string clientId, string clientSecret, array appScope, string state);
+            //@see:https://developer-programs.linkedin.com/documents/javascript-api-tutorial
+            var resp = $linkedIn.authorize();
+            console.log("$linkedIn.authorize() resp:",resp);
             if($linkedIn.isAuthorized())
             {
                 $rootScope.hideLoading();
                 console.log("LinkedIn authorized success!",$linkedIn);
                 $rootScope.loginModal_li.hide();
-                ///dump linkedIn info
-                console.log("$linkedIn.profile()",$linkedIn.profile());
+                ///$linkedIn.profile(ids, field, params) // get user(s) profile(s).
+                //@see:https://github.com/boketto/ngLinkedIn
+                //@see:https://developer.linkedin.com/docs/fields
+                console.log("$linkedIn.profile()",$linkedIn.profile('me',['id','first-name'])['$$state']);
+                //TODO://Sync the Facebook user profile.
+                LiUserService.save({'userId':user.id,'token':access_token}, function (response) {
+                    $log.debug("LiUserService.get() success!", response);
+                }, function (error) {
+                    // failure handler
+                    $log.error("LiUserService.get() failed:", JSON.stringify(error));
+                });
             }else{
                 $rootScope.hideLoading();
                 alert('LinkedIn authorized fail: ' + $linkedIn);

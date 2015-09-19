@@ -183,6 +183,7 @@ angular.module('ngLinkedIn', [])
                     $rootScope.$apply() ;
                 }
             };
+            //console.log("js_script:",js_script);
             document.getElementsByTagName('head')[0].appendChild(js_script);
 
         }

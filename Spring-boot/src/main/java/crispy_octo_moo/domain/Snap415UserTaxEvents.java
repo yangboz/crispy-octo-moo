@@ -2,15 +2,19 @@ package crispy_octo_moo.domain;
 
 import org.springframework.data.annotation.Id;
 
-public class UserPosts {
+public class Snap415UserTaxEvents {
 
 	@Id
 	private String id;
 	
 	//This is the user id for linking a user's profile to a user entity
-	private String userid;
+	private String 	userid;
 		
-	private String post;
+	private String 	taxevent;
+	
+	private String 	taxcategory;
+	
+	private int		taxcredit;
 	
 
 	public String getId() {

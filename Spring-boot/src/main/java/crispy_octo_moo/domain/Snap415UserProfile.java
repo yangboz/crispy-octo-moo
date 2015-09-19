@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @SuppressWarnings("serial")
 @Document(collection = "com_user_profile")
-public class UserProfile extends BaseEntity{
+public class Snap415UserProfile extends BaseEntity{
 
 	// @Id
 	// private String id;

@@ -3,38 +3,26 @@
  */
 package crispy_octo_moo.controller;
 
-import java.util.List;
-import java.util.Locale;
-
 import javax.inject.Inject;
 import javax.validation.Valid;
-import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.request.WebRequest;
 
 import com.wordnik.swagger.annotations.ApiOperation;
 
-import crispy_octo_moo.Constants;
-import crispy_octo_moo.domain.FbUser;
-import crispy_octo_moo.domain.UserProfile;
+import crispy_octo_moo.domain.Snap415FbUser;
 import crispy_octo_moo.dto.JsonObject;
 import crispy_octo_moo.dto.UserInfo;
-import crispy_octo_moo.repository.MongoConnectionRepository;
 import crispy_octo_moo.repository.FbUserRepository;
 
 /**
@@ -116,7 +104,7 @@ public class FacebookConnectController {
 		//@see: http://docs.spring.io/spring-social-facebook/docs/2.0.1.RELEASE/reference/htmlsingle/
 		org.springframework.social.facebook.api.User profile = facebook.userOperations().getUserProfile();
 		//Synchronize the FB user profile to DB.
-		FbUser fbUser = new FbUser(profile.getId(), profile.getName(), profile.getFirstName(), profile.getLastName(), profile.getGender(), profile.getLocale());
+		Snap415FbUser fbUser = new Snap415FbUser(profile.getId(), profile.getName(), profile.getFirstName(), profile.getLastName(), profile.getGender(), profile.getLocale());
 		fbUser.setIncome(-1);
 		fbUser.setNumberofChildren(-1);
 		fbUser.setTaxfilingstatus("NIL");

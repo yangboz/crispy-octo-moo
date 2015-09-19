@@ -165,10 +165,19 @@ angular.module('starter.services', [])
             })
         return data;
     })
-    //FbUserProfileService
-    .factory('FbUserProfileService', function ($resource, CONFIG_ENV) {
+    //FacebookUserService
+    .factory('FbUserService', function ($resource, CONFIG_ENV) {
         var data = $resource(
             CONFIG_ENV.api_endpoint  + "connect/facebook/profile/",
+            {},
+            {
+            })
+        return data;
+    })
+    //LinkedInUserService
+    .factory('LiUserService', function ($resource, CONFIG_ENV) {
+        var data = $resource(
+            CONFIG_ENV.api_endpoint  + "connect/linkedIn/profile/",
             {},
             {
             })
