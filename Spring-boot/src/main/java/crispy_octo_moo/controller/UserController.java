@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.wordnik.swagger.annotations.ApiOperation;
 
-import crispy_octo_moo.domain.Snap415FbUser;
+import crispy_octo_moo.domain.FbUserProfile;
 import crispy_octo_moo.dto.JsonObject;
-import crispy_octo_moo.repository.FbUserRepository;
+import crispy_octo_moo.repository.FacebookUserRepository;
 
 /**
  * The Class UserController.
@@ -36,11 +36,11 @@ public class UserController {
 
 	// Autowire an object of type UserDao
 	@Autowired
-	private FbUserRepository _userDao;
+	private FacebookUserRepository _userDao;
 	
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON)
 	@ApiOperation(httpMethod = "POST", value = "Response a string describing if the user info is successfully created or not.")
-	public JsonObject create(@RequestBody @Valid Snap415FbUser user) {
+	public JsonObject create(@RequestBody @Valid FbUserProfile user) {
 		return new JsonObject(_userDao.save(user));
 	}
 
@@ -52,13 +52,13 @@ public class UserController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@ApiOperation(httpMethod = "GET", value = "Response a string describing if the user info id is successfully get or not.")
-	public Snap415FbUser get(@PathVariable("id") String id) {
+	public FbUserProfile get(@PathVariable("id") String id) {
 		return this._userDao.findOne(id);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	@ApiOperation(httpMethod = "PUT", value = "Response a string describing if the  user info is successfully updated or not.")
-	public JsonObject update(@PathVariable("id") String id, @RequestBody @Valid Snap415FbUser user) {
+	public JsonObject update(@PathVariable("id") String id, @RequestBody @Valid FbUserProfile user) {
 //		User find = this._userDao.findOne(id);
 		user.setId(id);
 		return new JsonObject(this._userDao.save(user));

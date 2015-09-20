@@ -12,10 +12,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @SuppressWarnings("serial")
-@Document(collection = "snap415_fb_user")
-public class Snap415FbUser extends User {
+@Document(collection = "snap415_fb_user_profile")
+public class FbUserProfile extends User {
 
-    public Snap415FbUser(String id, String name, String firstName, String lastName, String gender, Locale locale) {
+    public FbUserProfile(String id, String name, String firstName, String lastName, String gender, Locale locale) {
         super(id, name, firstName, lastName, gender, locale);
     }
 

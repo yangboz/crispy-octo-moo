@@ -177,7 +177,7 @@ angular.module('starter.services', [])
     //LinkedInUserService
     .factory('LiUserService', function ($resource, CONFIG_ENV) {
         var data = $resource(
-            CONFIG_ENV.api_endpoint  + "connect/linkedIn/profile/",
+            CONFIG_ENV.api_endpoint  + "connect/linkedin/profile/",
             {},
             {
             })

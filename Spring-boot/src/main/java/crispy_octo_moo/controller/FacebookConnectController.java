@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.wordnik.swagger.annotations.ApiOperation;
 
-import crispy_octo_moo.domain.Snap415FbUser;
+import crispy_octo_moo.domain.FbUserProfile;
 import crispy_octo_moo.dto.JsonObject;
 import crispy_octo_moo.dto.UserInfo;
-import crispy_octo_moo.repository.FbUserRepository;
+import crispy_octo_moo.repository.FacebookUserRepository;
 
 /**
  * The Class FacebookConnectController.
@@ -40,7 +40,7 @@ public class FacebookConnectController {
 	
 	// Autowire an object of type UserDao
 	@Autowired
-	private FbUserRepository _fbUserDao;
+	private FacebookUserRepository _fbUserDao;
 	
 //	@Inject
 //	private ConnectionRepository connectionRepository;
@@ -104,7 +104,7 @@ public class FacebookConnectController {
 		//@see: http://docs.spring.io/spring-social-facebook/docs/2.0.1.RELEASE/reference/htmlsingle/
 		org.springframework.social.facebook.api.User profile = facebook.userOperations().getUserProfile();
 		//Synchronize the FB user profile to DB.
-		Snap415FbUser fbUser = new Snap415FbUser(profile.getId(), profile.getName(), profile.getFirstName(), profile.getLastName(), profile.getGender(), profile.getLocale());
+		FbUserProfile fbUser = new FbUserProfile(profile.getId(), profile.getName(), profile.getFirstName(), profile.getLastName(), profile.getGender(), profile.getLocale());
 		fbUser.setIncome(-1);
 		fbUser.setNumberofChildren(-1);
 		fbUser.setTaxfilingstatus("NIL");

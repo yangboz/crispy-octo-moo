@@ -7,21 +7,23 @@ import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.Version;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Document
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 @SuppressWarnings("serial")
 public abstract class BaseEntity implements Serializable {
     @Id
+    @Field("uuid")
     private String id;
 
     public String getId() {
         return id;
     }
-    
+
     public void setId(String id) {
         this.id = id;
     }
@@ -40,13 +42,12 @@ public abstract class BaseEntity implements Serializable {
         if (id == null) return other.id == null;
         return id.equals(other.id);
     }
-    
+
     @Version
     private Long version;
 
     /**
-     *  All objects will have a unique UUID which allows for the decoupling from DB generated ids
-     *
+     * All objects will have a unique UUID which allows for the decoupling from DB generated ids
      */
 //    @Column(length=36)
     private String uuid;
@@ -78,12 +79,12 @@ public abstract class BaseEntity implements Serializable {
     /**
      * In most instances we can rely on the UUID to identify the object.
      * Subclasses may want a user friendly identifier for constructing easy to read urls
-     *
+     * <p/>
      * <code>
-     *    /user/1883c578-76be-47fb-a5c1-7bbea3bf7fd0 using uuid as the identifier
-     *
-     *    /user/jsmith using the username as the identifier
-     *
+     * /user/1883c578-76be-47fb-a5c1-7bbea3bf7fd0 using uuid as the identifier
+     * <p/>
+     * /user/jsmith using the username as the identifier
+     * <p/>
      * </code>
      *
      * @return Object unique identifier for the object

@@ -38,7 +38,7 @@ angular.module('starter.controllers', [])
             $rootScope.loginModal_fb = modal;
             //Login Modal show();
             if (!window.localStorage["fb_ls_crispy_octo_moo"]) {
-                //$rootScope.loginModal_fb.show();
+                $rootScope.loginModal_fb.show();
             }
         });
         ///Modal related clean up.
@@ -86,7 +86,8 @@ angular.module('starter.controllers', [])
 
 ///
     })
-    .controller('LoginModalCtrl', function ($scope, $rootScope,ngFB ,$linkedIn, UserService,$log,FbUserService,LiUserService) {
+    .controller('LoginModalCtrl', function ($scope, $rootScope,ngFB ,$linkedIn, UserService,$log,
+                                            FbUserService,LiUserService,$http) {
         $scope.fbLogin = function () {
             $rootScope.showLoading();
             ngFB.login({scope: 'public_profile,email, user_location, user_relationships, user_education_history, user_work_history, user_birthday, user_posts'}).then(
@@ -168,7 +169,9 @@ angular.module('starter.controllers', [])
         };
         //@see: https://developer.linkedin.com/docs/js-sdk
         $scope.liLogin = function () {
+            //$linkedIn.refresh();
             $rootScope.showLoading();
+            //
             //@see: http://blog.ionic.io/oauth-ionic-ngcordova/
             //@see: https://github.com/nraboy/ng-cordova-oauth
             //$cordovaOauth.linkedin("77nayor82qqip3", "UJOUycxP5UgdD3da", ["r_basicprofile", "r_network", "r_emailaddress",
@@ -177,30 +180,51 @@ angular.module('starter.controllers', [])
             //}, function(error) {
             //    console.log("Error -> " + error);
             //});
-            //$cordovaOauth.linkedin(string clientId, string clientSecret, array appScope, string state);
-            //@see:https://developer-programs.linkedin.com/documents/javascript-api-tutorial
-            var resp = $linkedIn.authorize();
-            console.log("$linkedIn.authorize() resp:",resp);
-            if($linkedIn.isAuthorized())
-            {
+            $linkedIn.authorize();//No promise handler!
+            //var linkedInScope = {};
+            //IN.User.authorize(function OnLinkedInAuth($resp){
+            //    console.log($resp);
+            //}, linkedInScope);
+            //console.log("linkedInScope:",linkedInScope);
+            //Listen to Auth event to find oauth_token
+            //@see: http://stackoverflow.com/questions/31553463/javascript-get-linkedin-access-token
+            var oauth_token = "";
+            IN.Event.on(IN, "auth", function OnLinkedInAuth() {
+                for (var property in IN.ENV.auth) {
+                    //output += property + ': ' + object[property]+'; ';
+                    console.debug("IN.ENV.auth:" + property + ': ' + IN.ENV.auth[property]+'; ');
+                }
+
+                oauth_token = IN.ENV.auth.oauth_token;
+                console.debug("oauth token:" + oauth_token);
+            });
+            $linkedIn.isAuthorized().then(function (resp) {
+                console.log("$linkedIn.isAuthorized():",resp);    // $linkedIn.isAuthorized
                 $rootScope.hideLoading();
-                console.log("LinkedIn authorized success!",$linkedIn);
                 $rootScope.loginModal_li.hide();
                 ///$linkedIn.profile(ids, field, params) // get user(s) profile(s).
                 //@see:https://github.com/boketto/ngLinkedIn
                 //@see:https://developer.linkedin.com/docs/fields
-                console.log("$linkedIn.profile()",$linkedIn.profile('me',['id','first-name'])['$$state']);
-                //TODO://Sync the Facebook user profile.
-                LiUserService.save({'userId':user.id,'token':access_token}, function (response) {
-                    $log.debug("LiUserService.get() success!", response);
+                var liUserProfile = null;
+                //@see:https://spring.io/understanding/javascript-promises
+                $linkedIn.profile('me',['id','first-name']).then(function (resp) {
+                    liUserProfile = resp;
+                    console.log("$linkedIn.profile:",liUserProfile);    // $linkedIn.profile
+                    //Sync the Facebook user profile.
+                    LiUserService.save({'userId':liUserProfile.id,'token':oauth_token}, function (response) {
+                        $log.debug("LiUserService.get() success!", response);
+                    }, function (error) {
+                        // failure handler
+                        $log.error("LiUserService.get() failed:", JSON.stringify(error));
+                    });
                 }, function (error) {
-                    // failure handler
-                    $log.error("LiUserService.get() failed:", JSON.stringify(error));
+                    console.error('$linkedIn.profile() error: ', error);   // 'uh oh: something bad happened’
                 });
-            }else{
+            }, function (error) {
+                console.error('$linkedIn.isAuthorized() error: ', error);   // 'uh oh: something bad happened’
                 $rootScope.hideLoading();
-                alert('LinkedIn authorized fail: ' + $linkedIn);
-            }
+                alert('LinkedIn authorized fail: ' + error);
+            });
         }
     })
     .controller('DashCtrl', function ($scope, $rootScope) {
