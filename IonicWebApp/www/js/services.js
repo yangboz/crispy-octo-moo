@@ -148,7 +148,7 @@ angular.module('starter.services', [])
     //Snap415UserService
     .factory('Snap415UserService', function ($resource, CONFIG_ENV) {
         var data = $resource(
-            CONFIG_ENV.api_endpoint + "user/snap415/:Id",
+            CONFIG_ENV.api_endpoint + "user/profile/:Id",
             {Id: "@Id"},
             {
                 "update": {method: "PUT"}

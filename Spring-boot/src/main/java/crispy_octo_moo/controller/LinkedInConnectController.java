@@ -47,18 +47,18 @@ public class LinkedInConnectController {
     private ConnectionRepository connectionRepository;
 
     //
-//    @Inject
-//    public LinkedInConnectController(LinkedIn linkedIn, ConnectionRepository connectionRepository) {
-//        this.linkedIn = linkedIn;
-//        this.connectionRepository = connectionRepository;
-//    }
+    @Inject
+    public LinkedInConnectController(LinkedIn linkedIn, ConnectionRepository connectionRepository) {
+        this.linkedIn = linkedIn;
+        this.connectionRepository = connectionRepository;
+    }
 
 
     //
-    @Inject
-    public LinkedInConnectController(LinkedIn linkedIn) {
-        this.linkedIn = linkedIn;
-    }
+//    @Inject
+//    public LinkedInConnectController(LinkedIn linkedIn) {
+//        this.linkedIn = linkedIn;
+//    }
 
     @RequestMapping(value = "/profile", method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST", value = "Response a string describing if the access_token related user profile is successfully received.")

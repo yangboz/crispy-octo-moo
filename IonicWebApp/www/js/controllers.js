@@ -28,8 +28,9 @@ angular.module('starter.controllers', [])
                 console.log(Enum.localStorageKeys.OAUTH_OBJ_LI, data);
                 if (data == null) {
                     $rootScope.loginModal_li.show();
-                }else{
-                    $rootScope.syncLiUserProfile(data);
+                } else {
+                    $rootScope.oauth_obj_li = data;
+                    $rootScope.syncLiUserProfile();
                 }
             });
         });
@@ -49,8 +50,9 @@ angular.module('starter.controllers', [])
                 console.log(Enum.localStorageKeys.OAUTH_OBJ_FB, data);
                 if (data == null) {
                     $rootScope.loginModal_fb.show();
-                }else{
-                    $rootScope.syncFbUserProfile(data);
+                } else {
+                    $rootScope.oauth_obj_fb = data;
+                    $rootScope.syncFbUserProfile();
                 }
             });
         });
@@ -81,6 +83,9 @@ angular.module('starter.controllers', [])
         $rootScope.fbUser = null;
         $rootScope.fbUserMore = null;
         $rootScope.fbUserPermissions = null;
+        $rootScope.oauth_obj_fb = {};
+        //LinkedIn
+        $rootScope.oauth_obj_li = {};
         ////Category values(single selection)
         $rootScope.incomeCategories = [];
         $rootScope.prefIncomeCategory = null;
@@ -109,20 +114,21 @@ angular.module('starter.controllers', [])
                         $rootScope.loginModal_fb.hide();
                         //TODO:find the access token expire time.
                         //Long term/short term conditions,@see: https://developers.facebook.com/docs/facebook-login/access-tokens
-                        $log.debug('Facebook login succeeded, response: ',response);
-                        $log.debug('Facebook login succeeded, authResponse: ', response.authResponse);
+                        $rootScope.oauth_obj_fb = response.authResponse;
+                        $log.debug('Facebook login succeeded, response: ', $rootScope.oauth_obj_fb);
+                        //$log.debug('Facebook login succeeded, authResponse: ', response.authResponse);
                         //var access_token = response.authResponse.accessToken;
                         //$log.debug('Facebook login succeeded, got access token: ', access_token);
                         //Cache it.
-                        CacheService.set(Enum.localStorageKeys.OAUTH_OBJ_FB, JSON.stringify(response.authResponse), 1);//60 days?60 * 24 * 60 * 60
+                        CacheService.set(Enum.localStorageKeys.OAUTH_OBJ_FB, JSON.stringify($rootScope.oauth_obj_fb), 1);//60 days?60 * 24 * 60 * 60
                         //
-                        $rootScope.syncFbUserProfile(response.authResponse);
+                        $rootScope.syncFbUserProfile();
                     } else {
                         alert('Facebook login failed');
                     }
                 });
         };
-        $rootScope.syncFbUserProfile = function($oauth_obj_fb){
+        $rootScope.syncFbUserProfile = function () {
             ngFB.api({
                 path: '/me',
                 params: {fields: 'id,name'}
@@ -132,7 +138,7 @@ angular.module('starter.controllers', [])
                     console.log("$rootScope.fbUser:", $rootScope.fbUser);
                     $rootScope.hideLoading();
                     //Sync the Facebook with token then get user profile.
-                    FbUserService.save({'userId': user.id, 'token': $oauth_obj_fb.accessToken}, function (response) {
+                    FbUserService.save({'userId': user.id, 'token': $rootScope.oauth_obj_fb.accessToken}, function (response) {
                         $log.debug("FbUserService.get() success!", response);
                     }, function (error) {
                         // failure handler
@@ -140,7 +146,7 @@ angular.module('starter.controllers', [])
                     });
                 },
                 function (error) {
-                    alert('Facebook error: ' + error.error_description);
+                    alert('Facebook error: ' + error);
                     $rootScope.hideLoading();
                 });
             //Synchronize the user info testing
@@ -203,32 +209,42 @@ angular.module('starter.controllers', [])
             //}, function(error) {
             //    console.log("Error -> " + error);
             //});
-            $linkedIn.authorize();//No promise handler!
-            //var linkedInScope = {};
-            //IN.User.authorize(function OnLinkedInAuth($resp){
-            //    console.log($resp);
-            //}, linkedInScope);
-            //console.log("linkedInScope:",linkedInScope);
-            //Listen to Auth event to find oauth_token
-            //@see: http://stackoverflow.com/questions/31553463/javascript-get-linkedin-access-token
-            IN.Event.on(IN, "auth", function OnLinkedInAuth() {
-                //Dump the auth response object.
-                for (var property in IN.ENV.auth) {
-                    //output += property + ': ' + object[property]+'; ';
-                    console.debug("IN.ENV.auth:" + property + ': ' + IN.ENV.auth[property] + '; ');
-                }
-                var oauth_token = IN.ENV.auth.oauth_token;
-                var member_id = IN.ENV.auth.member_id;
-                var oauth_expires_in = IN.ENV.auth.oauth_expires_in;//seconds
-                //Cache it.
-                CacheService.set(Enum.localStorageKeys.OAUTH_OBJ_LI, JSON.stringify(IN.ENV.auth), oauth_expires_in);
+            //Authorize on condition
+            $linkedIn.isAuthorized().then(function (resp) {
                 //
-                $rootScope.syncLiUserProfile(IN.ENV.auth);
+                $scope.updateOauthObj_li();//For debugging.
+            }, function (error) {
+                console.log('$linkedIn.authorize() now...');
+                $linkedIn.authorize();//No promise handler!
+                //Listen to Auth event to find oauth_token
+                //@see: http://stackoverflow.com/questions/31553463/javascript-get-linkedin-access-token
+                IN.Event.on(IN, "auth", function OnLinkedInAuth() {
+                    //
+                    $scope.updateOauthObj_li();
+                });
             });
         }
-        $rootScope.syncLiUserProfile = function($oauth_obj_li){
+        $scope.updateOauthObj_li = function(){
+            //Dump the auth response object.
+            for (var property in IN.ENV.auth) {
+                //output += property + ': ' + object[property]+'; ';
+                console.debug("IN.ENV.auth:" + property + ': ' + IN.ENV.auth[property] + '; ');
+            }
+            $rootScope.oauth_obj_li = IN.ENV.auth;
+            //var oauth_token = IN.ENV.auth.oauth_token;
+            //var member_id = IN.ENV.auth.member_id;
+            //var oauth_expires_in = IN.ENV.auth.oauth_expires_in;//seconds
+            //Cache it.
+            CacheService.set(Enum.localStorageKeys.OAUTH_OBJ_LI, JSON.stringify($rootScope.oauth_obj_li), $rootScope.oauth_obj_li.oauth_expires_in);
+            //
+            $rootScope.syncLiUserProfile();
+        }
+        $rootScope.syncLiUserProfile = function () {
             //Sync the LinkedIn token then get user profile.
-            LiUserService.save({'userId': $oauth_obj_li.member_id, 'token': $oauth_obj_li.oauth_token}, function (response) {
+            LiUserService.save({
+                'userId': $rootScope.oauth_obj_li.member_id,
+                'token': $rootScope.oauth_obj_li.oauth_token
+            }, function (response) {
                 $log.debug("LiUserService.get() success!", response);
             }, function (error) {
                 // failure handler
@@ -240,7 +256,6 @@ angular.module('starter.controllers', [])
             $linkedIn.isAuthorized().then(function (resp) {
                 console.log("$linkedIn.isAuthorized():", resp);    // $linkedIn.isAuthorized
                 $rootScope.hideLoading();
-                $rootScope.loginModal_li.hide();
                 ///$linkedIn.profile(ids, field, params) // get user(s) profile(s).
                 //@see:https://github.com/boketto/ngLinkedIn
                 //@see:https://developer.linkedin.com/docs/fields
@@ -252,11 +267,13 @@ angular.module('starter.controllers', [])
                 }, function (error) {
                     console.error('$linkedIn.profile() error: ', error);   // 'uh oh: something bad happened’
                 });
+
             }, function (error) {
                 console.error('$linkedIn.isAuthorized() error: ', error);   // 'uh oh: something bad happened’
                 $rootScope.hideLoading();
                 alert('LinkedIn authorized fail: ' + error);
             });
+
         }
     })
     .controller('DashCtrl', function ($scope, $rootScope) {

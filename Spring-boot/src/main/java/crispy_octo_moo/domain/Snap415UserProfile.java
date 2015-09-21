@@ -7,6 +7,25 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "com_user_profile")
 public class Snap415UserProfile extends BaseEntity{
 
+
+	private FbUserProfile fbUserProfile;
+	private LiUserProfile liUserProfile;
+
+	public FbUserProfile getFbUserProfile() {
+		return fbUserProfile;
+	}
+
+	public void setFbUserProfile(FbUserProfile fbUserProfile) {
+		this.fbUserProfile = fbUserProfile;
+	}
+
+	public LiUserProfile getLiUserProfile() {
+		return liUserProfile;
+	}
+
+	public void setLiUserProfile(LiUserProfile liUserProfile) {
+		this.liUserProfile = liUserProfile;
+	}
 	// @Id
 	// private String id;
 

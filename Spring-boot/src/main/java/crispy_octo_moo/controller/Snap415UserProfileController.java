@@ -6,8 +6,8 @@ package crispy_octo_moo.controller;
 import javax.validation.Valid;
 import javax.ws.rs.core.MediaType;
 
-import crispy_octo_moo.domain.Snap415User;
-import crispy_octo_moo.repository.Snap415UserRepository;
+import crispy_octo_moo.domain.Snap415UserProfile;
+import crispy_octo_moo.repository.Snap415UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.wordnik.swagger.annotations.ApiOperation;
 
-import crispy_octo_moo.domain.FbUserProfile;
 import crispy_octo_moo.dto.JsonObject;
-import crispy_octo_moo.repository.FacebookUserRepository;
 
 /**
  * The Class UserController.
@@ -29,8 +27,8 @@ import crispy_octo_moo.repository.FacebookUserRepository;
  * @author yangboz
  */
 @RestController
-@RequestMapping("/v1/user/snap415")
-public class Snap415UserController {
+@RequestMapping("/v1/user/profile")
+public class Snap415UserProfileController {
 
     // ==============
     // PRIVATE FIELDS
@@ -38,11 +36,11 @@ public class Snap415UserController {
 
     // Autowire an object of type UserDao
     @Autowired
-    private Snap415UserRepository _userDao;
+    private Snap415UserProfileRepository _userDao;
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON)
     @ApiOperation(httpMethod = "POST", value = "Response a string describing if the user info is successfully created or not.")
-    public JsonObject create(@RequestBody @Valid Snap415User user) {
+    public JsonObject create(@RequestBody @Valid Snap415UserProfile user) {
         return new JsonObject(_userDao.save(user));
     }
 
@@ -54,13 +52,13 @@ public class Snap415UserController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ApiOperation(httpMethod = "GET", value = "Response a string describing if the user info id is successfully get or not.")
-    public Snap415User get(@PathVariable("id") String id) {
+    public Snap415UserProfile get(@PathVariable("id") String id) {
         return this._userDao.findOne(id);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ApiOperation(httpMethod = "PUT", value = "Response a string describing if the  user info is successfully updated or not.")
-    public JsonObject update(@PathVariable("id") String id, @RequestBody @Valid Snap415User user) {
+    public JsonObject update(@PathVariable("id") String id, @RequestBody @Valid Snap415UserProfile user) {
 //		User find = this._userDao.findOne(id);
         user.setId(id);
         return new JsonObject(this._userDao.save(user));
