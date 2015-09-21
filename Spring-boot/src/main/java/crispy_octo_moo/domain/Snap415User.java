@@ -6,9 +6,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 /**
  * Created by yangboz on 15/9/20.
  */
-//@JsonIgnoreProperties(ignoreUnknown = true)
-//@SuppressWarnings("serial")
-//@Document(collection = "snap415_user")
+@JsonIgnoreProperties(ignoreUnknown = true)
+@SuppressWarnings("serial")
+@Document(collection = "snap415_user")
 public class Snap415User extends BaseEntity {
 
     private Snap415UserProfile snap415UserProfile;

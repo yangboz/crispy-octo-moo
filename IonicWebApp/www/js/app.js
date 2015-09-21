@@ -6,7 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngOpenFB', 'ngLinkedIn',
-    'ngCordova', 'ngResource'])
+    'ngCordova', 'ngResource', 'LocalForageModule'])
 
     .run(function ($ionicPlatform, ngFB) {
 
@@ -55,7 +55,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         $linkedInProvider.set('appKey', '77nayor82qqip3')
             //.set('scope', 'r_basicprofile r_network r_emailaddress rw_company_admin w_share rw_nus');
             //.set('scope', 'r_basicprofile');
-        .set('authorize', true);
+            .set('authorize', true);
 
         // Ionic uses AngularUI Router which uses the concept of states
         // Learn more here: https://github.com/angular-ui/ui-router

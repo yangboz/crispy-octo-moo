@@ -12,11 +12,11 @@
         <div class="list card">
 
             <div class="item item-avatar">
-                <img ng-src="http://graph.facebook.com/{{$root.user.id}}/picture?width=270&height=270"/>
+                <img ng-src="http://graph.facebook.com/{{$root.fbUser.id}}/picture?width=270&height=270"/>
 
-                <h2>{{$root.user.name}}</h2>
+                <h2>{{$root.fbUser.name}}</h2>
 
-                <p>{{$root.userMore.relationship_status}}</p>
+                <p>{{$root.fbUserMore.relationship_status}}</p>
 
                 <p>Have <b>3</b> children</p>
 
@@ -29,11 +29,11 @@
                 </p>
 
                 <p>
-                    City: {{$root.user.city}}
+                    City: {{$root.fbUser.city}}
                 </p>
 
                 <p>
-                    Residents: birthday at {{$root.userMore.birthday}} Years.
+                    Residents: birthday at {{$root.fbUserMore.birthday}} Years.
                 </p>
 
                 <p>
@@ -41,7 +41,7 @@
                 </p>
                 <b>
                     <p>
-                        Family: {{ $root.userMore.family.data[0].name +'('+ $root.userMore.family.data[0].relationship +
+                        Family: {{ $root.fbUserMore.family.data[0].name +'('+ $root.fbUserMore.family.data[0].relationship +
                         ')' }}
                     </p>
                 </b>
@@ -73,16 +73,16 @@
                 </p>
                 <b>
                     <p>
-                        Location: {{$root.userMore.location.name}}
+                        Location: {{$root.fbUserMore.location.name}}
                     </p>
                 </b>
 
                 <p>
-                    Work status: first at {{$root.userMore.work[0].employer.name}}
+                    Work status: first at {{$root.fbUserMore.work[0].employer.name}}
                 </p>
 
                 <p>
-                    Education: {{$root.userMore.education[0].school.name +'('+ $root.userMore.education[0].type + ')'}}
+                    Education: {{$root.fbUserMore.education[0].school.name +'('+ $root.fbUserMore.education[0].type + ')'}}
                 </p>
             </div>
 

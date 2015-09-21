@@ -145,42 +145,40 @@ angular.module('starter.services', [])
             }
         };
     })
-    //UserService
-    .factory('UserService', function ($resource, CONFIG_ENV) {
+    //Snap415UserService
+    .factory('Snap415UserService', function ($resource, CONFIG_ENV) {
         var data = $resource(
-            CONFIG_ENV.api_endpoint  + "user/:Id",
+            CONFIG_ENV.api_endpoint + "user/snap415/:Id",
             {Id: "@Id"},
             {
                 "update": {method: "PUT"}
             })
         return data;
     })
-    //ConnectService
-    .factory('ConnectService', function ($resource, CONFIG_ENV) {
-        var data = $resource(
-            CONFIG_ENV.api_endpoint  + "connect/:providerId",
-            {providerId: "@providerId"},
-            {
-                "update": {method: "PUT"}
-            })
-        return data;
-    })
+    ////ConnectService
+    //.factory('ConnectService', function ($resource, CONFIG_ENV) {
+    //    var data = $resource(
+    //        CONFIG_ENV.api_endpoint  + "connect/:providerId",
+    //        {providerId: "@providerId"},
+    //        {
+    //            "update": {method: "PUT"}
+    //        })
+    //    return data;
+    //})
     //FacebookUserService
     .factory('FbUserService', function ($resource, CONFIG_ENV) {
         var data = $resource(
-            CONFIG_ENV.api_endpoint  + "connect/facebook/profile/",
+            CONFIG_ENV.api_endpoint + "connect/facebook/profile/",
             {},
-            {
-            })
+            {})
         return data;
     })
     //LinkedInUserService
     .factory('LiUserService', function ($resource, CONFIG_ENV) {
         var data = $resource(
-            CONFIG_ENV.api_endpoint  + "connect/linkedin/profile/",
+            CONFIG_ENV.api_endpoint + "connect/linkedin/profile/",
             {},
-            {
-            })
+            {})
         return data;
     })
 //@see http://stackoverflow.com/questions/16627860/angular-js-and-ng-swith-when-emulating-enum
@@ -218,6 +216,10 @@ angular.module('starter.services', [])
                     value: 1
                 }
             ]
+            , localStorageKeys: {
+                OAUTH_OBJ_FB: 'oauth_obj_4_facebook',
+                OAUTH_OBJ_LI: 'oauth_obj_4_linkedin'
+            }
         };
         return service;
     }])
@@ -258,5 +260,32 @@ angular.module('starter.services', [])
                 return $q.reject(rejection);
             }
         };
-    }
-);
+    })
+    //@see: http://stackoverflow.com/questions/2326943/when-do-items-in-html5-local-storage-expire/17632458#17632458
+    //@see: https://github.com/mozilla/localForage
+    //@see: https://github.com/ocombe/angular-localForage
+    .factory('CacheService', function ($localForage) {
+
+        return {
+            set: function (key, value, expireTimeInSeconds) {
+                return $localForage.setItem(key, {
+                    data: value,
+                    timestamp: new Date().getTime(),
+                    expireTimeInMilliseconds: expireTimeInSeconds * 1000
+                })
+            },
+            get: function (key) {
+                return $localForage.getItem(key).then(function (item) {
+                    if (!item || new Date().getTime() > (item.timestamp + item.expireTimeInMilliseconds)) {
+                        return null
+                    } else {
+                        return item.data
+                    }
+                })
+            },
+            remove: function (key) {
+                return $localForage.removeItem(key);
+            }
+        }
+
+    });

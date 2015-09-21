@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-    .controller('MainCtrl', function ($scope, $rootScope, $ionicModal, $timeout, $ionicLoading) {
+    .controller('MainCtrl', function ($scope, $rootScope, $ionicModal, $timeout, $ionicLoading, CacheService, Enum) {
 
         ///Loading
         $rootScope.showLoading = function () {
@@ -23,9 +23,15 @@ angular.module('starter.controllers', [])
             console.log("modal-login-li.html initialization.");
             $rootScope.loginModal_li = modal;
             //Login Modal show();
-            if (!window.localStorage["li_ls_crispy_octo_moo"]) {
-                $rootScope.loginModal_li.show();
-            }
+            //CacheService.remove(Enum.localStorageKeys.OAUTH_OBJ_LI);//for debugging
+            CacheService.get(Enum.localStorageKeys.OAUTH_OBJ_LI).then(function (data) {
+                console.log(Enum.localStorageKeys.OAUTH_OBJ_LI, data);
+                if (data == null) {
+                    $rootScope.loginModal_li.show();
+                }else{
+                    $rootScope.syncLiUserProfile(data);
+                }
+            });
         });
         ////Facebook
         $rootScope.loginModal_fb = undefined;
@@ -37,13 +43,19 @@ angular.module('starter.controllers', [])
             console.log("modal-login-fb.html initialization.");
             $rootScope.loginModal_fb = modal;
             //Login Modal show();
-            if (!window.localStorage["fb_ls_crispy_octo_moo"]) {
-                $rootScope.loginModal_fb.show();
-            }
+            //@see: CacheService
+            //CacheService.remove(Enum.localStorageKeys.OAUTH_OBJ_FB);//for debugging
+            CacheService.get(Enum.localStorageKeys.OAUTH_OBJ_FB).then(function (data) {
+                console.log(Enum.localStorageKeys.OAUTH_OBJ_FB, data);
+                if (data == null) {
+                    $rootScope.loginModal_fb.show();
+                }else{
+                    $rootScope.syncFbUserProfile(data);
+                }
+            });
         });
         ///Modal related clean up.
         $rootScope.$on("$stateChangeStart", function () {
-
             //ShowLoading
             $rootScope.showLoading();
         });
@@ -66,9 +78,9 @@ angular.module('starter.controllers', [])
         });
         ///Default behaviors
         ///FB User profile vars
-        $rootScope.user = null;
-        $rootScope.userMore = null;
-        $rootScope.userPermissions = null;
+        $rootScope.fbUser = null;
+        $rootScope.fbUserMore = null;
+        $rootScope.fbUserPermissions = null;
         ////Category values(single selection)
         $rootScope.incomeCategories = [];
         $rootScope.prefIncomeCategory = null;
@@ -86,8 +98,8 @@ angular.module('starter.controllers', [])
 
 ///
     })
-    .controller('LoginModalCtrl', function ($scope, $rootScope,ngFB ,$linkedIn, UserService,$log,
-                                            FbUserService,LiUserService,$http) {
+    .controller('LoginModalCtrl', function ($scope, $rootScope, ngFB, $linkedIn, Snap415UserService, $log,
+                                            FbUserService, LiUserService, $http, CacheService, Enum) {
         $scope.fbLogin = function () {
             $rootScope.showLoading();
             ngFB.login({scope: 'public_profile,email, user_location, user_relationships, user_education_history, user_work_history, user_birthday, user_posts'}).then(
@@ -95,67 +107,78 @@ angular.module('starter.controllers', [])
                     if (response.status === 'connected') {
                         console.log('Facebook User login succeeded');
                         $rootScope.loginModal_fb.hide();
+                        //TODO:find the access token expire time.
+                        //Long term/short term conditions,@see: https://developers.facebook.com/docs/facebook-login/access-tokens
+                        $log.debug('Facebook login succeeded, response: ',response);
+                        $log.debug('Facebook login succeeded, authResponse: ', response.authResponse);
+                        //var access_token = response.authResponse.accessToken;
+                        //$log.debug('Facebook login succeeded, got access token: ', access_token);
+                        //Cache it.
+                        CacheService.set(Enum.localStorageKeys.OAUTH_OBJ_FB, JSON.stringify(response.authResponse), 1);//60 days?60 * 24 * 60 * 60
                         //
-                        var access_token =  response.authResponse.accessToken;
-                        $log.debug('Facebook login succeeded, got access token: ',access_token);
-                        ///
-                        ngFB.api({
-                            path: '/me',
-                            params: {fields: 'id,name'}
-                        }).then(
-                            function (user) {
-                                $rootScope.user = user;
-                                console.log("$rootScope.user:",$rootScope.user);
-                                $rootScope.hideLoading();
-                                //Synchronize the user info testing
-                                //UserService.save($rootScope.user, function (response) {
-                                //    $log.debug("UserService.save() success!", response);
-                                //}, function (error) {
-                                //    // failure handler
-                                //    $log.error("UserService.save() failed:", JSON.stringify(error));
-                                //});
-                                //Sync the Facebook user profile.
-                                FbUserService.save({'userId':user.id,'token':access_token}, function (response) {
-                                    $log.debug("FbUserService.get() success!", response);
-                                }, function (error) {
-                                    // failure handler
-                                    $log.error("FbUserService.get() failed:", JSON.stringify(error));
-                                });
-                            },
-                            function (error) {
-                                alert('Facebook error: ' + error.error_description);
-                                $rootScope.hideLoading();
-                            });
-                        ///
-                        ngFB.api({
-                            path: '/me/permissions',
-                            params: {}
-                        }).then(
-                            function (response) {
-                                $rootScope.userPermissions = response;
-                                console.log("$rootScope.userPermissions:",$rootScope.userPermissions);
-                                $rootScope.hideLoading();
-                                //if can load more informations
-                                $scope.loadMoreFbInfo();
-                            },
-                            function (error) {
-                                alert('Facebook error: ' + error.error_description);
-                                $rootScope.hideLoading();
-                            });
+                        $rootScope.syncFbUserProfile(response.authResponse);
                     } else {
                         alert('Facebook login failed');
                     }
                 });
         };
-        $scope.loadMoreFbInfo = function() {
+        $rootScope.syncFbUserProfile = function($oauth_obj_fb){
+            ngFB.api({
+                path: '/me',
+                params: {fields: 'id,name'}
+            }).then(
+                function (user) {
+                    $rootScope.fbUser = user;
+                    console.log("$rootScope.fbUser:", $rootScope.fbUser);
+                    $rootScope.hideLoading();
+                    //Sync the Facebook with token then get user profile.
+                    FbUserService.save({'userId': user.id, 'token': $oauth_obj_fb.accessToken}, function (response) {
+                        $log.debug("FbUserService.get() success!", response);
+                    }, function (error) {
+                        // failure handler
+                        $log.error("FbUserService.get() failed:", JSON.stringify(error));
+                    });
+                },
+                function (error) {
+                    alert('Facebook error: ' + error.error_description);
+                    $rootScope.hideLoading();
+                });
+            //Synchronize the user info testing
+            //Snap415UserService.save($rootScope.user, function (response) {
+            //    $log.debug("UserService.save() success!", response);
+            //}, function (error) {
+            //    // failure handler
+            //    $log.error("Snap415UserService.save() failed:", JSON.stringify(error));
+            //});
+
+        }
+        //
+        $scope.loadMoreFbInfo = function () {
             $rootScope.showLoading();
+            ///
+            ngFB.api({
+                path: '/me/permissions',
+                params: {}
+            }).then(
+                function (response) {
+                    $rootScope.fbUserPermissions = response;
+                    console.log("$rootScope.fbUserPermissions:", $rootScope.fbUserPermissions);
+                    $rootScope.hideLoading();
+                    //if can load more informations
+                    $scope.loadMoreFbInfo();
+                },
+                function (error) {
+                    alert('Facebook error: ' + error.error_description);
+                    $rootScope.hideLoading();
+                });
+            //
             ngFB.api({
                 path: '/me',
                 params: {fields: 'id,name,email,relationship_status,work,birthday,location,education, posts, family'}
             }).then(
                 function ($response) {
-                    $rootScope.userMore = $response;
-                    console.log("$rootScope.userMore:",$rootScope.userMore);
+                    $rootScope.fbUserMore = $response;
+                    console.log("$rootScope.fbUserMore:", $rootScope.fbUserMore);
                     $rootScope.hideLoading();
                     //Accept the more fbInfo
                 },
@@ -188,18 +211,34 @@ angular.module('starter.controllers', [])
             //console.log("linkedInScope:",linkedInScope);
             //Listen to Auth event to find oauth_token
             //@see: http://stackoverflow.com/questions/31553463/javascript-get-linkedin-access-token
-            var oauth_token = "";
             IN.Event.on(IN, "auth", function OnLinkedInAuth() {
+                //Dump the auth response object.
                 for (var property in IN.ENV.auth) {
                     //output += property + ': ' + object[property]+'; ';
-                    console.debug("IN.ENV.auth:" + property + ': ' + IN.ENV.auth[property]+'; ');
+                    console.debug("IN.ENV.auth:" + property + ': ' + IN.ENV.auth[property] + '; ');
                 }
-
-                oauth_token = IN.ENV.auth.oauth_token;
-                console.debug("oauth token:" + oauth_token);
+                var oauth_token = IN.ENV.auth.oauth_token;
+                var member_id = IN.ENV.auth.member_id;
+                var oauth_expires_in = IN.ENV.auth.oauth_expires_in;//seconds
+                //Cache it.
+                CacheService.set(Enum.localStorageKeys.OAUTH_OBJ_LI, JSON.stringify(IN.ENV.auth), oauth_expires_in);
+                //
+                $rootScope.syncLiUserProfile(IN.ENV.auth);
             });
+        }
+        $rootScope.syncLiUserProfile = function($oauth_obj_li){
+            //Sync the LinkedIn token then get user profile.
+            LiUserService.save({'userId': $oauth_obj_li.member_id, 'token': $oauth_obj_li.oauth_token}, function (response) {
+                $log.debug("LiUserService.get() success!", response);
+            }, function (error) {
+                // failure handler
+                $log.error("LiUserService.get() failed:", JSON.stringify(error));
+            });
+        }
+        //
+        $scope.loadMoreLiInfo = function () {
             $linkedIn.isAuthorized().then(function (resp) {
-                console.log("$linkedIn.isAuthorized():",resp);    // $linkedIn.isAuthorized
+                console.log("$linkedIn.isAuthorized():", resp);    // $linkedIn.isAuthorized
                 $rootScope.hideLoading();
                 $rootScope.loginModal_li.hide();
                 ///$linkedIn.profile(ids, field, params) // get user(s) profile(s).
@@ -207,16 +246,9 @@ angular.module('starter.controllers', [])
                 //@see:https://developer.linkedin.com/docs/fields
                 var liUserProfile = null;
                 //@see:https://spring.io/understanding/javascript-promises
-                $linkedIn.profile('me',['id','first-name']).then(function (resp) {
+                $linkedIn.profile('me', ['id', 'first-name']).then(function (resp) {
                     liUserProfile = resp;
-                    console.log("$linkedIn.profile:",liUserProfile);    // $linkedIn.profile
-                    //Sync the Facebook user profile.
-                    LiUserService.save({'userId':liUserProfile.id,'token':oauth_token}, function (response) {
-                        $log.debug("LiUserService.get() success!", response);
-                    }, function (error) {
-                        // failure handler
-                        $log.error("LiUserService.get() failed:", JSON.stringify(error));
-                    });
+                    console.log("$linkedIn.profile:", liUserProfile);    // $linkedIn.profile
                 }, function (error) {
                     console.error('$linkedIn.profile() error: ', error);   // 'uh oh: something bad happened’
                 });
@@ -246,62 +278,62 @@ angular.module('starter.controllers', [])
         //$scope.chats = Chats.all();
     })
 
-    .controller('AccountSettingsCtrl', function ($scope, $rootScope,IncomeCategoryService,FilingCategoryService,
-                                                 ChildrenCategoryService,EVCreditService,MortgageInterestService,
-                                                 ChildrenKeywordsService,EITCCreditService,Enum,$ionicPopup) {
+    .controller('AccountSettingsCtrl', function ($scope, $rootScope, IncomeCategoryService, FilingCategoryService,
+                                                 ChildrenCategoryService, EVCreditService, MortgageInterestService,
+                                                 ChildrenKeywordsService, EITCCreditService, Enum, $ionicPopup) {
         //ng-model
         //@see: http://odetocode.com/blogs/scott/archive/2013/06/19/using-ngoptions-in-angularjs.aspx
         ///IncomeCategory
-        console.log("Enum.relationshipStatus[0].value:",Enum.relationshipStatus[0].value);
+        console.log("Enum.relationshipStatus[0].value:", Enum.relationshipStatus[0].value);
         $rootScope.incomeCategories = IncomeCategoryService.get(Enum.relationshipStatus[0].value);//Default setting(Married).
-        console.log("$rootScope.incomeCategories:",$rootScope.incomeCategories);
+        console.log("$rootScope.incomeCategories:", $rootScope.incomeCategories);
         $scope.setIncomeCategorySelected = function (value) {
             $rootScope.prefIncomeCategory = value;
-            console.log("$rootScope.prefIncomeCategory:",$rootScope.prefIncomeCategory);
+            console.log("$rootScope.prefIncomeCategory:", $rootScope.prefIncomeCategory);
         };
         ///FilingCategory
         $rootScope.filingCategories = FilingCategoryService.get(Enum.relationshipStatus[0].value);//Default setting(Married).
-        console.log("$rootScope.filingCategories:",$rootScope.filingCategories);
+        console.log("$rootScope.filingCategories:", $rootScope.filingCategories);
         $scope.setFilingCategorySelected = function (value) {
             $rootScope.prefFilingCategory = value;
-            console.log("$rootScope.prefFilingCategory:",$rootScope.prefFilingCategory);
+            console.log("$rootScope.prefFilingCategory:", $rootScope.prefFilingCategory);
         };
         ///ChildrenCategory
         $rootScope.childrenCategories = ChildrenCategoryService.all();//Default setting(all).
-        console.log("$rootScope.childrenCategories:",$rootScope.childrenCategories);
+        console.log("$rootScope.childrenCategories:", $rootScope.childrenCategories);
         $scope.setChildrenCategorySelected = function (value) {
             $rootScope.prefChildrenCategory = value;
-            console.log("$rootScope.prefChildrenCategory:",$rootScope.prefChildrenCategory);
+            console.log("$rootScope.prefChildrenCategory:", $rootScope.prefChildrenCategory);
         };
         ///ChildrenKeywords
         $rootScope.childrenKeywords = ChildrenKeywordsService.all();//Default setting(all).
-        console.log("$rootScope.childrenKeywords:",$rootScope.childrenKeywords);
+        console.log("$rootScope.childrenKeywords:", $rootScope.childrenKeywords);
         $scope.setChildrenKeywordSelected = function (value) {
             $rootScope.prefChildrenKeyword = value;
-            console.log("$rootScope.prefChildrenKeyword:",$rootScope.prefChildrenKeyword);
+            console.log("$rootScope.prefChildrenKeyword:", $rootScope.prefChildrenKeyword);
         };
         ///MortgageInterest
         $rootScope.mortgageInterests = MortgageInterestService.all();//Default setting(all).
-        console.log("$rootScope.mortgageInterests:",$rootScope.mortgageInterests);
+        console.log("$rootScope.mortgageInterests:", $rootScope.mortgageInterests);
         $scope.setMortgageInterestSelected = function (value) {
             $rootScope.prefMortgageInterest = value;
-            console.log("$rootScope.prefMortgageInterest:",$rootScope.prefMortgageInterest);
+            console.log("$rootScope.prefMortgageInterest:", $rootScope.prefMortgageInterest);
         };
         ///EVCredit
         $rootScope.EVCredits = EVCreditService.all();//Default setting(all).
-        console.log("$rootScope.EVCredits:",$rootScope.EVCredits);
+        console.log("$rootScope.EVCredits:", $rootScope.EVCredits);
         $scope.setEVCreditSelected = function (value) {
             $rootScope.prefEVCredit = value;
-            console.log("$rootScope.prefEVCredit:",$rootScope.prefEVCredit);
+            console.log("$rootScope.prefEVCredit:", $rootScope.prefEVCredit);
         };
         ///EITCCreditService calculate
-        $scope.EITCCreditCalculate = function(){
-            var result = EITCCreditService.get($rootScope.userMore,$rootScope.prefChildrenCategory,$rootScope.prefIncomeCategory);
+        $scope.EITCCreditCalculate = function () {
+            var result = EITCCreditService.get($rootScope.userMore, $rootScope.prefChildrenCategory, $rootScope.prefIncomeCategory);
             $ionicPopup.alert({
                 title: 'Congratulations!',
                 content: result
-            }).then(function(res) {
-                console.log('EITCCreditService calculated result:',result);
+            }).then(function (res) {
+                console.log('EITCCreditService calculated result:', result);
             });
         }
     })
