@@ -1,7 +1,11 @@
 package crispy_octo_moo.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.social.linkedin.api.LinkedInProfile;
+import org.springframework.social.linkedin.api.UrlResource;
 
 /**
  * Created by yangboz on 15/9/19.
@@ -9,51 +13,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @SuppressWarnings("serial")
 @Document(collection = "snap415_li_user_profile")
-public class LiUserProfile extends BaseEntity {
-    private String firstName;
-    private String headline;
-    private String liId;
-    private String lastName;
-    private Object siteStandardProifileRequest;
+public class LiUserProfile extends LinkedInProfile {
 
-    public String getFirstName() {
-        return firstName;
-    }
+    @Id
+    @Field("uuid")
+    private String id;
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getHeadline() {
-        return headline;
-    }
-
-    public void setHeadline(String headline) {
-        this.headline = headline;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public Object getSiteStandardProifileRequest() {
-        return siteStandardProifileRequest;
-    }
-
-    public void setSiteStandardProifileRequest(Object siteStandardProifileRequest) {
-        this.siteStandardProifileRequest = siteStandardProifileRequest;
-    }
-
-
-    public String getLiId() {
-        return liId;
-    }
-
-    public void setLiId(String liId) {
-        this.liId = liId;
+    public LiUserProfile(String id, String firstName, String lastName, String headline, String industry, String publicProfileUrl, UrlResource siteStandardProfileRequest, String profilePictureUrl) {
+        super(id, firstName, lastName, headline, industry, publicProfileUrl, siteStandardProfileRequest, profilePictureUrl);
     }
 }

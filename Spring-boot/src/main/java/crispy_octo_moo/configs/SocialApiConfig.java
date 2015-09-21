@@ -55,7 +55,7 @@ public class SocialApiConfig {
     @Scope(value = "request", proxyMode = ScopedProxyMode.INTERFACES)
     public LinkedIn LinkedIn(ConnectionRepository connectionRepository) {
         Connection<LinkedIn> linkedIn = connectionRepository.findPrimaryConnection(LinkedIn.class);
-        return linkedIn != null ? linkedIn.getApi() : new LinkedInTemplate("");//EJVLzdPSPeTqy2r2fVQapO7BSEzFg65MQaIF
+        return linkedIn != null ? linkedIn.getApi() : new LinkedInTemplate("60gURT89yKmqvJTMbcLFOCTAdX4gg2mHfQGp");//EJVLzdPSPeTqy2r2fVQapO7BSEzFg65MQaIF
     }
 
     @Bean

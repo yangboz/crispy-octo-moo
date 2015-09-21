@@ -29,7 +29,7 @@ angular.module('starter.controllers', [])
                 if (data == null) {
                     $rootScope.loginModal_li.show();
                 } else {
-                    $rootScope.oauth_obj_li = data;
+                    $rootScope.oauth_obj_li = JSON.parse(data);
                     $rootScope.syncLiUserProfile();
                 }
             });
@@ -49,9 +49,9 @@ angular.module('starter.controllers', [])
             CacheService.get(Enum.localStorageKeys.OAUTH_OBJ_FB).then(function (data) {
                 console.log(Enum.localStorageKeys.OAUTH_OBJ_FB, data);
                 if (data == null) {
-                    $rootScope.loginModal_fb.show();
+                    //$rootScope.loginModal_fb.show();
                 } else {
-                    $rootScope.oauth_obj_fb = data;
+                    $rootScope.oauth_obj_fb = JSON.parse(data);
                     $rootScope.syncFbUserProfile();
                 }
             });
@@ -244,6 +244,7 @@ angular.module('starter.controllers', [])
             LiUserService.save({
                 'userId': $rootScope.oauth_obj_li.member_id,
                 'token': $rootScope.oauth_obj_li.oauth_token
+                //'token': $rootScope.oauth_obj_li.anonymous_token
             }, function (response) {
                 $log.debug("LiUserService.get() success!", response);
             }, function (error) {

@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package crispy_octo_moo.controller;
 
@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,17 +35,17 @@ import crispy_octo_moo.repository.FacebookUserRepository;
 @RequestMapping("/v1/connect/facebook/")
 public class FacebookConnectController {
 
-	// ==============
-	// PRIVATE FIELDS
-	// ==============
-	
-	// Autowire an object of type UserDao
-	@Autowired
-	private FacebookUserRepository _fbUserDao;
-	
-//	@Inject
+    // ==============
+    // PRIVATE FIELDS
+    // ==============
+
+    // Autowire an object of type UserDao
+    @Autowired
+    private FacebookUserRepository _fbUserDao;
+
+    //	@Inject
 //	private ConnectionRepository connectionRepository;
-	private Facebook facebook;
+    private Facebook facebook;
 
     private ConnectionRepository connectionRepository;
 
@@ -86,27 +87,47 @@ public class FacebookConnectController {
 //		this._userDao.delete(id);
 //		return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
 //	}
-	
-	@RequestMapping(value = "/profile", method = RequestMethod.POST)
-	@ApiOperation(httpMethod = "POST", value = "Response a string describing if the access_token related user profile is successfully received.")
-	public JsonObject getUserProfile(@RequestBody @Valid UserInfo userInfo) {
-		/**
-		 * Programmatically signs in the user with the given the user ID.
-		 * @see: spring-social-showcase-boot(SignInUtil)
-		 */
-		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(userInfo.getUserId(), null, null));	
-		//
+
+    @RequestMapping(value = "/profile", method = RequestMethod.POST)
+    @ApiOperation(httpMethod = "POST", value = "Response a string describing if the access_token related user profile is successfully received.")
+    public JsonObject getUserProfile(@RequestBody @Valid UserInfo userInfo) {
+        /**
+         * Programmatically signs in the user with the given the user ID.
+         * @see: spring-social-showcase-boot(SignInUtil)
+         */
+        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(userInfo.getUserId(), null, null));
+        //
 //		String accessToken = "f8FX29g..."; // access token received from Facebook after OAuth authorization
 //		Facebook facebook = new FacebookTemplate(accessToken);
-		Connection<Facebook> connection = connectionRepository.findPrimaryConnection(Facebook.class);
-		Facebook facebook = connection != null ? connection.getApi() : new FacebookTemplate(userInfo.getToken());
-		//Retrieving a user's profile data.
-		//@see: http://docs.spring.io/spring-social-facebook/docs/2.0.1.RELEASE/reference/htmlsingle/
-		org.springframework.social.facebook.api.User profile = facebook.userOperations().getUserProfile();
-		//Synchronize the FB user profile to DB.
-		FbUserProfile fbUser = new FbUserProfile(profile.getId(), profile.getName(), profile.getFirstName(), profile.getLastName(), profile.getGender(), profile.getLocale());
-		//
-		this._fbUserDao.save(fbUser);
-		return new JsonObject(profile);
-	}
+        Connection<Facebook> connection = connectionRepository.findPrimaryConnection(Facebook.class);
+        Facebook facebook = connection != null ? connection.getApi() : new FacebookTemplate(userInfo.getToken());
+        //Retrieving a user's profile data.
+        //@see: http://docs.spring.io/spring-social-facebook/docs/2.0.1.RELEASE/reference/htmlsingle/
+        org.springframework.social.facebook.api.User profile = facebook.userOperations().getUserProfile();
+        //Synchronize the FB user profile to DB.
+        FbUserProfile fbUser = new FbUserProfile(profile.getId(), profile.getName(), profile.getFirstName(), profile.getLastName(), profile.getGender(), profile.getLocale());
+        //
+        this._fbUserDao.save(fbUser);
+        return new JsonObject(profile);
+    }
+
+    @RequestMapping(value = "/post", method = RequestMethod.POST)
+    @ApiOperation(httpMethod = "POST", value = "Response a string describing if the access_token related user profile is successfully received.")
+    public JsonObject getUserPost(@RequestBody @Valid UserInfo userInfo) {
+        /**
+         * Programmatically signs in the user with the given the user ID.
+         * @see: spring-social-showcase-boot(SignInUtil)
+         */
+        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(userInfo.getUserId(), null, null));
+        //
+//		String accessToken = "f8FX29g..."; // access token received from Facebook after OAuth authorization
+//		Facebook facebook = new FacebookTemplate(accessToken);
+        Connection<Facebook> connection = connectionRepository.findPrimaryConnection(Facebook.class);
+        Facebook facebook = connection != null ? connection.getApi() : new FacebookTemplate(userInfo.getToken());
+        //Retrieving a user's profile data.
+        //@see: http://docs.spring.io/spring-social-facebook/docs/2.0.1.RELEASE/reference/htmlsingle/
+        PagedList<org.springframework.social.facebook.api.Post> fbPosts = facebook.feedOperations().getPosts();
+        //TODO:Analysis the user post contents.
+        return new JsonObject(fbPosts);
+    }
 }

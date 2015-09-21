@@ -6,6 +6,8 @@ import crispy_octo_moo.dto.JsonObject;
 import crispy_octo_moo.dto.LiUserConnection;
 import crispy_octo_moo.dto.UserInfo;
 import crispy_octo_moo.repository.LinkedInUserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -35,6 +37,8 @@ public class LinkedInConnectController {
     // ==============
     // PRIVATE FIELDS
     // ==============
+
+    private final Logger LOG = LoggerFactory.getLogger(LinkedInConnectController.class);
 
     // Autowire an object of type UserDao
     @Autowired
@@ -67,23 +71,21 @@ public class LinkedInConnectController {
          * Programmatically signs in the user with the given the user ID.
          * @see: spring-social-showcase-boot(SignInUtil)
          */
+        LOG.info("userInfo:" + userInfo.toString());
         SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(userInfo.getUserId(), null, null));
         //
 //		String accessToken = "f8FX29g..."; // access token received from Facebook after OAuth authorization
 //		Facebook facebook = new FacebookTemplate(accessToken);
         Connection<LinkedIn> connection = connectionRepository.findPrimaryConnection(LinkedIn.class);
 //        "77nayor82qqip3", "UJOUycxP5UgdD3da"
+        LOG.info("Connection<LinkedIn>:" + connection);
         LinkedIn linkedIn = connection != null ? connection.getApi() : new LinkedInTemplate(userInfo.getToken());
+        LOG.info("linkedIn:" + linkedIn.isAuthorized() + "," + linkedIn.toString());
         //Retrieving a user's profile data.
         //@see: http://docs.spring.io/spring-social-facebook/docs/2.0.1.RELEASE/reference/htmlsingle/
         LinkedInProfile profile = linkedIn.profileOperations().getUserProfile();
         //Synchronize the FB user profile to DB.
-        LiUserProfile liUser = new LiUserProfile();
-        liUser.setFirstName(profile.getFirstName());
-        liUser.setHeadline(profile.getHeadline());
-        liUser.setLastName(profile.getLastName());
-        liUser.setLiId(profile.getId());
-        liUser.setSiteStandardProifileRequest(profile.getSiteStandardProfileRequest());
+        LiUserProfile liUser = new LiUserProfile(profile.getId(), profile.getLastName(), profile.getLastName(), profile.getHeadline(), profile.getIndustry(), profile.getPublicProfileUrl(), profile.getSiteStandardProfileRequest(), profile.getPublicProfileUrl());
         //
         this._liUserDao.save(liUser);
         return new JsonObject(profile);
