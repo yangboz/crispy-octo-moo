@@ -105,9 +105,6 @@ public class FacebookConnectController {
 		org.springframework.social.facebook.api.User profile = facebook.userOperations().getUserProfile();
 		//Synchronize the FB user profile to DB.
 		FbUserProfile fbUser = new FbUserProfile(profile.getId(), profile.getName(), profile.getFirstName(), profile.getLastName(), profile.getGender(), profile.getLocale());
-		fbUser.setIncome(-1);
-		fbUser.setNumberofChildren(-1);
-		fbUser.setTaxfilingstatus("NIL");
 		//
 		this._fbUserDao.save(fbUser);
 		return new JsonObject(profile);

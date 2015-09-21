@@ -1,11 +1,13 @@
 package crispy_octo_moo.domain;
 
 
+import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.social.facebook.api.EducationExperience;
 import org.springframework.social.facebook.api.User;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -22,6 +24,13 @@ public class FbUserProfile extends User {
     @Id
     private String id;
 
+    private String name;
+   	private String sex;
+   	private String relationshipstatus;
+   	private List<EducationExperience> education;
+   	private String workstatus;
+   	
+   	
     public String getId() {
         return id;
     }
@@ -30,33 +39,47 @@ public class FbUserProfile extends User {
         this.id = id;
     }
 
-    ///Extra
-    private int income;
-    private String taxfilingstatus;
-    private int numberofChildren;
+   
+	
+	public String getName() {
+		return name;
+	}
 
-    public int getIncome() {
-        return income;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setIncome(int income) {
-        this.income = income;
-    }
+	public String getSex() {
+		return sex;
+	}
 
-    public String getTaxfilingstatus() {
-        return taxfilingstatus;
-    }
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
 
-    public void setTaxfilingstatus(String taxfilingstatus) {
-        this.taxfilingstatus = taxfilingstatus;
-    }
+	public String getRelationshipstatus() {
+		return relationshipstatus;
+	}
 
-    public int getNumberofChildren() {
-        return numberofChildren;
-    }
+	public void setRelationshipstatus(String relationshipstatus) {
+		this.relationshipstatus = relationshipstatus;
+	}
 
-    public void setNumberofChildren(int numberofChildren) {
-        this.numberofChildren = numberofChildren;
-    }
+	public List<EducationExperience> getEducation() {
+		return education;
+	}
+
+	public void setEducation(List<EducationExperience> education) {
+		this.education = education;
+	}
+
+	public String getWorkstatus() {
+		return workstatus;
+	}
+
+	public void setWorkstatus(String workstatus) {
+		this.workstatus = workstatus;
+	}
+
 
 }
