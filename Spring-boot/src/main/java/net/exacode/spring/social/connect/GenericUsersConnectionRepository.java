@@ -1,4 +1,4 @@
-package crispy_octo_moo.repository;
+package net.exacode.spring.social.connect;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,7 +16,7 @@ import org.springframework.social.connect.UsersConnectionRepository;
  * 
  * @author mendlik
  */
-public class MongoUsersConnectionRepository implements
+public class GenericUsersConnectionRepository implements
 		UsersConnectionRepository {
 
 	private final SocialConnectionDao mongoService;
@@ -25,7 +25,7 @@ public class MongoUsersConnectionRepository implements
 
 	private ConnectionSignUp connectionSignUp;
 
-	public MongoUsersConnectionRepository(SocialConnectionDao mongoService,
+	public GenericUsersConnectionRepository(SocialConnectionDao mongoService,
 			ConnectionFactoryLocator connectionFactoryLocator) {
 		this.mongoService = mongoService;
 		this.connectionFactoryLocator = connectionFactoryLocator;
@@ -62,9 +62,8 @@ public class MongoUsersConnectionRepository implements
 		if (userId == null) {
 			throw new IllegalArgumentException("userId cannot be null");
 		}
-		return new MongoConnectionRepository(userId, mongoService,
+		return new GenericConnectionRepository(userId, mongoService,
 				connectionFactoryLocator);
 	}
-
 
 }

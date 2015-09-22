@@ -1,4 +1,4 @@
-package crispy_octo_moo.mongo;
+package net.exacode.spring.social.connect.mongo;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 import static org.springframework.data.mongodb.core.query.Query.query;
@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
+
+import net.exacode.spring.social.connect.SocialConnectionDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -24,14 +26,12 @@ import org.springframework.util.MultiValueMap;
 
 import com.mongodb.WriteConcern;
 
-import crispy_octo_moo.repository.SocialConnectionDao;
-
 /**
  * A MongoDB data access object for spring social connections
  * 
  * @author mendlik
  */
-//@Service
+@Service
 public class MongoConnectionDao implements SocialConnectionDao {
 
 	private final MongoTemplate mongoTemplate;
@@ -47,8 +47,8 @@ public class MongoConnectionDao implements SocialConnectionDao {
 	/**
 	 * Returns the max connection rank for the user and the provider.
 	 * 
-	 * @see crispy_octo_moo.repository.SocialConnectionDao#getMaxRank(java.lang.String,
-	 *      java.lang.String)
+	 * @see net.exacode.spring.social.connect.SocialConnectionDao#getMaxRank(String,
+	 *      String)
 	 */
 	@Override
 	public int getMaxRank(String userId, String providerId) {
@@ -69,8 +69,8 @@ public class MongoConnectionDao implements SocialConnectionDao {
 	/**
 	 * Create a new connection for the user.
 	 * 
-	 * @see crispy_octo_moo.repository.SocialConnectionDao#create(java.lang.String,
-	 *      org.springframework.social.connect.Connection, int)
+	 * @see net.exacode.spring.social.connect.SocialConnectionDao#create(String,
+	 *      Connection, int)
 	 */
 	@Override
 	public void create(String userId, Connection<?> userConn, int rank) {
@@ -83,8 +83,8 @@ public class MongoConnectionDao implements SocialConnectionDao {
 	/**
 	 * Update a connection.
 	 * 
-	 * @see crispy_octo_moo.repository.SocialConnectionDao#update(java.lang.String,
-	 *      org.springframework.social.connect.Connection)
+	 * @see net.exacode.spring.social.connect.SocialConnectionDao#update(String,
+	 *      Connection)
 	 */
 	@Override
 	public void update(String userId, Connection<?> userConn) {
@@ -112,8 +112,8 @@ public class MongoConnectionDao implements SocialConnectionDao {
 	/**
 	 * Remove a connection.
 	 * 
-	 * @see crispy_octo_moo.repository.SocialConnectionDao#remove(java.lang.String,
-	 *      org.springframework.social.connect.ConnectionKey)
+	 * @see net.exacode.spring.social.connect.SocialConnectionDao#remove(String,
+	 *      ConnectionKey)
 	 */
 	@Override
 	public void remove(String userId, ConnectionKey connectionKey) {
@@ -127,8 +127,8 @@ public class MongoConnectionDao implements SocialConnectionDao {
 	/**
 	 * Remove all the connections for a user on a provider.
 	 * 
-	 * @see crispy_octo_moo.repository.SocialConnectionDao#remove(java.lang.String,
-	 *      java.lang.String)
+	 * @see net.exacode.spring.social.connect.SocialConnectionDao#remove(String,
+	 *      String)
 	 */
 	@Override
 	public void remove(String userId, String providerId) {
@@ -142,8 +142,8 @@ public class MongoConnectionDao implements SocialConnectionDao {
 	/**
 	 * Return the primary connection.
 	 * 
-	 * @see crispy_octo_moo.repository.SocialConnectionDao#getPrimaryConnection(java.lang.String,
-	 *      java.lang.String)
+	 * @see net.exacode.spring.social.connect.SocialConnectionDao#getPrimaryConnection(String,
+	 *      String)
 	 */
 	@Override
 	public Connection<?> getPrimaryConnection(String userId, String providerId) {
@@ -158,8 +158,8 @@ public class MongoConnectionDao implements SocialConnectionDao {
 	/**
 	 * Get the connection for user, provider and provider user id.
 	 * 
-	 * @see crispy_octo_moo.repository.SocialConnectionDao#getConnection(java.lang.String,
-	 *      java.lang.String, java.lang.String)
+	 * @see net.exacode.spring.social.connect.SocialConnectionDao#getConnection(String,
+	 *      String, String)
 	 */
 	@Override
 	public Connection<?> getConnection(String userId, String providerId,
@@ -175,7 +175,7 @@ public class MongoConnectionDao implements SocialConnectionDao {
 	/**
 	 * Get all the connections for an user id.
 	 * 
-	 * @see crispy_octo_moo.repository.SocialConnectionDao#getConnections(java.lang.String)
+	 * @see net.exacode.spring.social.connect.SocialConnectionDao#getConnections(String)
 	 */
 	@Override
 	public List<Connection<?>> getConnections(String userId) {
@@ -189,8 +189,8 @@ public class MongoConnectionDao implements SocialConnectionDao {
 	/**
 	 * Get all the connections for an user id on a provider.
 	 * 
-	 * @see crispy_octo_moo.repository.SocialConnectionDao#getConnections(java.lang.String,
-	 *      java.lang.String)
+	 * @see net.exacode.spring.social.connect.SocialConnectionDao#getConnections(String,
+	 *      String)
 	 */
 	@Override
 	public List<Connection<?>> getConnections(String userId, String providerId) {
@@ -205,8 +205,8 @@ public class MongoConnectionDao implements SocialConnectionDao {
 	/**
 	 * Get all the connections for an user.
 	 * 
-	 * @see crispy_octo_moo.repository.SocialConnectionDao#getConnections(java.lang.String,
-	 *      org.springframework.util.MultiValueMap)
+	 * @see net.exacode.spring.social.connect.SocialConnectionDao#getConnections(String,
+	 *      MultiValueMap)
 	 */
 	@Override
 	public List<Connection<?>> getConnections(String userId,
@@ -240,8 +240,8 @@ public class MongoConnectionDao implements SocialConnectionDao {
 	/**
 	 * Get the user ids on the provider.
 	 * 
-	 * @see crispy_octo_moo.repository.SocialConnectionDao#getUserIds(java.lang.String,
-	 *      java.util.Set)
+	 * @see net.exacode.spring.social.connect.SocialConnectionDao#getUserIds(String,
+	 *      Set)
 	 */
 	@Override
 	public Set<String> getUserIds(String providerId, Set<String> providerUserIds) {
@@ -265,8 +265,8 @@ public class MongoConnectionDao implements SocialConnectionDao {
 	/**
 	 * Get the user ids on the provider with a given provider user id.
 	 * 
-	 * @see crispy_octo_moo.repository.SocialConnectionDao#getUserIds(java.lang.String,
-	 *      java.lang.String)
+	 * @see net.exacode.spring.social.connect.SocialConnectionDao#getUserIds(String,
+	 *      String)
 	 */
 	@Override
 	public List<String> getUserIds(String providerId, String providerUserId) {

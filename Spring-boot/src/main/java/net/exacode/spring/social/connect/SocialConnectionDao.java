@@ -1,4 +1,4 @@
-package crispy_octo_moo.repository;
+package net.exacode.spring.social.connect;
 
 import java.util.List;
 import java.util.Set;
@@ -33,14 +33,14 @@ public interface SocialConnectionDao {
 	Connection<?> getPrimaryConnection(String userId, String providerId);
 
 	Connection<?> getConnection(String userId, String providerId,
-			String providerUserId);
+								String providerUserId);
 
 	List<Connection<?>> getConnections(String userId);
 
 	List<Connection<?>> getConnections(String userId, String providerId);
 
 	List<Connection<?>> getConnections(String userId,
-			MultiValueMap<String, String> providerUsers);
+									   MultiValueMap<String, String> providerUsers);
 
 	Set<String> getUserIds(String providerId, Set<String> providerUserIds);
 

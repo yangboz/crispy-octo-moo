@@ -1,4 +1,4 @@
-package crispy_octo_moo.mongo;
+package net.exacode.spring.social.connect.mongo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.encrypt.TextEncryptor;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * 
  * @author mendlik
  */
-//@Component
+@Component
 public class MongoConnectionConverter {
 	private final ConnectionFactoryLocator connectionFactoryLocator;
 	private final TextEncryptor textEncryptor;

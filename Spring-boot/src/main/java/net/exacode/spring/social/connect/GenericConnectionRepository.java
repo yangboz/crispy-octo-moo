@@ -1,4 +1,4 @@
-package crispy_octo_moo.repository;
+package net.exacode.spring.social.connect;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,7 +16,6 @@ import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.DuplicateConnectionException;
 import org.springframework.social.connect.NoSuchConnectionException;
 import org.springframework.social.connect.NotConnectedException;
-import org.springframework.stereotype.Repository;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
@@ -26,7 +25,7 @@ import org.springframework.util.MultiValueMap;
  * @author mendlik
  * 
  */
-public class MongoConnectionRepository implements ConnectionRepository {
+public class GenericConnectionRepository implements ConnectionRepository {
 
 	private final String userId;
 
@@ -34,7 +33,7 @@ public class MongoConnectionRepository implements ConnectionRepository {
 
 	private final ConnectionFactoryLocator connectionFactoryLocator;
 
-	public MongoConnectionRepository(String userId,
+	public GenericConnectionRepository(String userId,
 			SocialConnectionDao connectionService,
 			ConnectionFactoryLocator connectionFactoryLocator) {
 		this.userId = userId;
@@ -225,6 +224,4 @@ public class MongoConnectionRepository implements ConnectionRepository {
 		// where userId = ? and providerId = ? and rank = 1
 		return connectionService.getPrimaryConnection(userId, providerId);
 	}
-
-
 }

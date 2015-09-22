@@ -6,6 +6,8 @@ package crispy_octo_moo.controller;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -38,6 +40,8 @@ public class FacebookConnectController {
     // ==============
     // PRIVATE FIELDS
     // ==============
+
+    private final Logger LOG = LoggerFactory.getLogger(FacebookConnectController.class);
 
     // Autowire an object of type UserDao
     @Autowired
@@ -99,8 +103,11 @@ public class FacebookConnectController {
         //
 //		String accessToken = "f8FX29g..."; // access token received from Facebook after OAuth authorization
 //		Facebook facebook = new FacebookTemplate(accessToken);
+        LOG.info("connectionRepository.findAllConnections():" + connectionRepository.findAllConnections().toString());
         Connection<Facebook> connection = connectionRepository.findPrimaryConnection(Facebook.class);
+        LOG.info("Connection<Facebook>:" + connection);
         Facebook facebook = connection != null ? connection.getApi() : new FacebookTemplate(userInfo.getToken());
+        LOG.info("facebook,isAuthorized():" + facebook.isAuthorized() + "," + facebook.toString());
         //Retrieving a user's profile data.
         //@see: http://docs.spring.io/spring-social-facebook/docs/2.0.1.RELEASE/reference/htmlsingle/
         org.springframework.social.facebook.api.User profile = facebook.userOperations().getUserProfile();

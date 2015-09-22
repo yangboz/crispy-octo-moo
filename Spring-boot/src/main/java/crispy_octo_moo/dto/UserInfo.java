@@ -1,8 +1,8 @@
 package crispy_octo_moo.dto;
 
 public class UserInfo {
-    private String userId;
-    private String token;
+    private String userId;//LinkedIn is member_id;
+    private String token;//LinkedIn is bearer token;
 
     public String getUserId() {
         return userId;

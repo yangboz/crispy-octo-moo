@@ -56,6 +56,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             //.set('scope', 'r_basicprofile r_network r_emailaddress rw_company_admin w_share rw_nus');
             //.set('scope', 'r_basicprofile');
             .set('authorize', true);
+            //.set('credentials_cookie', true);
 
         // Ionic uses AngularUI Router which uses the concept of states
         // Learn more here: https://github.com/angular-ui/ui-router

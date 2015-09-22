@@ -104,7 +104,7 @@ angular.module('starter.controllers', [])
 ///
     })
     .controller('LoginModalCtrl', function ($scope, $rootScope, ngFB, $linkedIn, Snap415UserService, $log,
-                                            FbUserService, LiUserService, $http, CacheService, Enum) {
+                                            FbUserProfileService, LiUserProfileService, $http, CacheService, Enum) {
         $scope.fbLogin = function () {
             $rootScope.showLoading();
             ngFB.login({scope: 'public_profile,email, user_location, user_relationships, user_education_history, user_work_history, user_birthday, user_posts'}).then(
@@ -138,11 +138,11 @@ angular.module('starter.controllers', [])
                     console.log("$rootScope.fbUser:", $rootScope.fbUser);
                     $rootScope.hideLoading();
                     //Sync the Facebook with token then get user profile.
-                    FbUserService.save({'userId': user.id, 'token': $rootScope.oauth_obj_fb.accessToken}, function (response) {
-                        $log.debug("FbUserService.get() success!", response);
+                    FbUserProfileService.save({'userId': user.id, 'token': $rootScope.oauth_obj_fb.accessToken}, function (response) {
+                        $log.debug("FbUserProfileService.get() success!", response);
                     }, function (error) {
                         // failure handler
-                        $log.error("FbUserService.get() failed:", JSON.stringify(error));
+                        $log.error("FbUserProfileService.get() failed:", JSON.stringify(error));
                     });
                 },
                 function (error) {
@@ -210,6 +210,7 @@ angular.module('starter.controllers', [])
             //    console.log("Error -> " + error);
             //});
             //Authorize on condition
+            //$linkedIn.refresh();
             $linkedIn.isAuthorized().then(function (resp) {
                 //
                 $scope.updateOauthObj_li();//For debugging.
@@ -223,6 +224,7 @@ angular.module('starter.controllers', [])
                     $scope.updateOauthObj_li();
                 });
             });
+            $linkedIn.api()
         }
         $scope.updateOauthObj_li = function(){
             //Dump the auth response object.
@@ -241,15 +243,15 @@ angular.module('starter.controllers', [])
         }
         $rootScope.syncLiUserProfile = function () {
             //Sync the LinkedIn token then get user profile.
-            LiUserService.save({
+            LiUserProfileService.save({
                 'userId': $rootScope.oauth_obj_li.member_id,
                 'token': $rootScope.oauth_obj_li.oauth_token
                 //'token': $rootScope.oauth_obj_li.anonymous_token
             }, function (response) {
-                $log.debug("LiUserService.get() success!", response);
+                $log.debug("LiUserProfileService.get() success!", response);
             }, function (error) {
                 // failure handler
-                $log.error("LiUserService.get() failed:", JSON.stringify(error));
+                $log.error("LiUserProfileService.get() failed:", JSON.stringify(error));
             });
         }
         //
