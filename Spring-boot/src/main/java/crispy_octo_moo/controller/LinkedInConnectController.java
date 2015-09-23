@@ -11,9 +11,8 @@ import com.wordnik.swagger.annotations.ApiOperation;
 import crispy_octo_moo.domain.LiUserProfile;
 import crispy_octo_moo.dto.JsonObject;
 import crispy_octo_moo.dto.LiUserConnection;
-import crispy_octo_moo.dto.UserInfo;
+import crispy_octo_moo.dto.Snap415Token;
 import crispy_octo_moo.repository.LinkedInUserRepository;
-import jdk.nashorn.internal.runtime.URIUtils;
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.builder.api.LinkedInApi;
 import org.scribe.model.*;
@@ -33,12 +32,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriUtils;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
 
 
@@ -85,7 +82,7 @@ public class LinkedInConnectController {
 
     @RequestMapping(value = "/access", method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST", value = "Response a string describing if the access_token related user profile is successfully received.")
-    public JsonObject getAccessToken(@RequestBody @Valid UserInfo userInfo) {
+    public JsonObject getAccessToken(@RequestBody @Valid Snap415Token snap415Token) {
         String linkedinKey = "77nayor82qqip3";    //add your LinkedIn key
         String linkedinSecret = "UJOUycxP5UgdD3da"; //add your LinkedIn Secret
         //@see: https://github.com/fernandezpablo85/scribe-java/wiki/getting-started
@@ -111,7 +108,7 @@ public class LinkedInConnectController {
             e.printStackTrace();
         }
         //4
-//        Verifier v = new Verifier(userInfo.getToken());
+//        Verifier v = new Verifier(snap415Token.getToken());
         String authUrl_token = authUrl.getQuery().split("&")[0].split("=")[1];
         System.out.println("authUrl_token:" + authUrl_token);
         Verifier v = new Verifier(authUrl_token);
@@ -172,13 +169,13 @@ public class LinkedInConnectController {
 
     @RequestMapping(value = "/profile", method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST", value = "Response a string describing if the access_token related user profile is successfully received.")
-    public JsonObject getUserProfile(@RequestBody @Valid UserInfo userInfo) {
+    public JsonObject getUserProfile(@RequestBody @Valid Snap415Token snap415Token) {
         /**
          * Programmatically signs in the user with the given the user ID.
          * @see: spring-social-showcase-boot(SignInUtil)
          */
-        LOG.info("userInfo:" + userInfo.toString());
-        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(userInfo.getUserId(), null, null));
+        LOG.info("snap415Token:" + snap415Token.toString());
+        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(snap415Token.getId(), null, null));
         //@see: https://developer-programs.linkedin.com/documents/exchange-jsapi-tokens-rest-api-oauth-tokens
 //		String accessToken = "f8FX29g..."; // access token received from Facebook after OAuth authorization
 //		Facebook facebook = new FacebookTemplate(accessToken);
@@ -187,11 +184,11 @@ public class LinkedInConnectController {
 //        Connection<LinkedIn> connection = connectionRepository.
 //        "77nayor82qqip3", "UJOUycxP5UgdD3da"
         LOG.info("Connection<LinkedIn>:" + connection);
-        LinkedIn linkedIn = connection != null ? connection.getApi() : new LinkedInTemplate(userInfo.getToken());
+        LinkedIn linkedIn = connection != null ? connection.getApi() : new LinkedInTemplate(snap415Token.getToken());
         LOG.info("linkedIn,isAuthorized():" + linkedIn.isAuthorized() + "," + linkedIn.toString());
         //Retrieving a user's profile data.
         //@see: http://docs.spring.io/spring-social-facebook/docs/2.0.1.RELEASE/reference/htmlsingle/
-        LOG.info("linkedIn getProfileById:" + linkedIn.profileOperations().getProfileById(userInfo.getUserId()));
+        LOG.info("linkedIn getProfileById:" + linkedIn.profileOperations().getProfileById(snap415Token.getId()));
         System.out.println("linkedIn.profileOperations():" + linkedIn.profileOperations().toString());
         LinkedInProfile profile = linkedIn.profileOperations().getUserProfile();
         LOG.info("LinkedInProfile: id:" + profile.getId());
@@ -205,7 +202,7 @@ public class LinkedInConnectController {
 
     @RequestMapping(value = "/connections", method = RequestMethod.GET)
     @ApiOperation(httpMethod = "GET", value = "Response a string describing if the user connnection is successfully received.")
-    public JsonObject getConnections(@RequestBody @Valid UserInfo userInfo) {
+    public JsonObject getConnections(@RequestBody @Valid Snap415Token snap415Token) {
         NetworkStatistics statistics = linkedIn.connectionOperations().getNetworkStatistics();
         LiUserConnection connection = new LiUserConnection();
         connection.setFirstDegreeCount(statistics.getFirstDegreeCount());

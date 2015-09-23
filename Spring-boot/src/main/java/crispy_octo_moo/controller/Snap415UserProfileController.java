@@ -22,7 +22,7 @@ import com.wordnik.swagger.annotations.ApiOperation;
 import crispy_octo_moo.dto.JsonObject;
 
 /**
- * The Class UserController.
+ * The Class Snap415UserProfileController.
  *
  * @author yangboz
  */

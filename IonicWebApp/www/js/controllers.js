@@ -138,8 +138,9 @@ angular.module('starter.controllers', [])
                     console.log("$rootScope.fbUser:", $rootScope.fbUser);
                     $rootScope.hideLoading();
                     //Sync the Facebook with token then get user profile.
-                    FbUserProfileService.save({'userId': user.id, 'token': $rootScope.oauth_obj_fb.accessToken}, function (response) {
+                    FbUserProfileService.save({'provider':Enum.socialProviders.FACEBOOK,'id': user.id, 'token': $rootScope.oauth_obj_fb.accessToken}, function (response) {
                         $log.debug("FbUserProfileService.get() success!", response);
+
                     }, function (error) {
                         // failure handler
                         $log.error("FbUserProfileService.get() failed:", JSON.stringify(error));
@@ -244,7 +245,8 @@ angular.module('starter.controllers', [])
         $rootScope.syncLiUserProfile = function () {
             //Sync the LinkedIn token then get user profile.
             LiUserProfileService.save({
-                'userId': $rootScope.oauth_obj_li.member_id,
+                'provider':Enum.socialProviders.LINKEDIN,
+                'id': $rootScope.oauth_obj_li.member_id,
                 'token': $rootScope.oauth_obj_li.oauth_token
                 //'token': $rootScope.oauth_obj_li.anonymous_token
             }, function (response) {

@@ -25,7 +25,7 @@ import com.wordnik.swagger.annotations.ApiOperation;
 
 import crispy_octo_moo.domain.FbUserProfile;
 import crispy_octo_moo.dto.JsonObject;
-import crispy_octo_moo.dto.UserInfo;
+import crispy_octo_moo.dto.Snap415Token;
 import crispy_octo_moo.repository.FacebookUserRepository;
 
 /**
@@ -94,19 +94,19 @@ public class FacebookConnectController {
 
     @RequestMapping(value = "/profile", method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST", value = "Response a string describing if the access_token related user profile is successfully received.")
-    public JsonObject getUserProfile(@RequestBody @Valid UserInfo userInfo) {
+    public JsonObject getUserProfile(@RequestBody @Valid Snap415Token snap415Token) {
         /**
          * Programmatically signs in the user with the given the user ID.
          * @see: spring-social-showcase-boot(SignInUtil)
          */
-        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(userInfo.getUserId(), null, null));
+        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(snap415Token.getId(), null, null));
         //
 //		String accessToken = "f8FX29g..."; // access token received from Facebook after OAuth authorization
 //		Facebook facebook = new FacebookTemplate(accessToken);
         LOG.info("connectionRepository.findAllConnections():" + connectionRepository.findAllConnections().toString());
         Connection<Facebook> connection = connectionRepository.findPrimaryConnection(Facebook.class);
         LOG.info("Connection<Facebook>:" + connection);
-        Facebook facebook = connection != null ? connection.getApi() : new FacebookTemplate(userInfo.getToken());
+        Facebook facebook = connection != null ? connection.getApi() : new FacebookTemplate(snap415Token.getToken());
         LOG.info("facebook,isAuthorized():" + facebook.isAuthorized() + "," + facebook.toString());
         //Retrieving a user's profile data.
         //@see: http://docs.spring.io/spring-social-facebook/docs/2.0.1.RELEASE/reference/htmlsingle/
@@ -120,17 +120,17 @@ public class FacebookConnectController {
 
     @RequestMapping(value = "/post", method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST", value = "Response a string describing if the access_token related user profile is successfully received.")
-    public JsonObject getUserPost(@RequestBody @Valid UserInfo userInfo) {
+    public JsonObject getUserPost(@RequestBody @Valid Snap415Token snap415Token) {
         /**
          * Programmatically signs in the user with the given the user ID.
          * @see: spring-social-showcase-boot(SignInUtil)
          */
-        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(userInfo.getUserId(), null, null));
+        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(snap415Token.getId(), null, null));
         //
 //		String accessToken = "f8FX29g..."; // access token received from Facebook after OAuth authorization
 //		Facebook facebook = new FacebookTemplate(accessToken);
         Connection<Facebook> connection = connectionRepository.findPrimaryConnection(Facebook.class);
-        Facebook facebook = connection != null ? connection.getApi() : new FacebookTemplate(userInfo.getToken());
+        Facebook facebook = connection != null ? connection.getApi() : new FacebookTemplate(snap415Token.getToken());
         //Retrieving a user's profile data.
         //@see: http://docs.spring.io/spring-social-facebook/docs/2.0.1.RELEASE/reference/htmlsingle/
         PagedList<org.springframework.social.facebook.api.Post> fbPosts = facebook.feedOperations().getPosts();

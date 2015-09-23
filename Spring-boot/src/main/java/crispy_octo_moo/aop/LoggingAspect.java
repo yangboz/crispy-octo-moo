@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 
-import crispy_octo_moo.Constants;
+import crispy_octo_moo.consts.Constants;
 
 import java.util.Arrays;
 

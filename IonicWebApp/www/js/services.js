@@ -220,6 +220,10 @@ angular.module('starter.services', [])
                 OAUTH_OBJ_FB: 'oauth_obj_4_facebook',
                 OAUTH_OBJ_LI: 'oauth_obj_4_linkedin'
             }
+            , socialProviders: {
+                FACEBOOK: 'facebook',
+                LINKEDIN: 'linkedin'
+            }
         };
         return service;
     }])
