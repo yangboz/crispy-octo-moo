@@ -49,7 +49,7 @@ angular.module('starter.controllers', [])
             CacheService.get(Enum.localStorageKeys.OAUTH_OBJ_FB).then(function (data) {
                 console.log(Enum.localStorageKeys.OAUTH_OBJ_FB, data);
                 if (data == null) {
-                    //$rootScope.loginModal_fb.show();
+                    $rootScope.loginModal_fb.show();
                 } else {
                     $rootScope.oauth_obj_fb = JSON.parse(data);
                     $rootScope.syncFbUserProfile();

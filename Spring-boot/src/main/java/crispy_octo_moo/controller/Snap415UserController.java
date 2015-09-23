@@ -42,25 +42,25 @@ public class Snap415UserController {
     @RequestMapping(value = "/me", method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST", value = "Response a string describing if the access_token related user profile is successfully received.")
     public Snap415UserProfile getMe(@RequestBody @Valid Snap415Token snap415Token) {
-        return userService.getMe();
+        return userService.getMe(snap415Token);
     }
 
     @RequestMapping(value = "/events", method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST", value = "Response a string describing if the access_token related user tax events is successfully received.")
     public Snap415UserTaxEvents getEvents(@RequestBody @Valid Snap415Token snap415Token) {
-        return userService.getEvents();
+        return userService.getEvents(snap415Token);
     }
 
     @RequestMapping(value = "/deals", method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST", value = "Response a string describing if the access_token related user deals is successfully received.")
     public Snap415UserDeals getDeals(@RequestBody @Valid Snap415Token snap415Token) {
-        return userService.getDeals();
+        return userService.getDeals(snap415Token);
     }
 
     @RequestMapping(value = "/overview", method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST", value = "Response a string describing if the access_token related user overview is successfully received.")
     public Snap415Overview getOverview(@RequestBody @Valid Snap415Token snap415Token) {
-        return userService.getOverview();
+        return userService.getOverview(snap415Token);
     }
 
 }
