@@ -40,8 +40,8 @@ public class Snap415UserProfileController {
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON)
     @ApiOperation(httpMethod = "POST", value = "Response a string describing if the user info is successfully created or not.")
-    public JsonObject create(@RequestBody @Valid Snap415UserProfile user) {
-        return new JsonObject(_userDao.save(user));
+    public Snap415UserProfile create(@RequestBody @Valid Snap415UserProfile user) {
+        return _userDao.save(user);
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -58,10 +58,10 @@ public class Snap415UserProfileController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ApiOperation(httpMethod = "PUT", value = "Response a string describing if the  user info is successfully updated or not.")
-    public JsonObject update(@PathVariable("id") String id, @RequestBody @Valid Snap415UserProfile user) {
+    public Snap415UserProfile update(@PathVariable("id") String id, @RequestBody @Valid Snap415UserProfile user) {
 //		User find = this._userDao.findOne(id);
         user.setId(id);
-        return new JsonObject(this._userDao.save(user));
+        return this._userDao.save(user);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

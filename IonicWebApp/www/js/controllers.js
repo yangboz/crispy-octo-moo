@@ -99,11 +99,16 @@ angular.module('starter.controllers', [])
         $rootScope.prefMortgageInterest = null;
         $rootScope.EVCredits = [];
         $rootScope.prefEVCredit = null;
+        ///Currently only for Facebook
+        $rootScope.getSnap415Token = function()
+        {
+            return {'provider':Enum.socialProviders.FACEBOOK,'id': $rootScope.fbUser.id, 'token': $rootScope.oauth_obj_fb.accessToken};
+        }
         ////test post.
 
 ///
     })
-    .controller('LoginModalCtrl', function ($scope, $rootScope, ngFB, $linkedIn, Snap415UserService, $log,
+    .controller('LoginModalCtrl', function ($scope, $rootScope, ngFB, $linkedIn, UserProfileService, $log,
                                             FbUserProfileService, LiUserProfileService, $http, CacheService, Enum) {
         $scope.fbLogin = function () {
             $rootScope.showLoading();
@@ -150,16 +155,8 @@ angular.module('starter.controllers', [])
                     alert('Facebook error: ' + error);
                     $rootScope.hideLoading();
                 });
-            //Synchronize the user info testing
-            //Snap415UserService.save($rootScope.user, function (response) {
-            //    $log.debug("UserService.save() success!", response);
-            //}, function (error) {
-            //    // failure handler
-            //    $log.error("Snap415UserService.save() failed:", JSON.stringify(error));
-            //});
-
         }
-        //
+        //For testing.
         $scope.loadMoreFbInfo = function () {
             $rootScope.showLoading();
             ///
@@ -256,7 +253,7 @@ angular.module('starter.controllers', [])
                 $log.error("LiUserProfileService.get() failed:", JSON.stringify(error));
             });
         }
-        //
+        //For testing.
         $scope.loadMoreLiInfo = function () {
             $linkedIn.isAuthorized().then(function (resp) {
                 console.log("$linkedIn.isAuthorized():", resp);    // $linkedIn.isAuthorized
@@ -281,23 +278,34 @@ angular.module('starter.controllers', [])
 
         }
     })
-    .controller('DashCtrl', function ($scope, $rootScope) {
+    .controller('DashCtrl', function ($scope,$rootScope,$log,Enum) {
 
     })
 
-    .controller('UpdatesCtrl', function ($scope) {
+    .controller('UpdatesCtrl', function ($scope,$rootScope,$log,Enum) {
+
     })
 
-    .controller('AccountsCtrl', function ($scope) {
-        // With the new view caching in Ionic, Controllers are only called
-        // when they are recreated or on app start, instead of every page change.
-        // To listen for when this page is active (for example, to refresh data),
-        // listen for the $ionicView.enter event:
-        //
-        //$scope.$on('$ionicView.enter', function(e) {
+    .controller('AccountsCtrl', function ($scope,$rootScope,$log,Enum,UserMeService) {
+        //Synchronize the user info testing
+        //UserProfileService.save($rootScope.user, function (response) {
+        //    $log.debug("UserProfileService.save() success!", response);
+        //}, function (error) {
+        //    // failure handler
+        //    $log.error("UserProfileService.save() failed:", JSON.stringify(error));
         //});
-
-        //$scope.chats = Chats.all();
+        $scope.me = {};
+        $scope.loadUserMe = function(){
+            UserMeService.save($rootScope.getSnap415Token(), function (response) {
+                $log.debug("UserMeService.save() success!", response);
+                $scope.me = response;
+            }, function (error) {
+                // failure handler
+                $log.error("UserMeService.save() failed:", JSON.stringify(error));
+            });
+        }
+        //Default behaviours:
+        $scope.loadUserMe();
     })
 
     .controller('AccountSettingsCtrl', function ($scope, $rootScope, IncomeCategoryService, FilingCategoryService,

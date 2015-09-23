@@ -145,13 +145,22 @@ angular.module('starter.services', [])
             }
         };
     })
-    //Snap415UserService
-    .factory('Snap415UserService', function ($resource, CONFIG_ENV) {
+    //UserProfileService
+    .factory('UserProfileService', function ($resource, CONFIG_ENV) {
         var data = $resource(
             CONFIG_ENV.api_endpoint + "user/profile/:Id",
             {Id: "@Id"},
             {
                 "update": {method: "PUT"}
+            })
+        return data;
+    })
+    //UserMeService
+    .factory('UserMeService', function ($resource, CONFIG_ENV) {
+        var data = $resource(
+            CONFIG_ENV.api_endpoint + "user/me",
+            {},
+            {
             })
         return data;
     })
