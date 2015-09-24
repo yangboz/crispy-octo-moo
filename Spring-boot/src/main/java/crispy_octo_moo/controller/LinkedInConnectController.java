@@ -1,22 +1,14 @@
 package crispy_octo_moo.controller;
 
-//import com.google.code.linkedinapi.client.LinkedInApiClient;
-//import com.google.code.linkedinapi.client.LinkedInApiClientFactory;
-//import com.google.code.linkedinapi.client.oauth.LinkedInAccessToken;
-//import com.google.code.linkedinapi.client.oauth.LinkedInOAuthService;
-//import com.google.code.linkedinapi.client.oauth.LinkedInOAuthServiceFactory;
-//import com.google.code.linkedinapi.client.oauth.LinkedInRequestToken;
-
 import com.wordnik.swagger.annotations.ApiOperation;
 import crispy_octo_moo.domain.LiUserProfile;
 import crispy_octo_moo.dto.JsonObject;
 import crispy_octo_moo.dto.LiUserConnection;
 import crispy_octo_moo.dto.Snap415Token;
 import crispy_octo_moo.repository.LinkedInUserRepository;
-import org.scribe.builder.ServiceBuilder;
-import org.scribe.builder.api.LinkedInApi;
+import crispy_octo_moo.service.LinkedInUserService;
 import org.scribe.model.*;
-import org.scribe.oauth.OAuthService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 
 /**
@@ -71,7 +61,8 @@ public class LinkedInConnectController {
         this.connectionRepository = connectionRepository;
     }
 
-
+    @Autowired
+    private LinkedInUserService _linkedInUserService;
     //
 //    @Inject
 //    public LinkedInConnectController(LinkedIn linkedIn) {
@@ -79,95 +70,18 @@ public class LinkedInConnectController {
 //    }
 //    private LinkedInRequestToken sessionRequestToken = null;
     private Token sessionRequestToken = null;
+    //
 
-    @RequestMapping(value = "/access", method = RequestMethod.POST)
+
+    //
+    @RequestMapping(value = "/profile", method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST", value = "Response a string describing if the access_token related user profile is successfully received.")
     public JsonObject getAccessToken(@RequestBody @Valid Snap415Token snap415Token) {
-        String linkedinKey = "77nayor82qqip3";    //add your LinkedIn key
-        String linkedinSecret = "UJOUycxP5UgdD3da"; //add your LinkedIn Secret
-        //@see: https://github.com/fernandezpablo85/scribe-java/wiki/getting-started
-        //1
-        OAuthService service = new ServiceBuilder()
-                .provider(LinkedInApi.class)
-                .apiKey(linkedinKey)
-                .apiSecret(linkedinSecret)
-                .scope("r_basicprofile")
-                .callback("http://localhost:8083/api/static/oauthcallback.html")
-                .build();
-        //2
-        Token requestToken = service.getRequestToken();
-        sessionRequestToken = new Token(requestToken.getToken(), requestToken.getSecret(), requestToken.getRawResponse());
-        //3
-        String authUrlStr = service.getAuthorizationUrl(requestToken);
-        System.out.println("authUrlStr:" + authUrlStr);
-        URL authUrl = null;
-//        authUri.getRawQuery().
-        try {
-            authUrl = new URL(authUrlStr);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        //4
-//        Verifier v = new Verifier(snap415Token.getToken());
-        String authUrl_token = authUrl.getQuery().split("&")[0].split("=")[1];
-        System.out.println("authUrl_token:" + authUrl_token);
-        Verifier v = new Verifier(authUrl_token);
-        System.out.println("Verifier value:" + v.getValue());
-//        Token accessToken = service.getAccessToken(requestToken, v); // the requestToken you had from step 2
-        Token accessToken = service.getAccessToken(sessionRequestToken, v); // the requestToken you had from step 2
-        //5
-        OAuthRequest request = new OAuthRequest(Verb.GET, "http://api.twitter.com/1/account/verify_credentials.xml");
-        service.signRequest(accessToken, request); // the access token from step 4
-        Response response = request.send();
-        System.out.println(response.getBody());
-//
-//        LinkedInOAuthService oauthService;
-//        LinkedInRequestToken requestToken;
-//
-//        System.out.println("Fetching request token from LinkedIn...");
-//        String authUrl = null;
-//        String authToken, authTokenSecret;
-//
-//        oauthService = LinkedInOAuthServiceFactory.getInstance().createLinkedInOAuthService(linkedinKey, linkedinSecret);
-//        requestToken = oauthService.getOAuthRequestToken();
-//
-//        authToken = requestToken.getToken();
-//        authTokenSecret = requestToken.getTokenSecret();
-//        //
-//        sessionRequestToken = new LinkedInRequestToken(authToken, authTokenSecret);
-//
-//        System.out.println("Request token: " + requestToken);
-//        System.out.println("Auth token:" + authToken);
-//        System.out.println("Auth token secret:" + authTokenSecret);
-//
-//        authUrl = requestToken.getAuthorizationUrl();
-//
-//        System.out.println("Copy below link in web browser to authorize. Copy the PIN obtained:" + authUrl);
-////        System.out.println("Enter the PIN code:");
-//        String pin = "54769";
-//
-//        LinkedInAccessToken accessToken;
-//        try {
-//            System.out.println("Fetching access token from LinkedIn...");
-//            oauthService.addRequestHeader("xoauth_oauth2_access_token", authToken);
-//            accessToken = oauthService.getOAuthAccessToken(sessionRequestToken, pin);
-//            System.out.println("Access token : " + accessToken.getToken());
-//            System.out.println("Token secret : " + accessToken.getTokenSecret());
-////            final LinkedInApiClientFactory factory = LinkedInApiClientFactory.newInstance(linkedinKey, linkedinSecret);
-////            final LinkedInApiClient client = factory.createLinkedInApiClient(accessToken);
-//
-//            //posting status to profile
-////            client.updateCurrentStatus("LinkedIn-J API is cool!");
-//
-//        } finally {
-//            System.out.println("Got LinkedIn access token!");
-////            System.out.println("Updated status!");
-//        }
-        return new JsonObject(accessToken);
-
+        //
+        return new JsonObject(this._linkedInUserService.getUserProfile(snap415Token));
     }
 
-    @RequestMapping(value = "/profile", method = RequestMethod.POST)
+    @RequestMapping(value = "/access", method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST", value = "Response a string describing if the access_token related user profile is successfully received.")
     public JsonObject getUserProfile(@RequestBody @Valid Snap415Token snap415Token) {
         /**
@@ -210,5 +124,6 @@ public class LinkedInConnectController {
         connection.setConnections(linkedIn.connectionOperations().getConnections());
         return new JsonObject(connection);
     }
+
 }
 

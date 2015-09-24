@@ -23,7 +23,7 @@ angular.module('starter.controllers', [])
             console.log("modal-login-li.html initialization.");
             $rootScope.loginModal_li = modal;
             //Login Modal show();
-            //CacheService.remove(Enum.localStorageKeys.OAUTH_OBJ_LI);//for debugging
+            CacheService.remove(Enum.localStorageKeys.OAUTH_OBJ_LI);//for debugging
             CacheService.get(Enum.localStorageKeys.OAUTH_OBJ_LI).then(function (data) {
                 console.log(Enum.localStorageKeys.OAUTH_OBJ_LI, data);
                 if (data == null) {
@@ -199,16 +199,6 @@ angular.module('starter.controllers', [])
             //$linkedIn.refresh();
             $rootScope.showLoading();
             //
-            //@see: http://blog.ionic.io/oauth-ionic-ngcordova/
-            //@see: https://github.com/nraboy/ng-cordova-oauth
-            //$cordovaOauth.linkedin("77nayor82qqip3", "UJOUycxP5UgdD3da", ["r_basicprofile", "r_network", "r_emailaddress",
-            //    "rw_company_admin", "w_share rw_nus"]).then(function(result) {
-            //    console.log("Response LinkedIn Object -> " + JSON.stringify(result));
-            //}, function(error) {
-            //    console.log("Error -> " + error);
-            //});
-            //Authorize on condition
-            //$linkedIn.refresh();
             $linkedIn.isAuthorized().then(function (resp) {
                 //
                 $scope.updateOauthObj_li();//For debugging.
@@ -222,14 +212,14 @@ angular.module('starter.controllers', [])
                     $scope.updateOauthObj_li();
                 });
             });
-            $linkedIn.api()
+            //$linkedIn.api()
         }
         $scope.updateOauthObj_li = function(){
             //Dump the auth response object.
-            for (var property in IN.ENV.auth) {
-                //output += property + ': ' + object[property]+'; ';
-                console.debug("IN.ENV.auth:" + property + ': ' + IN.ENV.auth[property] + '; ');
-            }
+            //for (var property in IN.ENV.auth) {
+            //    //output += property + ': ' + object[property]+'; ';
+            //    console.debug("IN.ENV.auth:" + property + ': ' + IN.ENV.auth[property] + '; ');
+            //}
             $rootScope.oauth_obj_li = IN.ENV.auth;
             //var oauth_token = IN.ENV.auth.oauth_token;
             //var member_id = IN.ENV.auth.member_id;
@@ -248,9 +238,11 @@ angular.module('starter.controllers', [])
                 //'token': $rootScope.oauth_obj_li.anonymous_token
             }, function (response) {
                 $log.debug("LiUserProfileService.get() success!", response);
+                $rootScope.loginModal_li.hide();
             }, function (error) {
                 // failure handler
                 $log.error("LiUserProfileService.get() failed:", JSON.stringify(error));
+                $rootScope.loginModal_li.hide();
             });
         }
         //For testing.

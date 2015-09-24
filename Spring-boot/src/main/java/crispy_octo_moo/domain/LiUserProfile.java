@@ -22,4 +22,9 @@ public class LiUserProfile extends LinkedInProfile {
     public LiUserProfile(String id, String firstName, String lastName, String headline, String industry, String publicProfileUrl, UrlResource siteStandardProfileRequest, String profilePictureUrl) {
         super(id, firstName, lastName, headline, industry, publicProfileUrl, siteStandardProfileRequest, profilePictureUrl);
     }
+
+    //Introducing the dummy constructor for JSON Mapper
+    public LiUserProfile() {
+        super(null, null, null, null, null, null, null, null);
+    }
 }
