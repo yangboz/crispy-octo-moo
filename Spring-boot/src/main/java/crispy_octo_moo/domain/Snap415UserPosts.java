@@ -1,11 +1,16 @@
 package crispy_octo_moo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.social.facebook.api.Post;
 
 //the information retrieved from user_posts will be mapped to Snap415UserPosts
-public class Snap415UserPosts extends Post{
+@JsonIgnoreProperties(ignoreUnknown = true)
+@SuppressWarnings("serial")
+@Document(collection = "snap415_user_posts")
+public class Snap415UserPosts extends Post {
 
     @Id
     @Field("uuid")

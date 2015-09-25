@@ -8,11 +8,13 @@ package crispy_octo_moo.domain;
 // number of children (this attribute can possibly be inferred or retrieved from facebook,
 // but for now, we rely on user input).
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 @SuppressWarnings("serial")
-@Document(collection = "com_user_profile")
+@Document(collection = "snap415_user_profile")
 public class Snap415UserProfile extends BaseEntity {
 
 

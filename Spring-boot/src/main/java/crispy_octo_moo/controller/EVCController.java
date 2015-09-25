@@ -1,14 +1,15 @@
 package crispy_octo_moo.controller;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wordnik.swagger.annotations.ApiOperation;
+import crispy_octo_moo.consts.FixtureData;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
-import java.net.URL;
+import javax.validation.Valid;
+import javax.ws.rs.core.MediaType;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,49 +22,52 @@ public class EVCController {
 
 //    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON)
 //    @ApiOperation(httpMethod = "POST", value = "Response a string describing if the user info is successfully created or not.")
-//    public Map<String, String> create(@RequestBody @Valid Map<String, String>) {
-//        return _userDao.save(user);
+//    public Map<String, Float> create(@RequestBody @Valid Map<String, Float> value) {
+//        FixtureData.ElectricVehicleCredit.putAll(value);
+//        return FixtureData.ElectricVehicleCredit;
 //    }
 
     @RequestMapping(method = RequestMethod.GET)
     @ApiOperation(httpMethod = "GET", value = "Response a list describing all of FB user info that is successfully get or not.")
-    public Map<String, String> list() {
+    public Map<String, Float> list() {
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, String> lMap = new HashMap<String, String>();
+//        Map<String, String> lMap = new HashMap<String, String>();
         // Load the directory as a resource　for testing.
-        URL dir_url = ClassLoader.getSystemResource("ElectricVehicleCredit.json");//FIXME:missing resource files.
-        try {
-            //convert JSON string to Map
-            File jsonFile = new File(dir_url.toURI());
-            System.out.println("jsonFile:" + jsonFile);
-            lMap = mapper.readValue(jsonFile,
-                    new TypeReference<Map<String, String>>() {
-                    });
-            System.out.println("HashMap(ElectricVehicleCredit):" + lMap);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return lMap;
+//        URL dir_url = ClassLoader.getSystemResource("ElectricVehicleCredit.json");//FIXME:missing resource files.
+//        try {
+//            //convert JSON string to Map
+//            File jsonFile = new File(dir_url.toURI());
+//            System.out.println("jsonFile:" + jsonFile);
+//            lMap = mapper.readValue(jsonFile,
+//                    new TypeReference<Map<String, String>>() {
+//                    });
+//            System.out.println("HashMap(ElectricVehicleCredit):" + lMap);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        return FixtureData.ElectricVehicleCredit;
     }
 
-//    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-//    @ApiOperation(httpMethod = "GET", value = "Response a string describing if the user info id is successfully get or not.")
-//    public Snap415UserProfile get(@PathVariable("id") String id) {
-//        return this._userDao.findOne(id);
-//    }
-//
-//    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-//    @ApiOperation(httpMethod = "PUT", value = "Response a string describing if the  user info is successfully updated or not.")
-//    public Snap415UserProfile update(@PathVariable("id") String id, @RequestBody @Valid Snap415UserProfile user) {
-////		User find = this._userDao.findOne(id);
-//        user.setId(id);
-//        return this._userDao.save(user);
-//    }
-//
-//    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-//    @ApiOperation(httpMethod = "DELETE", value = "Response a string describing if the user info is successfully delete or not.")
-//    public ResponseEntity<Boolean> delete(@PathVariable("id") String id) {
-//        this._userDao.delete(id);
-//        return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
-//    }
+    @RequestMapping(value = "/{key}", method = RequestMethod.GET)
+    @ApiOperation(httpMethod = "GET", value = "Response a string describing if the EVC key related value is successfully get or not.")
+    public Float get(@PathVariable("key") String key) {
+        return FixtureData.ElectricVehicleCredit.get(key);
+    }
+
+    //
+    @RequestMapping(value = "/{key}/{value}", method = RequestMethod.PUT)
+    @ApiOperation(httpMethod = "PUT", value = "Response a string describing if the  EVC item  is successfully updated or not.")
+    public ResponseEntity<Boolean> update(@PathVariable("key") String key, @PathVariable("value") Float value) {
+//		User find = this._userDao.findOne(id);
+        FixtureData.ElectricVehicleCredit.put(key, value);
+        return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
+    }
+
+    //
+    @RequestMapping(value = "/{key}", method = RequestMethod.DELETE)
+    @ApiOperation(httpMethod = "DELETE", value = "Response a string describing if the EVC item is successfully delete or not.")
+    public ResponseEntity<Boolean> delete(@PathVariable("key") String key) {
+        FixtureData.ElectricVehicleCredit.remove(key);
+        return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
+    }
 }
