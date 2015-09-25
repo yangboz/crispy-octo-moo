@@ -44,9 +44,12 @@ public class SocialApiConfig {
         registry.addConnectionFactory(new LinkedInConnectionFactory(
                 environment.getProperty("spring.social.linkedin.consumerKey"),
                 environment.getProperty("spring.social.linkedin.consumerSecret")));
-        registry.addConnectionFactory(new FacebookConnectionFactory(
+        //
+        FacebookConnectionFactory fbcf = new FacebookConnectionFactory(
                 environment.getProperty("spring.social.facebook.appId"),
-                environment.getProperty("spring.social.facebook.appSecret")));
+                environment.getProperty("spring.social.facebook.appSecret"));
+        fbcf.setScope(environment.getProperty("spring.social.facebook.scope"));
+        registry.addConnectionFactory(fbcf);
         return registry;
     }
 

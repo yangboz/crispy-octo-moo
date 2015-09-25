@@ -17,6 +17,7 @@ import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.Post;
+import org.springframework.social.facebook.api.User;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,7 +51,7 @@ public class FacebookConnectController {
 
     @RequestMapping(value = "/profile", method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST", value = "Response a string describing if the access_token related user profile is successfully received.")
-    public FbUserProfile getUserProfile(@RequestBody @Valid Snap415Token snap415Token) {
+    public User getUserProfile(@RequestBody @Valid Snap415Token snap415Token) {
         return fbUservice.getUserProfile(snap415Token);
     }
 

@@ -29,11 +29,11 @@
                 </p>
 
                 <p>
-                    City: {{$root.fbUser.city}}
+                    City: {{me.fbUserProfile.city}}
                 </p>
 
                 <p>
-                    Residents: birthday at {{$root.fbUserMore.birthday}} Years.
+                    Residents: birthday at {{me.fbUserProfile.birthday}} Years.
                 </p>
 
                 <p>
@@ -41,7 +41,7 @@
                 </p>
                 <b>
                     <p>
-                        Family: {{ $root.fbUserMore.family.data[0].name +'('+ $root.fbUserMore.family.data[0].relationship +
+                        Family: {{ me.fbUserProfile.family.data[0].name +'('+ me.fbUserProfile.family.data[0].relationship +
                         ')' }}
                     </p>
                 </b>
@@ -73,16 +73,16 @@
                 </p>
                 <b>
                     <p>
-                        Location: {{$root.fbUserMore.location.name}}
+                        Location: {{me.fbUserProfile.location.name}}
                     </p>
                 </b>
 
                 <p>
-                    Work status: first at {{$root.fbUserMore.work[0].employer.name}}
+                    Work status: first at {{me.fbUserProfile.work[0].employer.name}}
                 </p>
 
                 <p>
-                    Education: {{$root.fbUserMore.education[0].school.name +'('+ $root.fbUserMore.education[0].type + ')'}}
+                    Education: {{me.fbUserProfile.education[0].school.name +'('+ me.fbUserProfile.education[0].type + ')'}}
                 </p>
             </div>
 

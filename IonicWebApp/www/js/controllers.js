@@ -124,7 +124,7 @@ angular.module('starter.controllers', [])
                         //$log.debug('Facebook login succeeded, authResponse: ', response.authResponse);
                         //var access_token = response.authResponse.accessToken;
                         //$log.debug('Facebook login succeeded, got access token: ', access_token);
-                        //Cache it.
+                        //Cache it.@see:https://developers.facebook.com/tools/debug/accesstoken
                         CacheService.set(Enum.localStorageKeys.OAUTH_OBJ_FB, JSON.stringify($rootScope.oauth_obj_fb), 1*60*60);//1443168000 (in about an hour)
                         //
                         $rootScope.syncFbUserProfile();

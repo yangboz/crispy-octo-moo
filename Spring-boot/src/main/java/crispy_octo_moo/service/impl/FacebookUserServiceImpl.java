@@ -15,6 +15,7 @@ import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.Post;
+import org.springframework.social.facebook.api.User;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +46,7 @@ public class FacebookUserServiceImpl implements FacebookUserService {
     }
 
     @Override
-    public FbUserProfile getUserProfile(Snap415Token token) {
+    public User getUserProfile(Snap415Token token) {
         /**
          * Programmatically signs in the user with the given the user ID.
          * @see: spring-social-showcase-boot(SignInUtil)
@@ -61,12 +62,16 @@ public class FacebookUserServiceImpl implements FacebookUserService {
         LOG.debug("facebook,isAuthorized():" + facebook.isAuthorized() + "," + facebook.toString());
         //Retrieving a user's profile data.
         //@see: http://docs.spring.io/spring-social-facebook/docs/2.0.1.RELEASE/reference/htmlsingle/
+        //@see:
         org.springframework.social.facebook.api.User profile = facebook.userOperations().getUserProfile();
-        LOG.info("Raw facebook user profile:" + profile.toString());
+//        LOG.info("Raw facebook user profile:" + profile.toString());
+        LOG.info("Raw facebook user profile,getBirthday:" + profile.getBirthday() + ",getEducation:" + profile.getEducation().toArray().toString()
+                + ",getWork" + profile.getWork().toArray().toString() + ",getRelationshipStatus:" + profile.getRelationshipStatus());
         //Synchronize the FB user profile to DB.
-        FbUserProfile fbUser = new FbUserProfile(profile.getId(), profile.getName(), profile.getFirstName(), profile.getLastName(), profile.getGender(), profile.getLocale());
+//        FbUserProfile fbUser = new FbUserProfile(profile.getId(), profile.getName(), profile.getFirstName(), profile.getLastName(), profile.getGender(), profile.getLocale());
         //
-        return this._fbUserDao.save(fbUser);
+        return profile;
+//        return this._fbUserDao.save(fbUser);
     }
 
     @Override

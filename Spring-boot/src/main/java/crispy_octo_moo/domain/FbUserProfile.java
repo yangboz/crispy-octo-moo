@@ -12,6 +12,7 @@ import org.springframework.social.facebook.api.EducationExperience;
 import org.springframework.social.facebook.api.User;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.social.facebook.api.WorkEntry;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @SuppressWarnings("serial")
@@ -25,5 +26,4 @@ public class FbUserProfile extends User {
     @Id
     @Field("uuid")
     private String id;
-
 }

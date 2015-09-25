@@ -11,6 +11,11 @@ package crispy_octo_moo.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.social.facebook.api.EducationExperience;
+import org.springframework.social.facebook.api.User;
+import org.springframework.social.facebook.api.WorkEntry;
+
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @SuppressWarnings("serial")
@@ -18,14 +23,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Snap415UserProfile extends BaseEntity {
 
 
-    private FbUserProfile fbUserProfile;
+    private User fbUserProfile;
     private LiUserProfile liUserProfile;
 
-    public FbUserProfile getFbUserProfile() {
+    public User getFbUserProfile() {
         return fbUserProfile;
     }
 
-    public void setFbUserProfile(FbUserProfile fbUserProfile) {
+    public void setFbUserProfile(User fbUserProfile) {
         this.fbUserProfile = fbUserProfile;
     }
 
@@ -36,98 +41,76 @@ public class Snap415UserProfile extends BaseEntity {
     public void setLiUserProfile(LiUserProfile liUserProfile) {
         this.liUserProfile = liUserProfile;
     }
-    // @Id
-    // private String id;
 
-    // This is the user id for linking a user's profile to a user entity
-    private String userid;
+    //Simplify basic information as required.
+    private String simplyRelationshipStatus;
+    private String simplyEducation;
+    private String simplyBirthday;
+    private String simplyWork;
+    //Also allow user input,read and write
+    private int rwIncome;
+    private String rwTaxFilingStatus;
+    private int rwNumberOfChildren;
 
-    private String name;
-    private String sex;
-    private String relationshipstatus;
-    private String education;
-    private String workstatus;
-    private int income;
-    private String taxfilingstatus;
-    private int numberofChildren;
 
-    // public String getId() {
-    // return id;
-    // }
-    // public void setId(String id) {
-    // this.id = id;
-    // }
-
-    public String getUserid() {
-        return userid;
+    public String getSimplyRelationshipStatus() {
+        return simplyRelationshipStatus;
     }
 
-    public void setUserid(String userid) {
-        this.userid = userid;
+    public void setSimplyRelationshipStatus(String simplyRelationshipStatus) {
+        this.simplyRelationshipStatus = simplyRelationshipStatus;
     }
 
-    public String getName() {
-        return name;
+    public String getSimplyEducation() {
+        return simplyEducation;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSimplyEducation(String simplyEducation) {
+        this.simplyEducation = simplyEducation;
     }
 
-    public String getSex() {
-        return sex;
+    public String getSimplyBirthday() {
+        return simplyBirthday;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setSimplyBirthday(String simplyBirthday) {
+        this.simplyBirthday = simplyBirthday;
     }
 
-    public String getRelationshipstatus() {
-        return relationshipstatus;
+    public String getSimplyWork() {
+        return simplyWork;
     }
 
-    public void setRelationshipstatus(String relationshipstatus) {
-        this.relationshipstatus = relationshipstatus;
+    public void setSimplyWork(String simplyWork) {
+        this.simplyWork = simplyWork;
     }
 
-    public String getEducation() {
-        return education;
+    public int getRwIncome() {
+        return rwIncome;
     }
 
-    public void setEducation(String education) {
-        this.education = education;
+    public void setRwIncome(int rwIncome) {
+        this.rwIncome = rwIncome;
     }
 
-    public String getWorkstatus() {
-        return workstatus;
+    public String getRwTaxFilingStatus() {
+        return rwTaxFilingStatus;
     }
 
-    public void setWorkstatus(String workstatus) {
-        this.workstatus = workstatus;
+    public void setRwTaxFilingStatus(String rwTaxFilingStatus) {
+        this.rwTaxFilingStatus = rwTaxFilingStatus;
     }
 
-    public int getIncome() {
-        return income;
+    public int getRwNumberOfChildren() {
+        return rwNumberOfChildren;
     }
 
-    public void setIncome(int income) {
-        this.income = income;
+    public void setRwNumberOfChildren(int rwNumberOfChildren) {
+        this.rwNumberOfChildren = rwNumberOfChildren;
     }
 
-    public String getTaxfilingstatus() {
-        return taxfilingstatus;
+    public String toString() {
+        return "birthday:" + this.getSimplyBirthday() + ",work:" + this.getSimplyWork() + ",education:" + this.getSimplyEducation()
+                + ",relationshipStatus:" + this.getSimplyRelationshipStatus() + ",fbUserProfile:" + this.getFbUserProfile();
     }
-
-    public void setTaxfilingstatus(String taxfilingstatus) {
-        this.taxfilingstatus = taxfilingstatus;
-    }
-
-    public int getNumberofChildren() {
-        return numberofChildren;
-    }
-
-    public void setNumberofChildren(int numberofChildren) {
-        this.numberofChildren = numberofChildren;
-    }
-
 }
