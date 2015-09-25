@@ -67,58 +67,69 @@ angular.module('starter.services', [])
             }
         }
     })
-    .factory('EVCreditService', function () {
-        // Might use a resource here that returns a JSON array
 
-        // Some fake testing data
-        var ElecticVehicleCredits = [
-            {"label": 'Accord Plug-In Hybrid', "value": 3626},
-            {"label": 'Azure Dynamics Transit Connect Electric Vehicle', "value": 7500},
-            {"label": 'BMW i3 Sedan', "value": 7500},
-            {"label": 'BMW i8', "value": 3793},
-            {"label": 'Boulder Electric DV-500', "value": 7500},
-            {"label": 'BYD e6 Electric Vehicle', "value": 7500},
-            {"label": 'Fiat 500e', "value": 7500},
-            {"label": 'CODA Sedan', "value": 7500},
-            {"label": 'Electric Vehicles International (EVI) Electric truck', "value": 7500},
-            {"label": 'EMC Model E36 (Electric Vehicle Manufactured by Electric Mobile Cars)', "value": 7500},
-            {"label": 'Fisker Karma', "value": 7500},
-            {"label": 'Ford Focus Electric', "value": 7500},
-            {"label": 'Ford C-MAX Energi', "value": 4007},
-            {"label": 'Ford Fusion Energi', "value": 4007},
-            {"label": 'Cadillac ELR', "value": 7500},
-            {"label": 'Chevrolet Volt', "value": 7500},
-            {"label": 'Chevrolet Spark EV', "value": 7500},
-            {"label": 'Kia Soul Electric', "value": 7500},
-            {"label": 'Mercedes-Benz smart Coupe/Cabrio EV', "value": 7500},
-            {"label": 'Mercedes-Benz B-Class EV', "value": 7500},
-            {"label": 'Mitsubishi i-MiEV', "value": 7500},
-            {"label": 'Nissan Leaf', "value": 7500},
-            {"label": 'Porsche 918 Spyder', "value": 3667},
-            {"label": 'Porsche Panamera S E Hybrid', "value": 4751.80},
-            {"label": 'Porsche Caynee S E-Hybrid', "value": 5335.60},
-            {"label": 'smart fortwo', "value": 7500},
-            {"label": 'Tesla Roadster', "value": 7500},
-            {"label": 'Tesla Model S', "value": 7500},
-            {"label": 'Think City EV', "value": 7500},
-            {"label": 'Toyota Prius Plug-in Electic Drive Vehicle', "value": 2500},
-            {"label": 'Toyota RAV4 EV', "value": 7500},
-            {"label": 'VIA 2500', "value": 7500},
-            {"label": 'VIA 1500', "value": 7500},
-            {"label": 'Volkswagen e-Golf', "value": 7500},
-            {"label": 'Wheego LiFe Electric Vehicle', "value": 7500},
-            {"label": 'Zenith Electric Van', "value": 7500}
-        ];
-
-        return {
-            all: function () {
-                return ElecticVehicleCredits;
-            },
-            get: function ($key) {
-                return ElecticVehicleCredits[$key];
-            }
-        };
+    //EVCreditService
+    .factory('EVCreditService', function ($resource, CONFIG_ENV) {
+        var data = $resource(
+            CONFIG_ENV.api_endpoint + "evc/:Key",
+            {Key: "@Key"},
+            {
+                "update": {method: "PUT"}
+            })
+        return data;
     })
+    //.factory('EVCreditService', function () {
+    //    // Might use a resource here that returns a JSON array
+    //
+    //    // Some fake testing data
+    //    var ElecticVehicleCredits = [
+    //        {"label": 'Accord Plug-In Hybrid', "value": 3626},
+    //        {"label": 'Azure Dynamics Transit Connect Electric Vehicle', "value": 7500},
+    //        {"label": 'BMW i3 Sedan', "value": 7500},
+    //        {"label": 'BMW i8', "value": 3793},
+    //        {"label": 'Boulder Electric DV-500', "value": 7500},
+    //        {"label": 'BYD e6 Electric Vehicle', "value": 7500},
+    //        {"label": 'Fiat 500e', "value": 7500},
+    //        {"label": 'CODA Sedan', "value": 7500},
+    //        {"label": 'Electric Vehicles International (EVI) Electric truck', "value": 7500},
+    //        {"label": 'EMC Model E36 (Electric Vehicle Manufactured by Electric Mobile Cars)', "value": 7500},
+    //        {"label": 'Fisker Karma', "value": 7500},
+    //        {"label": 'Ford Focus Electric', "value": 7500},
+    //        {"label": 'Ford C-MAX Energi', "value": 4007},
+    //        {"label": 'Ford Fusion Energi', "value": 4007},
+    //        {"label": 'Cadillac ELR', "value": 7500},
+    //        {"label": 'Chevrolet Volt', "value": 7500},
+    //        {"label": 'Chevrolet Spark EV', "value": 7500},
+    //        {"label": 'Kia Soul Electric', "value": 7500},
+    //        {"label": 'Mercedes-Benz smart Coupe/Cabrio EV', "value": 7500},
+    //        {"label": 'Mercedes-Benz B-Class EV', "value": 7500},
+    //        {"label": 'Mitsubishi i-MiEV', "value": 7500},
+    //        {"label": 'Nissan Leaf', "value": 7500},
+    //        {"label": 'Porsche 918 Spyder', "value": 3667},
+    //        {"label": 'Porsche Panamera S E Hybrid', "value": 4751.80},
+    //        {"label": 'Porsche Caynee S E-Hybrid', "value": 5335.60},
+    //        {"label": 'smart fortwo', "value": 7500},
+    //        {"label": 'Tesla Roadster', "value": 7500},
+    //        {"label": 'Tesla Model S', "value": 7500},
+    //        {"label": 'Think City EV', "value": 7500},
+    //        {"label": 'Toyota Prius Plug-in Electic Drive Vehicle', "value": 2500},
+    //        {"label": 'Toyota RAV4 EV', "value": 7500},
+    //        {"label": 'VIA 2500', "value": 7500},
+    //        {"label": 'VIA 1500', "value": 7500},
+    //        {"label": 'Volkswagen e-Golf', "value": 7500},
+    //        {"label": 'Wheego LiFe Electric Vehicle', "value": 7500},
+    //        {"label": 'Zenith Electric Van', "value": 7500}
+    //    ];
+    //
+    //    return {
+    //        all: function () {
+    //            return ElecticVehicleCredits;
+    //        },
+    //        get: function ($key) {
+    //            return ElecticVehicleCredits[$key];
+    //        }
+    //    };
+    //})
     .factory('MortgageInterestService', function () {
         // Might use a resource here that returns a JSON array
 

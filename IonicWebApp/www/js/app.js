@@ -8,7 +8,7 @@
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngOpenFB', 'ngLinkedIn',
     'ngCordova', 'ngResource', 'LocalForageModule'])
 
-    .run(function ($ionicPlatform, ngFB) {
+    .run(function ($ionicPlatform, ngFB, $rootScope, Enum, CacheService,$state,$log) {
 
         ngFB.init({appId: '759417430835351'});//crispy-octo-moo:1153014161379784
 
@@ -24,6 +24,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                 // org.apache.cordova.statusbar required
                 StatusBar.styleLightContent();
             }
+        });
+
+        //stateChange event
+        $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+
+            CacheService.get(Enum.localStorageKeys.OAUTH_OBJ_FB).then(function (data) {
+                console.log(Enum.localStorageKeys.OAUTH_OBJ_FB, data);
+                if (data == null) {
+                    // User isn’t authenticated
+                    $state.transitionTo("tab.dash");
+                    event.preventDefault();
+                }
+            });
         });
     })
     //Support RESTful PATCH

@@ -23,7 +23,7 @@ angular.module('starter.controllers', [])
             console.log("modal-login-li.html initialization.");
             $rootScope.loginModal_li = modal;
             //Login Modal show();
-            CacheService.remove(Enum.localStorageKeys.OAUTH_OBJ_LI);//for debugging
+            //CacheService.remove(Enum.localStorageKeys.OAUTH_OBJ_LI);//for debugging
             CacheService.get(Enum.localStorageKeys.OAUTH_OBJ_LI).then(function (data) {
                 console.log(Enum.localStorageKeys.OAUTH_OBJ_LI, data);
                 if (data == null) {
@@ -125,7 +125,7 @@ angular.module('starter.controllers', [])
                         //var access_token = response.authResponse.accessToken;
                         //$log.debug('Facebook login succeeded, got access token: ', access_token);
                         //Cache it.
-                        CacheService.set(Enum.localStorageKeys.OAUTH_OBJ_FB, JSON.stringify($rootScope.oauth_obj_fb), 1);//60 days?60 * 24 * 60 * 60
+                        CacheService.set(Enum.localStorageKeys.OAUTH_OBJ_FB, JSON.stringify($rootScope.oauth_obj_fb), 1*60*60);//1443168000 (in about an hour)
                         //
                         $rootScope.syncFbUserProfile();
                     } else {
@@ -227,6 +227,8 @@ angular.module('starter.controllers', [])
             //Cache it.
             CacheService.set(Enum.localStorageKeys.OAUTH_OBJ_LI, JSON.stringify($rootScope.oauth_obj_li), $rootScope.oauth_obj_li.oauth_expires_in);
             //
+            $rootScope.loginModal_li.hide();
+            //
             $rootScope.syncLiUserProfile();
         }
         $rootScope.syncLiUserProfile = function () {
@@ -238,11 +240,9 @@ angular.module('starter.controllers', [])
                 //'token': $rootScope.oauth_obj_li.anonymous_token
             }, function (response) {
                 $log.debug("LiUserProfileService.get() success!", response);
-                $rootScope.loginModal_li.hide();
             }, function (error) {
                 // failure handler
                 $log.error("LiUserProfileService.get() failed:", JSON.stringify(error));
-                $rootScope.loginModal_li.hide();
             });
         }
         //For testing.
@@ -302,7 +302,7 @@ angular.module('starter.controllers', [])
 
     .controller('AccountSettingsCtrl', function ($scope, $rootScope, IncomeCategoryService, FilingCategoryService,
                                                  ChildrenCategoryService, EVCreditService, MortgageInterestService,
-                                                 ChildrenKeywordsService, EITCCreditService, Enum, $ionicPopup) {
+                                                 ChildrenKeywordsService, EITCCreditService, Enum, $ionicPopup,$log) {
         //ng-model
         //@see: http://odetocode.com/blogs/scott/archive/2013/06/19/using-ngoptions-in-angularjs.aspx
         ///IncomeCategory
@@ -342,8 +342,17 @@ angular.module('starter.controllers', [])
             console.log("$rootScope.prefMortgageInterest:", $rootScope.prefMortgageInterest);
         };
         ///EVCredit
-        $rootScope.EVCredits = EVCreditService.all();//Default setting(all).
-        console.log("$rootScope.EVCredits:", $rootScope.EVCredits);
+        //$rootScope.EVCredits = EVCreditService.all();//Default setting(all).
+        $rootScope.EVCredits = [];
+        EVCreditService.get({}, function (response) {
+            $log.debug("EVCreditService.get() success!", response);
+            $rootScope.EVCredits = response;
+            console.log("$rootScope.EVCredits:", $rootScope.EVCredits);
+        }, function (error) {
+            // failure handler
+            $log.error("EVCreditService.get() failed:", JSON.stringify(error));
+        });
+
         $scope.setEVCreditSelected = function (value) {
             $rootScope.prefEVCredit = value;
             console.log("$rootScope.prefEVCredit:", $rootScope.prefEVCredit);
