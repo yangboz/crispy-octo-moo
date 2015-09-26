@@ -328,8 +328,16 @@ angular.module('starter.controllers', [])
             console.log("$rootScope.prefChildrenCategory:", $rootScope.prefChildrenCategory);
         };
         ///ChildrenKeywords
-        $rootScope.childrenKeywords = ChildrenKeywordsService.all();//Default setting(all).
-        console.log("$rootScope.childrenKeywords:", $rootScope.childrenKeywords);
+        //$rootScope.childrenKeywords = ChildrenKeywordsService.all();//Default setting(all).
+        $rootScope.childrenKeywords = [];
+        ChildrenKeywordsService.get({}, function (response) {
+            $log.debug("ChildrenKeywordsService.get() success!", response);
+            $rootScope.childrenKeywords = response.data;
+            console.log("$rootScope.childrenKeywords:", $rootScope.EVCredits);
+        }, function (error) {
+            // failure handler
+            $log.error("ChildrenKeywordsService.get() failed:", JSON.stringify(error));
+        });
         $scope.setChildrenKeywordSelected = function (value) {
             $rootScope.prefChildrenKeyword = value;
             console.log("$rootScope.prefChildrenKeyword:", $rootScope.prefChildrenKeyword);
@@ -346,7 +354,7 @@ angular.module('starter.controllers', [])
         $rootScope.EVCredits = [];
         EVCreditService.get({}, function (response) {
             $log.debug("EVCreditService.get() success!", response);
-            $rootScope.EVCredits = response;
+            $rootScope.EVCredits = response.data;
             console.log("$rootScope.EVCredits:", $rootScope.EVCredits);
         }, function (error) {
             // failure handler

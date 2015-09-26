@@ -143,19 +143,28 @@ angular.module('starter.services', [])
             }
         };
     })
-    .factory('ChildrenKeywordsService', function () {
-        // Might use a resource here that returns a JSON array
-
-        // Some fake testing data
-
-        var Children = [{"label": "new baby"}, {"label": "my daughter"}, {"label": "my son"}];
-
-        return {
-            all: function () {
-                return Children;
-            }
-        };
+    .factory('ChildrenKeywordsService', function ($resource, CONFIG_ENV) {
+        var data = $resource(
+            CONFIG_ENV.api_endpoint + "ckeywords/:Index",
+            {Index: "@Index"},
+            {
+                "update": {method: "PUT"}
+            })
+        return data;
     })
+    //.factory('ChildrenKeywordsService', function () {
+    //    // Might use a resource here that returns a JSON array
+    //
+    //    // Some fake testing data
+    //
+    //    var Children = [{"label": "new baby"}, {"label": "my daughter"}, {"label": "my son"}];
+    //
+    //    return {
+    //        all: function () {
+    //            return Children;
+    //        }
+    //    };
+    //})
     //UserProfileService
     .factory('UserProfileService', function ($resource, CONFIG_ENV) {
         var data = $resource(
