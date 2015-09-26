@@ -12,11 +12,16 @@
         <div class="list card">
 
             <div class="item item-avatar">
-                <img ng-src="http://graph.facebook.com/{{$root.fbUser.id}}/picture?width=270&height=270"/>
+                <img ng-src="http://graph.facebook.com/{{me.fbUserProfile.id}}/picture?width=270&height=270"/>
 
                 <h2>{{me.fbUserProfile.firstName}}</h2>
 
                 <p>{{me.fbUserProfile.gender}}</p>
+
+                <p>{{me.simplyRelationshipStatus}}</p>
+                <p>{{me.simplyEducation}}</p>
+                <p>{{me.simplyBirthday}}</p>
+                <p>{{me.simplyWork}}</p>
 
                 <p>Have <b>3</b> children</p>
 

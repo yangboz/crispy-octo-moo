@@ -43,8 +43,8 @@ public class Snap415UserServiceImpl implements Snap415UserService {
             //
             result.setSimplyBirthday(fbUserProfile.getBirthday());
             result.setSimplyRelationshipStatus(fbUserProfile.getRelationshipStatus());
-            result.setSimplyEducation(fbUserProfile.getEducation().get(0).toString());
-            result.setSimplyWork(fbUserProfile.getWork().get(0).toString());
+            result.setSimplyEducation(fbUserProfile.getEducation().get(0).getType());
+            result.setSimplyWork(fbUserProfile.getWork().get(0).getEmployer().getName());
 
             LOG.info("getMe(Snap415UserProfile after NPE):" + result.toString());
             //

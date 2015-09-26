@@ -44,9 +44,9 @@ public class Snap415UserProfile extends BaseEntity {
 
     //Simplify basic information as required.
     private String simplyRelationshipStatus;
-    private String simplyEducation;
+    private Object simplyEducation;
     private String simplyBirthday;
-    private String simplyWork;
+    private Object simplyWork;
     //Also allow user input,read and write
     private int rwIncome;
     private String rwTaxFilingStatus;
@@ -61,11 +61,11 @@ public class Snap415UserProfile extends BaseEntity {
         this.simplyRelationshipStatus = simplyRelationshipStatus;
     }
 
-    public String getSimplyEducation() {
+    public Object getSimplyEducation() {
         return simplyEducation;
     }
 
-    public void setSimplyEducation(String simplyEducation) {
+    public void setSimplyEducation(Object simplyEducation) {
         this.simplyEducation = simplyEducation;
     }
 
@@ -77,11 +77,11 @@ public class Snap415UserProfile extends BaseEntity {
         this.simplyBirthday = simplyBirthday;
     }
 
-    public String getSimplyWork() {
+    public Object getSimplyWork() {
         return simplyWork;
     }
 
-    public void setSimplyWork(String simplyWork) {
+    public void setSimplyWork(Object simplyWork) {
         this.simplyWork = simplyWork;
     }
 
