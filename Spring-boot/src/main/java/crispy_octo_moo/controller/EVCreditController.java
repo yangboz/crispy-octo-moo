@@ -16,7 +16,7 @@ import java.util.Map;
  * Created by yangboz on 9/24/15.
  */
 @RestController
-@RequestMapping("/v1/evc")
+@RequestMapping("/v1/evCredit")
 public class EVCreditController {
 
 

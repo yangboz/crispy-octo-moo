@@ -19,7 +19,7 @@ import java.util.Map;
  * Created by yangboz on 9/26/15.
  */
 @RestController
-@RequestMapping("/v1/ckeywords")
+@RequestMapping("/v1/cKeywords")
 public class CKeywordsController {
 //    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON)
 //    @ApiOperation(httpMethod = "POST", value = "Response a string describing if the user info is successfully created or not.")

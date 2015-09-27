@@ -100,9 +100,12 @@ angular.module('starter.controllers', [])
         $rootScope.EVCredits = [];
         $rootScope.prefEVCredit = null;
         ///Currently only for Facebook
-        $rootScope.getSnap415Token = function()
-        {
-            return {'provider':Enum.socialProviders.FACEBOOK,'id': $rootScope.fbUser.id, 'token': $rootScope.oauth_obj_fb.accessToken};
+        $rootScope.getSnap415Token = function () {
+            return {
+                'provider': Enum.socialProviders.FACEBOOK,
+                'id': $rootScope.fbUser.id,
+                'token': $rootScope.oauth_obj_fb.accessToken
+            };
         }
         ////test post.
 
@@ -125,7 +128,7 @@ angular.module('starter.controllers', [])
                         //var access_token = response.authResponse.accessToken;
                         //$log.debug('Facebook login succeeded, got access token: ', access_token);
                         //Cache it.@see:https://developers.facebook.com/tools/debug/accesstoken
-                        CacheService.set(Enum.localStorageKeys.OAUTH_OBJ_FB, JSON.stringify($rootScope.oauth_obj_fb), 1*60*60);//1443168000 (in about an hour)
+                        CacheService.set(Enum.localStorageKeys.OAUTH_OBJ_FB, JSON.stringify($rootScope.oauth_obj_fb), 1 * 60 * 60);//1443168000 (in about an hour)
                         //
                         $rootScope.syncFbUserProfile();
                     } else {
@@ -143,7 +146,11 @@ angular.module('starter.controllers', [])
                     console.log("$rootScope.fbUser:", $rootScope.fbUser);
                     $rootScope.hideLoading();
                     //Sync the Facebook with token then get user profile.
-                    FbUserProfileService.save({'provider':Enum.socialProviders.FACEBOOK,'id': user.id, 'token': $rootScope.oauth_obj_fb.accessToken}, function (response) {
+                    FbUserProfileService.save({
+                        'provider': Enum.socialProviders.FACEBOOK,
+                        'id': user.id,
+                        'token': $rootScope.oauth_obj_fb.accessToken
+                    }, function (response) {
                         $log.debug("FbUserProfileService.get() success!", response);
 
                     }, function (error) {
@@ -214,7 +221,7 @@ angular.module('starter.controllers', [])
             });
             //$linkedIn.api()
         }
-        $scope.updateOauthObj_li = function(){
+        $scope.updateOauthObj_li = function () {
             //Dump the auth response object.
             //for (var property in IN.ENV.auth) {
             //    //output += property + ': ' + object[property]+'; ';
@@ -234,7 +241,7 @@ angular.module('starter.controllers', [])
         $rootScope.syncLiUserProfile = function () {
             //Sync the LinkedIn token then get user profile.
             LiUserProfileService.save({
-                'provider':Enum.socialProviders.LINKEDIN,
+                'provider': Enum.socialProviders.LINKEDIN,
                 'id': $rootScope.oauth_obj_li.member_id,
                 'token': $rootScope.oauth_obj_li.oauth_token
                 //'token': $rootScope.oauth_obj_li.anonymous_token
@@ -270,15 +277,15 @@ angular.module('starter.controllers', [])
 
         }
     })
-    .controller('DashCtrl', function ($scope,$rootScope,$log,Enum) {
+    .controller('DashCtrl', function ($scope, $rootScope, $log, Enum) {
 
     })
 
-    .controller('UpdatesCtrl', function ($scope,$rootScope,$log,Enum) {
+    .controller('UpdatesCtrl', function ($scope, $rootScope, $log, Enum) {
 
     })
 
-    .controller('AccountsCtrl', function ($scope,$rootScope,$log,Enum,UserMeService) {
+    .controller('AccountsCtrl', function ($scope, $rootScope, $log, Enum, UserMeService) {
         //Synchronize the user info testing
         //UserProfileService.save($rootScope.user, function (response) {
         //    $log.debug("UserProfileService.save() success!", response);
@@ -286,11 +293,11 @@ angular.module('starter.controllers', [])
         //    // failure handler
         //    $log.error("UserProfileService.save() failed:", JSON.stringify(error));
         //});
-        $scope.me = {};
-        $scope.loadUserMe = function(){
+        $rootScope.me = {};
+        $scope.loadUserMe = function () {
             UserMeService.save($rootScope.getSnap415Token(), function (response) {
                 $log.debug("UserMeService.save() success!", response);
-                $scope.me = response;
+                $rootScope.me = response;
             }, function (error) {
                 // failure handler
                 $log.error("UserMeService.save() failed:", JSON.stringify(error));
@@ -302,31 +309,58 @@ angular.module('starter.controllers', [])
 
     .controller('AccountSettingsCtrl', function ($scope, $rootScope, IncomeCategoryService, FilingCategoryService,
                                                  ChildrenCategoryService, EVCreditService, MortgageInterestService,
-                                                 ChildrenKeywordsService, EITCCreditService, Enum, $ionicPopup,$log) {
+                                                 ChildrenKeywordsService, EITCCreditService, Enum, $ionicPopup, $log) {
         //ng-model
         //@see: http://odetocode.com/blogs/scott/archive/2013/06/19/using-ngoptions-in-angularjs.aspx
         ///IncomeCategory
-        console.log("Enum.relationshipStatus[0].value:", Enum.relationshipStatus[0].value);
-        $rootScope.incomeCategories = IncomeCategoryService.get(Enum.relationshipStatus[0].value);//Default setting(Married).
+        //console.log("Enum.relationshipStatus[0].value:", Enum.relationshipStatus[0].value);
+        //$rootScope.incomeCategories = IncomeCategoryService.get(Enum.relationshipStatus[0].value);//Default setting(Married).
+        $rootScope.incomeCategories = [];
         console.log("$rootScope.incomeCategories:", $rootScope.incomeCategories);
         $scope.setIncomeCategorySelected = function (value) {
             $rootScope.prefIncomeCategory = value;
             console.log("$rootScope.prefIncomeCategory:", $rootScope.prefIncomeCategory);
         };
+        IncomeCategoryService.get({}, function (response) {
+            $log.debug("IncomeCategoryService.get() success!", response);
+            $rootScope.incomeCategories = response.data;
+            console.log("$rootScope.incomeCategories:", $rootScope.incomeCategories);
+        }, function (error) {
+            // failure handler
+            $log.error("IncomeCategoryService.get() failed:", JSON.stringify(error));
+        });
         ///FilingCategory
-        $rootScope.filingCategories = FilingCategoryService.get(Enum.relationshipStatus[0].value);//Default setting(Married).
-        console.log("$rootScope.filingCategories:", $rootScope.filingCategories);
+        //$rootScope.filingCategories = FilingCategoryService.get(Enum.relationshipStatus[0].value);//Default setting(Married).
+        $rootScope.filingCategories = [];
+        //console.log("$rootScope.filingCategories:", $rootScope.filingCategories);
         $scope.setFilingCategorySelected = function (value) {
             $rootScope.prefFilingCategory = value;
             console.log("$rootScope.prefFilingCategory:", $rootScope.prefFilingCategory);
         };
+        FilingCategoryService.get({}, function (response) {
+            $log.debug("FilingCategoryService.get() success!", response);
+            $rootScope.filingCategories = response.data;
+            console.log("$rootScope.filingCategories:", $rootScope.filingCategories);
+        }, function (error) {
+            // failure handler
+            $log.error("FilingCategoryService.get() failed:", JSON.stringify(error));
+        });
         ///ChildrenCategory
-        $rootScope.childrenCategories = ChildrenCategoryService.all();//Default setting(all).
-        console.log("$rootScope.childrenCategories:", $rootScope.childrenCategories);
+        //$rootScope.childrenCategories = ChildrenCategoryService.all();//Default setting(all).
+        $rootScope.childrenCategories = [];
+        //console.log("$rootScope.childrenCategories:", $rootScope.childrenCategories);
         $scope.setChildrenCategorySelected = function (value) {
             $rootScope.prefChildrenCategory = value;
             console.log("$rootScope.prefChildrenCategory:", $rootScope.prefChildrenCategory);
         };
+        ChildrenCategoryService.get({}, function (response) {
+            $log.debug("ChildrenCategoryService.get() success!", response);
+            $rootScope.childrenCategories = response.data;
+            console.log("$rootScope.childrenCategories:", $rootScope.childrenCategories);
+        }, function (error) {
+            // failure handler
+            $log.error("ChildrenCategoryService.get() failed:", JSON.stringify(error));
+        });
         ///ChildrenKeywords
         //$rootScope.childrenKeywords = ChildrenKeywordsService.all();//Default setting(all).
         $rootScope.childrenKeywords = [];
@@ -343,12 +377,21 @@ angular.module('starter.controllers', [])
             console.log("$rootScope.prefChildrenKeyword:", $rootScope.prefChildrenKeyword);
         };
         ///MortgageInterest
-        $rootScope.mortgageInterests = MortgageInterestService.all();//Default setting(all).
-        console.log("$rootScope.mortgageInterests:", $rootScope.mortgageInterests);
+        //$rootScope.mortgageInterests = MortgageInterestService.all();//Default setting(all).
+        $rootScope.mortgageInterests = [];
+        //console.log("$rootScope.mortgageInterests:", $rootScope.mortgageInterests);
         $scope.setMortgageInterestSelected = function (value) {
             $rootScope.prefMortgageInterest = value;
             console.log("$rootScope.prefMortgageInterest:", $rootScope.prefMortgageInterest);
         };
+        MortgageInterestService.get({}, function (response) {
+            $log.debug("MortgageInterestService.get() success!", response);
+            $rootScope.mortgageInterests = response.data;
+            console.log("$rootScope.mortgageInterests:", $rootScope.mortgageInterests);
+        }, function (error) {
+            // failure handler
+            $log.error("MortgageInterestService.get() failed:", JSON.stringify(error));
+        });
         ///EVCredit
         //$rootScope.EVCredits = EVCreditService.all();//Default setting(all).
         $rootScope.EVCredits = [];
@@ -367,13 +410,27 @@ angular.module('starter.controllers', [])
         };
         ///EITCCreditService calculate
         $scope.EITCCreditCalculate = function () {
-            var result = EITCCreditService.get($rootScope.userMore, $rootScope.prefChildrenCategory, $rootScope.prefIncomeCategory);
-            $ionicPopup.alert({
-                title: 'Congratulations!',
-                content: result
-            }).then(function (res) {
-                console.log('EITCCreditService calculated result:', result);
+            //var result = EITCCreditService.get($rootScope.userMore, $rootScope.prefChildrenCategory, $rootScope.prefIncomeCategory);
+            $scope.result = "";
+            EITCCreditService.save({
+                "relationshipStatus": $rootScope.me.simplyRelationshipStatus,
+                "numberOfChildren": $rootScope.me.rwNumberOfChildren,
+                "income": $rootScope.me.rwIncome
+            }, function (response) {
+                $log.debug("EITCCreditService.save() success!", response);
+                $scope.result = response.data;
+                //
+                $ionicPopup.alert({
+                    title: 'Congratulations!',
+                    content: $scope.result
+                }).then(function (res) {
+                    console.log('EITCCreditService calculated result:', $scope.result);
+                });
+            }, function (error) {
+                // failure handler
+                $log.error("EITCCreditService.save() failed:", JSON.stringify(error));
             });
+
         }
     })
     .controller('AccountInvitesCtrl', function ($scope, $rootScope, $stateParams) {

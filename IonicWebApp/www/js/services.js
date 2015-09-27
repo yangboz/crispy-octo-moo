@@ -29,49 +29,84 @@ angular.module('starter.services', [])
             }
         }
     })
-    .factory('IncomeCategoryService', function () {
-        var categoriesFixture = [
-            //["0-150000", "300000-700000","700000-10000000","1000000-1500000"],
-            //["150000-300000","300000-700000","700000-10000000","1000000-1500000"]
-            [{"label": "0-150000"}, {"label": "300000-700000"}, {"label": "700000-10000000"}, {"label": "1000000-1500000"}],
-            [{"label": "150000-300000"}, {"label": "300000-700000"}, {"label": "700000-10000000"}, {"label": "1000000-1500000"}]
-        ];
-
-        return {
-            get: function ($relationship_status) {
-
-                return categoriesFixture[$relationship_status];
-            }
-        }
+    .factory('EITCCreditService', function ($resource, CONFIG_ENV) {
+        var data = $resource(
+            CONFIG_ENV.api_endpoint + "eitcCredit",
+            {},
+            {
+                "update": {method: "PUT"}
+            })
+        return data;
     })
-    .factory('FilingCategoryService', function () {
-        var categoriesFixture = [
-            [{"label": "filing jointly"}, {"label": "filing separatly"}],
-            [{"label": "single filer"}, {"label": "head of household"}]
-        ];
-
-        return {
-            get: function ($relationship_status) {
-
-                return categoriesFixture[$relationship_status];
-            }
-        }
+    //.factory('IncomeCategoryService', function () {
+    //    var categoriesFixture = [
+    //        //["0-150000", "300000-700000","700000-10000000","1000000-1500000"],
+    //        //["150000-300000","300000-700000","700000-10000000","1000000-1500000"]
+    //        [{"label": "0-150000"}, {"label": "300000-700000"}, {"label": "700000-10000000"}, {"label": "1000000-1500000"}],
+    //        [{"label": "150000-300000"}, {"label": "300000-700000"}, {"label": "700000-10000000"}, {"label": "1000000-1500000"}]
+    //    ];
+    //
+    //    return {
+    //        get: function ($relationship_status) {
+    //
+    //            return categoriesFixture[$relationship_status];
+    //        }
+    //    }
+    //})
+    .factory('IncomeCategoryService', function ($resource, CONFIG_ENV) {
+        var data = $resource(
+            CONFIG_ENV.api_endpoint + "incomeCategory/:Key",
+            {Key: "@Key"},
+            {
+                "update": {method: "PUT"}
+            })
+        return data;
     })
-    .factory('ChildrenCategoryService', function () {
-        var categoriesFixture = [{"label": "0"}, {"label": "1"}, {"label": "2"}, {"label": "3"}, {"label": "4"},
-            {"label": "5"}, {"label": "6"}, {"label": "7"}, {"label": "8"}];
-
-        return {
-            all: function () {
-                return categoriesFixture;
-            }
-        }
+    //.factory('FilingCategoryService', function () {
+    //    var categoriesFixture = [
+    //        [{"label": "filing jointly"}, {"label": "filing separatly"}],
+    //        [{"label": "single filer"}, {"label": "head of household"}]
+    //    ];
+    //
+    //    return {
+    //        get: function ($relationship_status) {
+    //
+    //            return categoriesFixture[$relationship_status];
+    //        }
+    //    }
+    //})
+    .factory('FilingCategoryService', function ($resource, CONFIG_ENV) {
+        var data = $resource(
+            CONFIG_ENV.api_endpoint + "fillingCategory/:Key",
+            {Key: "@Key"},
+            {
+                "update": {method: "PUT"}
+            })
+        return data;
     })
-
+    //.factory('ChildrenCategoryService', function () {
+    //    var categoriesFixture = [{"label": "0"}, {"label": "1"}, {"label": "2"}, {"label": "3"}, {"label": "4"},
+    //        {"label": "5"}, {"label": "6"}, {"label": "7"}, {"label": "8"}];
+    //
+    //    return {
+    //        all: function () {
+    //            return categoriesFixture;
+    //        }
+    //    }
+    //})
+    .factory('ChildrenCategoryService', function ($resource, CONFIG_ENV) {
+        var data = $resource(
+            CONFIG_ENV.api_endpoint + "childrenCategory/:Key",
+            {Key: "@Key"},
+            {
+                "update": {method: "PUT"}
+            })
+        return data;
+    })
     //EVCreditService
     .factory('EVCreditService', function ($resource, CONFIG_ENV) {
         var data = $resource(
-            CONFIG_ENV.api_endpoint + "evc/:Key",
+            CONFIG_ENV.api_endpoint + "evCredit/:Key",
             {Key: "@Key"},
             {
                 "update": {method: "PUT"}
@@ -130,22 +165,31 @@ angular.module('starter.services', [])
     //        }
     //    };
     //})
-    .factory('MortgageInterestService', function () {
-        // Might use a resource here that returns a JSON array
-
-        // Some fake testing data
-        var MortgageInterests = [{"label": "MORTGAGE"}, {"label": "HOME OWNER"}, {"label": "OUR HOUSE"},
-            {"label": "NEW HOUSE"}, {"label": "MOVING TO A NEW HOUSE"}];
-
-        return {
-            all: function () {
-                return MortgageInterests;
-            }
-        };
+    .factory('MortgageInterestService', function ($resource, CONFIG_ENV) {
+        var data = $resource(
+            CONFIG_ENV.api_endpoint + "mInterests/:Index",
+            {Index: "@Index"},
+            {
+                "update": {method: "PUT"}
+            })
+        return data;
     })
+    //.factory('MortgageInterestService', function () {
+    //    // Might use a resource here that returns a JSON array
+    //
+    //    // Some fake testing data
+    //    var MortgageInterests = [{"label": "MORTGAGE"}, {"label": "HOME OWNER"}, {"label": "OUR HOUSE"},
+    //        {"label": "NEW HOUSE"}, {"label": "MOVING TO A NEW HOUSE"}];
+    //
+    //    return {
+    //        all: function () {
+    //            return MortgageInterests;
+    //        }
+    //    };
+    //})
     .factory('ChildrenKeywordsService', function ($resource, CONFIG_ENV) {
         var data = $resource(
-            CONFIG_ENV.api_endpoint + "ckeywords/:Index",
+            CONFIG_ENV.api_endpoint + "cKeywords/:Index",
             {Index: "@Index"},
             {
                 "update": {method: "PUT"}

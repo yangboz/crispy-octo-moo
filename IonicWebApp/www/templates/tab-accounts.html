@@ -12,16 +12,16 @@
         <div class="list card">
 
             <div class="item item-avatar">
-                <img ng-src="http://graph.facebook.com/{{me.fbUserProfile.id}}/picture?width=270&height=270"/>
+                <img ng-src="http://graph.facebook.com/{{$root.me.fbUserProfile.id}}/picture?width=270&height=270"/>
 
-                <h2>{{me.fbUserProfile.firstName}}</h2>
+                <h2>{{$root.me.fbUserProfile.firstName}}</h2>
 
-                <p>{{me.fbUserProfile.gender}}</p>
+                <p>{{$root.me.fbUserProfile.gender}}</p>
 
-                <p><b>RelationshipStatus:</b> {{me.simplyRelationshipStatus}}</p>
-                <p><b>Education:</b> {{me.simplyEducation}}</p>
-                <p><b>Birthday:</b> {{me.simplyBirthday}}</p>
-                <p><b>Work:</b> {{me.simplyWork}}</p>
+                <p><b>RelationshipStatus:</b> {{$root.me.simplyRelationshipStatus}}</p>
+                <p><b>Education:</b> {{$root.me.simplyEducation}}</p>
+                <p><b>Birthday:</b> {{$root.me.simplyBirthday}}</p>
+                <p><b>Work:</b> {{$root.me.simplyWork}}</p>
 
                 <p>Have <b>3</b> children</p>
 
@@ -34,11 +34,11 @@
                 </p>
 
                 <p>
-                    City: {{me.fbUserProfile.city}}
+                    City: {{$root.me.fbUserProfile.city}}
                 </p>
 
                 <p>
-                    Residents: birthday at {{me.fbUserProfile.birthday}} Years.
+                    Residents: birthday at {{$root.me.fbUserProfile.birthday}} Years.
                 </p>
 
                 <p>
@@ -46,7 +46,7 @@
                 </p>
                 <b>
                     <p>
-                        Family: {{ me.fbUserProfile.family.data[0].name +'('+ me.fbUserProfile.family.data[0].relationship +
+                        Family: {{ $root.me.fbUserProfile.family.data[0].name +'('+ $root.me.fbUserProfile.family.data[0].relationship +
                         ')' }}
                     </p>
                 </b>
@@ -78,16 +78,16 @@
                 </p>
                 <b>
                     <p>
-                        Location: {{me.fbUserProfile.location.name}}
+                        Location: {{$root.me.fbUserProfile.location.name}}
                     </p>
                 </b>
 
                 <p>
-                    Work status: first at {{me.fbUserProfile.work[0].employer.name}}
+                    Work status: first at {{$root.me.fbUserProfile.work[0].employer.name}}
                 </p>
 
                 <p>
-                    Education: {{me.fbUserProfile.education[0].school.name +'('+ me.fbUserProfile.education[0].type + ')'}}
+                    Education: {{$root.me.fbUserProfile.education[0].school.name +'('+ $root.me.fbUserProfile.education[0].type + ')'}}
                 </p>
             </div>
 

@@ -60,4 +60,61 @@ public class FixtureData {
         add(new LabelObject("my son"));
     }};
 
+    public static final List<LabelObject> MortgageInterests = new ArrayList<LabelObject>() {{
+        add(new LabelObject("NEW HOUSE"));
+        add(new LabelObject("MOVING TO A NEW HOUSE"));
+    }};
+
+    public static final List<LabelObject> IncomeCategory = new ArrayList<LabelObject>() {{
+        add(new LabelObject("0-150000"));
+        add(new LabelObject("300000-700000"));
+        add(new LabelObject("700000-10000000"));
+        add(new LabelObject("1000000-1500000"));
+        add(new LabelObject("150000-300000"));
+        add(new LabelObject("300000-700000"));
+        add(new LabelObject("700000-10000000"));
+        add(new LabelObject("1000000-1500000"));
+    }};
+
+    public static final List<LabelObject> FillingCategory = new ArrayList<LabelObject>() {{
+        add(new LabelObject("filing jointly"));
+        add(new LabelObject("filing separatly"));
+        add(new LabelObject("single filer"));
+        add(new LabelObject("head of household"));
+    }};
+
+    public static final List<LabelObject> ChildrenCategory = new ArrayList<LabelObject>() {{
+        add(new LabelObject("0"));
+        add(new LabelObject("1"));
+        add(new LabelObject("2"));
+        add(new LabelObject("3"));
+        add(new LabelObject("4"));
+        add(new LabelObject("5"));
+        add(new LabelObject("6"));
+        add(new LabelObject("7"));
+        add(new LabelObject("8"));
+    }};
+
+    //    List<Integer> incomeFixture = new ArrayList<Integer>(20330, 44651, 49974, 53267);
+    public static final List<Integer> incomeFixture = new ArrayList<Integer>() {{
+        add(20330);
+        add(44651);
+        add(49974);
+        add(53267);
+    }};
+    //    List<Integer> numberofChildrenThresholds = new ArrayList<Integer>(0, 1, 2, 3);
+    public static final List<Integer> numberofChildrenThresholds = new ArrayList<Integer>() {{
+        add(0);
+        add(1);
+        add(2);
+        add(3);
+    }};
+    //    List<String> creditFixture = new ArrayList<String>("$503", "$3359", "$5548", "$6242", "unknown");
+    public static final List<String> creditFixture = new ArrayList<String>() {{
+        add("$503");
+        add("$3359");
+        add("$5548");
+        add("$6242");
+        add("unknown");
+    }};
 }

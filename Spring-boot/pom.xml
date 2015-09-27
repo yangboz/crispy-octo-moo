@@ -5,7 +5,7 @@
 
     <groupId>info.smartkit</groupId>
     <artifactId>crispy-octo-moo</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
