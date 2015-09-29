@@ -38,7 +38,7 @@ angular.module('starter.controllers', [])
         $rootScope.loginModal_fb = undefined;
         $ionicModal.fromTemplateUrl('templates/modal-login-fb.html', {
             scope: $scope,
-            backdropClickToClose: false,
+            backdropClickToClose: true,
             animation: 'slide-in-up'
         }).then(function (modal) {
             console.log("modal-login-fb.html initialization.");
@@ -99,12 +99,27 @@ angular.module('starter.controllers', [])
         $rootScope.prefMortgageInterest = null;
         $rootScope.EVCredits = [];
         $rootScope.prefEVCredit = null;
-        ///Currently only for Facebook
-        $rootScope.getSnap415Token = function () {
+        ///Currently social provider info.
+        $rootScope.isNonFacebookActive = false;//LinkedIn or others provider active.
+        $rootScope._getProvider = function(){
+            return $rootScope.isNonFacebookActive?Enum.socialProviders.LINKEDIN:Enum.socialProviders.FACEBOOK;
+        }
+        $rootScope._getProviderId = function(){
+            return $rootScope.isNonFacebookActive?$rootScope.oauth_obj_li.member_id:$rootScope.fbUser.id;
+        }
+        $rootScope._getProviderToken = function(){
+            return $rootScope.isNonFacebookActive?$rootScope.oauth_obj_li.oauth_token:$rootScope.oauth_obj_fb.accessToken;
+        }
+        $rootScope.getSnap415Token = function ($provider,$id,$token) {
+            //return {
+            //    'provider': Enum.socialProviders.FACEBOOK,
+            //    'id': $rootScope.fbUser.id,
+            //    'token': $rootScope.oauth_obj_fb.accessToken
+            //};
             return {
-                'provider': Enum.socialProviders.FACEBOOK,
-                'id': $rootScope.fbUser.id,
-                'token': $rootScope.oauth_obj_fb.accessToken
+                'provider': $rootScope._getProvider(),
+                'id': $rootScope._getProviderId(),
+                'token': $rootScope._getProviderToken()
             };
         }
         ////test post.
@@ -278,10 +293,11 @@ angular.module('starter.controllers', [])
         }
     })
     .controller('DashCtrl', function ($scope, $rootScope, $log, Enum) {
-
+        //load overview items.
     })
 
-    .controller('UpdatesCtrl', function ($scope, $rootScope, $log, Enum) {
+    .controller('UpdatesCtrl', function ($scope, $rootScope, $log, Enum,TaxEventService) {
+        //load tax event items.
 
     })
 
@@ -439,6 +455,13 @@ angular.module('starter.controllers', [])
         };
     })
 
-    .controller('DealsCtrl', function ($scope) {
-
+    .controller('DealsCtrl', function ($scope,$rootScope,$log,DealService) {
+        //load deal items.
+        DealService.get({}, function (response) {
+            $log.debug("DealService.get() success!", response);
+            $scope.deals = response.data;
+        }, function (error) {
+            // failure handler
+            $log.error("DealService.get() failed:", JSON.stringify(error));
+        });
     });

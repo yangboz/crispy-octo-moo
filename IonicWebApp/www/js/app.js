@@ -33,8 +33,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                 console.log(Enum.localStorageKeys.OAUTH_OBJ_FB, data);
                 if (data == null) {
                     // User isn’t authenticated
-                    $state.transitionTo("tab.dash");
-                    event.preventDefault();
+                    //$state.transitionTo("tab.dash");
+                    //event.preventDefault();
                 }
             });
         });

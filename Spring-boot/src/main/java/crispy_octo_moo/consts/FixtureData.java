@@ -1,12 +1,12 @@
 package crispy_octo_moo.consts;
 
+import crispy_octo_moo.dto.DealObject;
 import crispy_octo_moo.dto.LabelObject;
 import crispy_octo_moo.dto.LabelValueObject;
+import crispy_octo_moo.dto.WebSiteObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by yangboz on 9/25/15.
@@ -116,5 +116,33 @@ public class FixtureData {
         add("$5548");
         add("$6242");
         add("unknown");
+    }};
+
+    public static final List<WebSiteObject> TaxEventObjects = new ArrayList<WebSiteObject>() {{
+        add(new WebSiteObject("Make your refund bigger and reach your goal quicker!",
+                "Have any of these tax deductible events happened to you recently?", ""));
+        add(new WebSiteObject("Bought an electric car", "You applied it today!", ""));
+        add(new WebSiteObject("Donated to charity", "You applied it today!", ""));
+        add(new WebSiteObject("Got married", "You applied it today!", ""));
+        add(new WebSiteObject("Have a baby", " You applied it today!", ""));
+        add(new WebSiteObject("Bought a house", "You applied it today!", "See more life events."));
+    }};
+
+    public static final List<WebSiteObject> OverviewObjects = new ArrayList<WebSiteObject>() {{
+        add(new WebSiteObject("Tip of the Day",
+                "There are over <b>30</b> exemptions to paying health-care fees.</p>\n" +
+                        "                    <a href=\"#\" target=\"_self\" title=\"#\">Click here to see if you qualify for any of these.</a>", ""));
+        add(new WebSiteObject("Your Estimated Credits:", "<b>$10,500</b>\n" +
+                "\n" +
+                "                    <p style=\"color:green\">+1,500 since last login.</p>\n" +
+                "\n" +
+                "                    <p style=\"color:red\">-1,500 since last login.</p>", "<a href=\"#\" target=\"_self\" title=\"#\">See latest tax events.</a>"));
+    }};
+
+
+    public static final List<DealObject> DealObjects = new ArrayList<DealObject>() {{
+        add(new DealObject(0, "50% off electric car charge outlet", -1500));
+        add(new DealObject(50, "75% off vacation to Bari island.", 100));
+        add(new DealObject(100, "80% baby crib and matress.", 1500));
     }};
 }

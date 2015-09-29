@@ -254,6 +254,36 @@ angular.module('starter.services', [])
             {})
         return data;
     })
+    //OverviewService
+    .factory('OverviewService', function ($resource, CONFIG_ENV) {
+        var data = $resource(
+            CONFIG_ENV.api_endpoint + "overviews",
+            {},
+            {
+
+            })
+        return data;
+    })
+    //DealService
+    .factory('DealService', function ($resource, CONFIG_ENV) {
+        var data = $resource(
+            CONFIG_ENV.api_endpoint + "deals",
+            {},
+            {
+
+            })
+        return data;
+    })
+    //TaxEventService
+    .factory('TaxEventService', function ($resource, CONFIG_ENV) {
+        var data = $resource(
+            CONFIG_ENV.api_endpoint + "taxEvents",
+            {},
+            {
+
+            })
+        return data;
+    })
 //@see http://stackoverflow.com/questions/16627860/angular-js-and-ng-swith-when-emulating-enum
     .factory('Enum', [function () {
         var service = {

@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.social.facebook.api.EducationExperience;
 import org.springframework.social.facebook.api.User;
 import org.springframework.social.facebook.api.WorkEntry;
+import org.springframework.social.linkedin.api.LinkedInProfile;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class Snap415UserProfile extends BaseEntity {
 
 
     private User fbUserProfile;
-    private LiUserProfile liUserProfile;
+    private LinkedInProfile liUserProfile;
 
     public User getFbUserProfile() {
         return fbUserProfile;
@@ -34,11 +35,11 @@ public class Snap415UserProfile extends BaseEntity {
         this.fbUserProfile = fbUserProfile;
     }
 
-    public LiUserProfile getLiUserProfile() {
+    public LinkedInProfile getLiUserProfile() {
         return liUserProfile;
     }
 
-    public void setLiUserProfile(LiUserProfile liUserProfile) {
+    public void setLiUserProfile(LinkedInProfile liUserProfile) {
         this.liUserProfile = liUserProfile;
     }
 

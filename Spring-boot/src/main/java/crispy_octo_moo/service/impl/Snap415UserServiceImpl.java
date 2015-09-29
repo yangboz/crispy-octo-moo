@@ -9,11 +9,13 @@ import crispy_octo_moo.dto.Snap415Overview;
 import crispy_octo_moo.dto.Snap415Token;
 import crispy_octo_moo.repository.Snap415UserProfileRepository;
 import crispy_octo_moo.service.FacebookUserService;
+import crispy_octo_moo.service.LinkedInUserService;
 import crispy_octo_moo.service.Snap415UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.facebook.api.User;
+import org.springframework.social.linkedin.api.LinkedInProfile;
 import org.springframework.stereotype.Service;
 
 /**
@@ -26,6 +28,9 @@ public class Snap415UserServiceImpl implements Snap415UserService {
 
     @Autowired
     FacebookUserService fbUserService;
+
+    @Autowired
+    LinkedInUserService linkedInUserService;
 
     @Autowired
     Snap415UserProfileRepository _userDao;
@@ -49,6 +54,14 @@ public class Snap415UserServiceImpl implements Snap415UserService {
             LOG.info("getMe(Snap415UserProfile after NPE):" + result.toString());
             //
         } else if (token.getProvider().equals(SocialProviders.LINKEDIN.getValue())) {
+            LinkedInProfile liUserProfile = linkedInUserService.getUserProfile(token);
+            result.setLiUserProfile(liUserProfile);
+            LOG.info("liUserProfile:" + liUserProfile);
+            //XXX:normalize the simply properties as the same as FB user profile.
+            result.setSimplyBirthday(liUserProfile.getSummary());
+            result.setSimplyRelationshipStatus(liUserProfile.getSummary());
+            result.setSimplyEducation(liUserProfile.getHeadline());
+            result.setSimplyWork(liUserProfile.getIndustry());
 
         } else {
 
@@ -62,7 +75,8 @@ public class Snap415UserServiceImpl implements Snap415UserService {
     public Snap415UserTaxEvents getEvents(Snap415Token token) {
         Snap415UserTaxEvents result = new Snap415UserTaxEvents();
         if (token.getProvider().equals(SocialProviders.FACEBOOK.getValue())) {
-
+            //
+//            fbUserService.getUserPost()
         } else if (token.getProvider().equals(SocialProviders.LINKEDIN.getValue())) {
 
         } else {
@@ -75,6 +89,7 @@ public class Snap415UserServiceImpl implements Snap415UserService {
     public Snap415UserDeals getDeals(Snap415Token token) {
         Snap415UserDeals result = new Snap415UserDeals();
         if (token.getProvider().equals(SocialProviders.FACEBOOK.getValue())) {
+            //
 
         } else if (token.getProvider().equals(SocialProviders.LINKEDIN.getValue())) {
 
@@ -88,6 +103,7 @@ public class Snap415UserServiceImpl implements Snap415UserService {
     public Snap415Overview getOverview(Snap415Token token) {
         Snap415Overview result = new Snap415Overview();
         if (token.getProvider().equals(SocialProviders.FACEBOOK.getValue())) {
+            //
 
         } else if (token.getProvider().equals(SocialProviders.LINKEDIN.getValue())) {
 
