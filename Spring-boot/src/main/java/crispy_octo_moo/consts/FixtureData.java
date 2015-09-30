@@ -125,18 +125,19 @@ public class FixtureData {
         add(new WebSiteObject("Donated to charity", "You applied it today!", ""));
         add(new WebSiteObject("Got married", "You applied it today!", ""));
         add(new WebSiteObject("Have a baby", " You applied it today!", ""));
-        add(new WebSiteObject("Bought a house", "You applied it today!", "See more life events."));
+        add(new WebSiteObject("Bought a house", "You applied it today!", "<a href=\"#\" target=\"_self\" title=\"#\">See more life events.</a>"));
     }};
 
     public static final List<WebSiteObject> OverviewObjects = new ArrayList<WebSiteObject>() {{
         add(new WebSiteObject("Tip of the Day",
-                "There are over <b>30</b> exemptions to paying health-care fees.</p>\n" +
-                        "                    <a href=\"#\" target=\"_self\" title=\"#\">Click here to see if you qualify for any of these.</a>", ""));
+                "There are over <b>30</b> exemptions to paying health-care fees." +
+                        "</p>"
+                , "<a href=\"#\" target=\"_self\" title=\"#\">Click here to see if you qualify for any of these.</a>"));
         add(new WebSiteObject("Your Estimated Credits:", "<b>$10,500</b>\n" +
                 "\n" +
-                "                    <p style=\"color:green\">+1,500 since last login.</p>\n" +
+                "<p style=\"color:green\">+1,500 since last login.</p>\n" +
                 "\n" +
-                "                    <p style=\"color:red\">-1,500 since last login.</p>", "<a href=\"#\" target=\"_self\" title=\"#\">See latest tax events.</a>"));
+                "<p style=\"color:red\">-1,500 since last login.</p>", "<a href=\"#\" target=\"_self\" title=\"#\">See latest tax events.</a>"));
     }};
 
 

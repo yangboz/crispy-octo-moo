@@ -1,27 +1,16 @@
 <ion-view view-title="Overview">
     <ion-content class="padding">
 
-        <div class="list card">
-            <div class="item item-divider">Tip of the Day</div>
+        <div class="list card" ng-repeat="item in overviews">
+            <div class="item item-divider"><span ng-bind-html="item.header"></span></div>
             <div class="item item-body">
                 <div>
-                    There are over <b>30</b> exemptions to paying health-care fees.</p>
-                    <a href="#" target="_self" title="#">Click here to see if you qualify for any of these.</a>
+                    <span ng-bind-html="trustAsHtml(item.body)"></span>
                 </div>
+            </div>
+            <div class="item item-divider" ng-show="item.footer!=''">
+                <span ng-bind-html="item.footer"></span>
             </div>
         </div>
 
-        <div class="list card">
-            <div class="item item-divider">Your Estimated Credits:</div>
-            <div class="item item-body">
-                <div>
-                    <b>$10,500</b>
-
-                    <p style="color:green">+1,500 since last login.</p>
-
-                    <p style="color:red">-1,500 since last login.</p>
-                    <a href="#" target="_self" title="#">See latest tax events.</a>
-                </div>
-            </div>
-        </div>
 </ion-view>

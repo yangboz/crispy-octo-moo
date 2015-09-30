@@ -292,13 +292,37 @@ angular.module('starter.controllers', [])
 
         }
     })
-    .controller('DashCtrl', function ($scope, $rootScope, $log, Enum) {
+    .controller('DashCtrl', function ($scope, $rootScope, $log, OverviewService,$sce) {
         //load overview items.
+        OverviewService.get({}, function (response) {
+            $log.debug("OverviewService.get() success!", response);
+            $scope.overviews = response.data;
+        }, function (error) {
+            // failure handler
+            $log.error("OverviewService.get() failed:", JSON.stringify(error));
+        });
+        //
+        $scope.trustAsHtml = function(rawHtml)
+        {
+            return $sce.trustAsHtml(rawHtml);
+        }
+
     })
 
-    .controller('UpdatesCtrl', function ($scope, $rootScope, $log, Enum,TaxEventService) {
+    .controller('UpdatesCtrl', function ($scope, $rootScope, $log,TaxEventService,$sce) {
         //load tax event items.
-
+        TaxEventService.get({}, function (response) {
+            $log.debug("TaxEventService.get() success!", response);
+            $scope.taxEvents = response.data;
+        }, function (error) {
+            // failure handler
+            $log.error("TaxEventService.get() failed:", JSON.stringify(error));
+        });
+        //
+        $scope.trustAsHtml = function(rawHtml)
+        {
+            return $sce.trustAsHtml(rawHtml);
+        }
     })
 
     .controller('AccountsCtrl', function ($scope, $rootScope, $log, Enum, UserMeService) {

@@ -33,8 +33,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                 console.log(Enum.localStorageKeys.OAUTH_OBJ_FB, data);
                 if (data == null) {
                     // User isn’t authenticated
-                    //$state.transitionTo("tab.dash");
-                    //event.preventDefault();
+                    $state.transitionTo("tab.dash");
+                    event.preventDefault();
                 }
             });
         });
@@ -147,4 +147,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/tab/dash');
+    })
+    //Filters
+    .filter('sumOfValue', function () {
+        return function (data, key) {
+            if (typeof (data) === 'undefined' && typeof (key) === 'undefined') {
+                return 0;
+            }
+            var sum = 0;
+            //console.log("data:"+data);
+            if(data && data.length) {
+                for (var i = 0; i < data.length; i++) {
+                    sum = sum + parseInt(data[i][key]);
+                }
+            }
+            return sum;
+        }
     });
