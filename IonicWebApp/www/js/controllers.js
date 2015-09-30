@@ -56,6 +56,17 @@ angular.module('starter.controllers', [])
                 }
             });
         });
+        ////DealDetail
+        $rootScope.detailModal_deal = undefined;
+        $ionicModal.fromTemplateUrl('templates/modal-detail-deal.html', {
+            scope: $scope,
+            backdropClickToClose: true,
+            animation: 'slide-in-up'
+        }).then(function (modal) {
+            console.log("modal-detail-deal.html initialization.");
+            $rootScope.detailModal_deal = modal;
+            //Login Modal show();
+        });
         ///Modal related clean up.
         $rootScope.$on("$stateChangeStart", function () {
             //ShowLoading
@@ -69,6 +80,7 @@ angular.module('starter.controllers', [])
         $scope.$on('$destroy', function () {
             $rootScope.loginModal_fb.remove();
             $rootScope.loginModal_li.remove();
+            $rootScope,detailModal_deal.remove();
         });
         // Execute action on hide modal
         $scope.$on('modal.hidden', function () {
@@ -488,4 +500,16 @@ angular.module('starter.controllers', [])
             // failure handler
             $log.error("DealService.get() failed:", JSON.stringify(error));
         });
+        //popup detail
+        $scope.detail = function($index){
+            DealService.get({Index:$index}, function (response) {
+                $log.debug("DealService.get($index) success!", response);
+                $rootScope.deal = response;
+                $rootScope.detailModal_deal.show();
+            }, function (error) {
+                // failure handler
+                $log.error("DealService.get($index) failed:", JSON.stringify(error));
+            });
+        }
+
     });

@@ -1,0 +1,21 @@
+<div class="modal" ng-controller="DealsCtrl">
+    <ion-header-bar>
+        <h1 class="title">Rank:{{deal.rank}}</h1>
+
+        <div class="buttons">
+            <button class="button button-clear ion-close-round" ng-show="false" ng-click="$root.detailModal_deal.hide()"></button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <!--<form ng-submit="submitBtnClickHandler()">-->
+
+            <i ng-if="deal.rank>50&&deal.rank<=100" class="icon ion-ios-star"></i>
+            <i ng-if="deal.rank>0&&deal.rank<=50" class="icon ion-ios-star-half"></i>
+            <i ng-if="deal.rank<50" class="icon ion-ios-star-outline"></i>
+            {{deal.content}}
+            <span ng-if="deal.balance>0" class="badge badge-positive">${{deal.balance}}</span>
+            <span ng-if="deal.balance<=0" class="badge badge-assertive">${{deal.balance}}</span>
+
+        <!--</form>-->
+    </ion-content>
+</div>

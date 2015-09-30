@@ -2,16 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54c06866-f93e-4b72-af58-4eecf4251f8f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../Spring-boot/src/main/java/crispy_octo_moo/dto/sqoot/SqootDeal.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../Spring-boot/src/main/java/crispy_octo_moo/dto/sqoot/SqootDealMerchant.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../Spring-boot/src/main/java/crispy_octo_moo/service/SqootDealService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../Spring-boot/src/main/java/crispy_octo_moo/service/impl/SqootDealServiceImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../Spring-boot/src/main/java/crispy_octo_moo/dto/sqoot/SqootDealsObject.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../Spring-boot/src/main/java/crispy_octo_moo/dto/sqoot/SqootQuery.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../Spring-boot/src/main/java/crispy_octo_moo/dto/sqoot/SqootQueryLocation.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../../Spring-boot/src/main/java/crispy_octo_moo/controller/DealsController.java" afterPath="$PROJECT_DIR$/../../Spring-boot/src/main/java/crispy_octo_moo/controller/SqootDealsController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Spring-boot/src/main/resources/application-local.properties" afterPath="$PROJECT_DIR$/../../Spring-boot/src/main/resources/application-local.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Spring-boot/pom.xml" afterPath="$PROJECT_DIR$/../../Spring-boot/pom.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/modal-detail-deal.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../Spring-boot/src/main/java/crispy_octo_moo/controller/SqootDealsController.java" afterPath="$PROJECT_DIR$/../../Spring-boot/src/main/java/crispy_octo_moo/controller/SqootDealsController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/controllers.js" afterPath="$PROJECT_DIR$/js/controllers.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/services.js" afterPath="$PROJECT_DIR$/js/services.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/tab-dash.html" afterPath="$PROJECT_DIR$/templates/tab-dash.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/tab-deals.html" afterPath="$PROJECT_DIR$/templates/tab-deals.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="www.iws" />
@@ -33,11 +29,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="controllers.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="controllers.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/controllers.js">
           <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6963563">
+              <caret line="506" column="42" selection-start-line="506" selection-start-column="42" selection-end-line="506" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="modal-login-li.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/modal-login-li.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-14.375">
+              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="modal-detail-deal.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/modal-detail-deal.html">
+          <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="306" column="45" selection-start-line="306" selection-start-column="45" selection-end-line="306" selection-end-column="45" />
+              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -47,7 +63,7 @@
         <entry file="file://$PROJECT_DIR$/templates/tab-dash.html">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-4.375">
-              <caret line="7" column="52" selection-start-line="7" selection-start-column="40" selection-end-line="7" selection-end-column="52" />
+              <caret line="7" column="71" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="71" />
               <folding />
             </state>
           </provider>
@@ -56,8 +72,8 @@
       <file leaf-file-name="tab-deals.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/tab-deals.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.625">
-              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+            <state vertical-scroll-proportion="-9.375">
+              <caret line="15" column="100" selection-start-line="10" selection-start-column="16" selection-end-line="15" selection-end-column="100" />
               <folding />
             </state>
           </provider>
@@ -73,16 +89,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tab-accounts.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/tab-accounts.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="44" column="19" selection-start-line="44" selection-start-column="19" selection-end-line="44" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="snap415test.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/snap415test.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -93,20 +99,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="account-settings.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/account-settings.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="47" column="30" selection-start-line="47" selection-start-column="30" selection-end-line="47" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="helper.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="helper.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/helper.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.1417004">
+            <state vertical-scroll-proportion="0.0">
               <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
               <folding />
             </state>
@@ -117,7 +113,7 @@
         <entry file="file://$PROJECT_DIR$/js/services.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="271" column="13" selection-start-line="271" selection-start-column="13" selection-end-line="280" selection-end-column="15" />
+              <caret line="265" column="6" selection-start-line="265" selection-start-column="6" selection-end-line="265" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -165,13 +161,14 @@
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/templates/account-settings.html" />
         <option value="$PROJECT_DIR$/templates/tab-accounts.html" />
-        <option value="$PROJECT_DIR$/js/services.js" />
-        <option value="$PROJECT_DIR$/templates/tab-dash.html" />
-        <option value="$PROJECT_DIR$/js/controllers.js" />
         <option value="$PROJECT_DIR$/templates/tab-updates.html" />
         <option value="$PROJECT_DIR$/js/app.js" />
-        <option value="$PROJECT_DIR$/templates/tab-deals.html" />
         <option value="$PROJECT_DIR$/js/helper.js" />
+        <option value="$PROJECT_DIR$/templates/tab-deals.html" />
+        <option value="$PROJECT_DIR$/js/services.js" />
+        <option value="$PROJECT_DIR$/templates/tab-dash.html" />
+        <option value="$PROJECT_DIR$/templates/modal-detail-deal.html" />
+        <option value="$PROJECT_DIR$/js/controllers.js" />
       </list>
     </option>
   </component>
@@ -183,8 +180,8 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="287" />
-    <option name="y" value="311" />
+    <option name="x" value="8" />
+    <option name="y" value="48" />
     <option name="width" value="1440" />
     <option name="height" value="838" />
   </component>
@@ -405,7 +402,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="287" y="311" width="1440" height="838" extended-state="0" />
+    <frame x="8" y="48" width="1440" height="838" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21944444" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -443,13 +440,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="53" selection-start-line="19" selection-start-column="53" selection-end-line="19" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/linkedin/ngLinkedIn.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -659,13 +649,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/modal-login-li.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="6" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/logoutcallback.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
@@ -761,30 +744,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/services.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="271" column="13" selection-start-line="271" selection-start-column="13" selection-end-line="280" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/controllers.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="306" column="45" selection-start-line="306" selection-start-column="45" selection-end-line="306" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/tab-dash.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.375">
-          <caret line="7" column="52" selection-start-line="7" selection-start-column="40" selection-end-line="7" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/tab-updates.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.375">
@@ -801,18 +760,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/tab-deals.html">
+    <entry file="file://$PROJECT_DIR$/js/helper.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.625">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/helper.js">
+    <entry file="file://$PROJECT_DIR$/templates/modal-login-li.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1417004">
-          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+        <state vertical-scroll-proportion="-14.375">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/tab-dash.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.375">
+          <caret line="7" column="71" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/services.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="265" column="6" selection-start-line="265" selection-start-column="6" selection-end-line="265" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/tab-deals.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.375">
+          <caret line="15" column="100" selection-start-line="10" selection-start-column="16" selection-end-line="15" selection-end-column="100" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/modal-detail-deal.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/controllers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6963563">
+          <caret line="506" column="42" selection-start-line="506" selection-start-column="42" selection-end-line="506" selection-end-column="42" />
           <folding />
         </state>
       </provider>

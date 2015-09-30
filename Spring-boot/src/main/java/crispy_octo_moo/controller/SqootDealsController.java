@@ -2,7 +2,9 @@ package crispy_octo_moo.controller;
 
 import com.wordnik.swagger.annotations.ApiOperation;
 import crispy_octo_moo.consts.FixtureData;
+import crispy_octo_moo.dto.DealObject;
 import crispy_octo_moo.dto.JsonObject;
+import crispy_octo_moo.dto.LabelObject;
 import crispy_octo_moo.dto.sqoot.SqootDealsObject;
 import crispy_octo_moo.service.SqootDealService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,19 +25,25 @@ public class SqootDealsController {
 
     @RequestMapping(method = RequestMethod.GET)
     @ApiOperation(httpMethod = "GET", value = "Response a list describing all of deal objects that is successfully get or not.")
-    public JsonObject list() {
+    public JsonObject getDeals() {
         return new JsonObject(FixtureData.DealObjects);
     }
 
-    @RequestMapping(value = "/{keywords}", method = RequestMethod.GET)
+    @RequestMapping(value = "/by/{keywords}", method = RequestMethod.GET)
     @ApiOperation(httpMethod = "GET", value = "Response a SqootDealsObject describing if the category keywords related value is successfully get or not.")
-    public SqootDealsObject getDeals(@PathVariable("keywords") String keywords) {
+    public SqootDealsObject getDealsByKeywords(@PathVariable("keywords") String keywords) {
         return sqootDealService.getDeals(keywords);
     }
 
     @RequestMapping(value = "/categories", method = RequestMethod.GET)
     @ApiOperation(httpMethod = "GET", value = "Response a list describing all of deal categories that is successfully get or not.")
-    public JsonObject categories() {
+    public JsonObject getCategories() {
         return new JsonObject(sqootDealService.getCategories());
+    }
+
+    @RequestMapping(value = "/{index}", method = RequestMethod.GET)
+    @ApiOperation(httpMethod = "GET", value = "Response a string describing if the SqootDeals item value is successfully get or not.")
+    public DealObject getDeal(@PathVariable("index") int index) {
+        return FixtureData.DealObjects.get(index);
     }
 }

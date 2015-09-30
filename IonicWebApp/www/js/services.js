@@ -267,8 +267,8 @@ angular.module('starter.services', [])
     //DealService
     .factory('DealService', function ($resource, CONFIG_ENV) {
         var data = $resource(
-            CONFIG_ENV.api_endpoint + "deals",
-            {},
+            CONFIG_ENV.api_endpoint + "deals/:Index",
+            {"Index":"@Index"},
             {
 
             })
