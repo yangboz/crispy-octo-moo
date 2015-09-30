@@ -21,7 +21,7 @@ var _environments = {
             /**
              * Add any config properties you want in here for this environment
              */
-            api_endpoint_base: 'http://localhost:8083/api/'
+            api_endpoint_base: 'http://192.168.2.28:8083/api/'
         }
     },
     test: {
@@ -69,8 +69,8 @@ _getEnvironment = function () {
     return "local";//default
 };
 DynamicEnvironment.get = function (property) {
-    var result = _environments[_getEnvironment()].config[property];
-    //var result = _environments["local"].config[property];
+    //var result = _environments[_getEnvironment()].config[property];
+    var result = _environments["dev"].config[property];
     console.log("DynamicEnvironment.get():",result);
     return result;
 };
