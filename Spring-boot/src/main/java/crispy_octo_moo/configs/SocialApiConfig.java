@@ -2,10 +2,7 @@ package crispy_octo_moo.configs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.social.config.annotation.EnableSocial;
 import org.springframework.social.connect.Connection;
@@ -38,6 +35,25 @@ public class SocialApiConfig {
     @Autowired
     Environment environment;
 
+    private static String sqootApiKey;
+    private static String sqootApiSecret;
+
+    public static String getSqootApiKey() {
+        return sqootApiKey;
+    }
+
+    public static void setSqootApiKey(String sqootApiKey) {
+        SocialApiConfig.sqootApiKey = sqootApiKey;
+    }
+
+    public static String getSqootApiSecret() {
+        return sqootApiSecret;
+    }
+
+    public static void setSqootApiSecret(String sqootApiSecret) {
+        SocialApiConfig.sqootApiSecret = sqootApiSecret;
+    }
+
     @Bean
     public ConnectionFactoryLocator connectionFactoryLocator() {
         ConnectionFactoryRegistry registry = new ConnectionFactoryRegistry();
@@ -50,6 +66,9 @@ public class SocialApiConfig {
                 environment.getProperty("spring.social.facebook.appSecret"));
         fbcf.setScope(environment.getProperty("spring.social.facebook.scope"));
         registry.addConnectionFactory(fbcf);
+        //Sqoot settings
+        SocialApiConfig.setSqootApiKey(environment.getProperty("sqoot.snap415.apiKey", String.class));
+        SocialApiConfig.setSqootApiSecret(environment.getProperty("sqoot.snap415.apiSecret", String.class));
         return registry;
     }
 
@@ -66,4 +85,6 @@ public class SocialApiConfig {
         Connection<Facebook> facebook = connectionRepository.findPrimaryConnection(Facebook.class);
         return facebook != null ? facebook.getApi() : new FacebookTemplate("");
     }
+
+
 }

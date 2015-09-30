@@ -6,8 +6,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.SimpleCommandLinePropertySource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -20,7 +22,7 @@ import javax.annotation.PostConstruct;
 // todo: replace these three with @SpringBootApplication
 
 //
-@PropertySources({ @PropertySource(value = "classpath:application-${spring.profiles.active}.properties") })
+@PropertySources({@PropertySource(value = "classpath:application-${spring.profiles.active}.properties")})
 //
 // @Configuration
 // @EnableAutoConfiguration
@@ -28,7 +30,7 @@ import javax.annotation.PostConstruct;
 @SpringBootApplication
 
 @EnableTransactionManagement
-public class Application{
+public class Application {
 
     private final Logger log = LoggerFactory.getLogger(Application.class);
 
@@ -67,7 +69,7 @@ public class Application{
      * Set a default profile if it has not been set
      */
     @SuppressWarnings("unused")
-	private static void addDefaultProfile(SpringApplication app, SimpleCommandLinePropertySource source) {
+    private static void addDefaultProfile(SpringApplication app, SimpleCommandLinePropertySource source) {
         if (!source.containsProperty("spring.profiles.active")) {
             app.setAdditionalProfiles(Constants.SPRING_PROFILE_DEVELOPMENT);
         }
