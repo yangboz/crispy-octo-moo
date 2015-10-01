@@ -28,7 +28,7 @@ public class SqootDeal {
     private String description;//          "...html...",
     private String fine_print;//           "...text...",
     private String image_url;//            "http://api.sqoot.com/v2/deals/1234/image",
-    private Boolean online;//               false,
+    private boolean online;//               false,
     private String number_sold;//          35,
     private String expires_at;//          "2012-06-18T00:00:00Z",
     private String created_at;//          "2012-06-14T00:00:00Z",
@@ -164,11 +164,11 @@ public class SqootDeal {
         this.image_url = image_url;
     }
 
-    public Boolean getOnline() {
+    public boolean getOnline() {
         return online;
     }
 
-    public void setOnline(Boolean online) {
+    public void setOnline(boolean online) {
         this.online = online;
     }
 
@@ -210,5 +210,12 @@ public class SqootDeal {
 
     public void setMerchant(SqootDealMerchant merchant) {
         this.merchant = merchant;
+    }
+
+    @Override
+    public String toString() {
+        return "Id:" + getId() + ",title:" + getTitle() + ",url:" + getUrl() + ",shortTitle:" + getShort_title() + ",price:" + getPrice()
+                + ",untrackUrl:" + getUntracked_url() + ",value:" + getValue() + ",discountAmout:" + getDiscount_amount() + ",discountPercentage:" + getDiscount_percentage()
+                + ",categorySlug:" + getCategory_slug() + ",categoryName:" + getCategory_name() + ",...";
     }
 }

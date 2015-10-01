@@ -93,4 +93,11 @@ public class SqootQuery {
     public void setUpdated_after(String updated_after) {
         this.updated_after = updated_after;
     }
+
+    @Override
+    public String toString() {
+        return "total:" + getTotal() + ",page:" + getPage() + ",perPage:" + getPer_page() + ",radius:" + getRadius() + ",online:" + getOnline()
+                + ",category_slugs:" + getCategory_slugs() + ",provider_slugs:" + getProvider_slugs() + ",updateAfter:" + getUpdated_after()
+                + ",location:" + getLocation().toString();
+    }
 }
