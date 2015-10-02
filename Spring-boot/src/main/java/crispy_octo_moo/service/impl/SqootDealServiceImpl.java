@@ -1,12 +1,12 @@
 package crispy_octo_moo.service.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.common.util.concurrent.FutureCallback;
 
-import com.ning.http.client.AsyncCompletionHandler;
-import com.ning.http.client.AsyncHttpClient;
-import com.ning.http.client.Response;
 import crispy_octo_moo.configs.SocialApiConfig;
 import crispy_octo_moo.dto.sqoot.SqootCategories;
 import crispy_octo_moo.dto.sqoot.SqootCategory;
@@ -14,6 +14,7 @@ import crispy_octo_moo.dto.sqoot.SqootCategoryObject;
 import crispy_octo_moo.dto.sqoot.SqootDealsObject;
 import crispy_octo_moo.service.SqootDealService;
 import crispy_octo_moo.utils.LoggingRequestInterceptor;
+import jdk.nashorn.internal.parser.JSONParser;
 import org.apache.coyote.Request;
 
 import org.apache.http.Header;
@@ -32,19 +33,16 @@ import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import scala.util.parsing.json.JSONArray;
-import scala.util.parsing.json.JSONObject;
 import sun.net.www.http.HttpClient;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.CharBuffer;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -58,54 +56,57 @@ public class SqootDealServiceImpl implements SqootDealService {
 
     private final Logger LOG = LoggerFactory.getLogger(SqootDealServiceImpl.class);
 
-
     //    @Value("${sqoot.snap415.apiKey}")
     private String sqootApiKey = "ucx07k";//FIXME:it should comes from property files;
 
     //Category from tax events key-words.
     @Override
     public SqootDealsObject getDeals(String category) {
-        String urlStr = "https://api.sqoot.com/v2/deals?api_key=" + sqootApiKey + "&category_slugs=" + category;
-        //
-//        AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
-//        Future<Response> f = asyncHttpClient.prepareGet(urlStr).execute();
-//        try {
-//            Response r = f.get();
-//            try {
-//                System.out.println("Response body:" + r.getResponseBody().toString());
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        } catch (ExecutionException e) {
-//            e.printStackTrace();
-//        }
-        AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
-        asyncHttpClient.prepareGet(urlStr).execute(new AsyncCompletionHandler<Response>() {
-
-            @Override
-            public Response onCompleted(Response response) throws Exception {
-                // Do something with the Response
-                // ...
-                System.out.println("Response body::" + response.getResponseBody().toString());
-                return response;
-            }
-
-            @Override
-            public void onThrowable(Throwable t) {
-                // Something wrong happened.
-                System.out.println(t.toString());
-            }
-        });
-
-        //
+//        String urlStr = "https://api.sqoot.com/v2/deals?api_key=" + sqootApiKey + "&category_slugs=" + category;
+        String urlStr = "http://api.sqoot.com/v2/deals?api_key=" + sqootApiKey;
         LOG.info("SqootDealsObject url:" + urlStr);
-        String respString = getRestTemplate().getForObject(urlStr, String.class);
-        LOG.info("respString:" + respString);
-        ResponseEntity<Object> responseEntity = getRestTemplate().getForEntity(urlStr, Object.class);
-        LOG.info("responseEntity:" + responseEntity.toString());
-        SqootDealsObject sqootDealsObject = getRestTemplate().getForObject(urlStr, SqootDealsObject.class);
+        RestTemplate restTemplate = getRestTemplate();
+//        restTemplate.
+        Map params = new HashMap();
+        params.put("category_slugs", category);
+        params.put("api_key", sqootApiKey);
+//        params.put("location",locationString);
+        params.put("radius", "10");
+        String respString = restTemplate.getForObject(urlStr, String.class, params);
+//        LOG.info("respString:" + respString);
+//        JSONObject jsonObject = new JSONObject(respString);
+//        LOG.info("jsonObject:" + jsonObject.toString());
+//        JSONArray dealsJsonArray = jsonObject.getJSONArray("deals");
+//        LOG.info("dealsJsonArray:" + dealsJsonArray.toString());
+        //JSON to JavaBean
+        ObjectMapper objectMapper = new ObjectMapper();
+        //
+        objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+        objectMapper.configure(
+                DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        //Single quote
+        objectMapper
+                .configure(
+                        com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_SINGLE_QUOTES,
+                        true);
+        //
+        JsonNode node = null;
+        try {
+            node = objectMapper.readTree(respString);
+            LOG.info("objectMapper.readTree:" + node.toString());
+        } catch (Exception e) {
+            LOG.error(e.toString());
+        }
+        SqootDealsObject sqootDealsObject = null;
+        try {
+            sqootDealsObject = objectMapper.readValue(respString, SqootDealsObject.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //
+//        ResponseEntity<Object> responseEntity = restTemplate.getForEntity(urlStr, Object.class);
+//        LOG.info("responseEntity:" + responseEntity.toString());
+//        SqootDealsObject sqootDealsObject = restTemplate.getForObject(urlStr, SqootDealsObject.class);
         LOG.info("sqootDealsObject:" + sqootDealsObject);
         return sqootDealsObject;
     }
