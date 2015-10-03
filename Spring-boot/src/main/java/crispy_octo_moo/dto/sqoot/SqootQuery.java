@@ -1,12 +1,16 @@
 package crispy_octo_moo.dto.sqoot;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 /**
  * Created by yangboz on 9/30/15.
  * http://docs.sqoot.com/v2/deals.html
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
+//@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class SqootQuery {
 
     public SqootQuery() {
@@ -15,7 +19,8 @@ public class SqootQuery {
     private int total;//":    1000,
     private int page;//":     1,
     private int per_page;//": 10,
-    private SqootQueryLocation location;//":
+    private String query;//
+    private SqootQueryLocation location = new SqootQueryLocation();//":
     private long radius;//":         10,
     private Boolean online;//":         false,
     private String[] category_slugs;//": ["awesome-bagels"],
@@ -99,5 +104,13 @@ public class SqootQuery {
         return "total:" + getTotal() + ",page:" + getPage() + ",perPage:" + getPer_page() + ",radius:" + getRadius() + ",online:" + getOnline()
                 + ",category_slugs:" + getCategory_slugs() + ",provider_slugs:" + getProvider_slugs() + ",updateAfter:" + getUpdated_after()
                 + ",location:" + getLocation().toString();
+    }
+
+    public String getQuery() {
+        return query;
+    }
+
+    public void setQuery(String query) {
+        this.query = query;
     }
 }

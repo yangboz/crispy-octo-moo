@@ -2,6 +2,7 @@ package crispy_octo_moo.dto.sqoot;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ public class SqootDealsObject {
     }
 
     private SqootQuery query;
-    private List<SqootDealObject> deals;
+    private List<SqootDealObject> deals = new ArrayList<SqootDealObject>();
 //    private SqootDealObject[] deals;
 
     public SqootQuery getQuery() {

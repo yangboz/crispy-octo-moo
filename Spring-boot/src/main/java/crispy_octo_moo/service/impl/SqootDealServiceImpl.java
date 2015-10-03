@@ -1,5 +1,6 @@
 package crispy_octo_moo.service.impl;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -8,16 +9,15 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.common.util.concurrent.FutureCallback;
 
 import crispy_octo_moo.configs.SocialApiConfig;
-import crispy_octo_moo.dto.sqoot.SqootCategories;
-import crispy_octo_moo.dto.sqoot.SqootCategory;
-import crispy_octo_moo.dto.sqoot.SqootCategoryObject;
-import crispy_octo_moo.dto.sqoot.SqootDealsObject;
+import crispy_octo_moo.dto.sqoot.*;
 import crispy_octo_moo.service.SqootDealService;
 import crispy_octo_moo.utils.LoggingRequestInterceptor;
 import jdk.nashorn.internal.parser.JSONParser;
 import org.apache.coyote.Request;
 
 import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +62,7 @@ public class SqootDealServiceImpl implements SqootDealService {
     //Category from tax events key-words.
     @Override
     public SqootDealsObject getDeals(String category) {
-//        String urlStr = "https://api.sqoot.com/v2/deals?api_key=" + sqootApiKey + "&category_slugs=" + category;
+//        String urlStr = "https://api.sqoot.com/v2/deals?api_key=" + sqootApiKey + "&category_slugs=" + category;//Invalid API url.
         String urlStr = "http://api.sqoot.com/v2/deals?api_key=" + sqootApiKey;
         LOG.info("SqootDealsObject url:" + urlStr);
         RestTemplate restTemplate = getRestTemplate();
@@ -80,10 +80,11 @@ public class SqootDealServiceImpl implements SqootDealService {
 //        LOG.info("dealsJsonArray:" + dealsJsonArray.toString());
         //JSON to JavaBean
         ObjectMapper objectMapper = new ObjectMapper();
-        //
+        //ObjectMapper configures..
         objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
         objectMapper.configure(
                 DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         //Single quote
         objectMapper
                 .configure(
@@ -91,23 +92,49 @@ public class SqootDealServiceImpl implements SqootDealService {
                         true);
         //
         JsonNode node = null;
+        SqootDealsObject sqootDealsObject = null;
         try {
             node = objectMapper.readTree(respString);
-            LOG.info("objectMapper.readTree:" + node.toString());
+//            LOG.info("objectMapper.readTree:" + node.toString());
+            JsonNode queryNode = node.get("query");
+            LOG.info("objectMapper.readTree:queryNode:" + queryNode);
+            LOG.info("queryNode.total:" + queryNode.get("total").toString());
+//            SqootQuery sqootQuery = objectMapper.readValue(node.get("query").toString(), SqootQuery.class);//FIXME:automatic mapper.
+            SqootQuery sqootQuery = new SqootQuery();
+//            sqootQuery.setPage(node.get("page"));
+            //
+            JSONObject jsonObject = new JSONObject(respString);
+            LOG.info("jsonObject:" + jsonObject.toString());
+            JSONArray deals = jsonObject.getJSONArray("deals");
+            LOG.info("deals:" + deals.toString());
+            for (int i = 0; i < deals.length(); i++) {
+                JSONObject deal = deals.getJSONObject(i).getJSONObject("deal");
+                JSONObject merchant = deal.getJSONObject("merchant");
+                SqootDeal sqootDeal = new SqootDeal();
+                sqootDeal.setTitle(deal.getString("short_title"));
+                sqootDeal.setUrl(deal.getString("url"));
+                LOG.info("sqootDeal:" + sqootDeal.toString());
+                //
+                SqootDealObject sqootDealObject = new SqootDealObject();
+                sqootDealObject.setDeal(sqootDeal);
+                sqootDealsObject.getDeals().add(sqootDealObject);
+            }
+//            LOG.info("objectMapper.readTree:deals:" + node.get("deals").toString());
+//            sqootDealsObject = objectMapper.readValue(node.get("deals").toString(), SqootDealsObject.class);
+            LOG.info("sqootDealsObject:" + sqootDealsObject.toString());
         } catch (Exception e) {
             LOG.error(e.toString());
         }
-        SqootDealsObject sqootDealsObject = null;
-        try {
-            sqootDealsObject = objectMapper.readValue(respString, SqootDealsObject.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        //
+//        try {
+//            sqootDealsObject = objectMapper.readValue(respString, SqootDealsObject.class);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         //
 //        ResponseEntity<Object> responseEntity = restTemplate.getForEntity(urlStr, Object.class);
 //        LOG.info("responseEntity:" + responseEntity.toString());
 //        SqootDealsObject sqootDealsObject = restTemplate.getForObject(urlStr, SqootDealsObject.class);
-        LOG.info("sqootDealsObject:" + sqootDealsObject);
         return sqootDealsObject;
     }
 
