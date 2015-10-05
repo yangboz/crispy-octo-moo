@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 
 import crispy_octo_moo.service.FacebookUserService;
+import crispy_octo_moo.service.Snap415PersistenceService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,13 +51,14 @@ public class FacebookConnectController {
     @Autowired
     FacebookUserService fbUservice;
 
-    //@Autowired
-    //Snap415PersistenceService snap415PersistenceService;
+    @Autowired
+    Snap415PersistenceService snap415PersistenceService;
 
     @RequestMapping(value = "/profile", method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST", value = "Response a string describing if the access_token related user profile is successfully received.")
     public User getUserProfile(@RequestBody @Valid Snap415Token snap415Token) {
-    	//snap415PersistenceService.persistUserProfile(snap415Token);
+    	snap415PersistenceService.persistUserProfile(snap415Token);
+    	snap415PersistenceService.persistUserPosts(snap415Token);
         return fbUservice.getUserProfile(snap415Token);
     }
 

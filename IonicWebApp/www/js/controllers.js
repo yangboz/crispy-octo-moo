@@ -45,7 +45,7 @@ angular.module('starter.controllers', [])
             $rootScope.loginModal_fb = modal;
             //Login Modal show();
             //@see: CacheService
-            //CacheService.remove(Enum.localStorageKeys.OAUTH_OBJ_FB);//for debugging
+            CacheService.remove(Enum.localStorageKeys.OAUTH_OBJ_FB);//for debugging
             CacheService.get(Enum.localStorageKeys.OAUTH_OBJ_FB).then(function (data) {
                 console.log(Enum.localStorageKeys.OAUTH_OBJ_FB, data);
                 if (data == null) {

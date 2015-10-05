@@ -3,10 +3,13 @@ package crispy_octo_moo.service.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.social.facebook.api.PagedList;
+import org.springframework.social.facebook.api.Post;
 import org.springframework.social.facebook.api.User;
 import org.springframework.stereotype.Service;
 
 import crispy_octo_moo.domain.Snap415UserDeals;
+import crispy_octo_moo.domain.Snap415UserPosts;
 import crispy_octo_moo.domain.Snap415UserProfile;
 import crispy_octo_moo.domain.Snap415UserTaxEvents;
 import crispy_octo_moo.dto.Snap415Token;
@@ -27,6 +30,8 @@ public class Snap415PersistenceServiceImpl implements Snap415PersistenceService 
 	 @Autowired
 	 Snap415UserService snap415UserService;
 	
+	 @Autowired
+	 FacebookUserService fbUserService;
 	
 	
 	 @Autowired
@@ -47,10 +52,9 @@ public class Snap415PersistenceServiceImpl implements Snap415PersistenceService 
 	public Snap415UserProfile persistUserProfile(Snap415Token token) {
 		// TODO Auto-generated method stub
 		
-		//use the token to get fb user id
 		Snap415UserProfile snap415UserProfile = snap415UserService.getMe(token);
 		
-		LOG.info("snap415UserProfile.getSimplyBirthday():" + snap415UserProfile.getSimplyBirthday());
+		//LOG.info("snap415UserProfile.getSimplyBirthday():" + snap415UserProfile.getSimplyBirthday());
 		
 		_userProfileDao.save(snap415UserProfile);
 		
@@ -60,13 +64,24 @@ public class Snap415PersistenceServiceImpl implements Snap415PersistenceService 
 	}
 	
 	@Override
-	public Snap415UserTaxEvents persistUserPosts(Snap415Token token) {
+	public Snap415UserPosts persistUserPosts(Snap415Token token) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		PagedList<Post> fbposts = fbUserService.getUserPost(token);
+		
+		Snap415UserPosts snap415UserPosts = new Snap415UserPosts();
+		
+		snap415UserPosts.setPosts(fbposts);
+		
+		_userPostsDao.save(snap415UserPosts);
+		
+		return snap415UserPosts;
+		
+		
 	}
 	
 	@Override
-	public Snap415UserDeals persistUserTaxEvents(Snap415Token token) {
+	public Snap415UserTaxEvents persistUserTaxEvents(Snap415Token token) {
 		// TODO Auto-generated method stub
 		return null;
 	}
