@@ -24,6 +24,7 @@ import java.util.List;
 public class Snap415UserProfile extends BaseEntity {
 
 
+	
     private User fbUserProfile;
     private LinkedInProfile liUserProfile;
 

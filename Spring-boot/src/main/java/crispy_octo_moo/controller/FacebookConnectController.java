@@ -49,9 +49,13 @@ public class FacebookConnectController {
     @Autowired
     FacebookUserService fbUservice;
 
+    //@Autowired
+    //Snap415PersistenceService snap415PersistenceService;
+
     @RequestMapping(value = "/profile", method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST", value = "Response a string describing if the access_token related user profile is successfully received.")
     public User getUserProfile(@RequestBody @Valid Snap415Token snap415Token) {
+    	//snap415PersistenceService.persistUserProfile(snap415Token);
         return fbUservice.getUserProfile(snap415Token);
     }
 

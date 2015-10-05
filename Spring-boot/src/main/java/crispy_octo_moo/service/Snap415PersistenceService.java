@@ -6,6 +6,13 @@ import crispy_octo_moo.domain.Snap415UserTaxEvents;
 import crispy_octo_moo.dto.Snap415Overview;
 import crispy_octo_moo.dto.Snap415Token;
 
+
+
+/**
+ * Persistence service is to populate entities so that the data serving the 4 tabs
+ * are ready
+ */
+
 public interface Snap415PersistenceService {
 
 	//  corresponds to Snap415UserProfile entity

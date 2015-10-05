@@ -3,6 +3,8 @@ package crispy_octo_moo.service.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.social.facebook.api.User;
+import org.springframework.stereotype.Service;
 
 import crispy_octo_moo.domain.Snap415UserDeals;
 import crispy_octo_moo.domain.Snap415UserProfile;
@@ -15,16 +17,17 @@ import crispy_octo_moo.repository.Snap415UserTaxEventsRepository;
 import crispy_octo_moo.service.FacebookUserService;
 import crispy_octo_moo.service.LinkedInUserService;
 import crispy_octo_moo.service.Snap415PersistenceService;
+import crispy_octo_moo.service.Snap415UserService;
 
+@Service
 public class Snap415PersistenceServiceImpl implements Snap415PersistenceService {
 
 	 private final Logger LOG = LoggerFactory.getLogger(Snap415PersistenceServiceImpl.class);
 	
 	 @Autowired
-	 FacebookUserService fbUserService;
+	 Snap415UserService snap415UserService;
 	
-	 @Autowired
-	 LinkedInUserService linkedInUserService;
+	
 	
 	 @Autowired
 	 Snap415UserProfileRepository _userProfileDao;
@@ -36,14 +39,24 @@ public class Snap415PersistenceServiceImpl implements Snap415PersistenceService 
 	 Snap415UserTaxEventsRepository _userTaxEvensDao;
 	 
 	 @Autowired
-	 Snap415UserDealsRepository _userTDealsDao;
+	 Snap415UserDealsRepository _userDealsDao;
 	 
 	 
 	    
 	@Override
 	public Snap415UserProfile persistUserProfile(Snap415Token token) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		//use the token to get fb user id
+		Snap415UserProfile snap415UserProfile = snap415UserService.getMe(token);
+		
+		LOG.info("snap415UserProfile.getSimplyBirthday():" + snap415UserProfile.getSimplyBirthday());
+		
+		_userProfileDao.save(snap415UserProfile);
+		
+		
+		
+		return snap415UserProfile;
 	}
 	
 	@Override
