@@ -8,7 +8,6 @@ import crispy_octo_moo.dto.Snap415Overview;
 import crispy_octo_moo.dto.Snap415Token;
 
 
-
 /**
  * Persistence service is to populate entities so that the data serving the 4 tabs
  * are ready
@@ -16,14 +15,14 @@ import crispy_octo_moo.dto.Snap415Token;
 
 public interface Snap415PersistenceService {
 
-	//  corresponds to Snap415UserProfile entity
-	Snap415UserProfile persistUserProfile(Snap415Token token);
+    //  corresponds to Snap415UserProfile entity
+    Snap415UserProfile persistUserProfile(Snap415Token token);
 
-	Snap415UserPosts persistUserPosts(Snap415Token token);
+    Snap415UserPosts persistUserPosts(Snap415Token token);
 
-	//corresponds to Snap415UserTaxEvents entity
-	Snap415UserTaxEvents persistUserTaxEvents(Snap415Token token);
+    //corresponds to Snap415UserTaxEvents entity
+    Snap415UserTaxEvents persistUserTaxEvents(Snap415Token token);
 
-	//corresponds to Snap415UserDeals entity
-	Snap415UserDeals persistUserDeals(Snap415Token token);
+    //corresponds to Snap415UserDeals entity
+    Snap415UserDeals persistUserDeals(Snap415Token token, String category);//Default category: cars
 }

@@ -12,7 +12,7 @@ public class SqootDealObject {
     public SqootDealObject() {
     }
 
-    private SqootDeal deal;
+    private SqootDeal deal = new SqootDeal();
 
     public SqootDeal getDeal() {
         return deal;

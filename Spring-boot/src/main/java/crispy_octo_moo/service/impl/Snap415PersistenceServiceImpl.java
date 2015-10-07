@@ -2,6 +2,10 @@ package crispy_octo_moo.service.impl;
 
 import java.util.ArrayList;
 
+import crispy_octo_moo.dto.sqoot.SqootDeal;
+import crispy_octo_moo.dto.sqoot.SqootDealObject;
+import crispy_octo_moo.dto.sqoot.SqootDealsObject;
+import crispy_octo_moo.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,116 +24,116 @@ import crispy_octo_moo.repository.Snap415UserDealsRepository;
 import crispy_octo_moo.repository.Snap415UserPostsRepository;
 import crispy_octo_moo.repository.Snap415UserProfileRepository;
 import crispy_octo_moo.repository.Snap415UserTaxEventsRepository;
-import crispy_octo_moo.service.FacebookUserService;
-import crispy_octo_moo.service.LinkedInUserService;
-import crispy_octo_moo.service.Snap415PersistenceService;
-import crispy_octo_moo.service.Snap415UserService;
 
 @Service
 public class Snap415PersistenceServiceImpl implements Snap415PersistenceService {
 
-	 private final Logger LOG = LoggerFactory.getLogger(Snap415PersistenceServiceImpl.class);
-	 
-	 private String Snap415ID = null;
-	
-	 @Autowired
-	 Snap415UserService snap415UserService;
-	
-	 @Autowired
-	 FacebookUserService fbUserService;
-	
-	
-	 @Autowired
-	 Snap415UserProfileRepository _userProfileDao;
-	 
-	 @Autowired
-	 Snap415UserPostsRepository _userPostsDao;
-	 
-	 @Autowired
-	 Snap415UserTaxEventsRepository _userTaxEventsDao;
-	 
-	 @Autowired
-	 Snap415UserDealsRepository _userDealsDao;
-	 
-	 
-	    
-	@Override
-	public Snap415UserProfile persistUserProfile(Snap415Token token) {
-		// TODO Auto-generated method stub
-		
-		Snap415UserProfile snap415UserProfile = snap415UserService.getMe(token);
-		
-		//LOG.info("snap415UserProfile.getSimplyBirthday():" + snap415UserProfile.getSimplyBirthday());
-		
-		_userProfileDao.save(snap415UserProfile);
-		
-		Snap415ID = snap415UserProfile.getId();
-		
-		return snap415UserProfile;
-	}
-	
-	@Override
-	public Snap415UserPosts persistUserPosts(Snap415Token token) {
-		// TODO Auto-generated method stub
-		
-		PagedList<Post> fbposts = fbUserService.getUserPost(token);
-		
-		Snap415UserPosts snap415UserPosts = new Snap415UserPosts();
-		
-		snap415UserPosts.setPosts(fbposts);
-		snap415UserPosts.setSnap415ID(Snap415ID);
-		
-		_userPostsDao.save(snap415UserPosts);
-		
-		return snap415UserPosts;
-		
-		
-	}
-	
-	@Override
-	public Snap415UserTaxEvents persistUserTaxEvents(Snap415Token token) {
-		// TODO Auto-generated method stub
-		// The initial persistence is done by retrieving story property in fb post and saving it as tax event
-		
-		Snap415UserTaxEvents snap415UserTaxEvents = new Snap415UserTaxEvents();
-		
-		LOG.info("User Tax Events:" + Snap415ID);
+    private final Logger LOG = LoggerFactory.getLogger(Snap415PersistenceServiceImpl.class);
 
-		if(Snap415ID != null)
-		{
-			PagedList<Post> fbposts = snap415UserService.getFBPosts(Snap415ID);
-			
-			if(!fbposts.isEmpty())
-			{
-				ArrayList<Snap415TaxEvent> snap415TaxEvents = new ArrayList<Snap415TaxEvent>();
-				
-				for(Post temp : fbposts)
-				{
-					Snap415TaxEvent snap415TaxEvent = new Snap415TaxEvent();
-					
-					snap415TaxEvent.setTaxCategory("unknown");
-					snap415TaxEvent.setTaxCredit("unknown");
-					snap415TaxEvent.setEventDescription(temp.getStory());
-					
-					snap415TaxEvents.add(snap415TaxEvent);
-				}
-				
-				snap415UserTaxEvents.setSnap415ID(Snap415ID);
-				snap415UserTaxEvents.setTaxEvents(snap415TaxEvents);
-				
-				_userTaxEventsDao.save(snap415UserTaxEvents);
-			}
-			
-		}
-		
-		return null;
-	}
-	
-	@Override
-	public Snap415UserDeals persistUserDeals(Snap415Token token) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    private String Snap415ID = null;
 
-	
+    @Autowired
+    Snap415UserService snap415UserService;
+
+    @Autowired
+    FacebookUserService fbUserService;
+
+    @Autowired
+    SqootDealService sqootDealService;
+
+
+    @Autowired
+    Snap415UserProfileRepository _userProfileDao;
+
+    @Autowired
+    Snap415UserPostsRepository _userPostsDao;
+
+    @Autowired
+    Snap415UserTaxEventsRepository _userTaxEventsDao;
+
+    @Autowired
+    Snap415UserDealsRepository _userDealsDao;
+
+
+    @Override
+    public Snap415UserProfile persistUserProfile(Snap415Token token) {
+        // TODO Auto-generated method stub
+
+        Snap415UserProfile snap415UserProfile = snap415UserService.getMe(token);
+
+        //LOG.info("snap415UserProfile.getSimplyBirthday():" + snap415UserProfile.getSimplyBirthday());
+
+        _userProfileDao.save(snap415UserProfile);
+
+        Snap415ID = snap415UserProfile.getId();
+
+        return snap415UserProfile;
+    }
+
+    @Override
+    public Snap415UserPosts persistUserPosts(Snap415Token token) {
+        // TODO Auto-generated method stub
+
+        PagedList<Post> fbposts = fbUserService.getUserPost(token);
+
+        Snap415UserPosts snap415UserPosts = new Snap415UserPosts();
+
+        snap415UserPosts.setPosts(fbposts);
+        snap415UserPosts.setSnap415ID(Snap415ID);
+
+        _userPostsDao.save(snap415UserPosts);
+
+        return snap415UserPosts;
+
+
+    }
+
+    @Override
+    public Snap415UserTaxEvents persistUserTaxEvents(Snap415Token token) {
+        // TODO Auto-generated method stub
+        // The initial persistence is done by retrieving story property in fb post and saving it as tax event
+
+        Snap415UserTaxEvents snap415UserTaxEvents = new Snap415UserTaxEvents();
+
+        LOG.info("User Tax Events:" + Snap415ID);
+
+        if (Snap415ID != null) {
+            PagedList<Post> fbposts = snap415UserService.getFBPosts(Snap415ID);
+
+            if (!fbposts.isEmpty()) {
+                ArrayList<Snap415TaxEvent> snap415TaxEvents = new ArrayList<Snap415TaxEvent>();
+
+                for (Post temp : fbposts) {
+                    Snap415TaxEvent snap415TaxEvent = new Snap415TaxEvent();
+
+                    snap415TaxEvent.setTaxCategory("unknown");
+                    snap415TaxEvent.setTaxCredit("unknown");
+                    snap415TaxEvent.setEventDescription(temp.getStory());
+
+                    snap415TaxEvents.add(snap415TaxEvent);
+                }
+
+                snap415UserTaxEvents.setSnap415ID(Snap415ID);
+                snap415UserTaxEvents.setTaxEvents(snap415TaxEvents);
+
+                _userTaxEventsDao.save(snap415UserTaxEvents);
+            }
+
+        }
+
+        return null;
+    }
+
+    @Override
+    public Snap415UserDeals persistUserDeals(Snap415Token token, String category) {
+        SqootDealsObject sqootDealsObject = sqootDealService.getDeals(category);
+        if (sqootDealsObject != null) {
+            Snap415UserDeals snap415UserDeals = new Snap415UserDeals();
+            snap415UserDeals.setSqootDealsObject(sqootDealsObject);
+            _userDealsDao.save(snap415UserDeals);
+        }
+        return null;
+    }
+
+
 }

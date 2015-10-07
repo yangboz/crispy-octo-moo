@@ -84,7 +84,7 @@ public class SqootDealServiceImpl implements SqootDealService {
         objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
         objectMapper.configure(
                 DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+//        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         //Single quote
         objectMapper
                 .configure(
@@ -92,32 +92,39 @@ public class SqootDealServiceImpl implements SqootDealService {
                         true);
         //
         JsonNode node = null;
-        SqootDealsObject sqootDealsObject = null;
+        SqootDealsObject sqootDealsObject = new SqootDealsObject();
         try {
             node = objectMapper.readTree(respString);
 //            LOG.info("objectMapper.readTree:" + node.toString());
             JsonNode queryNode = node.get("query");
             LOG.info("objectMapper.readTree:queryNode:" + queryNode);
             LOG.info("queryNode.total:" + queryNode.get("total").toString());
-//            SqootQuery sqootQuery = objectMapper.readValue(node.get("query").toString(), SqootQuery.class);//FIXME:automatic mapper.
-            SqootQuery sqootQuery = new SqootQuery();
+            SqootQuery sqootQuery = null;
+            try {
+                sqootQuery = objectMapper.readValue(queryNode.toString(), SqootQuery.class);//FIXME:automatic mapper.
+            } catch (Exception e) {
+                LOG.error(e.toString());
+            }
+//            SqootQuery sqootQuery = new SqootQuery();
 //            sqootQuery.setPage(node.get("page"));
+            LOG.info("sqootQuery:" + sqootQuery.toString());
+            sqootDealsObject.setQuery(sqootQuery);
             //
             JSONObject jsonObject = new JSONObject(respString);
             LOG.info("jsonObject:" + jsonObject.toString());
             JSONArray deals = jsonObject.getJSONArray("deals");
-            LOG.info("deals:" + deals.toString());
+            LOG.info("deals:" + deals.toString() + ",len:" + deals.length());
             for (int i = 0; i < deals.length(); i++) {
                 JSONObject deal = deals.getJSONObject(i).getJSONObject("deal");
-                JSONObject merchant = deal.getJSONObject("merchant");
-                SqootDeal sqootDeal = new SqootDeal();
-                sqootDeal.setTitle(deal.getString("short_title"));
-                sqootDeal.setUrl(deal.getString("url"));
+                //
+                SqootDeal sqootDeal = objectMapper.readValue(deal.toString(), SqootDeal.class);
                 LOG.info("sqootDeal:" + sqootDeal.toString());
                 //
                 SqootDealObject sqootDealObject = new SqootDealObject();
                 sqootDealObject.setDeal(sqootDeal);
+                //
                 sqootDealsObject.getDeals().add(sqootDealObject);
+//                LOG.info("sqootDealsObject.getDeals():" + sqootDealsObject.getDeals());
             }
 //            LOG.info("objectMapper.readTree:deals:" + node.get("deals").toString());
 //            sqootDealsObject = objectMapper.readValue(node.get("deals").toString(), SqootDealsObject.class);
@@ -125,16 +132,6 @@ public class SqootDealServiceImpl implements SqootDealService {
         } catch (Exception e) {
             LOG.error(e.toString());
         }
-        //
-//        try {
-//            sqootDealsObject = objectMapper.readValue(respString, SqootDealsObject.class);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-        //
-//        ResponseEntity<Object> responseEntity = restTemplate.getForEntity(urlStr, Object.class);
-//        LOG.info("responseEntity:" + responseEntity.toString());
-//        SqootDealsObject sqootDealsObject = restTemplate.getForObject(urlStr, SqootDealsObject.class);
         return sqootDealsObject;
     }
 

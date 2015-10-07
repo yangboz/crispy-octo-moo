@@ -1,8 +1,12 @@
 package crispy_octo_moo.dto.sqoot;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import java.util.List;
 
 /**
  * Created by yangboz on 9/30/15.
@@ -19,12 +23,17 @@ public class SqootQuery {
     private int total;//":    1000,
     private int page;//":     1,
     private int per_page;//": 10,
+    @JsonIgnore
     private String query;//
+    @JsonIgnore
     private SqootQueryLocation location = new SqootQueryLocation();//":
     private long radius;//":         10,
+    @JsonIgnore
     private Boolean online;//":         false,
-    private String[] category_slugs;//": ["awesome-bagels"],
-    private String[] provider_slugs;//": [],
+
+    private List<String> category_slugs;//": ["awesome-bagels"],
+
+    private List<String> provider_slugs;//": [],
     private String updated_after;//":  null
 
     public int getTotal() {
@@ -75,19 +84,19 @@ public class SqootQuery {
         this.online = online;
     }
 
-    public String[] getCategory_slugs() {
+    public List<String> getCategory_slugs() {
         return category_slugs;
     }
 
-    public void setCategory_slugs(String[] category_slugs) {
+    public void setCategory_slugs(List<String> category_slugs) {
         this.category_slugs = category_slugs;
     }
 
-    public String[] getProvider_slugs() {
+    public List<String> getProvider_slugs() {
         return provider_slugs;
     }
 
-    public void setProvider_slugs(String[] provider_slugs) {
+    public void setProvider_slugs(List<String> provider_slugs) {
         this.provider_slugs = provider_slugs;
     }
 
