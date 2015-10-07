@@ -1,5 +1,7 @@
 package crispy_octo_moo.service.impl;
 
+import java.util.ArrayList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.social.facebook.api.Post;
 import org.springframework.social.facebook.api.User;
 import org.springframework.stereotype.Service;
 
+import crispy_octo_moo.domain.Snap415TaxEvent;
 import crispy_octo_moo.domain.Snap415UserDeals;
 import crispy_octo_moo.domain.Snap415UserPosts;
 import crispy_octo_moo.domain.Snap415UserProfile;
@@ -26,6 +29,8 @@ import crispy_octo_moo.service.Snap415UserService;
 public class Snap415PersistenceServiceImpl implements Snap415PersistenceService {
 
 	 private final Logger LOG = LoggerFactory.getLogger(Snap415PersistenceServiceImpl.class);
+	 
+	 private String Snap415ID = null;
 	
 	 @Autowired
 	 Snap415UserService snap415UserService;
@@ -41,7 +46,7 @@ public class Snap415PersistenceServiceImpl implements Snap415PersistenceService 
 	 Snap415UserPostsRepository _userPostsDao;
 	 
 	 @Autowired
-	 Snap415UserTaxEventsRepository _userTaxEvensDao;
+	 Snap415UserTaxEventsRepository _userTaxEventsDao;
 	 
 	 @Autowired
 	 Snap415UserDealsRepository _userDealsDao;
@@ -58,7 +63,7 @@ public class Snap415PersistenceServiceImpl implements Snap415PersistenceService 
 		
 		_userProfileDao.save(snap415UserProfile);
 		
-		
+		Snap415ID = snap415UserProfile.getId();
 		
 		return snap415UserProfile;
 	}
@@ -72,6 +77,7 @@ public class Snap415PersistenceServiceImpl implements Snap415PersistenceService 
 		Snap415UserPosts snap415UserPosts = new Snap415UserPosts();
 		
 		snap415UserPosts.setPosts(fbposts);
+		snap415UserPosts.setSnap415ID(Snap415ID);
 		
 		_userPostsDao.save(snap415UserPosts);
 		
@@ -83,6 +89,39 @@ public class Snap415PersistenceServiceImpl implements Snap415PersistenceService 
 	@Override
 	public Snap415UserTaxEvents persistUserTaxEvents(Snap415Token token) {
 		// TODO Auto-generated method stub
+		// The initial persistence is done by retrieving story property in fb post and saving it as tax event
+		
+		Snap415UserTaxEvents snap415UserTaxEvents = new Snap415UserTaxEvents();
+		
+		LOG.info("User Tax Events:" + Snap415ID);
+
+		if(Snap415ID != null)
+		{
+			PagedList<Post> fbposts = snap415UserService.getFBPosts(Snap415ID);
+			
+			if(!fbposts.isEmpty())
+			{
+				ArrayList<Snap415TaxEvent> snap415TaxEvents = new ArrayList<Snap415TaxEvent>();
+				
+				for(Post temp : fbposts)
+				{
+					Snap415TaxEvent snap415TaxEvent = new Snap415TaxEvent();
+					
+					snap415TaxEvent.setTaxCategory("unknown");
+					snap415TaxEvent.setTaxCredit("unknown");
+					snap415TaxEvent.setEventDescription(temp.getStory());
+					
+					snap415TaxEvents.add(snap415TaxEvent);
+				}
+				
+				snap415UserTaxEvents.setSnap415ID(Snap415ID);
+				snap415UserTaxEvents.setTaxEvents(snap415TaxEvents);
+				
+				_userTaxEventsDao.save(snap415UserTaxEvents);
+			}
+			
+		}
+		
 		return null;
 	}
 	

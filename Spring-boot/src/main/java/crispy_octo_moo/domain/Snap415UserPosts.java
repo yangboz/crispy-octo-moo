@@ -18,7 +18,7 @@ public class Snap415UserPosts {
     private String id;
 
     //This is the user id for linking a user's profile to a user entity
-    private String userid;
+    private String snap415ID;
     
     private PagedList<Post> posts;
     
@@ -32,12 +32,12 @@ public class Snap415UserPosts {
         this.id = id;
     }
 
-	public String getUserid() {
-		return userid;
+	public String getSnap415ID() {
+		return snap415ID;
 	}
 
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setSnap415ID(String snap415id) {
+		this.snap415ID = snap415id;
 	}
 
 	public PagedList<Post> getPosts() {

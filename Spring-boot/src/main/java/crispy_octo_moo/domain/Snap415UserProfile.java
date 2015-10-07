@@ -24,6 +24,9 @@ import java.util.List;
 public class Snap415UserProfile extends BaseEntity {
 
 
+	// This is the App's user ID to associate profile, posts, tax events, deals together
+	// Currently, this ID is set the same as the FB user ID
+	private String Snap415ID;
 	
     private User fbUserProfile;
     private LinkedInProfile liUserProfile;
@@ -115,4 +118,12 @@ public class Snap415UserProfile extends BaseEntity {
         return "birthday:" + this.getSimplyBirthday() + ",work:" + this.getSimplyWork() + ",education:" + this.getSimplyEducation()
                 + ",relationshipStatus:" + this.getSimplyRelationshipStatus() + ",fbUserProfile:" + this.getFbUserProfile();
     }
+
+	public String getSnap415ID() {
+		return Snap415ID;
+	}
+
+	public void setSnap415ID(String snap415id) {
+		Snap415ID = snap415id;
+	}
 }

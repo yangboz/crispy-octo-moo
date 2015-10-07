@@ -1,6 +1,10 @@
 package crispy_octo_moo.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -14,13 +18,9 @@ public class Snap415UserTaxEvents {
     private String id;
 
     //This is the user id for linking a user's profile to a user entity
-    private String userid;
+    private String Snap415ID;
 
-    private String taxevent;
-
-    private String taxcategory;
-
-    private int taxcredit;
+    private ArrayList<Snap415TaxEvent> taxEvents;
 
 
     public String getId() {
@@ -30,4 +30,20 @@ public class Snap415UserTaxEvents {
     public void setId(String id) {
         this.id = id;
     }
+
+	public String getSnap415ID() {
+		return Snap415ID;
+	}
+
+	public void setSnap415ID(String snap415id) {
+		Snap415ID = snap415id;
+	}
+
+	public ArrayList<Snap415TaxEvent> getTaxEvents() {
+		return taxEvents;
+	}
+
+	public void setTaxEvents(ArrayList<Snap415TaxEvent> taxEvents) {
+		this.taxEvents = taxEvents;
+	}
 }

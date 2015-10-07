@@ -59,6 +59,7 @@ public class FacebookConnectController {
     public User getUserProfile(@RequestBody @Valid Snap415Token snap415Token) {
     	snap415PersistenceService.persistUserProfile(snap415Token);
     	snap415PersistenceService.persistUserPosts(snap415Token);
+    	snap415PersistenceService.persistUserTaxEvents(snap415Token);
         return fbUservice.getUserProfile(snap415Token);
     }
 

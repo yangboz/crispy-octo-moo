@@ -3,10 +3,12 @@ package crispy_octo_moo.service.impl;
 import crispy_octo_moo.consts.SocialProviders;
 import crispy_octo_moo.domain.FbUserProfile;
 import crispy_octo_moo.domain.Snap415UserDeals;
+import crispy_octo_moo.domain.Snap415UserPosts;
 import crispy_octo_moo.domain.Snap415UserProfile;
 import crispy_octo_moo.domain.Snap415UserTaxEvents;
 import crispy_octo_moo.dto.Snap415Overview;
 import crispy_octo_moo.dto.Snap415Token;
+import crispy_octo_moo.repository.Snap415UserPostsRepository;
 import crispy_octo_moo.repository.Snap415UserProfileRepository;
 import crispy_octo_moo.service.FacebookUserService;
 import crispy_octo_moo.service.LinkedInUserService;
@@ -17,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.facebook.api.User;
 import org.springframework.social.linkedin.api.LinkedInProfile;
 import org.springframework.stereotype.Service;
+import org.springframework.social.facebook.api.PagedList;
+import org.springframework.social.facebook.api.Post;
 
 /**
  * Created by yangboz on 9/23/15.
@@ -32,8 +36,9 @@ public class Snap415UserServiceImpl implements Snap415UserService {
     @Autowired
     LinkedInUserService linkedInUserService;
 
+
     @Autowired
-    Snap415UserProfileRepository _userDao;
+    Snap415UserPostsRepository _userPostsDao;
 
     @Override
     public Snap415UserProfile getMe(Snap415Token token) {
@@ -43,6 +48,7 @@ public class Snap415UserServiceImpl implements Snap415UserService {
         if (token.getProvider().equals(SocialProviders.FACEBOOK.getValue())) {
             //DTO things.
             User fbUserProfile = fbUserService.getUserProfile(token);
+            result.setSnap415ID(fbUserProfile.getId());
             result.setFbUserProfile(fbUserProfile);
             LOG.info("fbUserProfile.getBirthday():" + fbUserProfile.getBirthday());
             //
@@ -111,5 +117,21 @@ public class Snap415UserServiceImpl implements Snap415UserService {
 
         }
         return result;
+    }
+    
+    @Override
+    public PagedList<Post> getFBPosts(String snap415ID) {
+        
+    	
+    	LOG.info("getFBPost:");
+    	
+    	Snap415UserPosts posts = _userPostsDao.findBySnap415ID(snap415ID);
+    	
+    	
+    	
+    	//PagedList<Post> fbposts = posts.getPosts();
+    	PagedList<Post> fbposts = null;
+    	
+        return fbposts;
     }
 }
