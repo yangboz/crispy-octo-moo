@@ -29,14 +29,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         //stateChange event
         $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
 
-            CacheService.get(Enum.localStorageKeys.OAUTH_OBJ_FB).then(function (data) {
-                console.log(Enum.localStorageKeys.OAUTH_OBJ_FB, data);
-                if (data == null) {
-                    // User isn’t authenticated
-                    $state.transitionTo("tab.dash");
-                    event.preventDefault();
-                }
-            });
+            //CacheService.get(Enum.localStorageKeys.OAUTH_OBJ_FB).then(function (data) {
+            //    console.log(Enum.localStorageKeys.OAUTH_OBJ_FB, data);
+            //    if (data == null) {
+            //        // User isn’t authenticated
+            //        $state.transitionTo("tab.dash");
+            //        event.preventDefault();
+            //    }
+            //});
         });
     })
     //Support RESTful PATCH
@@ -137,6 +137,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
             .state('tab.deals', {
                 url: '/deals',
+                cache: false,
                 views: {
                     'tab-deals': {
                         templateUrl: 'templates/tab-deals.html',
@@ -149,16 +150,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         $urlRouterProvider.otherwise('/tab/dash');
     })
     //Filters
-    .filter('sumOfValue', function () {
+    .filter('sumOfValue', function ($log) {
         return function (data, key) {
             if (typeof (data) === 'undefined' && typeof (key) === 'undefined') {
                 return 0;
             }
             var sum = 0;
-            //console.log("data:"+data);
+
+            //$log.info("data:"+data+",key:"+key);
+            //$log.info("data[0]:"+data[0]);
+
             if(data && data.length) {
                 for (var i = 0; i < data.length; i++) {
-                    sum = sum + parseInt(data[i][key]);
+                    //$log.info(data[i]["deal"][key]);
+                    sum = sum + parseInt(data[i]["deal"][key]);
                 }
             }
             return sum;

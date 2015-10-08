@@ -7,19 +7,19 @@
 <ion-view view-title="Deals">
     <ion-content class="padding">
         <div class="list" ng-repeat="item in resultValue=(deals)" >
-            <a class="item item-icon-left" href="#" on-hold="detail({{$index}})">
-                <i ng-if="item.rank>50&&item.rank<=100" class="icon ion-ios-star"></i>
-                <i ng-if="item.rank>0&&item.rank<=50" class="icon ion-ios-star-half"></i>
-                <i ng-if="item.rank<50" class="icon ion-ios-star-outline"></i>
-                {{item.content}}
-                <span ng-if="item.balance>0" class="badge badge-positive">${{item.balance}}</span>
-                <span ng-if="item.balance<=0" class="badge badge-assertive">${{item.balance}}</span>
+            <a class="item item-icon-left" href="#" on-hold="detail({{item.deal}})">
+                <i ng-if="item.deal.discount_amount>=100" class="icon ion-ios-star"></i>
+                <i ng-if="item.deal.discount_amount>=50" class="icon ion-ios-star-half"></i>
+                <i ng-if="item.deal.discount_amount<50" class="icon ion-ios-star-outline"></i>
+                {{item.deal.short_title}}
+                <span ng-if="item.deal.discount_amount>0" class="badge badge-positive">${{item.deal.discount_amount}}</span>
+                <span ng-if="item.deal.discount_amount<=0" class="badge badge-assertive">${{item.deal.discount_amount}}</span>
             </a>
         </div>
         <div class="item item-divider">
             Total saving:
-            <span ng-if="(resultValue | sumOfValue:'balance')>0" class="badge badge-balanced">${{resultValue | sumOfValue:'balance'}}</span>
-            <span ng-if="(resultValue | sumOfValue:'balance')<=0" class="badge badge-assertive">${{resultValue | sumOfValue:'balance'}}</span>
+            <span ng-if="(resultValue | sumOfValue:'discount_amount')>0" class="badge badge-balanced">${{resultValue | sumOfValue:'discount_amount'}}</span>
+            <span ng-if="(resultValue | sumOfValue:'discount_amount')<=0" class="badge badge-assertive">${{resultValue | sumOfValue:'discount_amount'}}</span>
         </div>
     </ion-content>
 </ion-view>

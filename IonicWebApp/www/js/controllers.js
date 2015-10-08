@@ -491,25 +491,44 @@ angular.module('starter.controllers', [])
         };
     })
 
-    .controller('DealsCtrl', function ($scope,$rootScope,$log,DealService) {
+    .controller('DealsCtrl', function ($scope,$rootScope,$log,DealService,CategoryDealService,$sce) {
         //load deal items.
-        DealService.get({}, function (response) {
-            $log.debug("DealService.get() success!", response);
-            $scope.deals = response.data;
+        //DealService.get({}, function (response) {
+        //    $log.debug("DealService.get() success!", response);
+        //    $scope.deals = response.data;
+        //}, function (error) {
+        //    // failure handler
+        //    $log.error("DealService.get() failed:", JSON.stringify(error));
+        //});
+        CategoryDealService.get({Keywords:'cars'}, function (response) {
+            $log.debug("CategoryDealService.get() success!", response);
+            $scope.deals = response.deals;
         }, function (error) {
             // failure handler
-            $log.error("DealService.get() failed:", JSON.stringify(error));
+            $log.error("CategoryDealService.get() failed:", JSON.stringify(error));
         });
         //popup detail
         $scope.detail = function($index){
-            DealService.get({Index:$index}, function (response) {
-                $log.debug("DealService.get($index) success!", response);
-                $rootScope.deal = response;
-                $rootScope.detailModal_deal.show();
-            }, function (error) {
-                // failure handler
-                $log.error("DealService.get($index) failed:", JSON.stringify(error));
-            });
+            //DealService.get({Index:$index}, function (response) {
+            //    $log.debug("DealService.get($index) success!", response);
+            //    $rootScope.deal = response;
+            //    $rootScope.detailModal_deal.show();
+            //}, function (error) {
+            //    // failure handler
+            //    $log.error("DealService.get($index) failed:", JSON.stringify(error));
+            //});
+            $rootScope.deal = $index;
+            //for (prop in $index) {
+            //    $log.debug(prop + ' = ' + $index[prop]);
+            //}
+            //$log.debug("$rootScope.deal:"+$rootScope.deal);
+            $rootScope.detailModal_deal.show();
+        }
+
+        //
+        $scope.trustAsHtml = function(rawHtml)
+        {
+            return $sce.trustAsHtml(rawHtml);
         }
 
     });

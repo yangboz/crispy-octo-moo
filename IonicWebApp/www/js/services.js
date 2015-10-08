@@ -274,6 +274,16 @@ angular.module('starter.services', [])
             })
         return data;
     })
+    //CategoryDealService
+    .factory('CategoryDealService', function ($resource, CONFIG_ENV) {
+        var data = $resource(
+            CONFIG_ENV.api_endpoint + "deals/by/:Keywords",
+            {"Keywords":"@Keywords"},
+            {
+
+            })
+        return data;
+    })
     //TaxEventService
     .factory('TaxEventService', function ($resource, CONFIG_ENV) {
         var data = $resource(
