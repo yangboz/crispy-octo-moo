@@ -67,9 +67,6 @@ public class FacebookUserServiceImpl implements FacebookUserService {
 //        LOG.info("Raw facebook user profile:" + profile.toString());
         LOG.info("Raw facebook user profile,getBirthday:" + profile.getBirthday() + ",getEducation:" + profile.getEducation().toArray().toString()
                 + ",getWork" + profile.getWork().toArray().toString() + ",getRelationshipStatus:" + profile.getRelationshipStatus());
-        //Synchronize the FB user profile to DB.
-//        FbUserProfile fbUser = new FbUserProfile(profile.getId(), profile.getName(), profile.getFirstName(), profile.getLastName(), profile.getGender(), profile.getLocale());
-        //
         return profile;
 //        return this._fbUserDao.save(fbUser);
     }

@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import javax.ws.rs.core.MediaType;
 
 import crispy_octo_moo.domain.Snap415UserProfile;
+import crispy_octo_moo.dto.Snap415UserProfileBase;
 import crispy_octo_moo.repository.Snap415UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -58,10 +59,17 @@ public class Snap415UserProfileController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ApiOperation(httpMethod = "PUT", value = "Response a string describing if the  user info is successfully updated or not.")
-    public Snap415UserProfile update(@PathVariable("id") String id, @RequestBody @Valid Snap415UserProfile user) {
-//		User find = this._userDao.findOne(id);
-        user.setId(id);
-        return this._userDao.save(user);
+    public Snap415UserProfile update(@PathVariable("id") String id, @RequestBody Snap415UserProfileBase user) {
+        Snap415UserProfile findProfile = this._userDao.findOne(id);
+        Snap415UserProfileBase findProfileBase = findProfile.getProfileBase();
+//        find.setId(id);
+        findProfile.setSnap415ID(id);//Currently using FB ID.
+        findProfileBase.setRwIncome(user.getRwIncome());
+        findProfileBase.setRwNumberOfChildren(user.getRwNumberOfChildren());
+        findProfileBase.setRwTaxFilingStatus(user.getRwTaxFilingStatus());
+        //
+        findProfile.setProfileBase(findProfileBase);
+        return this._userDao.save(findProfile);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

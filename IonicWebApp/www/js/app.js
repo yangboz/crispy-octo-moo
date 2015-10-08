@@ -137,7 +137,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
             .state('tab.deals', {
                 url: '/deals',
-                cache: false,
+                //cache: false,
                 views: {
                     'tab-deals': {
                         templateUrl: 'templates/tab-deals.html',

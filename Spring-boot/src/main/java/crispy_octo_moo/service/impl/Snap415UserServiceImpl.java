@@ -13,6 +13,7 @@ import crispy_octo_moo.repository.Snap415UserPostsRepository;
 import crispy_octo_moo.repository.Snap415UserProfileRepository;
 import crispy_octo_moo.service.FacebookUserService;
 import crispy_octo_moo.service.LinkedInUserService;
+import crispy_octo_moo.service.Snap415PersistenceService;
 import crispy_octo_moo.service.Snap415UserService;
 
 import java.util.ArrayList;
@@ -44,6 +45,9 @@ public class Snap415UserServiceImpl implements Snap415UserService {
     @Autowired
     Snap415UserPostsRepository _userPostsDao;
 
+    @Autowired
+    Snap415UserProfileRepository _userProfileDao;
+
     @Override
     public Snap415UserProfile getMe(Snap415Token token) {
 
@@ -56,10 +60,10 @@ public class Snap415UserServiceImpl implements Snap415UserService {
             result.setFbUserProfile(fbUserProfile);
             LOG.info("fbUserProfile.getBirthday():" + fbUserProfile.getBirthday());
             //
-            result.setSimplyBirthday(fbUserProfile.getBirthday());
-            result.setSimplyRelationshipStatus(fbUserProfile.getRelationshipStatus());
-            result.setSimplyEducation(fbUserProfile.getEducation().get(0).getType());
-            result.setSimplyWork(fbUserProfile.getWork().get(0).getEmployer().getName());
+            result.getProfileBase().setSimplyBirthday(fbUserProfile.getBirthday());
+            result.getProfileBase().setSimplyRelationshipStatus(fbUserProfile.getRelationshipStatus());
+            result.getProfileBase().setSimplyEducation(fbUserProfile.getEducation().get(0).getType());
+            result.getProfileBase().setSimplyWork(fbUserProfile.getWork().get(0).getEmployer().getName());
 
             LOG.info("getMe(Snap415UserProfile after NPE):" + result.toString());
             //
@@ -68,17 +72,16 @@ public class Snap415UserServiceImpl implements Snap415UserService {
             result.setLiUserProfile(liUserProfile);
             LOG.info("liUserProfile:" + liUserProfile);
             //XXX:normalize the simply properties as the same as FB user profile.
-            result.setSimplyBirthday(liUserProfile.getSummary());
-            result.setSimplyRelationshipStatus(liUserProfile.getSummary());
-            result.setSimplyEducation(liUserProfile.getHeadline());
-            result.setSimplyWork(liUserProfile.getIndustry());
+            result.getProfileBase().setSimplyBirthday(liUserProfile.getSummary());
+            result.getProfileBase().setSimplyRelationshipStatus(liUserProfile.getSummary());
+            result.getProfileBase().setSimplyEducation(liUserProfile.getHeadline());
+            result.getProfileBase().setSimplyWork(liUserProfile.getIndustry());
 
         } else {
 
         }
-        //Also sync to mongodb
-//       _userDao.save(result);
-        return result;
+        //Synchronize the Social user profile to DB.
+        return _userProfileDao.save(result);
     }
 
     @Override
@@ -122,20 +125,19 @@ public class Snap415UserServiceImpl implements Snap415UserService {
         }
         return result;
     }
-    
+
     @Override
     public ArrayList<Snap415FBPost> getFBPosts(String snap415ID) {
-        
-    	
-    	LOG.info("getFBPost:"+snap415ID);
-    	
-    	Snap415UserPosts posts = _userPostsDao.findBySnap415ID(snap415ID);
-    	
-    	
-    	
-    	ArrayList<Snap415FBPost> fbposts = posts.getPosts();
-    	//PagedList<Post> fbposts = null;
-    	
+
+
+        LOG.info("getFBPost:" + snap415ID);
+
+        Snap415UserPosts posts = _userPostsDao.findBySnap415ID(snap415ID);
+
+
+        ArrayList<Snap415FBPost> fbposts = posts.getPosts();
+        //PagedList<Post> fbposts = null;
+
         return fbposts;
     }
 }

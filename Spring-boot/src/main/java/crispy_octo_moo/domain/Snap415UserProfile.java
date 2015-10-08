@@ -9,6 +9,7 @@ package crispy_octo_moo.domain;
 // but for now, we rely on user input).
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import crispy_octo_moo.dto.Snap415UserProfileBase;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.social.facebook.api.EducationExperience;
@@ -23,13 +24,16 @@ import java.util.List;
 @Document(collection = "snap415_user_profile")
 public class Snap415UserProfile extends BaseEntity {
 
+    public Snap415UserProfile() {
+    }
 
-	// This is the App's user ID to associate profile, posts, tax events, deals together
-	// Currently, this ID is set the same as the FB user ID
-	private String snap415ID;
-	
+    // This is the App's user ID to associate profile, posts, tax events, deals together
+    // Currently, this ID is set the same as the FB user ID
+    private String snap415ID;
+
     private User fbUserProfile;
     private LinkedInProfile liUserProfile;
+    private Snap415UserProfileBase profileBase = new Snap415UserProfileBase();
 
     public User getFbUserProfile() {
         return fbUserProfile;
@@ -47,83 +51,90 @@ public class Snap415UserProfile extends BaseEntity {
         this.liUserProfile = liUserProfile;
     }
 
-    //Simplify basic information as required.
-    private String simplyRelationshipStatus;
-    private Object simplyEducation;
-    private String simplyBirthday;
-    private Object simplyWork;
-    //Also allow user input,read and write
-    private int rwIncome;
-    private String rwTaxFilingStatus;
-    private int rwNumberOfChildren;
-
-
-    public String getSimplyRelationshipStatus() {
-        return simplyRelationshipStatus;
-    }
-
-    public void setSimplyRelationshipStatus(String simplyRelationshipStatus) {
-        this.simplyRelationshipStatus = simplyRelationshipStatus;
-    }
-
-    public Object getSimplyEducation() {
-        return simplyEducation;
-    }
-
-    public void setSimplyEducation(Object simplyEducation) {
-        this.simplyEducation = simplyEducation;
-    }
-
-    public String getSimplyBirthday() {
-        return simplyBirthday;
-    }
-
-    public void setSimplyBirthday(String simplyBirthday) {
-        this.simplyBirthday = simplyBirthday;
-    }
-
-    public Object getSimplyWork() {
-        return simplyWork;
-    }
-
-    public void setSimplyWork(Object simplyWork) {
-        this.simplyWork = simplyWork;
-    }
-
-    public int getRwIncome() {
-        return rwIncome;
-    }
-
-    public void setRwIncome(int rwIncome) {
-        this.rwIncome = rwIncome;
-    }
-
-    public String getRwTaxFilingStatus() {
-        return rwTaxFilingStatus;
-    }
-
-    public void setRwTaxFilingStatus(String rwTaxFilingStatus) {
-        this.rwTaxFilingStatus = rwTaxFilingStatus;
-    }
-
-    public int getRwNumberOfChildren() {
-        return rwNumberOfChildren;
-    }
-
-    public void setRwNumberOfChildren(int rwNumberOfChildren) {
-        this.rwNumberOfChildren = rwNumberOfChildren;
-    }
+//    //Simplify basic information as required.
+//    private String simplyRelationshipStatus;
+//    private Object simplyEducation;
+//    private String simplyBirthday;
+//    private Object simplyWork;
+//    //Also allow user input,read and write
+//    private int rwIncome;
+//    private String rwTaxFilingStatus;
+//    private int rwNumberOfChildren;
+//
+//
+//    public String getSimplyRelationshipStatus() {
+//        return simplyRelationshipStatus;
+//    }
+//
+//    public void setSimplyRelationshipStatus(String simplyRelationshipStatus) {
+//        this.simplyRelationshipStatus = simplyRelationshipStatus;
+//    }
+//
+//    public Object getSimplyEducation() {
+//        return simplyEducation;
+//    }
+//
+//    public void setSimplyEducation(Object simplyEducation) {
+//        this.simplyEducation = simplyEducation;
+//    }
+//
+//    public String getSimplyBirthday() {
+//        return simplyBirthday;
+//    }
+//
+//    public void setSimplyBirthday(String simplyBirthday) {
+//        this.simplyBirthday = simplyBirthday;
+//    }
+//
+//    public Object getSimplyWork() {
+//        return simplyWork;
+//    }
+//
+//    public void setSimplyWork(Object simplyWork) {
+//        this.simplyWork = simplyWork;
+//    }
+//
+//    public int getRwIncome() {
+//        return rwIncome;
+//    }
+//
+//    public void setRwIncome(int rwIncome) {
+//        this.rwIncome = rwIncome;
+//    }
+//
+//    public String getRwTaxFilingStatus() {
+//        return rwTaxFilingStatus;
+//    }
+//
+//    public void setRwTaxFilingStatus(String rwTaxFilingStatus) {
+//        this.rwTaxFilingStatus = rwTaxFilingStatus;
+//    }
+//
+//    public int getRwNumberOfChildren() {
+//        return rwNumberOfChildren;
+//    }
+//
+//    public void setRwNumberOfChildren(int rwNumberOfChildren) {
+//        this.rwNumberOfChildren = rwNumberOfChildren;
+//    }
 
     public String toString() {
-        return "birthday:" + this.getSimplyBirthday() + ",work:" + this.getSimplyWork() + ",education:" + this.getSimplyEducation()
-                + ",relationshipStatus:" + this.getSimplyRelationshipStatus() + ",fbUserProfile:" + this.getFbUserProfile();
+        return "profileBase:" + this.getProfileBase() + ",fbUserProfile:" + this.getFbUserProfile() + ",liUserProfile:" + this.getLiUserProfile();
     }
 
-	public String getSnap415ID() {
-		return snap415ID;
-	}
+    public String getSnap415ID() {
+        return snap415ID;
+    }
 
-	public void setSnap415ID(String snap415id) {
-		this.snap415ID = snap415id;
-	}
+    public void setSnap415ID(String snap415id) {
+        this.snap415ID = snap415id;
+    }
+
+    public Snap415UserProfileBase getProfileBase() {
+        return profileBase;
+    }
+
+    public void setProfileBase(Snap415UserProfileBase profileBase) {
+        this.profileBase = profileBase;
+    }
 }

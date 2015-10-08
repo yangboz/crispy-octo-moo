@@ -385,13 +385,25 @@ angular.module('starter.controllers', [])
         }
     })
 
-    .controller('MeModalCtrl', function ($scope, $rootScope, $log, Enum, UserMeService) {
+    .controller('MeModalCtrl', function ($scope, $rootScope, $log, Enum, UserProfileService) {
         $scope.profile = {income:0,children:0,filingCategory:''};
         //Submit profile inputs.
         $scope.save = function(){
             $log.info("preSaved me profile:"+",income:"+$scope.profile.income+",children:"+$scope.profile.children
-                +",filingCategory(label,group):"+$scope.profile.filingCategory.label+$scope.profile.filingCategory.group);
-            //TODO:post to user profile service.
+                +",filingCategory(label,group):"+$scope.profile.filingCategory.label+","+$scope.profile.filingCategory.group);
+            //Update user profile service.
+            $rootScope.me.rwIncome = $scope.profile.income;
+            $rootScope.me.rwTaxFilingStatus = $scope.profile.filingCategory.label;
+            $rootScope.me.rwNumberOfChildren = $scope.profile.children;
+            //
+            UserProfileService.update({Id:$rootScope.me.id},$rootScope.me, function (response) {
+                $log.debug("UserProfileService.update() success!", response);
+                $rootScope.me = response;
+                $rootScope.detailModal_me.hide();
+            }, function (error) {
+                // failure handler
+                $log.error("UserProfileService.update() failed:", JSON.stringify(error));
+            });
         }
     })
 
