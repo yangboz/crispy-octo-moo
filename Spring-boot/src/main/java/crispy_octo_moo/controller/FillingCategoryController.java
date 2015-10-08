@@ -3,6 +3,7 @@ package crispy_octo_moo.controller;
 import com.wordnik.swagger.annotations.ApiOperation;
 import crispy_octo_moo.consts.FixtureData;
 import crispy_octo_moo.dto.JsonObject;
+import crispy_octo_moo.dto.LabelGroupObject;
 import crispy_octo_moo.dto.LabelObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,16 +26,16 @@ public class FillingCategoryController {
 
     @RequestMapping(value = "/{index}", method = RequestMethod.GET)
     @ApiOperation(httpMethod = "GET", value = "Response a string describing if the FillingCategory related value is successfully get or not.")
-    public LabelObject get(@PathVariable("index") int index) {
+    public LabelGroupObject get(@PathVariable("index") int index) {
         return FixtureData.FillingCategory.get(index);
     }
 
     //
-    @RequestMapping(value = "/{index}/{value}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{index}/{value}/{group}", method = RequestMethod.PUT)
     @ApiOperation(httpMethod = "PUT", value = "Response a string describing if the  FillingCategory item  is successfully updated or not.")
-    public ResponseEntity<Boolean> update(@PathVariable("index") int index, @PathVariable("value") String value) {
+    public ResponseEntity<Boolean> update(@PathVariable("index") int index, @PathVariable("value") String value, @PathVariable("group") String group) {
 //		User find = this._userDao.findOne(id);
-        FixtureData.FillingCategory.set(index, new LabelObject(value));
+        FixtureData.FillingCategory.set(index, new LabelGroupObject(value, group));
         return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
     }
 

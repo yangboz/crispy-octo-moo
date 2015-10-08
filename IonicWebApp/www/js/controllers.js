@@ -67,6 +67,17 @@ angular.module('starter.controllers', [])
             $rootScope.detailModal_deal = modal;
             //Login Modal show();
         });
+        ////DealDetail
+        $rootScope.detailModal_me = undefined;
+        $ionicModal.fromTemplateUrl('templates/modal-detail-me.html', {
+            scope: $scope,
+            backdropClickToClose: true,
+            animation: 'slide-in-up'
+        }).then(function (modal) {
+            console.log("modal-detail-me.html initialization.");
+            $rootScope.detailModal_me = modal;
+            //Login Modal show();
+        });
         ///Modal related clean up.
         $rootScope.$on("$stateChangeStart", function () {
             //ShowLoading
@@ -81,6 +92,7 @@ angular.module('starter.controllers', [])
             $rootScope.loginModal_fb.remove();
             $rootScope.loginModal_li.remove();
             $rootScope,detailModal_deal.remove();
+            $rootScope,detailModal_me.remove();
         });
         // Execute action on hide modal
         $scope.$on('modal.hidden', function () {
@@ -337,7 +349,7 @@ angular.module('starter.controllers', [])
         }
     })
 
-    .controller('AccountsCtrl', function ($scope, $rootScope, $log, Enum, UserMeService) {
+    .controller('AccountsCtrl', function ($scope, $rootScope, $log, Enum, UserMeService,FilingCategoryService) {
         //Synchronize the user info testing
         //UserProfileService.save($rootScope.user, function (response) {
         //    $log.debug("UserProfileService.save() success!", response);
@@ -357,6 +369,30 @@ angular.module('starter.controllers', [])
         }
         //Default behaviours:
         $scope.loadUserMe();
+        //
+        //popup detail
+        $scope.detail = function(){
+
+            FilingCategoryService.get({}, function (response) {
+                $log.debug("FilingCategoryService.get() success!", response);
+                $rootScope.filingCategories = response.data;
+                console.log("$rootScope.filingCategories:", $rootScope.filingCategories);
+                $rootScope.detailModal_me.show();
+            }, function (error) {
+                // failure handler
+                $log.error("FilingCategoryService.get() failed:", JSON.stringify(error));
+            });
+        }
+    })
+
+    .controller('MeModalCtrl', function ($scope, $rootScope, $log, Enum, UserMeService) {
+        $scope.profile = {income:0,children:0,filingCategory:''};
+        //Submit profile inputs.
+        $scope.save = function(){
+            $log.info("preSaved me profile:"+",income:"+$scope.profile.income+",children:"+$scope.profile.children
+                +",filingCategory(label,group):"+$scope.profile.filingCategory.label+$scope.profile.filingCategory.group);
+            //TODO:post to user profile service.
+        }
     })
 
     .controller('AccountSettingsCtrl', function ($scope, $rootScope, IncomeCategoryService, FilingCategoryService,

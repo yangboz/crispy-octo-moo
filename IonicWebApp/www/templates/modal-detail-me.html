@@ -1,0 +1,36 @@
+<div class="modal" ng-controller="MeModalCtrl">
+    <ion-header-bar>
+        <h1 class="title">INFO</h1>
+
+        <div class="buttons">
+            <button class="button button-clear ion-close-round" ng-show="false" ng-click=""></button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <div class="list">
+
+            <div class="item range range-positive">
+                Income: (<b>{{profile.income}}</b>$)
+                <i class="icon ion-social-usd-outline"></i>
+                <input type="range" name="income" min="0" max="10000" value="0" ng-model="profile.income">
+                <i class="icon ion-social-usd"></i>
+            </div>
+            <div class="item range range-positive">
+                Number Of Children: (<b>{{profile.children}}</b>)
+                <i class="icon ion-ios-body-outline"></i>
+                <input type="range" name="children" min="0" max="8" value="0" ng-model="profile.children">
+                <i class="icon ion-ios-body"></i>
+            </div>
+            <div class="item item-input item-select">
+                Tax Filing Status:
+                <select ng-model="profile.filingCategory"
+                        ng-options="fCate.label group by fCate.group for fCate in $root.filingCategories"/>
+            </div>
+            <button class="button button-block button-positive" ng-click="save()">
+                SAVE
+            </button>
+        </div>
+
+
+    </ion-content>
+</div>

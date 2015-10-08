@@ -1,9 +1,6 @@
 package crispy_octo_moo.consts;
 
-import crispy_octo_moo.dto.DealObject;
-import crispy_octo_moo.dto.LabelObject;
-import crispy_octo_moo.dto.LabelValueObject;
-import crispy_octo_moo.dto.WebSiteObject;
+import crispy_octo_moo.dto.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,11 +73,11 @@ public class FixtureData {
         add(new LabelObject("1000000-1500000"));
     }};
 
-    public static final List<LabelObject> FillingCategory = new ArrayList<LabelObject>() {{
-        add(new LabelObject("filing jointly"));
-        add(new LabelObject("filing separatly"));
-        add(new LabelObject("single filer"));
-        add(new LabelObject("head of household"));
+    public static final List<LabelGroupObject> FillingCategory = new ArrayList<LabelGroupObject>() {{
+        add(new LabelGroupObject("filing jointly", "Married"));
+        add(new LabelGroupObject("filing separatly", "Married"));
+        add(new LabelGroupObject("single filer", "Single"));
+        add(new LabelGroupObject("head of household", "Single"));
     }};
 
     public static final List<LabelObject> ChildrenCategory = new ArrayList<LabelObject>() {{
