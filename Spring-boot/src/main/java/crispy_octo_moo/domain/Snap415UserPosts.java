@@ -1,6 +1,9 @@
 package crispy_octo_moo.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.ArrayList;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -20,7 +23,8 @@ public class Snap415UserPosts {
     //This is the user id for linking a user's profile to a user entity
     private String snap415ID;
     
-    private PagedList<Post> posts;
+    //private PagedList<Post> posts;
+    private ArrayList<Snap415FBPost> posts;
     
 
 
@@ -40,11 +44,11 @@ public class Snap415UserPosts {
 		this.snap415ID = snap415id;
 	}
 
-	public PagedList<Post> getPosts() {
+	public ArrayList<Snap415FBPost> getPosts() {
 		return posts;
 	}
 
-	public void setPosts(PagedList<Post> posts) {
+	public void setPosts(ArrayList<Snap415FBPost> posts) {
 		this.posts = posts;
 	}
 }

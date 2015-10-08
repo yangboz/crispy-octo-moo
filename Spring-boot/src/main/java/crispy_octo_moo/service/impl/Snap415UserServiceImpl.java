@@ -4,6 +4,7 @@ import crispy_octo_moo.consts.SocialProviders;
 import crispy_octo_moo.domain.FbUserProfile;
 import crispy_octo_moo.domain.Snap415UserDeals;
 import crispy_octo_moo.domain.Snap415UserPosts;
+import crispy_octo_moo.domain.Snap415FBPost;
 import crispy_octo_moo.domain.Snap415UserProfile;
 import crispy_octo_moo.domain.Snap415UserTaxEvents;
 import crispy_octo_moo.dto.Snap415Overview;
@@ -13,6 +14,9 @@ import crispy_octo_moo.repository.Snap415UserProfileRepository;
 import crispy_octo_moo.service.FacebookUserService;
 import crispy_octo_moo.service.LinkedInUserService;
 import crispy_octo_moo.service.Snap415UserService;
+
+import java.util.ArrayList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,17 +124,17 @@ public class Snap415UserServiceImpl implements Snap415UserService {
     }
     
     @Override
-    public PagedList<Post> getFBPosts(String snap415ID) {
+    public ArrayList<Snap415FBPost> getFBPosts(String snap415ID) {
         
     	
-    	LOG.info("getFBPost:");
+    	LOG.info("getFBPost:"+snap415ID);
     	
     	Snap415UserPosts posts = _userPostsDao.findBySnap415ID(snap415ID);
     	
     	
     	
-    	//PagedList<Post> fbposts = posts.getPosts();
-    	PagedList<Post> fbposts = null;
+    	ArrayList<Snap415FBPost> fbposts = posts.getPosts();
+    	//PagedList<Post> fbposts = null;
     	
         return fbposts;
     }

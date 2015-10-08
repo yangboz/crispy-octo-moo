@@ -14,6 +14,7 @@ import org.springframework.social.facebook.api.Post;
 import org.springframework.social.facebook.api.User;
 import org.springframework.stereotype.Service;
 
+import crispy_octo_moo.domain.Snap415FBPost;
 import crispy_octo_moo.domain.Snap415TaxEvent;
 import crispy_octo_moo.domain.Snap415UserDeals;
 import crispy_octo_moo.domain.Snap415UserPosts;
@@ -65,7 +66,7 @@ public class Snap415PersistenceServiceImpl implements Snap415PersistenceService 
 
         _userProfileDao.save(snap415UserProfile);
 
-        Snap415ID = snap415UserProfile.getId();
+        Snap415ID = snap415UserProfile.getSnap415ID();
 
         return snap415UserProfile;
     }
@@ -75,10 +76,21 @@ public class Snap415PersistenceServiceImpl implements Snap415PersistenceService 
         // TODO Auto-generated method stub
 
         PagedList<Post> fbposts = fbUserService.getUserPost(token);
+        
+        ArrayList<Snap415FBPost> snap415FBPosts = new ArrayList<Snap415FBPost>();
 
+        for(Post temp : fbposts)
+        {
+        	Snap415FBPost snap415FBPost = new Snap415FBPost();
+        	
+        	snap415FBPost.setStory(temp.getStory());
+        	snap415FBPost.setCreatedTime(temp.getCreatedTime());
+        	snap415FBPosts.add(snap415FBPost);
+        }
+        
         Snap415UserPosts snap415UserPosts = new Snap415UserPosts();
 
-        snap415UserPosts.setPosts(fbposts);
+        snap415UserPosts.setPosts(snap415FBPosts);
         snap415UserPosts.setSnap415ID(Snap415ID);
 
         _userPostsDao.save(snap415UserPosts);
@@ -98,12 +110,12 @@ public class Snap415PersistenceServiceImpl implements Snap415PersistenceService 
         LOG.info("User Tax Events:" + Snap415ID);
 
         if (Snap415ID != null) {
-            PagedList<Post> fbposts = snap415UserService.getFBPosts(Snap415ID);
+            ArrayList<Snap415FBPost> fbposts = snap415UserService.getFBPosts(Snap415ID);
 
             if (!fbposts.isEmpty()) {
                 ArrayList<Snap415TaxEvent> snap415TaxEvents = new ArrayList<Snap415TaxEvent>();
 
-                for (Post temp : fbposts) {
+                for (Snap415FBPost temp : fbposts) {
                     Snap415TaxEvent snap415TaxEvent = new Snap415TaxEvent();
 
                     snap415TaxEvent.setTaxCategory("unknown");
