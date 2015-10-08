@@ -1,10 +1,13 @@
 package crispy_octo_moo.service;
 
+import crispy_octo_moo.domain.Snap415FBPost;
 import crispy_octo_moo.domain.Snap415UserDeals;
 import crispy_octo_moo.domain.Snap415UserProfile;
 import crispy_octo_moo.domain.Snap415UserTaxEvents;
 import crispy_octo_moo.dto.Snap415Overview;
 import crispy_octo_moo.dto.Snap415Token;
+
+import java.util.ArrayList;
 
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.Post;
@@ -27,5 +30,5 @@ public interface Snap415UserService {
     Snap415Overview getOverview(Snap415Token token);
     
     // This service is used internally for generating tax events
-    PagedList<Post> getFBPosts(String snap415ID);
+    ArrayList<Snap415FBPost> getFBPosts(String snap415ID);
 }
