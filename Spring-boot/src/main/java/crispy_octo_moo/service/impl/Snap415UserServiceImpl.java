@@ -1,12 +1,7 @@
 package crispy_octo_moo.service.impl;
 
 import crispy_octo_moo.consts.SocialProviders;
-import crispy_octo_moo.domain.FbUserProfile;
-import crispy_octo_moo.domain.Snap415UserDeals;
-import crispy_octo_moo.domain.Snap415UserPosts;
-import crispy_octo_moo.domain.Snap415FBPost;
-import crispy_octo_moo.domain.Snap415UserProfile;
-import crispy_octo_moo.domain.Snap415UserTaxEvents;
+import crispy_octo_moo.domain.*;
 import crispy_octo_moo.dto.Snap415Overview;
 import crispy_octo_moo.dto.Snap415Token;
 import crispy_octo_moo.repository.Snap415UserPostsRepository;
@@ -17,7 +12,9 @@ import crispy_octo_moo.service.Snap415PersistenceService;
 import crispy_octo_moo.service.Snap415UserService;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import javafx.geometry.Pos;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,10 +89,18 @@ public class Snap415UserServiceImpl implements Snap415UserService {
     public Snap415UserTaxEvents getEvents(Snap415Token token) {
         Snap415UserTaxEvents result = new Snap415UserTaxEvents();
         if (token.getProvider().equals(SocialProviders.FACEBOOK.getValue())) {
-            //
+            //Post related story.
+            PagedList<Post> posts = fbUserService.getUserPost(token);
+            ArrayList<Snap415TaxEvent> snap415TaxEventList = new ArrayList<Snap415TaxEvent>();
+            for (int index = 0; index < posts.size(); index++) {
+                Snap415TaxEvent snap415TaxEvent = new Snap415TaxEvent();
+                snap415TaxEvent.setEventDescription(posts.get(index).getStory());
+                snap415TaxEventList.add(snap415TaxEvent);
+            }
+            result.setTaxEvents(snap415TaxEventList);
 //            fbUserService.getUserPost()
         } else if (token.getProvider().equals(SocialProviders.LINKEDIN.getValue())) {
-
+            //TODO:apply this condition.
         } else {
 
         }

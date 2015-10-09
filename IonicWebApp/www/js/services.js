@@ -294,6 +294,14 @@ angular.module('starter.services', [])
             })
         return data;
     })
+    .factory('UserTaxEventService', function ($resource, CONFIG_ENV) {
+        var data = $resource(
+            CONFIG_ENV.api_endpoint + "user/events",
+            {},
+            {
+            })
+        return data;
+    })
 //@see http://stackoverflow.com/questions/16627860/angular-js-and-ng-swith-when-emulating-enum
     .factory('Enum', [function () {
         var service = {

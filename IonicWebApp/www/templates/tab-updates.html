@@ -1,14 +1,14 @@
 <ion-view view-title="Tax Events">
     <ion-content class="padding">
         <div class="list card" ng-repeat="item in taxEvents">
-            <div class="item item-divider"><span ng-bind-html="item.header"></span></div>
+            <div class="item item-divider"><span>Category:</span>{{item.taxCategory}}</div>
             <div class="item item-body">
                 <div>
-                    <span ng-bind-html="trustAsHtml(item.body)"></span>
+                    <span ng-bind-html="trustAsHtml(item.eventDescription)"></span>
                 </div>
             </div>
-            <div class="item item-divider" ng-show="item.footer!=''">
-                <span ng-bind-html="item.footer"></span>
+            <div class="item item-divider" ng-show="item.taxCredit!=''">
+                <span>Credit:</span>{{item.taxCredit}}
             </div>
         </div>
     </ion-content>

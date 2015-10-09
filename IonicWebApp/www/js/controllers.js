@@ -333,14 +333,21 @@ angular.module('starter.controllers', [])
 
     })
 
-    .controller('UpdatesCtrl', function ($scope, $rootScope, $log,TaxEventService,$sce) {
+    .controller('UpdatesCtrl', function ($scope, $rootScope, $log,TaxEventService,$sce,UserTaxEventService) {
         //load tax event items.
-        TaxEventService.get({}, function (response) {
-            $log.debug("TaxEventService.get() success!", response);
-            $scope.taxEvents = response.data;
+        //TaxEventService.get({}, function (response) {
+        //    $log.debug("TaxEventService.get() success!", response);
+        //    $scope.taxEvents = response.data;
+        //}, function (error) {
+        //    // failure handler
+        //    $log.error("TaxEventService.get() failed:", JSON.stringify(error));
+        //});
+        UserTaxEventService.save($rootScope.getSnap415Token(), function (response) {
+            $log.debug("UserTaxEventService.get() success!", response);
+            $scope.taxEvents = response.taxEvents;
         }, function (error) {
             // failure handler
-            $log.error("TaxEventService.get() failed:", JSON.stringify(error));
+            $log.error("UserTaxEventService.get() failed:", JSON.stringify(error));
         });
         //
         $scope.trustAsHtml = function(rawHtml)
@@ -579,4 +586,8 @@ angular.module('starter.controllers', [])
             return $sce.trustAsHtml(rawHtml);
         }
 
-    });
+    })
+    .controller('DealModalCtrl', function ($scope,$rootScope,$log,DealService,CategoryDealService,$sce) {
+        //
+    })
+;
