@@ -34,4 +34,8 @@ public class Snap415Token {
     public void setProvider(String provider) {
         this.provider = provider;
     }
+
+    public String getIdentifier() {
+        return this.getProvider() + "_" + this.getId();
+    }
 }

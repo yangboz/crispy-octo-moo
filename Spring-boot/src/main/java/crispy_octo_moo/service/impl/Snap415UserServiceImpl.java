@@ -51,37 +51,41 @@ public class Snap415UserServiceImpl implements Snap415UserService {
     @Override
     public Snap415UserProfile getMe(Snap415Token token) {
 
-        Snap415UserProfile result = new Snap415UserProfile();
-
+        Snap415UserProfile find = _userProfileDao.findBySnap415ID(token.getIdentifier());
+        LOG.info("Finding existed Snap415UserProfile:" + find);
+        if (null == find) {
+            find = new Snap415UserProfile();
+            find.setSnap415ID(token.getIdentifier());
+        }
         if (token.getProvider().equals(SocialProviders.FACEBOOK.getValue())) {
             //DTO things.
             User fbUserProfile = fbUserService.getUserProfile(token);
-            result.setSnap415ID(fbUserProfile.getId());
-            result.setFbUserProfile(fbUserProfile);
-            LOG.info("fbUserProfile.getBirthday():" + fbUserProfile.getBirthday());
+//
+            find.setFbUserProfile(fbUserProfile);
+            LOG.info("fbUserProfile:" + fbUserProfile);
             //
-            result.getProfileBase().setSimplyBirthday(fbUserProfile.getBirthday());
-            result.getProfileBase().setSimplyRelationshipStatus(fbUserProfile.getRelationshipStatus());
-            result.getProfileBase().setSimplyEducation(fbUserProfile.getEducation().get(0).getType());
-            result.getProfileBase().setSimplyWork(fbUserProfile.getWork().get(0).getEmployer().getName());
+            find.getProfileBase().setSimplyBirthday(fbUserProfile.getBirthday());
+            find.getProfileBase().setSimplyRelationshipStatus(fbUserProfile.getRelationshipStatus());
+            find.getProfileBase().setSimplyEducation(fbUserProfile.getEducation().get(0).getType());
+            find.getProfileBase().setSimplyWork(fbUserProfile.getWork().get(0).getEmployer().getName());
 
-            LOG.info("getMe(Snap415UserProfile after NPE):" + result.toString());
+//            LOG.info("getMe(Snap415UserProfile after NPE):" + find.toString());
             //
         } else if (token.getProvider().equals(SocialProviders.LINKEDIN.getValue())) {
             LinkedInProfile liUserProfile = linkedInUserService.getUserProfile(token);
-            result.setLiUserProfile(liUserProfile);
+            find.setLiUserProfile(liUserProfile);
             LOG.info("liUserProfile:" + liUserProfile);
             //XXX:normalize the simply properties as the same as FB user profile.
-            result.getProfileBase().setSimplyBirthday(liUserProfile.getSummary());
-            result.getProfileBase().setSimplyRelationshipStatus(liUserProfile.getSummary());
-            result.getProfileBase().setSimplyEducation(liUserProfile.getHeadline());
-            result.getProfileBase().setSimplyWork(liUserProfile.getIndustry());
+            find.getProfileBase().setSimplyBirthday(liUserProfile.getSummary());
+            find.getProfileBase().setSimplyRelationshipStatus(liUserProfile.getSummary());
+            find.getProfileBase().setSimplyEducation(liUserProfile.getHeadline());
+            find.getProfileBase().setSimplyWork(liUserProfile.getIndustry());
 
         } else {
 
         }
         //Synchronize the Social user profile to DB.
-        return _userProfileDao.save(result);
+        return _userProfileDao.save(find);
     }
 
     @Override

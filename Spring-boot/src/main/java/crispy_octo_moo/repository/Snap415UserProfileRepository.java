@@ -7,4 +7,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * Created by yangboz on 15/9/21.
  */
 public interface Snap415UserProfileRepository extends MongoRepository<Snap415UserProfile, String> {
+    Snap415UserProfile findBySnap415ID(String sid);
 }

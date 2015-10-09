@@ -62,8 +62,8 @@ public class Snap415UserProfileController {
     public Snap415UserProfile update(@PathVariable("id") String id, @RequestBody Snap415UserProfileBase user) {
         Snap415UserProfile findProfile = this._userDao.findOne(id);
         Snap415UserProfileBase findProfileBase = findProfile.getProfileBase();
-//        find.setId(id);
-        findProfile.setSnap415ID(id);//Currently using FB ID.
+//        findProfile.setId(id);
+//        findProfile.setSnap415ID(id);//Currently using FB ID.
         findProfileBase.setRwIncome(user.getRwIncome());
         findProfileBase.setRwNumberOfChildren(user.getRwNumberOfChildren());
         findProfileBase.setRwTaxFilingStatus(user.getRwTaxFilingStatus());
