@@ -40,6 +40,9 @@ public class Snap415PersistenceServiceImpl implements Snap415PersistenceService 
     FacebookUserService fbUserService;
 
     @Autowired
+    EITCCreditService eitcCreditService;
+    
+    @Autowired
     SqootDealService sqootDealService;
 
 
@@ -106,14 +109,34 @@ public class Snap415PersistenceServiceImpl implements Snap415PersistenceService 
         // The initial persistence is done by retrieving story property in fb post and saving it as tax event
 
         Snap415UserTaxEvents snap415UserTaxEvents = new Snap415UserTaxEvents();
-
+        
+        
         LOG.info("User Tax Events:" + Snap415ID);
 
         if (Snap415ID != null) {
+
+            ArrayList<Snap415TaxEvent> snap415TaxEvents = new ArrayList<Snap415TaxEvent>();
+
+            
+        	int eitcCredit = eitcCreditService.getEITCCredit(Snap415ID);
+            
+            if(eitcCredit > 0)
+            {
+            	Snap415TaxEvent eitcTaxEvent = new Snap415TaxEvent();
+            	
+            	eitcTaxEvent.setEventDescription("EITC credit");
+            	eitcTaxEvent.setTaxCategory("EITC");
+            	eitcTaxEvent.setTaxCredit(new Integer(eitcCredit).toString());
+            	
+            	snap415TaxEvents.add(eitcTaxEvent);
+            }
+
             ArrayList<Snap415FBPost> fbposts = snap415UserService.getFBPosts(Snap415ID);
+            
+            
 
             if (!fbposts.isEmpty()) {
-                ArrayList<Snap415TaxEvent> snap415TaxEvents = new ArrayList<Snap415TaxEvent>();
+                
 
                 for (Snap415FBPost temp : fbposts) {
                     Snap415TaxEvent snap415TaxEvent = new Snap415TaxEvent();
