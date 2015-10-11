@@ -6,6 +6,7 @@ import crispy_octo_moo.dto.Snap415Overview;
 import crispy_octo_moo.dto.Snap415Token;
 import crispy_octo_moo.repository.Snap415UserPostsRepository;
 import crispy_octo_moo.repository.Snap415UserProfileRepository;
+import crispy_octo_moo.repository.Snap415UserTaxEventsRepository;
 import crispy_octo_moo.service.FacebookUserService;
 import crispy_octo_moo.service.LinkedInUserService;
 import crispy_octo_moo.service.Snap415PersistenceService;
@@ -41,6 +42,9 @@ public class Snap415UserServiceImpl implements Snap415UserService {
 
     @Autowired
     Snap415UserPostsRepository _userPostsDao;
+
+    @Autowired
+    Snap415UserTaxEventsRepository _userTaxEventsDao;
 
     @Autowired
     Snap415UserProfileRepository _userProfileDao;
@@ -87,23 +91,30 @@ public class Snap415UserServiceImpl implements Snap415UserService {
 
     @Override
     public Snap415UserTaxEvents getEvents(Snap415Token token) {
-        Snap415UserTaxEvents result = new Snap415UserTaxEvents();
-        if (token.getProvider().equals(SocialProviders.FACEBOOK.getValue())) {
+       // Snap415UserTaxEvents result = new Snap415UserTaxEvents();
+        //if (token.getProvider().equals(SocialProviders.FACEBOOK.getValue())) {
             //Post related story.
-            PagedList<Post> posts = fbUserService.getUserPost(token);
-            ArrayList<Snap415TaxEvent> snap415TaxEventList = new ArrayList<Snap415TaxEvent>();
-            for (int index = 0; index < posts.size(); index++) {
-                Snap415TaxEvent snap415TaxEvent = new Snap415TaxEvent();
-                snap415TaxEvent.setEventDescription(posts.get(index).getStory());
-                snap415TaxEventList.add(snap415TaxEvent);
-            }
-            result.setTaxEvents(snap415TaxEventList);
+          //  PagedList<Post> posts = fbUserService.getUserPost(token);
+            //ArrayList<Snap415TaxEvent> snap415TaxEventList = new ArrayList<Snap415TaxEvent>();
+            //for (int index = 0; index < posts.size(); index++) {
+            //    Snap415TaxEvent snap415TaxEvent = new Snap415TaxEvent();
+            //    snap415TaxEvent.setEventDescription(posts.get(index).getStory());
+            //    snap415TaxEventList.add(snap415TaxEvent);
+            //}
+            //result.setTaxEvents(snap415TaxEventList);
 //            fbUserService.getUserPost()
-        } else if (token.getProvider().equals(SocialProviders.LINKEDIN.getValue())) {
+       // } else if (token.getProvider().equals(SocialProviders.LINKEDIN.getValue())) {
             //TODO:apply this condition.
-        } else {
+        //} else {
 
-        }
+        //}
+    	
+    	 Snap415UserProfile snap415UserProfile = this.getMe(token);
+
+         String Snap415ID = snap415UserProfile.getSnap415ID();
+    	    	
+    	Snap415UserTaxEvents result = _userTaxEventsDao.findBySnap415ID(Snap415ID);
+    	
         return result;
     }
 

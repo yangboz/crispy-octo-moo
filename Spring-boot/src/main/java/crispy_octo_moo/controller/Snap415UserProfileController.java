@@ -9,6 +9,9 @@ import javax.ws.rs.core.MediaType;
 import crispy_octo_moo.domain.Snap415UserProfile;
 import crispy_octo_moo.dto.Snap415UserProfileBase;
 import crispy_octo_moo.repository.Snap415UserProfileRepository;
+import crispy_octo_moo.service.EITCCreditService;
+import crispy_octo_moo.service.Snap415UserTaxEventsService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +42,9 @@ public class Snap415UserProfileController {
     @Autowired
     private Snap415UserProfileRepository _userDao;
 
+    @Autowired
+    private Snap415UserTaxEventsService snap415UserTaxEventsService;
+    
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON)
     @ApiOperation(httpMethod = "POST", value = "Response a string describing if the user info is successfully created or not.")
     public Snap415UserProfile create(@RequestBody @Valid Snap415UserProfile user) {
@@ -69,6 +75,9 @@ public class Snap415UserProfileController {
         findProfileBase.setRwTaxFilingStatus(user.getRwTaxFilingStatus());
         //
         findProfile.setProfileBase(findProfileBase);
+        
+        snap415UserTaxEventsService.UpdateEITECCredit(findProfile.getSnap415ID());
+        
         return this._userDao.save(findProfile);
     }
 

@@ -18,7 +18,7 @@ public class Snap415UserTaxEvents {
     private String id;
 
     //This is the user id for linking a user's profile to a user entity
-    private String Snap415ID;
+    private String snap415ID;
 
     private ArrayList<Snap415TaxEvent> taxEvents;
 
@@ -32,11 +32,11 @@ public class Snap415UserTaxEvents {
     }
 
 	public String getSnap415ID() {
-		return Snap415ID;
+		return snap415ID;
 	}
 
 	public void setSnap415ID(String snap415id) {
-		Snap415ID = snap415id;
+		snap415ID = snap415id;
 	}
 
 	public ArrayList<Snap415TaxEvent> getTaxEvents() {

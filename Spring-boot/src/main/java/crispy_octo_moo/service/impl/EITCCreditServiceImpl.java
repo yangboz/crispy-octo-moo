@@ -1,5 +1,7 @@
 package crispy_octo_moo.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +11,9 @@ import crispy_octo_moo.service.EITCCreditService;
 
 @Service
 public class EITCCreditServiceImpl implements EITCCreditService{
+
+	
+    private final Logger LOG = LoggerFactory.getLogger(EITCCreditServiceImpl.class);
 
 	@Autowired
 	Snap415UserProfileRepository _userProfileDao;
@@ -29,10 +34,12 @@ public class EITCCreditServiceImpl implements EITCCreditService{
 		numberofChildren = snap415UserProfile.getProfileBase().getRwNumberOfChildren();
 		income = snap415UserProfile.getProfileBase().getRwIncome();
 		
-		if(relationship_status == "Married")
-	    {
+		LOG.info("eitc:relationship_status ="+relationship_status+" numberofChidrn ="+numberofChildren+" income="+income);
 
-	            if(income<20330 && numberofChildren == 0)
+		eitccredit = 0;
+		if(relationship_status.equals("Married"))
+	    {
+			    if(income<20330 && numberofChildren == 0)
 	                eitccredit = 503;
 	            else if(income<44651 && numberofChildren == 1)
 	                eitccredit = 3359;
@@ -40,11 +47,11 @@ public class EITCCreditServiceImpl implements EITCCreditService{
 	            	eitccredit = 5548;
 	            else if(income<53267 && numberofChildren >= 3)
 	            	eitccredit = 6242;
-	            else
-	            	eitccredit = 0;
-	        }
-		else if(relationship_status == "Single")
+	           
+	    }
+		else if(relationship_status.equals("Single"))
 		{
+			
 			if(income<14820 && numberofChildren == 0)
                 eitccredit = 503;
             else if(income<39131 && numberofChildren == 1)
@@ -53,9 +60,9 @@ public class EITCCreditServiceImpl implements EITCCreditService{
             	eitccredit = 5548;
             else if(income<47747 && numberofChildren >= 3)
             	eitccredit = 6242;
-            else
-            	eitccredit = 0;
-		}
+        }
+		
+		LOG.info("eitccredt ="+eitccredit);
 		
 		return eitccredit;
 	}

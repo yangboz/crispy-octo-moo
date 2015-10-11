@@ -119,6 +119,8 @@ public class Snap415PersistenceServiceImpl implements Snap415PersistenceService 
 
             
         	int eitcCredit = eitcCreditService.getEITCCredit(Snap415ID);
+        	
+        	LOG.info("eitcCredit="+eitcCredit);
             
             if(eitcCredit > 0)
             {
