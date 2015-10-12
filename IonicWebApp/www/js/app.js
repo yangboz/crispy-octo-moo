@@ -98,6 +98,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
             .state('tab.updates', {
                 url: '/updates',
+                cache: false,
                 views: {
                     'tab-updates': {
                         templateUrl: 'templates/tab-updates.html',

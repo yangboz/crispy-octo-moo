@@ -108,12 +108,23 @@ public class Snap415UserServiceImpl implements Snap415UserService {
         //} else {
 
         //}
-    	
+    	LOG.info("handle update tab click");
     	 Snap415UserProfile snap415UserProfile = this.getMe(token);
 
          String Snap415ID = snap415UserProfile.getSnap415ID();
     	    	
     	Snap415UserTaxEvents result = _userTaxEventsDao.findBySnap415ID(Snap415ID);
+    	
+    	ArrayList<Snap415TaxEvent> events = result.getTaxEvents();
+		
+		for(Snap415TaxEvent temp : events)
+		{
+			if(temp.getTaxCategory().equals("EITC"))
+			{
+				LOG.info("update:"+temp.getTaxCategory()+ " "+temp.getTaxCredit());;
+			}
+		}
+		
     	
         return result;
     }

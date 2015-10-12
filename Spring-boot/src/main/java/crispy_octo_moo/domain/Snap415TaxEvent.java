@@ -29,5 +29,6 @@ public class Snap415TaxEvent {
         this.eventDescription = eventDescription;
     }
 
+    
 
 }

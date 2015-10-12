@@ -12,6 +12,8 @@ import crispy_octo_moo.repository.Snap415UserProfileRepository;
 import crispy_octo_moo.service.EITCCreditService;
 import crispy_octo_moo.service.Snap415UserTaxEventsService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +40,9 @@ public class Snap415UserProfileController {
     // PRIVATE FIELDS
     // ==============
 
+    private final Logger LOG = LoggerFactory.getLogger(Snap415UserProfileController.class);
+
+    
     // Autowire an object of type UserDao
     @Autowired
     private Snap415UserProfileRepository _userDao;
@@ -70,15 +75,28 @@ public class Snap415UserProfileController {
         Snap415UserProfileBase findProfileBase = findProfile.getProfileBase();
 //        findProfile.setId(id);
 //        findProfile.setSnap415ID(id);//Currently using FB ID.
+        
+        LOG.info("data to update:"+user.getRwIncome()+" "+user.getRwNumberOfChildren());
         findProfileBase.setRwIncome(user.getRwIncome());
         findProfileBase.setRwNumberOfChildren(user.getRwNumberOfChildren());
         findProfileBase.setRwTaxFilingStatus(user.getRwTaxFilingStatus());
         //
         findProfile.setProfileBase(findProfileBase);
+  
+        //int count = 0;
         
+        //while(count < 10000)
+        //{
+        //	count++;
+        //}
+        
+        findProfile = this._userDao.save(findProfile);
+        
+        LOG.info("respond to save action");
         snap415UserTaxEventsService.UpdateEITECCredit(findProfile.getSnap415ID());
         
-        return this._userDao.save(findProfile);
+        //return this._userDao.save(findProfile);
+        return findProfile;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
