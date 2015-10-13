@@ -18,24 +18,21 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
 
-// todo: replace these three with @SpringBootApplication
 
-//
 @PropertySources({@PropertySource(value = "classpath:application-${spring.profiles.active}.properties")})
-//
-// @Configuration
-// @EnableAutoConfiguration
-// @ComponentScan
 @SpringBootApplication
-
-@EnableTransactionManagement
+//@EnableTransactionManagement
 public class Application {
 
     private final Logger log = LoggerFactory.getLogger(Application.class);
 
     @Autowired
     private Environment env;
+//@:https://spring.io/blog/2015/04/27/binding-to-data-services-with-spring-boot-in-cloud-foundry
+//    @Autowired
+//    private DataSource dataSource;
 
     /**
      * Initializes registrar.

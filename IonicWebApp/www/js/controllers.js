@@ -167,10 +167,10 @@ angular.module('starter.controllers', [])
                 $log.error("UserTaxEventService.get() failed:", JSON.stringify(error));
             });
             //
-            $scope.timer = $interval ( function ( )
-            {
-                $rootScope.loadTaxEvents();
-            } , 1*1*200*1000 );//Every 20 s
+            //$scope.timer = $interval ( function ( )
+            //{
+            //    $rootScope.loadTaxEvents();
+            //} , 1*1*200*1000 );//Every 20 s
         }
         $rootScope.me = {};
         $rootScope.loadUserMe = function () {
