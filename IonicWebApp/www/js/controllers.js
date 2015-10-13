@@ -1,6 +1,7 @@
 angular.module('starter.controllers', [])
 
-    .controller('MainCtrl', function ($scope, $rootScope, $ionicModal, $timeout, $ionicLoading, CacheService, Enum) {
+    .controller('MainCtrl', function ($scope, $rootScope, $ionicModal, $timeout, $ionicLoading, CacheService, Enum,$log
+        ,OverviewService,UserTaxEventService,$interval,UserMeService) {
 
         ///Loading
         $rootScope.showLoading = function () {
@@ -146,9 +147,41 @@ angular.module('starter.controllers', [])
                 'token': $rootScope._getProviderToken()
             };
         }
-        ////test post.
-
-///
+        ////RootScope functions.
+        //load overview items.
+        $rootScope.loadOverviews = function(){
+            OverviewService.get({}, function (response) {
+                $log.debug("OverviewService.get() success!", response);
+                $scope.overviews = response.data;
+            }, function (error) {
+                // failure handler
+                $log.error("OverviewService.get() failed:", JSON.stringify(error));
+            });
+        }
+        $rootScope.loadTaxEvents = function(){
+            UserTaxEventService.save($rootScope.getSnap415Token(), function (response) {
+                $log.debug("UserTaxEventService.get() success!", response);
+                $scope.taxEvents = response.taxEvents;
+            }, function (error) {
+                // failure handler
+                $log.error("UserTaxEventService.get() failed:", JSON.stringify(error));
+            });
+            //
+            $scope.timer = $interval ( function ( )
+            {
+                $rootScope.loadTaxEvents();
+            } , 1*1*200*1000 );//Every 20 s
+        }
+        $rootScope.me = {};
+        $rootScope.loadUserMe = function () {
+            UserMeService.save($rootScope.getSnap415Token(), function (response) {
+                $log.debug("UserMeService.save() success!", response);
+                $rootScope.me = response;
+            }, function (error) {
+                // failure handler
+                $log.error("UserMeService.save() failed:", JSON.stringify(error));
+            });
+        }
     })
     .controller('LoginModalCtrl', function ($scope, $rootScope, ngFB, $linkedIn, UserProfileService, $log,
                                             FbUserProfileService, LiUserProfileService, $http, CacheService, Enum) {
@@ -191,11 +224,15 @@ angular.module('starter.controllers', [])
                         'token': $rootScope.oauth_obj_fb.accessToken
                     }, function (response) {
                         $log.debug("FbUserProfileService.get() success!", response);
-
+                        //Default load overviews.
+                        $rootScope.loadOverviews();
+                        $rootScope.loadTaxEvents();
+                        $rootScope.loadUserMe();
                     }, function (error) {
                         // failure handler
                         $log.error("FbUserProfileService.get() failed:", JSON.stringify(error));
                     });
+
                 },
                 function (error) {
                     alert('Facebook error: ' + error);
@@ -316,15 +353,7 @@ angular.module('starter.controllers', [])
 
         }
     })
-    .controller('DashCtrl', function ($scope, $rootScope, $log, OverviewService,$sce) {
-        //load overview items.
-        OverviewService.get({}, function (response) {
-            $log.debug("OverviewService.get() success!", response);
-            $scope.overviews = response.data;
-        }, function (error) {
-            // failure handler
-            $log.error("OverviewService.get() failed:", JSON.stringify(error));
-        });
+    .controller('DashCtrl', function ($scope, $rootScope, $log,$sce) {
         //
         $scope.trustAsHtml = function(rawHtml)
         {
@@ -333,30 +362,16 @@ angular.module('starter.controllers', [])
 
     })
 
-    .controller('UpdatesCtrl', function ($scope, $rootScope, $log,TaxEventService,$sce,UserTaxEventService) {
-        //load tax event items.
-        //TaxEventService.get({}, function (response) {
-        //    $log.debug("TaxEventService.get() success!", response);
-        //    $scope.taxEvents = response.data;
-        //}, function (error) {
-        //    // failure handler
-        //    $log.error("TaxEventService.get() failed:", JSON.stringify(error));
-        //});
-        UserTaxEventService.save($rootScope.getSnap415Token(), function (response) {
-            $log.debug("UserTaxEventService.get() success!", response);
-            $scope.taxEvents = response.taxEvents;
-        }, function (error) {
-            // failure handler
-            $log.error("UserTaxEventService.get() failed:", JSON.stringify(error));
-        });
+    .controller('UpdatesCtrl', function ($scope, $rootScope, $log,TaxEventService,$sce) {
         //
         $scope.trustAsHtml = function(rawHtml)
         {
             return $sce.trustAsHtml(rawHtml);
         }
+
     })
 
-    .controller('AccountsCtrl', function ($scope, $rootScope, $log, Enum, UserMeService,FilingCategoryService) {
+    .controller('AccountsCtrl', function ($scope, $rootScope, $log, Enum,FilingCategoryService) {
         //Synchronize the user info testing
         //UserProfileService.save($rootScope.user, function (response) {
         //    $log.debug("UserProfileService.save() success!", response);
@@ -364,18 +379,6 @@ angular.module('starter.controllers', [])
         //    // failure handler
         //    $log.error("UserProfileService.save() failed:", JSON.stringify(error));
         //});
-        $rootScope.me = {};
-        $scope.loadUserMe = function () {
-            UserMeService.save($rootScope.getSnap415Token(), function (response) {
-                $log.debug("UserMeService.save() success!", response);
-                $rootScope.me = response;
-            }, function (error) {
-                // failure handler
-                $log.error("UserMeService.save() failed:", JSON.stringify(error));
-            });
-        }
-        //Default behaviours:
-        $scope.loadUserMe();
         //
         //popup detail
         $scope.detail = function(){
