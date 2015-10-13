@@ -1,7 +1,7 @@
-Spring-boot + MongoDb + Facbook4J
+Spring-Social + MongoDb
 ===============================
 
-Using Mongo database(http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/) with Java8(http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/#) based Spring-boot to resolve without FB keyword insight API problem.
+Using Mongo database(http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/) with Java8(http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/#) powered Spring-boot application.
 
 How to Run?
 ===========
