@@ -71,11 +71,12 @@ _getEnvironment = function () {
         }
     }
 
-    return "local";//default
+    return "dev";//default
 };
 DynamicEnvironment.get = function (property) {
     var result = _environments[_getEnvironment()].config[property];
     //var result = _environments["dev"].config[property];
+    //console.log("_getEnvironment():",_getEnvironment());
     console.log("DynamicEnvironment.get():",result);
     return result;
 };
