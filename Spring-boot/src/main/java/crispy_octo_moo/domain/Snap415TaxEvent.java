@@ -29,6 +29,9 @@ public class Snap415TaxEvent {
         this.eventDescription = eventDescription;
     }
 
-    
+    @Override
+    public String toString() {
+        return "taxCategory:" + getTaxCategory() + ",taxCredit:" + getTaxCredit() + ",eventDescription:" + getEventDescription();
+    }
 
 }

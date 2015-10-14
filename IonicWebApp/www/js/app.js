@@ -55,11 +55,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }])
     ///ENV_config
     .constant('CONFIG_ENV', {
-        'api_endpoint_base': 'http://localhost:8083/api/',
-        //'api_endpoint_base': DynamicEnvironment.get('api_endpoint_base'),
-        'api_endpoint': 'http://localhost:8083/api/v1/',
-        //'api_endpoint': DynamicEnvironment.get('api_endpoint_base') + '/',
-        'api_version': '0.0.1'
+        //'api_endpoint_base': 'http://localhost:8083/api/',
+        'api_endpoint_base': DynamicEnvironment.get('api_endpoint_base'),
+        //'api_endpoint': 'http://localhost:8083/api/v1/',
+        'api_endpoint': DynamicEnvironment.get('api_endpoint_base'),
+        //'api_version': 'v1'
+        'api_version': DynamicEnvironment.get('api_version')
     })
 
     .config(function ($stateProvider, $urlRouterProvider, $linkedInProvider) {

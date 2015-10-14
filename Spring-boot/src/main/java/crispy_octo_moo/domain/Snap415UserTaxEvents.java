@@ -31,19 +31,24 @@ public class Snap415UserTaxEvents {
         this.id = id;
     }
 
-	public String getSnap415ID() {
-		return snap415ID;
-	}
+    public String getSnap415ID() {
+        return snap415ID;
+    }
 
-	public void setSnap415ID(String snap415id) {
-		snap415ID = snap415id;
-	}
+    public void setSnap415ID(String snap415id) {
+        snap415ID = snap415id;
+    }
 
-	public ArrayList<Snap415TaxEvent> getTaxEvents() {
-		return taxEvents;
-	}
+    public ArrayList<Snap415TaxEvent> getTaxEvents() {
+        return taxEvents;
+    }
 
-	public void setTaxEvents(ArrayList<Snap415TaxEvent> taxEvents) {
-		this.taxEvents = taxEvents;
-	}
+    public void setTaxEvents(ArrayList<Snap415TaxEvent> taxEvents) {
+        this.taxEvents = taxEvents;
+    }
+
+    @Override
+    public String toString() {
+        return "id:" + getId() + ",snap415ID:" + getSnap415ID() + ",taxEvents:" + getTaxEvents();
+    }
 }

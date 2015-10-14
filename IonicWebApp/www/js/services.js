@@ -31,7 +31,7 @@ angular.module('starter.services', [])
     })
     .factory('EITCCreditService', function ($resource, CONFIG_ENV) {
         var data = $resource(
-            CONFIG_ENV.api_endpoint + "eitcCredit",
+            CONFIG_ENV.api_endpoint + CONFIG_ENV.api_version + "eitcCredit",
             {},
             {
                 "update": {method: "PUT"}
@@ -55,7 +55,7 @@ angular.module('starter.services', [])
     //})
     .factory('IncomeCategoryService', function ($resource, CONFIG_ENV) {
         var data = $resource(
-            CONFIG_ENV.api_endpoint + "incomeCategory/:Key",
+            CONFIG_ENV.api_endpoint + CONFIG_ENV.api_version + "incomeCategory/:Key",
             {Key: "@Key"},
             {
                 "update": {method: "PUT"}
@@ -77,7 +77,7 @@ angular.module('starter.services', [])
     //})
     .factory('FilingCategoryService', function ($resource, CONFIG_ENV) {
         var data = $resource(
-            CONFIG_ENV.api_endpoint + "fillingCategory/:Key",
+            CONFIG_ENV.api_endpoint + CONFIG_ENV.api_version + "fillingCategory/:Key",
             {Key: "@Key"},
             {
                 "update": {method: "PUT"}
@@ -96,7 +96,7 @@ angular.module('starter.services', [])
     //})
     .factory('ChildrenCategoryService', function ($resource, CONFIG_ENV) {
         var data = $resource(
-            CONFIG_ENV.api_endpoint + "childrenCategory/:Key",
+            CONFIG_ENV.api_endpoint + CONFIG_ENV.api_version + "childrenCategory/:Key",
             {Key: "@Key"},
             {
                 "update": {method: "PUT"}
@@ -106,7 +106,7 @@ angular.module('starter.services', [])
     //EVCreditService
     .factory('EVCreditService', function ($resource, CONFIG_ENV) {
         var data = $resource(
-            CONFIG_ENV.api_endpoint + "evCredit/:Key",
+            CONFIG_ENV.api_endpoint + CONFIG_ENV.api_version + "evCredit/:Key",
             {Key: "@Key"},
             {
                 "update": {method: "PUT"}
@@ -167,7 +167,7 @@ angular.module('starter.services', [])
     //})
     .factory('MortgageInterestService', function ($resource, CONFIG_ENV) {
         var data = $resource(
-            CONFIG_ENV.api_endpoint + "mInterests/:Index",
+            CONFIG_ENV.api_endpoint + CONFIG_ENV.api_version + "mInterests/:Index",
             {Index: "@Index"},
             {
                 "update": {method: "PUT"}
@@ -189,7 +189,7 @@ angular.module('starter.services', [])
     //})
     .factory('ChildrenKeywordsService', function ($resource, CONFIG_ENV) {
         var data = $resource(
-            CONFIG_ENV.api_endpoint + "cKeywords/:Index",
+            CONFIG_ENV.api_endpoint + CONFIG_ENV.api_version + "cKeywords/:Index",
             {Index: "@Index"},
             {
                 "update": {method: "PUT"}
@@ -212,7 +212,7 @@ angular.module('starter.services', [])
     //UserProfileService
     .factory('UserProfileService', function ($resource, CONFIG_ENV) {
         var data = $resource(
-            CONFIG_ENV.api_endpoint + "user/profile/:Id",
+            CONFIG_ENV.api_endpoint + CONFIG_ENV.api_version + "user/profile/:Id",
             {Id: "@Id"},
             {
                 "update": {method: "PUT"}
@@ -222,7 +222,7 @@ angular.module('starter.services', [])
     //UserMeService
     .factory('UserMeService', function ($resource, CONFIG_ENV) {
         var data = $resource(
-            CONFIG_ENV.api_endpoint + "user/me",
+            CONFIG_ENV.api_endpoint + CONFIG_ENV.api_version + "user/me",
             {},
             {
             })
@@ -231,7 +231,7 @@ angular.module('starter.services', [])
     ////ConnectService
     //.factory('ConnectService', function ($resource, CONFIG_ENV) {
     //    var data = $resource(
-    //        CONFIG_ENV.api_endpoint  + "connect/:providerId",
+    //        CONFIG_ENV.api_endpoint + CONFIG_ENV.api_version  + "connect/:providerId",
     //        {providerId: "@providerId"},
     //        {
     //            "update": {method: "PUT"}
@@ -241,7 +241,7 @@ angular.module('starter.services', [])
     //FbUserProfileService
     .factory('FbUserProfileService', function ($resource, CONFIG_ENV) {
         var data = $resource(
-            CONFIG_ENV.api_endpoint + "connect/facebook/profile/",
+            CONFIG_ENV.api_endpoint + CONFIG_ENV.api_version + "connect/facebook/profile/",
             {},
             {})
         return data;
@@ -249,7 +249,7 @@ angular.module('starter.services', [])
     //LiUserProfileService
     .factory('LiUserProfileService', function ($resource, CONFIG_ENV) {
         var data = $resource(
-            CONFIG_ENV.api_endpoint + "connect/linkedin/profile/",
+            CONFIG_ENV.api_endpoint + CONFIG_ENV.api_version + "connect/linkedin/profile/",
             {},
             {})
         return data;
@@ -257,7 +257,7 @@ angular.module('starter.services', [])
     //OverviewService
     .factory('OverviewService', function ($resource, CONFIG_ENV) {
         var data = $resource(
-            CONFIG_ENV.api_endpoint + "overviews",
+            CONFIG_ENV.api_endpoint + CONFIG_ENV.api_version + "overviews",
             {},
             {
 
@@ -267,7 +267,7 @@ angular.module('starter.services', [])
     //DealService
     .factory('DealService', function ($resource, CONFIG_ENV) {
         var data = $resource(
-            CONFIG_ENV.api_endpoint + "deals/:Index",
+            CONFIG_ENV.api_endpoint + CONFIG_ENV.api_version + "deals/:Index",
             {"Index":"@Index"},
             {
 
@@ -277,7 +277,7 @@ angular.module('starter.services', [])
     //CategoryDealService
     .factory('CategoryDealService', function ($resource, CONFIG_ENV) {
         var data = $resource(
-            CONFIG_ENV.api_endpoint + "deals/by/:Keywords",
+            CONFIG_ENV.api_endpoint + CONFIG_ENV.api_version + "deals/by/:Keywords",
             {"Keywords":"@Keywords"},
             {
 
@@ -287,7 +287,7 @@ angular.module('starter.services', [])
     //TaxEventService
     .factory('TaxEventService', function ($resource, CONFIG_ENV) {
         var data = $resource(
-            CONFIG_ENV.api_endpoint + "taxEvents",
+            CONFIG_ENV.api_endpoint + CONFIG_ENV.api_version + "taxEvents",
             {},
             {
 
@@ -296,7 +296,7 @@ angular.module('starter.services', [])
     })
     .factory('UserTaxEventService', function ($resource, CONFIG_ENV) {
         var data = $resource(
-            CONFIG_ENV.api_endpoint + "user/events",
+            CONFIG_ENV.api_endpoint + CONFIG_ENV.api_version + "user/events",
             {},
             {
             })

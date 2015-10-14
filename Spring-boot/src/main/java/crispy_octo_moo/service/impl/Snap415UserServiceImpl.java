@@ -1,6 +1,7 @@
 package crispy_octo_moo.service.impl;
 
 import crispy_octo_moo.consts.SocialProviders;
+import crispy_octo_moo.consts.TaxCategories;
 import crispy_octo_moo.domain.*;
 import crispy_octo_moo.dto.Snap415Overview;
 import crispy_octo_moo.dto.Snap415Token;
@@ -91,41 +92,39 @@ public class Snap415UserServiceImpl implements Snap415UserService {
 
     @Override
     public Snap415UserTaxEvents getEvents(Snap415Token token) {
-       // Snap415UserTaxEvents result = new Snap415UserTaxEvents();
+        // Snap415UserTaxEvents result = new Snap415UserTaxEvents();
         //if (token.getProvider().equals(SocialProviders.FACEBOOK.getValue())) {
-            //Post related story.
-          //  PagedList<Post> posts = fbUserService.getUserPost(token);
-            //ArrayList<Snap415TaxEvent> snap415TaxEventList = new ArrayList<Snap415TaxEvent>();
-            //for (int index = 0; index < posts.size(); index++) {
-            //    Snap415TaxEvent snap415TaxEvent = new Snap415TaxEvent();
-            //    snap415TaxEvent.setEventDescription(posts.get(index).getStory());
-            //    snap415TaxEventList.add(snap415TaxEvent);
-            //}
-            //result.setTaxEvents(snap415TaxEventList);
+        //Post related story.
+        //  PagedList<Post> posts = fbUserService.getUserPost(token);
+        //ArrayList<Snap415TaxEvent> snap415TaxEventList = new ArrayList<Snap415TaxEvent>();
+        //for (int index = 0; index < posts.size(); index++) {
+        //    Snap415TaxEvent snap415TaxEvent = new Snap415TaxEvent();
+        //    snap415TaxEvent.setEventDescription(posts.get(index).getStory());
+        //    snap415TaxEventList.add(snap415TaxEvent);
+        //}
+        //result.setTaxEvents(snap415TaxEventList);
 //            fbUserService.getUserPost()
-       // } else if (token.getProvider().equals(SocialProviders.LINKEDIN.getValue())) {
-            //TODO:apply this condition.
+        // } else if (token.getProvider().equals(SocialProviders.LINKEDIN.getValue())) {
+        //TODO:apply this condition.
         //} else {
 
         //}
-    	LOG.info("handle update tab click");
-    	 Snap415UserProfile snap415UserProfile = this.getMe(token);
+        LOG.info("handle update tab click");
+        Snap415UserProfile snap415UserProfile = this.getMe(token);
 
-         String Snap415ID = snap415UserProfile.getSnap415ID();
-    	    	
-    	Snap415UserTaxEvents result = _userTaxEventsDao.findBySnap415ID(Snap415ID);
-    	
-    	ArrayList<Snap415TaxEvent> events = result.getTaxEvents();
-		
-		for(Snap415TaxEvent temp : events)
-		{
-			if(temp.getTaxCategory().equals("EITC"))
-			{
-				LOG.info("update:"+temp.getTaxCategory()+ " "+temp.getTaxCredit());;
-			}
-		}
-		
-    	
+        String Snap415ID = snap415UserProfile.getSnap415ID();
+
+        Snap415UserTaxEvents result = _userTaxEventsDao.findBySnap415ID(Snap415ID);
+
+        ArrayList<Snap415TaxEvent> events = result.getTaxEvents();
+
+        for (Snap415TaxEvent temp : events) {
+            if (temp.getTaxCategory().equals(TaxCategories.EITC.getValue())) {
+                LOG.info("update:" + temp.getTaxCategory() + " " + temp.getTaxCredit());
+            }
+        }
+
+
         return result;
     }
 
@@ -168,7 +167,7 @@ public class Snap415UserServiceImpl implements Snap415UserService {
 
         ArrayList<Snap415FBPost> fbposts = posts.getPosts();
         //PagedList<Post> fbposts = null;
-
+        LOG.info("getFBPost result:" + fbposts.toString());
         return fbposts;
     }
 }

@@ -12,45 +12,50 @@ var _environments = {
             /**
              * Add any config properties you want in here for this environment
              */
-            api_endpoint_base: 'http://localhost:8083/api/'
+            api_endpoint_base: 'http://localhost:8083/api/',
+            api_version: '/v1/'
         }
     },
     dev: {
-        host: 'http://localhost:8100',
+        host: 'http://ec2-52-27-252-152.us-west-2.compute.amazonaws.com',
         config: {
             /**
              * Add any config properties you want in here for this environment
              */
-            api_endpoint_base: 'http://192.168.2.28:8083/api/'
+            api_endpoint_base: 'http://ec2-52-27-252-152.us-west-2.compute.amazonaws.com:8083/api',
+            api_version: '/v1/'
         }
     },
     test: {
-        host: 'http://localhost:8100',
+        host: 'http:test.com',
         config: {
             /**
              * Add any config properties you want in here for this environment
              */
-            api_endpoint_base: 'http://localhost:8083/api/'
+            api_endpoint_base: 'http://test.com:8083/api',
+            api_version: '/v1/'
         }
     },
     stage: {
-        host: 'http://localhost:8100',
+        host: 'http://stage.com',
         config: {
             /**
              * Add any config properties you want in here for this environment
              */
-            api_endpoint_base: 'http://localhost:8083/api/'
+            api_endpoint_base: 'http://stage.com/api/',
+            api_version: '/v1/'
         }
     },
     prod: {
-        host: 'http://localhost:8100',
+        host: 'http://prod.com',
         config: {
             /**
              * Add any config properties you want in here for this environment
              */
-            api_endpoint_base: 'http://localhost:8083/api/'
+            api_endpoint_base: 'http://prod.com/api/',
+            api_version: '/v1/'
         }
-    },
+    }
 };
 _getEnvironment = function () {
     var host = window.location.host;
@@ -69,8 +74,8 @@ _getEnvironment = function () {
     return "local";//default
 };
 DynamicEnvironment.get = function (property) {
-    //var result = _environments[_getEnvironment()].config[property];
-    var result = _environments["dev"].config[property];
+    var result = _environments[_getEnvironment()].config[property];
+    //var result = _environments["dev"].config[property];
     console.log("DynamicEnvironment.get():",result);
     return result;
 };
