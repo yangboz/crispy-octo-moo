@@ -363,6 +363,8 @@ angular.module('starter.controllers', [])
     })
 
     .controller('UpdatesCtrl', function ($scope, $rootScope, $log,TaxEventService,$sce) {
+        //Default behaviors:
+
         //
         $scope.trustAsHtml = function(rawHtml)
         {
@@ -410,6 +412,8 @@ angular.module('starter.controllers', [])
                 $log.debug("UserProfileService.update() success!", response);
                 $rootScope.me = response;
                 $rootScope.detailModal_me.hide();
+                //Update the taxEvents.
+                $rootScope.loadTaxEvents();
             }, function (error) {
                 // failure handler
                 $log.error("UserProfileService.update() failed:", JSON.stringify(error));
