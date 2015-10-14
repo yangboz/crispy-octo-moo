@@ -83,12 +83,6 @@ public class Snap415UserProfileController {
         //
         findProfile.setProfileBase(findProfileBase);
   
-        //int count = 0;
-        
-        //while(count < 10000)
-        //{
-        //	count++;
-        //}
         
         findProfile = this._userDao.save(findProfile);
         
