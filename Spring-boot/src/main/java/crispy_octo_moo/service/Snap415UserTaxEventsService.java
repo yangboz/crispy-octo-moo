@@ -1,6 +1,8 @@
 package crispy_octo_moo.service;
 
+import crispy_octo_moo.domain.Snap415UserTaxEvents;
+
 public interface Snap415UserTaxEventsService {
 
-	void UpdateEITECCredit(String snap415ID);
+    Snap415UserTaxEvents updateEITECCredit(String snap415ID);
 }

@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import javax.ws.rs.core.MediaType;
 
 import crispy_octo_moo.domain.Snap415UserProfile;
+import crispy_octo_moo.domain.Snap415UserTaxEvents;
 import crispy_octo_moo.dto.Snap415UserProfileBase;
 import crispy_octo_moo.repository.Snap415UserProfileRepository;
 import crispy_octo_moo.service.EITCCreditService;
@@ -42,14 +43,14 @@ public class Snap415UserProfileController {
 
     private final Logger LOG = LoggerFactory.getLogger(Snap415UserProfileController.class);
 
-    
+
     // Autowire an object of type UserDao
     @Autowired
     private Snap415UserProfileRepository _userDao;
 
     @Autowired
     private Snap415UserTaxEventsService snap415UserTaxEventsService;
-    
+
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON)
     @ApiOperation(httpMethod = "POST", value = "Response a string describing if the user info is successfully created or not.")
     public Snap415UserProfile create(@RequestBody @Valid Snap415UserProfile user) {
@@ -75,26 +76,27 @@ public class Snap415UserProfileController {
         Snap415UserProfileBase findProfileBase = findProfile.getProfileBase();
 //        findProfile.setId(id);
 //        findProfile.setSnap415ID(id);//Currently using FB ID.
-        
-        LOG.info("data to update:"+user.getRwIncome()+" "+user.getRwNumberOfChildren());
+
+        LOG.info("data to update,income:" + user.getRwIncome() + ",numberOfChildren:" + user.getRwNumberOfChildren() + ",relationship:" + user.getRwTaxFilingStatus());
         findProfileBase.setRwIncome(user.getRwIncome());
         findProfileBase.setRwNumberOfChildren(user.getRwNumberOfChildren());
         findProfileBase.setRwTaxFilingStatus(user.getRwTaxFilingStatus());
         //
         findProfile.setProfileBase(findProfileBase);
-  
+
         //int count = 0;
-        
+
         //while(count < 10000)
         //{
         //	count++;
         //}
-        
+
         findProfile = this._userDao.save(findProfile);
-        
-        LOG.info("respond to save action");
-        snap415UserTaxEventsService.UpdateEITECCredit(findProfile.getSnap415ID());
-        
+
+        LOG.info("respond to save action,updateEITECCredit() called! ");
+        Snap415UserTaxEvents snap415UserTaxEvents = snap415UserTaxEventsService.updateEITECCredit(findProfile.getSnap415ID());
+        LOG.info("updateEITECCredit() result:" + snap415UserTaxEvents.toString());
+
         //return this._userDao.save(findProfile);
         return findProfile;
     }
