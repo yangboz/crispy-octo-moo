@@ -181,6 +181,12 @@
             <scope>runtime</scope>
         </dependency>
         -->
+        <!-- EventBus -->
+        <dependency>
+            <groupId>org.zalando.stups</groupId>
+            <artifactId>spring-boot-starter-guava-eventbus</artifactId>
+            <version>0.5.0</version>
+        </dependency>
     </dependencies>
 
 
@@ -241,6 +247,7 @@
                 <updatePolicy>always</updatePolicy>
             </snapshots>
         </repository>
+        
         <!--CloudFoundry
                 <repository>
                     <id>pivotal-releases</id>
