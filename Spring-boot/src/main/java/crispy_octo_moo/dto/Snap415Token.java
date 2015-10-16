@@ -6,6 +6,15 @@ public class Snap415Token {
     private String token;//LinkedIn is bearer token;
     private String provider;//faceboo,linkedin...
 
+    public Snap415Token() {
+    }
+
+    public Snap415Token(String id, String token, String provider) {
+        this.id = id;
+        this.token = token;
+        this.provider = provider;
+    }
+
     public String getId() {
         return id;
     }

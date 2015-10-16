@@ -34,10 +34,10 @@ import javax.sql.DataSource;
 @PropertySources({@PropertySource(value = "classpath:application-${spring.profiles.active}.properties")})
 @SpringBootApplication
 //@EnableTransactionManagement
-//@EnableScheduling
+@EnableScheduling
 public class Application {
 
-    private final Logger LOG = LoggerFactory.getLogger(Application.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
     @Autowired
     private Environment env;
@@ -87,17 +87,17 @@ public class Application {
         Snap415PersistenceService snap415PersistenceService = new Snap415PersistenceServiceImpl();
         context.getAutowireCapableBeanFactory().autowireBeanProperties(
                 snap415PersistenceService, AutowireCapableBeanFactory.AUTOWIRE_AUTODETECT, true);
-        EventBusHelper eventBusHelper = new EventBusHelper();
+        Constants.eventBusHelper = new EventBusHelper();
         context.getAutowireCapableBeanFactory().autowireBeanProperties(
-                eventBusHelper, AutowireCapableBeanFactory.AUTOWIRE_AUTODETECT,
+                Constants.eventBusHelper, AutowireCapableBeanFactory.AUTOWIRE_AUTODETECT,
                 true);
         //EventBus register
         FbPostsEventBusSubscriber fbPostsEventBusSubscriber = new FbPostsEventBusSubscriber();
         FbProfileEventBusSubscriber fbProfileEventBusSubscriber = new FbProfileEventBusSubscriber(); //
         LOG.info("snap415PersistenceService:" + snap415PersistenceService.toString());
         fbProfileEventBusSubscriber.setSnap415PersistenceService(snap415PersistenceService);
-        eventBusHelper.registerSubscriber(fbPostsEventBusSubscriber);
-        eventBusHelper.registerSubscriber(fbProfileEventBusSubscriber); //
+        Constants.eventBusHelper.registerSubscriber(fbPostsEventBusSubscriber);
+        Constants.eventBusHelper.registerSubscriber(fbProfileEventBusSubscriber); //
 //        eventBusHelper.postEvent(new MqttMessageEvent("{'TaskId':2,'BlackId':3,'FaceId':4,'Confidence':88.5,'AlarmType':1}"));
 //        eventBusHelper.postEvent(new MqttMessageEvent("{\"msgType\":1,\"ipaddr\":\"192.168.2.8\",\"port\":1883,\"msgBody\":{\"statusRpt\":[{\"taskid\":77,\"status\":0}]}}"));
     }

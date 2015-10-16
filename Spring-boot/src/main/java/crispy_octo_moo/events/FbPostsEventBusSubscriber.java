@@ -26,7 +26,7 @@ public class FbPostsEventBusSubscriber {
     @Subscribe
     public void onEvent(FbPostsUpdateEvent event) {
         // Handle the string passed on by the Event Bus
-
+        LOG.info("onEvent,data:" + event.getData());
     }
 
     public Snap415PersistenceService getSnap415PersistenceService() {

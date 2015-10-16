@@ -7,7 +7,7 @@ var DynamicEnvironment = DynamicEnvironment || {};
 var _environment;
 var _environments = {
     local: {
-        host: 'http://localhost:63342',
+        host: 'localhost:8100',
         config: {
             /**
              * Add any config properties you want in here for this environment
@@ -63,7 +63,7 @@ _getEnvironment = function () {
     if (_environment) {
         return _environment;
     }
-
+    // console.log("host:",host);
     for (var environment in _environments) {
         if (typeof _environments[environment].host && _environments[environment].host == host) {
             _environment = environment;
@@ -76,7 +76,7 @@ _getEnvironment = function () {
 DynamicEnvironment.get = function (property) {
     var result = _environments[_getEnvironment()].config[property];
     //var result = _environments["dev"].config[property];
-    //console.log("_getEnvironment():",_getEnvironment());
+    console.log("_getEnvironment():",_getEnvironment());
     console.log("DynamicEnvironment.get():",result);
     return result;
 };
