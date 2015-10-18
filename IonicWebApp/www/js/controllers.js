@@ -7,7 +7,7 @@ angular.module('starter.controllers', [])
         $rootScope.showLoading = function () {
             $ionicLoading.show({
                 //template: 'Loading...'
-                template: "<img id='spinner' src='img/spinner.gif'>"
+                template: "<images id='spinner' src='images/spinner.gif'>"
             });
         };
         $rootScope.hideLoading = function () {
