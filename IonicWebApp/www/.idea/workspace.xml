@@ -2,51 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54c06866-f93e-4b72-af58-4eecf4251f8f" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/android-chrome-144x144.png" afterPath="$PROJECT_DIR$/images/android-chrome-144x144.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/android-chrome-192x192.png" afterPath="$PROJECT_DIR$/images/android-chrome-192x192.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/android-chrome-36x36.png" afterPath="$PROJECT_DIR$/images/android-chrome-36x36.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/android-chrome-48x48.png" afterPath="$PROJECT_DIR$/images/android-chrome-48x48.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/android-chrome-72x72.png" afterPath="$PROJECT_DIR$/images/android-chrome-72x72.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/android-chrome-96x96.png" afterPath="$PROJECT_DIR$/images/android-chrome-96x96.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/apple-touch-icon-114x114.png" afterPath="$PROJECT_DIR$/images/apple-touch-icon-114x114.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/apple-touch-icon-120x120.png" afterPath="$PROJECT_DIR$/images/apple-touch-icon-120x120.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/apple-touch-icon-144x144.png" afterPath="$PROJECT_DIR$/images/apple-touch-icon-144x144.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/apple-touch-icon-152x152.png" afterPath="$PROJECT_DIR$/images/apple-touch-icon-152x152.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/apple-touch-icon-180x180.png" afterPath="$PROJECT_DIR$/images/apple-touch-icon-180x180.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/apple-touch-icon-57x57.png" afterPath="$PROJECT_DIR$/images/apple-touch-icon-57x57.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/apple-touch-icon-60x60.png" afterPath="$PROJECT_DIR$/images/apple-touch-icon-60x60.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/apple-touch-icon-72x72.png" afterPath="$PROJECT_DIR$/images/apple-touch-icon-72x72.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/apple-touch-icon-76x76.png" afterPath="$PROJECT_DIR$/images/apple-touch-icon-76x76.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/apple-touch-icon-precomposed.png" afterPath="$PROJECT_DIR$/images/apple-touch-icon-precomposed.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/apple-touch-icon.png" afterPath="$PROJECT_DIR$/images/apple-touch-icon.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/browserconfig.xml" afterPath="$PROJECT_DIR$/images/browserconfig.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/favicon-16x16.png" afterPath="$PROJECT_DIR$/images/favicon-16x16.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/favicon-32x32.png" afterPath="$PROJECT_DIR$/images/favicon-32x32.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/favicon-96x96.png" afterPath="$PROJECT_DIR$/images/favicon-96x96.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/favicon.ico" afterPath="$PROJECT_DIR$/images/favicon.ico" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/icon_a_04.png" afterPath="$PROJECT_DIR$/images/icon_a_04.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/ionic.png" afterPath="$PROJECT_DIR$/images/ionic.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/manifest.json" afterPath="$PROJECT_DIR$/images/manifest.json" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/mstile-144x144.png" afterPath="$PROJECT_DIR$/images/mstile-144x144.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/mstile-150x150.png" afterPath="$PROJECT_DIR$/images/mstile-150x150.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/mstile-310x150.png" afterPath="$PROJECT_DIR$/images/mstile-310x150.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/mstile-310x310.png" afterPath="$PROJECT_DIR$/images/mstile-310x310.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/mstile-70x70.png" afterPath="$PROJECT_DIR$/images/mstile-70x70.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/safari-pinned-tab.svg" afterPath="$PROJECT_DIR$/images/safari-pinned-tab.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/img/spinner.gif" afterPath="$PROJECT_DIR$/images/spinner.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/ionic/js/angular/angular-animate.js" afterPath="$PROJECT_DIR$/lib/ionic/js/angular/angular-animate.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/ionic/js/angular/angular-sanitize.js" afterPath="$PROJECT_DIR$/lib/ionic/js/angular/angular-sanitize.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/ionic/js/angular/angular-sanitize.min.js" afterPath="$PROJECT_DIR$/lib/ionic/js/angular/angular-sanitize.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/ionic/js/angular-ui/angular-ui-router.js" afterPath="$PROJECT_DIR$/lib/ionic/js/angular-ui/angular-ui-router.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/angular/angular.js" afterPath="$PROJECT_DIR$/lib/angular/angular.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/ionic/js/angular/angular.js" afterPath="$PROJECT_DIR$/lib/ionic/js/angular/angular.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/ionic/js/angular/angular.min.js" afterPath="$PROJECT_DIR$/lib/ionic/js/angular/angular.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/controllers.js" afterPath="$PROJECT_DIR$/js/controllers.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/ionic/js/ionic-angular.js" afterPath="$PROJECT_DIR$/lib/ionic/js/ionic-angular.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/ionic/js/ionic-angular.min.js" afterPath="$PROJECT_DIR$/lib/ionic/js/ionic-angular.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/ionic/js/ionic.bundle.js" afterPath="$PROJECT_DIR$/lib/ionic/js/ionic.bundle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/ionic/js/ionic.bundle.min.js" afterPath="$PROJECT_DIR$/lib/ionic/js/ionic.bundle.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
     <ignored path="www.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -150,8 +106,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.53846157">
-              <caret line="26" column="57" selection-start-line="26" selection-start-column="57" selection-end-line="26" selection-end-column="57" />
+            <state vertical-scroll-proportion="-0.006993007">
+              <caret line="0" column="15" selection-start-line="0" selection-start-column="15" selection-end-line="0" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -860,8 +816,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53846157">
-          <caret line="26" column="57" selection-start-line="26" selection-start-column="57" selection-end-line="26" selection-end-column="57" />
+        <state vertical-scroll-proportion="-0.006993007">
+          <caret line="0" column="15" selection-start-line="0" selection-start-column="15" selection-end-line="0" selection-end-column="15" />
           <folding />
         </state>
       </provider>
