@@ -34,7 +34,7 @@ import javax.sql.DataSource;
 @PropertySources({@PropertySource(value = "classpath:application-${spring.profiles.active}.properties")})
 @SpringBootApplication
 //@EnableTransactionManagement
-@EnableScheduling
+//@EnableScheduling
 public class Application {
 
     private static final Logger LOG = LoggerFactory.getLogger(Application.class);
