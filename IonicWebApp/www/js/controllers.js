@@ -397,8 +397,8 @@ angular.module('starter.controllers', [])
         }
     })
 
-    .controller('MeModalCtrl', function ($scope, $rootScope, $log, Enum, UserProfileService) {
-        $scope.profile = {income:0,children:0,filingCategory:''};
+    .controller('MeModalCtrl', function ($scope, $rootScope, $log, Enum, UserProfileService,$sce) {
+        $scope.profile = {income:0,children:0,filingCategory:'',iconUrl:''};
         //Submit profile inputs.
         $scope.save = function(){
             $log.info("preSaved me profile:"+",income:"+$scope.profile.income+",children:"+$scope.profile.children
@@ -407,6 +407,9 @@ angular.module('starter.controllers', [])
             $rootScope.me.rwIncome = $scope.profile.income;
             $rootScope.me.rwTaxFilingStatus = $scope.profile.filingCategory.label;
             $rootScope.me.rwNumberOfChildren = $scope.profile.children;
+            var rawProfileIconUrl = "http://graph.facebook.com/"+$rootScope.me.fbUserProfile.id+"/picture?width=270&height=270";
+            $log.info("rawProfileIconUrl:"+rawProfileIconUrl);
+            $scope.profile.iconUrl = $sce.trustAsResourceUrl(rawProfileIconUrl);
             //
             UserProfileService.update({Id:$rootScope.me.id},$rootScope.me, function (response) {
                 $log.debug("UserProfileService.update() success!", response);
