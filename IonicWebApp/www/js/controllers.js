@@ -583,6 +583,7 @@ angular.module('starter.controllers', [])
             //    $log.error("DealService.get($index) failed:", JSON.stringify(error));
             //});
             $rootScope.deal = $index;
+            $rootScope.deal.image_url = $sce.trustAsResourceUrl($rootScope.deal.image_url);
             //for (prop in $index) {
             //    $log.debug(prop + ' = ' + $index[prop]);
             //}
