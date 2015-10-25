@@ -338,8 +338,7 @@ angular.module('starter.services', [])
                 }
             ]
             , localStorageKeys: {
-                OAUTH_OBJ_FB: 'oauth_obj_4_facebook',
-                OAUTH_OBJ_LI: 'oauth_obj_4_linkedin'
+                OAUTH_OBJ_SOCIAL: 'oauth_obj_4_social'
             }
             , socialProviders: {
                 FACEBOOK: 'facebook',

@@ -14,49 +14,70 @@ angular.module('starter.controllers', [])
             $ionicLoading.hide();
         };
         ///LoginModal
+        ////Social
+        $rootScope.loginModal_social = undefined;
+        $ionicModal.fromTemplateUrl('templates/modal-login-social.html', {
+            scope: $scope,
+            backdropClickToClose: true,
+            animation: 'slide-in-up'
+        }).then(function (modal) {
+            console.log("modal-login-social.html initialization.");
+            $rootScope.loginModal_social = modal;
+            //Login Modal show();
+            CacheService.remove(Enum.localStorageKeys.OAUTH_OBJ_SOCIAL);//Always show login modal,cuz some of invalid access token issue.
+            CacheService.get(Enum.localStorageKeys.OAUTH_OBJ_SOCIAL).then(function (data) {
+                console.log(Enum.localStorageKeys.OAUTH_OBJ_SOCIAL, data);
+                if (data == null) {
+                    $rootScope.loginModal_social.show();
+                } else {
+                    $rootScope.oauth_obj_social = JSON.parse(data);
+                    $rootScope.syncFbUserProfile();//Notice:currently Facebook as default.
+                }
+            });
+        });
         ////LinkedIn
-        $rootScope.loginModal_li = undefined;
-        $ionicModal.fromTemplateUrl('templates/modal-login-li.html', {
-            scope: $scope,
-            backdropClickToClose: true,
-            animation: 'slide-in-up'
-        }).then(function (modal) {
-            console.log("modal-login-li.html initialization.");
-            $rootScope.loginModal_li = modal;
-            //Login Modal show();
-            //CacheService.remove(Enum.localStorageKeys.OAUTH_OBJ_LI);//for debugging
-            CacheService.get(Enum.localStorageKeys.OAUTH_OBJ_LI).then(function (data) {
-                console.log(Enum.localStorageKeys.OAUTH_OBJ_LI, data);
-                if (data == null) {
-                    $rootScope.loginModal_li.show();
-                } else {
-                    $rootScope.oauth_obj_li = JSON.parse(data);
-                    $rootScope.syncLiUserProfile();
-                }
-            });
-        });
-        ////Facebook
-        $rootScope.loginModal_fb = undefined;
-        $ionicModal.fromTemplateUrl('templates/modal-login-fb.html', {
-            scope: $scope,
-            backdropClickToClose: true,
-            animation: 'slide-in-up'
-        }).then(function (modal) {
-            console.log("modal-login-fb.html initialization.");
-            $rootScope.loginModal_fb = modal;
-            //Login Modal show();
-            //@see: CacheService
-            CacheService.remove(Enum.localStorageKeys.OAUTH_OBJ_FB);//for debugging
-            CacheService.get(Enum.localStorageKeys.OAUTH_OBJ_FB).then(function (data) {
-                console.log(Enum.localStorageKeys.OAUTH_OBJ_FB, data);
-                if (data == null) {
-                    $rootScope.loginModal_fb.show();
-                } else {
-                    $rootScope.oauth_obj_fb = JSON.parse(data);
-                    $rootScope.syncFbUserProfile();
-                }
-            });
-        });
+        //$rootScope.loginModal_li = undefined;
+        //$ionicModal.fromTemplateUrl('templates/modal-login-li.html', {
+        //    scope: $scope,
+        //    backdropClickToClose: true,
+        //    animation: 'slide-in-up'
+        //}).then(function (modal) {
+        //    console.log("modal-login-li.html initialization.");
+        //    $rootScope.loginModal_li = modal;
+        //    //Login Modal show();
+        //    //CacheService.remove(Enum.localStorageKeys.OAUTH_OBJ_LI);//for debugging
+        //    CacheService.get(Enum.localStorageKeys.OAUTH_OBJ_LI).then(function (data) {
+        //        console.log(Enum.localStorageKeys.OAUTH_OBJ_LI, data);
+        //        if (data == null) {
+        //            $rootScope.loginModal_li.show();
+        //        } else {
+        //            $rootScope.oauth_obj_li = JSON.parse(data);
+        //            $rootScope.syncLiUserProfile();
+        //        }
+        //    });
+        //});
+        //////Facebook
+        //$rootScope.loginModal_fb = undefined;
+        //$ionicModal.fromTemplateUrl('templates/modal-login-fb.html', {
+        //    scope: $scope,
+        //    backdropClickToClose: true,
+        //    animation: 'slide-in-up'
+        //}).then(function (modal) {
+        //    console.log("modal-login-fb.html initialization.");
+        //    $rootScope.loginModal_fb = modal;
+        //    //Login Modal show();
+        //    //@see: CacheService
+        //    CacheService.remove(Enum.localStorageKeys.OAUTH_OBJ_FB);//for debugging
+        //    CacheService.get(Enum.localStorageKeys.OAUTH_OBJ_FB).then(function (data) {
+        //        console.log(Enum.localStorageKeys.OAUTH_OBJ_FB, data);
+        //        if (data == null) {
+        //            $rootScope.loginModal_fb.show();
+        //        } else {
+        //            $rootScope.oauth_obj_fb = JSON.parse(data);
+        //            $rootScope.syncFbUserProfile();
+        //        }
+        //    });
+        //});
         ////DealDetail
         $rootScope.detailModal_deal = undefined;
         $ionicModal.fromTemplateUrl('templates/modal-detail-deal.html', {
@@ -90,8 +111,9 @@ angular.module('starter.controllers', [])
         });
         //Cleanup the modal when we're done with it!
         $scope.$on('$destroy', function () {
-            $rootScope.loginModal_fb.remove();
-            $rootScope.loginModal_li.remove();
+            $rootScope.loginModal_social.remove();
+            //$rootScope.loginModal_fb.remove();
+            //$rootScope.loginModal_li.remove();
             $rootScope,detailModal_deal.remove();
             $rootScope,detailModal_me.remove();
         });
@@ -191,7 +213,7 @@ angular.module('starter.controllers', [])
                 function (response) {
                     if (response.status === 'connected') {
                         console.log('Facebook User login succeeded');
-                        $rootScope.loginModal_fb.hide();
+                        $rootScope.loginModal_social.hide();
                         //TODO:find the access token expire time.
                         //Long term/short term conditions,@see: https://developers.facebook.com/docs/facebook-login/access-tokens
                         $rootScope.oauth_obj_fb = response.authResponse;
@@ -200,7 +222,7 @@ angular.module('starter.controllers', [])
                         //var access_token = response.authResponse.accessToken;
                         //$log.debug('Facebook login succeeded, got access token: ', access_token);
                         //Cache it.@see:https://developers.facebook.com/tools/debug/accesstoken
-                        CacheService.set(Enum.localStorageKeys.OAUTH_OBJ_FB, JSON.stringify($rootScope.oauth_obj_fb), 1 * 60 * 60);//1443168000 (in about an hour)
+                        CacheService.set(Enum.localStorageKeys.OAUTH_OBJ_SOCIAL, JSON.stringify($rootScope.oauth_obj_fb), 1 * 60 * 60);//1443168000 (in about an hour)
                         //
                         $rootScope.syncFbUserProfile();
                     } else {
@@ -308,7 +330,7 @@ angular.module('starter.controllers', [])
             //var member_id = IN.ENV.auth.member_id;
             //var oauth_expires_in = IN.ENV.auth.oauth_expires_in;//seconds
             //Cache it.
-            CacheService.set(Enum.localStorageKeys.OAUTH_OBJ_LI, JSON.stringify($rootScope.oauth_obj_li), $rootScope.oauth_obj_li.oauth_expires_in);
+            CacheService.set(Enum.localStorageKeys.OAUTH_OBJ_SOCIAL, JSON.stringify($rootScope.oauth_obj_li), $rootScope.oauth_obj_li.oauth_expires_in);
             //
             $rootScope.loginModal_li.hide();
             //

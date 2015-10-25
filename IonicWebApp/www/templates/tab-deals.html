@@ -11,7 +11,7 @@
                 <i ng-if="item.deal.discount_amount>=100" class="icon ion-ios-star"></i>
                 <i ng-if="item.deal.discount_amount>=50" class="icon ion-ios-star-half"></i>
                 <i ng-if="item.deal.discount_amount<50" class="icon ion-ios-star-outline"></i>
-                {{item.deal.short_title}}
+                {{item.deal.title}}
                 <span ng-if="item.deal.discount_amount>0" class="badge badge-positive">${{item.deal.discount_amount}}</span>
                 <span ng-if="item.deal.discount_amount<=0" class="badge badge-assertive">${{item.deal.discount_amount}}</span>
             </a>
