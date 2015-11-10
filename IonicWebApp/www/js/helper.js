@@ -17,12 +17,12 @@ var _environments = {
         }
     },
     dev: {
-        host: 'http://ec2-52-27-252-152.us-west-2.compute.amazonaws.com',
+        host: 'http://ec2-54-218-60-55.us-west-2.compute.amazonaws.com',
         config: {
             /**
              * Add any config properties you want in here for this environment
              */
-            api_endpoint_base: 'http://ec2-52-27-252-152.us-west-2.compute.amazonaws.com:8083/api',
+            api_endpoint_base: 'http://ec2-54-218-60-55.us-west-2.compute.amazonaws.com:8083/api',
             api_version: '/v1/'
         }
     },
