@@ -13,6 +13,6 @@ https://github.com/ccoenraets/OpenFB
 
 # Jenkins:
 
-Spring-boot: [![Build Status](http://ec2-54-218-63-45.us-west-2.compute.amazonaws.com:8080/buildStatus/icon?job=DEV_Snap415_Server)](http://ec2-54-218-63-45.us-west-2.compute.amazonaws.com:8080/job/DEV_Snap415_Server/)
+Spring-boot: [![Build Status](http://ec2-54-218-63-45.us-west-2.compute.amazonaws.com:8080/job/DEV_Snap415_JavaSpringBoot/badge/icon)](http://ec2-54-218-63-45.us-west-2.compute.amazonaws.com:8080/job/DEV_Snap415_JavaSpringBoot/)
 
-IonicWebApp: [![Build Status](http://ec2-54-218-63-45.us-west-2.compute.amazonaws.com:8080/job/DEV_Snap415_WebApp/badge/icon)](http://ec2-54-218-63-45.us-west-2.compute.amazonaws.com:8080/job/DEV_Snap415_WebApp/)
+IonicWebApp: [![Build Status](http://ec2-54-218-63-45.us-west-2.compute.amazonaws.com:8080/job/DEV_Snap415_IonicWebApp/badge/icon)](http://ec2-54-218-63-45.us-west-2.compute.amazonaws.com:8080/job/DEV_Snap415_IonicWebApp/)
