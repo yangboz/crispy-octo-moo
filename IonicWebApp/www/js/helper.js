@@ -13,7 +13,8 @@ var _environments = {
              * Add any config properties you want in here for this environment
              */
             api_endpoint_base: 'http://localhost:8083/api/',
-            api_version: '/v1/'
+            api_version: '/v1/',
+            ga_track_code:'UA-70365426-1'
         }
     },
     dev: {
@@ -23,7 +24,8 @@ var _environments = {
              * Add any config properties you want in here for this environment
              */
             api_endpoint_base: 'http://ec2-54-218-63-45.us-west-2.compute.amazonaws.com:8083/api',
-            api_version: '/v1/'
+            api_version: '/v1/',
+            ga_track_code:'UA-70365426-1'
         }
     },
     test: {

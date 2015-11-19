@@ -2,7 +2,10 @@ angular.module('starter.controllers', [])
 
     .controller('MainCtrl', function ($scope, $rootScope, $ionicModal, $timeout, $ionicLoading, CacheService, Enum,$log
         ,OverviewService,UserTaxEventService,$interval,UserMeService) {
-
+        //GA begin
+        if (typeof analytics !== 'undefined') {
+            analytics.trackView("MainCtrl");
+        }//GA end
         ///Loading
         $rootScope.showLoading = function () {
             $ionicLoading.show({
@@ -207,6 +210,11 @@ angular.module('starter.controllers', [])
     })
     .controller('LoginModalCtrl', function ($scope, $rootScope, ngFB, $linkedIn, UserProfileService, $log,
                                             FbUserProfileService, LiUserProfileService, $http, CacheService, Enum) {
+        //GA start
+        if (typeof analytics !== 'undefined') {
+            analytics.trackView("LoginModalCtrl");
+        }//GA end
+        //
         $scope.fbLogin = function () {
             $rootScope.showLoading();
             ngFB.login({scope: 'public_profile,email, user_location, user_relationships, user_education_history, user_work_history, user_birthday, user_posts'}).then(
@@ -376,6 +384,10 @@ angular.module('starter.controllers', [])
         }
     })
     .controller('DashCtrl', function ($scope, $rootScope, $log,$sce) {
+        //GA start
+        if (typeof analytics !== 'undefined') {
+            analytics.trackView("DashCtrl");
+        }//GA end
         //
         $scope.trustAsHtml = function(rawHtml)
         {
@@ -385,6 +397,10 @@ angular.module('starter.controllers', [])
     })
 
     .controller('UpdatesCtrl', function ($scope, $rootScope, $log,TaxEventService,$sce) {
+        //GA start
+        if (typeof analytics !== 'undefined') {
+            analytics.trackView("UpdatesCtrl");
+        }//GA end
         //Default behaviors:
 
         //
@@ -396,6 +412,10 @@ angular.module('starter.controllers', [])
     })
 
     .controller('AccountsCtrl', function ($scope, $rootScope, $log, Enum,FilingCategoryService) {
+        //GA start
+        if (typeof analytics !== 'undefined') {
+            analytics.trackView("AccountsCtrl");
+        }//GA end
         //Synchronize the user info testing
         //UserProfileService.save($rootScope.user, function (response) {
         //    $log.debug("UserProfileService.save() success!", response);
@@ -420,6 +440,10 @@ angular.module('starter.controllers', [])
     })
 
     .controller('MeModalCtrl', function ($scope, $rootScope, $log, Enum, UserProfileService,$sce) {
+        //GA start
+        if (typeof analytics !== 'undefined') {
+            analytics.trackView("MeModalCtrl");
+        }//GA end
         $scope.profile = {income:0,children:0,filingCategory:'',iconUrl:''};
         //Submit profile inputs.
         $scope.save = function(){
@@ -449,6 +473,10 @@ angular.module('starter.controllers', [])
     .controller('AccountSettingsCtrl', function ($scope, $rootScope, IncomeCategoryService, FilingCategoryService,
                                                  ChildrenCategoryService, EVCreditService, MortgageInterestService,
                                                  ChildrenKeywordsService, EITCCreditService, Enum, $ionicPopup, $log) {
+        //GA start
+        if (typeof analytics !== 'undefined') {
+            analytics.trackView("AccountSettingsCtrl");
+        }//GA end
         //ng-model
         //@see: http://odetocode.com/blogs/scott/archive/2013/06/19/using-ngoptions-in-angularjs.aspx
         ///IncomeCategory
@@ -573,12 +601,20 @@ angular.module('starter.controllers', [])
         }
     })
     .controller('AccountInvitesCtrl', function ($scope, $rootScope, $stateParams) {
+        //GA start
+        if (typeof analytics !== 'undefined') {
+            analytics.trackView("AccountInvitesCtrl");
+        }//GA end
         $scope.settings = {
             enableFriends: true
         };
     })
 
     .controller('DealsCtrl', function ($scope,$rootScope,$log,DealService,CategoryDealService,$sce) {
+        //GA start
+        if (typeof analytics !== 'undefined') {
+            analytics.trackView("DealsCtrl");
+        }//GA end
         //load deal items.
         //DealService.get({}, function (response) {
         //    $log.debug("DealService.get() success!", response);
@@ -621,6 +657,10 @@ angular.module('starter.controllers', [])
 
     })
     .controller('DealModalCtrl', function ($scope,$rootScope,$log,DealService,CategoryDealService,$sce) {
+        //GA start
+        if (typeof analytics !== 'undefined') {
+            analytics.trackView("DealModalCtrl");
+        }//GA end
         //
     })
 ;

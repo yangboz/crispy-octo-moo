@@ -13,6 +13,23 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         ngFB.init({appId: '759417430835351'});//crispy-octo-moo:1153014161379784
 
         $ionicPlatform.ready(function () {
+            //analytics.startTrackerWithId('UA-XXXX-YY') <br />
+            //analytics.trackView('Screen Title')<br />
+            //analytics.trackEvent('Category', 'Action', 'Label', Value)<br />
+            //analytics.addTransaction('ID', 'Affiliation', Revenue, Tax, Shipping, 'Currency Code')<br />
+            //analytics.addTransactionItem('ID', 'Name', 'SKU', 'Category', Price, Quantity, 'Currency Code')<br />
+            //analytics.setUserId('my-user-id')<br />
+            //analytics.debugMode()<br />
+            //GA begin
+            if (typeof analytics !== 'undefined'){
+                console.log("Google Analytics active!!!");
+                analytics.debugMode();
+                analytics.startTrackerWithId(DynamicEnvironment.get('ga_track_code'));
+                analytics.trackView('Crispy-octo-moo InoicWebApp')
+            }//GA end
+            else {
+                console.log("Google Analytics Unavailable!!!");
+            }
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
             if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
