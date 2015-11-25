@@ -12,6 +12,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
         ngFB.init({appId: '759417430835351'});//crispy-octo-moo:1153014161379784
 
+    //
+    $log.info("ionic.Platform info(platform,device,version,isWebView):",
+      ionic.Platform.platform()
+      , ionic.Platform.device()
+      , ionic.Platform.version()
+      , ionic.Platform.isWebView()
+    );
+
         $ionicPlatform.ready(function () {
             //analytics.startTrackerWithId('UA-XXXX-YY') <br />
             //analytics.trackView('Screen Title')<br />
@@ -41,6 +49,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                 // org.apache.cordova.statusbar required
                 StatusBar.styleLightContent();
             }
+
         });
 
         //stateChange event
