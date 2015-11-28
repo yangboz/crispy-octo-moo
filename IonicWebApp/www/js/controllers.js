@@ -209,7 +209,7 @@ angular.module('starter.controllers', [])
         }
     })
     .controller('LoginModalCtrl', function ($scope, $rootScope, ngFB, $linkedIn, UserProfileService, $log,
-                                            FbUserProfileService, LiUserProfileService, $http, CacheService, Enum) {
+                                            FbUserProfileService, LiUserProfileService, $http, CacheService, Enum,$ionicLoading) {
         //GA start
         if (typeof analytics !== 'undefined') {
             analytics.trackView("LoginModalCtrl");
