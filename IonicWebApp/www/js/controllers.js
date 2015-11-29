@@ -454,30 +454,30 @@ angular.module('starter.controllers', [])
           console.log('getLoginStatus', success.status);
 
           // Check if we have our user saved
-          var user = UserService.getUser('facebook');
+          //var user = UserService.getUser('facebook');
 
-          if(!user.userID){
-            getFacebookProfileInfo(success.authResponse)
-              .then(function(profileInfo) {
-                console.log("profileInfo:",profileInfo);
-                // For the purpose of this example I will store user data on local storage
-                //UserService.setUser({
-                //  authResponse: success.authResponse,
-                //  userID: profileInfo.id,
-                //  name: profileInfo.name,
-                //  email: profileInfo.email,
-                //  picture : "http://graph.facebook.com/" + success.authResponse.userID + "/picture?type=large"
-                //});
-                //
-                //$state.go('app.home');
-              }, function(fail){
-                // Fail get profile info
-                console.log('profile info fail', fail);
-              });
-          }else{
-            //$state.go('app.home');
-            console.log("No user.userID!");
-          }
+        //  if(!user.userID){
+        //    getFacebookProfileInfo(success.authResponse)
+        //      .then(function(profileInfo) {
+        //        console.log("profileInfo:",profileInfo);
+        //        // For the purpose of this example I will store user data on local storage
+        //        //UserService.setUser({
+        //        //  authResponse: success.authResponse,
+        //        //  userID: profileInfo.id,
+        //        //  name: profileInfo.name,
+        //        //  email: profileInfo.email,
+        //        //  picture : "http://graph.facebook.com/" + success.authResponse.userID + "/picture?type=large"
+        //        //});
+        //        //
+        //        //$state.go('app.home');
+        //      }, function(fail){
+        //        // Fail get profile info
+        //        console.log('profile info fail', fail);
+        //      });
+        //  }else{
+        //    //$state.go('app.home');
+        //    console.log("No user.userID!");
+        //  }
         } else {
           // If (success.status === 'not_authorized') the user is logged in to Facebook,
           // but has not authenticated your app
