@@ -223,6 +223,30 @@ angular.module('starter.controllers', [])
             $scope.fbLogin_web();
           }
         }
+        //
+        $scope.fbLoginSuccessHandler = function(response) {
+          //alert for debugging.
+          alert('fbLoginSuccessHandler:'+response);
+          if (response.status === 'connected') {
+            console.log('Facebook User login succeeded');
+            $rootScope.loginModal_social.hide();
+            //TODO:find the access token expire time.
+            //Long term/short term conditions,@see: https://developers.facebook.com/docs/facebook-login/access-tokens
+            $rootScope.oauth_obj_fb = response.authResponse;
+            $log.debug('Facebook login succeeded, response: ', $rootScope.oauth_obj_fb);
+            //$log.debug('Facebook login succeeded, authResponse: ', response.authResponse);
+            //var access_token = response.authResponse.accessToken;
+            //$log.debug('Facebook login succeeded, got access token: ', access_token);
+            //Cache it.@see:https://developers.facebook.com/tools/debug/accesstoken
+            CacheService.set(Enum.localStorageKeys.OAUTH_OBJ_SOCIAL, JSON.stringify($rootScope.oauth_obj_fb), 1 * 60 * 60);//1443168000 (in about an hour)
+            //
+            $rootScope.syncFbUserProfile();
+          } else {
+            alert('Facebook login failed');
+          }
+
+        }
+
         //FacebookLogin_WebApp
         $scope.fbLogin_web = function () {
             $rootScope.showLoading();
@@ -394,109 +418,68 @@ angular.module('starter.controllers', [])
     //FacebookLogin_mobile
     /////@see: https://ionicthemes.com/tutorials/about/native-facebook-login-with-ionic-framework
     // This is the success callback from the login method
-    var fbLoginSuccess = function(response) {
-      if (!response.authResponse){
-        fbLoginError("Cannot find the authResponse");
-        return;
-      }
 
-      var authResponse = response.authResponse;
-
-      getFacebookProfileInfo(authResponse)
-        .then(function(profileInfo) {
-          // For the purpose of this example I will store user data on local storage
-          //UserService.setUser({
-          //  authResponse: authResponse,
-          //  userID: profileInfo.id,
-          //  name: profileInfo.name,
-          //  email: profileInfo.email,
-          //  picture : "http://graph.facebook.com/" + authResponse.userID + "/picture?type=large"
-          //});
-          $ionicLoading.hide();
-          //$state.go('app.home');
-          console.log("V profileInfo:",profileInfo);
-        }, function(fail){
-          // Fail get profile info
-          console.log('profile info fail', fail);
-        });
-    };
-
-    // This is the fail callback from the login method
-    var fbLoginError = function(error){
-      console.log('fbLoginError', error);
-      $ionicLoading.hide();
-    };
-
-    // This method is to get the user profile info from the facebook api
-    var getFacebookProfileInfo = function (authResponse) {
-      var info = $q.defer();
-
-      facebookConnectPlugin.api('/me?fields=email,name&access_token=' + authResponse.accessToken, null,
-        function (response) {
-          console.log(response);
-          info.resolve(response);
-        },
-        function (response) {
-          console.log(response);
-          info.reject(response);
-        }
-      );
-      return info.promise;
-    };
 
     //This method is executed when the user press the "Login with facebook" button
     $scope.fbLogin_mobile = function() {
-      facebookConnectPlugin.getLoginStatus(function(success){
-        if(success.status === 'connected'){
-          // The user is logged in and has authenticated your app, and response.authResponse supplies
-          // the user's ID, a valid access token, a signed request, and the time the access token
-          // and signed request each expire
-          console.log('getLoginStatus', success.status);
-
-          // Check if we have our user saved
-          //var user = UserService.getUser('facebook');
-
-        //  if(!user.userID){
-        //    getFacebookProfileInfo(success.authResponse)
-        //      .then(function(profileInfo) {
-        //        console.log("profileInfo:",profileInfo);
-        //        // For the purpose of this example I will store user data on local storage
-        //        //UserService.setUser({
-        //        //  authResponse: success.authResponse,
-        //        //  userID: profileInfo.id,
-        //        //  name: profileInfo.name,
-        //        //  email: profileInfo.email,
-        //        //  picture : "http://graph.facebook.com/" + success.authResponse.userID + "/picture?type=large"
-        //        //});
-        //        //
-        //        //$state.go('app.home');
-        //      }, function(fail){
-        //        // Fail get profile info
-        //        console.log('profile info fail', fail);
-        //      });
-        //  }else{
-        //    //$state.go('app.home');
-        //    console.log("No user.userID!");
-        //  }
-        } else {
-          // If (success.status === 'not_authorized') the user is logged in to Facebook,
-          // but has not authenticated your app
-          // Else the person is not logged into Facebook,
-          // so we're not sure if they are logged into this app or not.
-
-          console.log('getLoginStatus', success.status);
-
-          $ionicLoading.show({
-            template: 'Logging in...'
-          });
-
-          // Ask the permissions you need. You can learn more about
-          // FB permissions here: https://developers.facebook.com/docs/facebook-login/permissions/v2.4
-          facebookConnectPlugin.login(['email', 'public_profile'], fbLoginSuccess, fbLoginError);
+      var fbLoginSuccess = function(response) {
+        if (!response.authResponse){
+          fbLoginError("Cannot find the authResponse");
+          return;
         }
-      });
+
+        //var authResponse = response.authResponse;
+
+        //getFacebookProfileInfo(authResponse)
+        //  .then(function(profileInfo) {
+        //    // For the purpose of this example I will store user data on local storage
+        //    //UserService.setUser({
+        //    //  authResponse: authResponse,
+        //    //  userID: profileInfo.id,
+        //    //  name: profileInfo.name,
+        //    //  email: profileInfo.email,
+        //    //  picture : "http://graph.facebook.com/" + authResponse.userID + "/picture?type=large"
+        //    //});
+        //    $ionicLoading.hide();
+        //    //$state.go('app.home');
+        //    console.log("V profileInfo:",profileInfo);
+        //  }, function(fail){
+        //    // Fail get profile info
+        //    console.log('profile info fail', fail);
+        //  });
+        $scope.fbLoginSuccessHandler(response);
+      };
+
+      // This is the fail callback from the login method
+      var fbLoginError = function(error){
+        console.log('fbLoginError', error);
+        $ionicLoading.hide();
+      };
+
+      // This method is to get the user profile info from the facebook api
+      //var getFacebookProfileInfo = function (authResponse) {
+      //  var info = $q.defer();
+      //
+      //  facebookConnectPlugin.api('/me?fields=email,name&access_token=' + authResponse.accessToken, null,
+      //    function (response) {
+      //      console.log(response);
+      //      info.resolve(response);
+      //    },
+      //    function (response) {
+      //      console.log(response);
+      //      info.reject(response);
+      //    }
+      //  );
+      //  return info.promise;
+      //};
+
+      // Ask the permissions you need. You can learn more about
+      // FB permissions here: https://developers.facebook.com/docs/facebook-login/permissions/v2.4
+      facebookConnectPlugin.login(['public_profile','email', 'user_location', 'user_relationships', 'user_education_history',
+        'user_work_history', 'user_birthday', 'user_posts'], fbLoginSuccess, fbLoginError);
     };
     })
+
     .controller('DashCtrl', function ($scope, $rootScope, $log,$sce) {
         //GA start
         if (typeof analytics !== 'undefined') {
