@@ -209,7 +209,8 @@ angular.module('starter.controllers', [])
         }
     })
     .controller('LoginModalCtrl', function ($scope, $rootScope, ngFB, $linkedIn, UserProfileService, $log,
-                                            FbUserProfileService, LiUserProfileService, $http, CacheService, Enum,$ionicLoading) {
+                                            FbUserProfileService, LiUserProfileService, $http, CacheService,
+                                            Enum,$ionicLoading) {
         //GA start
         if (typeof analytics !== 'undefined') {
             analytics.trackView("LoginModalCtrl");
@@ -233,7 +234,7 @@ angular.module('starter.controllers', [])
             //TODO:find the access token expire time.
             //Long term/short term conditions,@see: https://developers.facebook.com/docs/facebook-login/access-tokens
             $rootScope.oauth_obj_fb = response.authResponse;
-            $log.debug('Facebook login succeeded, response: ', $rootScope.oauth_obj_fb);
+            console.log('Facebook login succeeded, response: ', $rootScope.oauth_obj_fb);
             //$log.debug('Facebook login succeeded, authResponse: ', response.authResponse);
             //var access_token = response.authResponse.accessToken;
             //$log.debug('Facebook login succeeded, got access token: ', access_token);
@@ -245,6 +246,71 @@ angular.module('starter.controllers', [])
             alert('Facebook login failed');
           }
 
+        }
+        //facebook user profile handler
+        $scope.fbProfileHandler = function(user){
+          $rootScope.fbUser = user;
+          console.log("$rootScope.fbUser:", $rootScope.fbUser);
+          $rootScope.hideLoading();
+          //Sync the Facebook with token then get user profile.
+          FbUserProfileService.save({
+            'provider': Enum.socialProviders.FACEBOOK,
+            'id': user.id,
+            'token': $rootScope.oauth_obj_fb.accessToken
+          }, function (response) {
+            $log.debug("FbUserProfileService.get() success!", response);
+            //Default load overviews.
+            $rootScope.loadOverviews();
+            $rootScope.loadTaxEvents();
+            $rootScope.loadUserMe();
+          }, function (error) {
+            // failure handler
+            $log.error("FbUserProfileService.get() failed:", JSON.stringify(error));
+          });
+        }
+        //retrieve facebook user profile by web;
+        $scope.fbProfileRetrieve_web = function(){
+          ngFB.api({
+            path: '/me',
+            params: {fields: 'id,name'}
+          }).then(
+            function (user) {
+              $scope.fbProfileHandler(user);
+            },
+            function (error) {
+              alert('Facebook error: ' + error);
+              console.error('Facebook error: ' + error);
+            });
+          $rootScope.hideLoading();
+        };
+        //
+        $scope.fbProfileRetrieve_mobile = function(){
+          // This method is to get the user profile info from the facebook api
+          var getFacebookProfileInfo = function (authResponse) {
+            var info = $q.defer();
+            facebookConnectPlugin.api('/me?fields=email,name&access_token=' + authResponse.accessToken, null,
+              function (response) {
+                console.log(response);
+                info.resolve(response);
+              },
+              function (response) {
+                console.log(response);
+                info.reject(response);
+              }
+            );
+            return info.promise;
+          };
+          //
+          getFacebookProfileInfo(success.authResponse)
+            .then(function(user) {
+              //
+              $scope.fbProfileHandler(user);
+            }, function(fail){
+                // Fail get profile info
+              alert('fbProfile info fail'+ fail);
+                console.log('fbProfile info fail', fail);
+            });
+            $rootScope.hideLoading();
         }
 
         //FacebookLogin_WebApp
@@ -265,42 +331,20 @@ angular.module('starter.controllers', [])
                         //Cache it.@see:https://developers.facebook.com/tools/debug/accesstoken
                         CacheService.set(Enum.localStorageKeys.OAUTH_OBJ_SOCIAL, JSON.stringify($rootScope.oauth_obj_fb), 1 * 60 * 60);//1443168000 (in about an hour)
                         //
-                        $rootScope.syncFbUserProfile();
+                        $rootScope.syncFbUserProfile();//retrieve,handlers(parse,assemble,storage)
                     } else {
                         alert('Facebook login failed');
                     }
                 });
         };
         $rootScope.syncFbUserProfile = function () {
-            ngFB.api({
-                path: '/me',
-                params: {fields: 'id,name'}
-            }).then(
-                function (user) {
-                    $rootScope.fbUser = user;
-                    console.log("$rootScope.fbUser:", $rootScope.fbUser);
-                    $rootScope.hideLoading();
-                    //Sync the Facebook with token then get user profile.
-                    FbUserProfileService.save({
-                        'provider': Enum.socialProviders.FACEBOOK,
-                        'id': user.id,
-                        'token': $rootScope.oauth_obj_fb.accessToken
-                    }, function (response) {
-                        $log.debug("FbUserProfileService.get() success!", response);
-                        //Default load overviews.
-                        $rootScope.loadOverviews();
-                        $rootScope.loadTaxEvents();
-                        $rootScope.loadUserMe();
-                    }, function (error) {
-                        // failure handler
-                        $log.error("FbUserProfileService.get() failed:", JSON.stringify(error));
-                    });
-
-                },
-                function (error) {
-                    alert('Facebook error: ' + error);
-                    $rootScope.hideLoading();
-                });
+          $rootScope.showLoading();
+          if(ionic.Platform.isWebView())
+          {
+            $scope.fbProfileRetrieve_mobile();
+          }else{
+            $scope.fbProfileRetrieve_web();
+          }
         }
         //For testing.
         $scope.loadMoreFbInfo = function () {
