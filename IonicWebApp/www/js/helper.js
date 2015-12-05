@@ -61,7 +61,7 @@ var _environments = {
 };
 _getEnvironment = function () {
     var host = window.location.host;
-
+    console.log("_getEnvironment.host:"+host);
     if (_environment) {
         return _environment;
     }

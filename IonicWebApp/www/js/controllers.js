@@ -229,6 +229,7 @@ angular.module('starter.controllers', [])
           //alert for debugging.
           alert('fbLoginSuccessHandler:'+response);
           if (response.status === 'connected') {
+            alert('fbLoginSuccessHandler response.status === connected');
             console.log('Facebook User login succeeded');
             $rootScope.loginModal_social.hide();
             //TODO:find the access token expire time.
