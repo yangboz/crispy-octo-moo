@@ -53,5 +53,29 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>fb759417430835351</string>
+            </array>
+        </dict>
+    </array>
+    <!-- https://developers.facebook.com/docs/ios/getting-started -->
+    <key>FacebookAppID</key>
+    <string>759417430835351</string>
+    <key>FacebookDisplayName</key>
+    <string>snap415</string>
+    
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>fbauth2</string>
+    </array>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+    </dict>
 </dict>
 </plist>

@@ -16,6 +16,8 @@
 		6505C5941C152D060040E055 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6505C5921C152D060040E055 /* LaunchScreen.storyboard */; };
 		6505C59F1C152D060040E055 /* CrispyOctoMooTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6505C59E1C152D060040E055 /* CrispyOctoMooTests.m */; };
 		6505C5AA1C152D080040E055 /* CrispyOctoMooUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6505C5A91C152D080040E055 /* CrispyOctoMooUITests.m */; };
+		6505C5BA1C1530BD0040E055 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6505C5B91C1530BD0040E055 /* FBSDKCoreKit.framework */; };
+		6505C5BD1C1534E50040E055 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6505C5BC1C1534E50040E055 /* FBSDKLoginKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,8 @@
 		6505C5A51C152D070040E055 /* CrispyOctoMooUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrispyOctoMooUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6505C5A91C152D080040E055 /* CrispyOctoMooUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CrispyOctoMooUITests.m; sourceTree = "<group>"; };
 		6505C5AB1C152D080040E055 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6505C5B91C1530BD0040E055 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "FacebookSDKs-iOS-20151111/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		6505C5BC1C1534E50040E055 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = FacebookSDKs/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6505C5BD1C1534E50040E055 /* FBSDKLoginKit.framework in Frameworks */,
+				6505C5BA1C1530BD0040E055 /* FBSDKCoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +90,7 @@
 		6505C5751C152CFC0040E055 = {
 			isa = PBXGroup;
 			children = (
+				6505C5BB1C1530CE0040E055 /* Frameworks */,
 				6505C5801C152CFD0040E055 /* CrispyOctoMoo */,
 				6505C59D1C152D060040E055 /* CrispyOctoMooTests */,
 				6505C5A81C152D070040E055 /* CrispyOctoMooUITests */,
@@ -143,6 +150,15 @@
 				6505C5AB1C152D080040E055 /* Info.plist */,
 			);
 			path = CrispyOctoMooUITests;
+			sourceTree = "<group>";
+		};
+		6505C5BB1C1530CE0040E055 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6505C5BC1C1534E50040E055 /* FBSDKLoginKit.framework */,
+				6505C5B91C1530BD0040E055 /* FBSDKCoreKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -421,6 +437,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FacebookSDKs",
+				);
 				INFOPLIST_FILE = CrispyOctoMoo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -434,6 +454,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FacebookSDKs",
+				);
 				INFOPLIST_FILE = CrispyOctoMoo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
