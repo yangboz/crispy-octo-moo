@@ -1,0 +1,41 @@
+//
+//  CrispyOctoMoo-Prefix.pch
+//  CrispyOctoMoo
+//
+//  Created by yangboz on 12/7/15.
+//  Copyright © 2015 SMARTKIT.INFO. All rights reserved.
+//
+
+#ifndef CrispyOctoMoo_Prefix_pch
+#define CrispyOctoMoo_Prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.//
+
+// Prefix header for all source files of the 'CrispyOctoMoo' target in the 'CrispyOctoMoo' project
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+#endif
+
+#if __IPHONE_OS_VERSION_MIN_REQUIRED
+#import <SystemConfiguration/SystemConfiguration.h>
+#import <MobileCoreServices/MobileCoreServices.h>
+#else
+#import <SystemConfiguration/SystemConfiguration.h>
+#import <CoreServices/CoreServices.h>
+#endif
+
+// Make RestKit globally available
+#import <RestKit/RestKit.h>
+
+#endif /* CrispyOctoMoo_Prefix_pch */

@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "395590E4263AD170CF2F6C14D38E62D3A4F0D20B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "D78740BB5B159EA13C82AB5AF1D92A0F3C627237" : 0,
+    "395590E4263AD170CF2F6C14D38E62D3A4F0D20B" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "E084E163-D08A-44F3-919D-3FF17138A3F6",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "D78740BB5B159EA13C82AB5AF1D92A0F3C627237" : "restkit\/",
+    "395590E4263AD170CF2F6C14D38E62D3A4F0D20B" : "crispy-octo-moo\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "CrispyOctoMoo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "iOS\/CrispyOctoMoo\/CrispyOctoMoo.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/yangboz\/crispy-octo-moo.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "395590E4263AD170CF2F6C14D38E62D3A4F0D20B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/restkit\/restkit",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D78740BB5B159EA13C82AB5AF1D92A0F3C627237"
+    }
+  ]
+}

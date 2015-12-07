@@ -12,6 +12,8 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKLoginKit/FBSDKLoginButton.h>
 
+#import "Snap415API.h"
+
 @interface FirstViewController : UIViewController
 
 

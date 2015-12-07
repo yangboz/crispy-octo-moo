@@ -33,8 +33,43 @@
 }
 
 - (void)fbLoginHandler{
+    NSString *fbUserId = [[FBSDKAccessToken currentAccessToken] userID];
     NSString *fbAccessTokenStr = [[FBSDKAccessToken currentAccessToken] tokenString];
-    NSLog(@"fbAccessTokenStr:%@",fbAccessTokenStr);
+    NSLog(@"fbAccessToken id:%@,token:%@",fbUserId,fbAccessTokenStr);
+    //@TODO:Cache it.@see:https://developers.facebook.com/tools/debug/accesstoken
+//    CacheService.set(Enum.localStorageKeys.OAUTH_OBJ_SOCIAL, JSON.stringify($rootScope.oauth_obj_fb), 1 * 60 * 60);//1443168000 (in about an hour)
+    //retrieve,handlers(parse,assemble,storage)
+//    [self syncFbProfile];
+    [self fbProfileHandler:fbUserId withToken:fbAccessTokenStr];
+}
+
+//facebook user profile handler
+-(void)fbProfileHandler:(NSString *)userId withToken:(NSString *)token
+{
+//    $rootScope.fbUser = user;
+//    console.log("$rootScope.fbUser:", $rootScope.fbUser);
+//    $rootScope.hideLoading();
+    //Sync the Facebook with token then get user profile.
+//    FbUserProfileService.save({
+//        'provider': Enum.socialProviders.FACEBOOK,
+//        'id': user.id,
+//        'token': $rootScope.oauth_obj_fb.accessToken
+//    }, function (response) {
+//        $log.debug("FbUserProfileService.get() success!", response);
+//        //Default load overviews.
+//        $rootScope.loadOverviews();
+//        $rootScope.loadTaxEvents();
+//        $rootScope.loadUserMe();
+//    }, function (error) {
+//        // failure handler
+//        $log.error("FbUserProfileService.get() failed:", JSON.stringify(error));
+//    });
+    Snap415Token *snap415Token = [[Snap415Token alloc] init];
+    snap415Token.id = userId;
+    snap415Token.token = token;
+    snap415Token.provider = @"facebook";
+    
+    [[Snap415API sharedInstance] syncUserProfile:snap415Token];
 }
 
 - (void)didReceiveMemoryWarning {
