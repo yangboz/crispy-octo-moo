@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <FBSDKLoginKit/FBSDKLoginButton.h>
+
 @interface FirstViewController : UIViewController
 
 

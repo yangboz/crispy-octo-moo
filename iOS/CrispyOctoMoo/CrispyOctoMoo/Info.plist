@@ -62,20 +62,56 @@
             </array>
         </dict>
     </array>
-    <!-- https://developers.facebook.com/docs/ios/getting-started -->
-    <key>FacebookAppID</key>
-    <string>759417430835351</string>
-    <key>FacebookDisplayName</key>
-    <string>snap415</string>
-    
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>fbauth2</string>
-    </array>
-    <key>NSAppTransportSecurity</key>
-    <dict>
-        <key>NSAllowsArbitraryLoads</key>
-        <true/>
-    </dict>
+    <!--https://developers.facebook.com/quickstarts/759417430835351/?platform=ios -->
+     <key>CFBundleURLTypes</key>
+     <array>
+     <dict>
+     <key>CFBundleURLSchemes</key>
+     <array>
+     <string>fb759417430835351</string>
+     </array>
+     </dict>
+     </array>
+     <key>FacebookAppID</key>
+     <string>759417430835351</string>
+     <key>FacebookDisplayName</key>
+     <string>snap415</string>
+     
+     <key>NSAppTransportSecurity</key>
+     <dict>
+         <key>NSExceptionDomains</key>
+         <dict>
+             <key>facebook.com</key>
+             <dict>
+                 <key>NSIncludesSubdomains</key>
+                 <true/>
+                 <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+                 <false/>
+             </dict>
+             <key>fbcdn.net</key>
+             <dict>
+                 <key>NSIncludesSubdomains</key>
+                 <true/>
+                 <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+                 <false/>
+             </dict>
+             <key>akamaihd.net</key>
+             <dict>
+                 <key>NSIncludesSubdomains</key>
+                 <true/>
+                 <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+                 <false/>
+             </dict>
+         </dict>
+     </dict>
+     
+     <key>LSApplicationQueriesSchemes</key>
+     <array>
+         <string>fbapi</string>
+         <string>fb-messenger-api</string>
+         <string>fbauth2</string>
+         <string>fbshareextension</string>
+     </array>
+     
 </dict>
 </plist>
