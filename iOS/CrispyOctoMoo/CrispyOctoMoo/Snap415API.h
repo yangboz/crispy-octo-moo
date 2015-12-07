@@ -19,5 +19,5 @@
 -(NSArray *)getMe;
 -(NSArray *)getEvents;
 -(NSArray *)getDeals;
--(NSArray *)getOverview;
+-(NSArray *)getOverviews;
 @end

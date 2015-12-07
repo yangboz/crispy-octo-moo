@@ -10,6 +10,18 @@
 
 #import <RestKit/RestKit.h>
 
+//@see: http://stackoverflow.com/questions/5643514/how-to-define-an-nsstring-for-global-use
+#ifdef DEV
+#define kAPIEndpointHost @"http://ec2-54-218-63-45.us-west-2.compute.amazonaws.com:8083/api/v1/"
+#else//LOCAL
+#define kAPIEndpointHost @"http://localhost:8083/api/v1/"
+#endif
+//@see: https://github.com/yangboz/crispy-octo-moo/wiki/API-Services
+#define kAPI_user_me (kAPIEndpointHost @"user/me")
+#define kAPI_events (kAPIEndpointHost @"taxEvents")
+#define kAPI_deals (kAPIEndpointHost @"deals")
+#define kAPI_overviews (kAPIEndpointHost @"overviews")
+
 @implementation Snap415API
 
 - (id)init
@@ -51,13 +63,19 @@
     // under the 'user/me' key path
     RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:requestMapping objectClass:[Snap415UserProfile class] rootKeyPath:@"data" method:RKRequestMethodAny];
     
-    RKObjectManager *manager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:@"http://ec2-54-218-63-45.us-west-2.compute.amazonaws.com:8083/api/v1/"]];
+    RKObjectManager *manager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:kAPI_user_me]];
     [manager addRequestDescriptor:requestDescriptor];
     [manager addResponseDescriptor:articleDescriptor];
     
     // POST to create
-    [manager postObject:snap415Token path:@"http://ec2-54-218-63-45.us-west-2.compute.amazonaws.com:8083/api/v1/user/me" parameters:nil success:nil failure:nil];
+    [manager postObject:snap415Token path:kAPI_user_me parameters:nil success:nil failure:nil];
     //
+    // PATCH to update
+//    article.body = @"New Body";
+//    [manager patchObject:article path:@"/articles/1234" parameters:nil success:nil failure:nil];
+//    
+//    // DELETE to destroy
+//    [manager deleteObject:article path:@"/articles/1234" parameters:nil success:nil failure:nil];
     return YES;
 }
 -(NSArray *)getMe
@@ -72,7 +90,7 @@
 {
     return NULL;
 }
--(NSArray *)getOverview
+-(NSArray *)getOverviews
 {
     return NULL;
 }
