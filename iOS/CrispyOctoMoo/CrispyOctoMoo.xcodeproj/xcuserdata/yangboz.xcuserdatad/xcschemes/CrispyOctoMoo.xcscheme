@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "65DC4ADE1C131BB7006C3206"
+               BlueprintIdentifier = "6505C57D1C152CFC0040E055"
                BuildableName = "CrispyOctoMoo.app"
                BlueprintName = "CrispyOctoMoo"
                ReferencedContainer = "container:CrispyOctoMoo.xcodeproj">
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "65DC4AFA1C131BBB006C3206"
+               BlueprintIdentifier = "6505C5991C152D060040E055"
                BuildableName = "CrispyOctoMooTests.xctest"
                BlueprintName = "CrispyOctoMooTests"
                ReferencedContainer = "container:CrispyOctoMoo.xcodeproj">
@@ -42,7 +42,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "65DC4B051C131BBC006C3206"
+               BlueprintIdentifier = "6505C5A41C152D070040E055"
                BuildableName = "CrispyOctoMooUITests.xctest"
                BlueprintName = "CrispyOctoMooUITests"
                ReferencedContainer = "container:CrispyOctoMoo.xcodeproj">
@@ -52,7 +52,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "65DC4ADE1C131BB7006C3206"
+            BlueprintIdentifier = "6505C57D1C152CFC0040E055"
             BuildableName = "CrispyOctoMoo.app"
             BlueprintName = "CrispyOctoMoo"
             ReferencedContainer = "container:CrispyOctoMoo.xcodeproj">
@@ -75,7 +75,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "65DC4ADE1C131BB7006C3206"
+            BlueprintIdentifier = "6505C57D1C152CFC0040E055"
             BuildableName = "CrispyOctoMoo.app"
             BlueprintName = "CrispyOctoMoo"
             ReferencedContainer = "container:CrispyOctoMoo.xcodeproj">
@@ -94,7 +94,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "65DC4ADE1C131BB7006C3206"
+            BlueprintIdentifier = "6505C57D1C152CFC0040E055"
             BuildableName = "CrispyOctoMoo.app"
             BlueprintName = "CrispyOctoMoo"
             ReferencedContainer = "container:CrispyOctoMoo.xcodeproj">
