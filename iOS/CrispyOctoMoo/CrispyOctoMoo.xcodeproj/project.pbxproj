@@ -21,6 +21,7 @@
 		6505C5C21C1589AC0040E055 /* Snap415API.m in Sources */ = {isa = PBXBuildFile; fileRef = 6505C5C11C1589AC0040E055 /* Snap415API.m */; };
 		6505C5C91C15902A0040E055 /* Snap415Token.m in Sources */ = {isa = PBXBuildFile; fileRef = 6505C5C81C15902A0040E055 /* Snap415Token.m */; };
 		652204AA1C15BA9000AC45CD /* Snap415UserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 652204A91C15BA9000AC45CD /* Snap415UserProfile.m */; };
+		652204AC1C15E5C100AC45CD /* icons in Resources */ = {isa = PBXBuildFile; fileRef = 652204AB1C15E5C100AC45CD /* icons */; };
 		905ED5A2A9F477941F17EA3F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27D3CDDFF7269ACA3912C959 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +71,7 @@
 		652204A71C15B7B900AC45CD /* CrispyOctoMoo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CrispyOctoMoo-Prefix.pch"; sourceTree = "<group>"; };
 		652204A81C15BA9000AC45CD /* Snap415UserProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Snap415UserProfile.h; sourceTree = "<group>"; };
 		652204A91C15BA9000AC45CD /* Snap415UserProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Snap415UserProfile.m; sourceTree = "<group>"; };
+		652204AB1C15E5C100AC45CD /* icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = icons; sourceTree = "<group>"; };
 		A3D226CB33FD43D1F1418341 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D335C52C33EB0229AEBCDA90 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,6 +129,7 @@
 		6505C5801C152CFD0040E055 /* CrispyOctoMoo */ = {
 			isa = PBXGroup;
 			children = (
+				652204AB1C15E5C100AC45CD /* icons */,
 				6505C5C51C158B330040E055 /* viewControllers */,
 				6505C5C41C158B290040E055 /* models */,
 				6505C5841C152CFE0040E055 /* AppDelegate.h */,
@@ -326,6 +329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6505C5941C152D060040E055 /* LaunchScreen.storyboard in Resources */,
+				652204AC1C15E5C100AC45CD /* icons in Resources */,
 				6505C5911C152D050040E055 /* Assets.xcassets in Resources */,
 				6505C58F1C152D020040E055 /* Main.storyboard in Resources */,
 			);
