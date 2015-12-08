@@ -1,8 +1,10 @@
 package crispy_octo_moo.configs;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.core.env.Environment;
 import org.springframework.social.config.annotation.EnableSocial;
 import org.springframework.social.connect.Connection;
@@ -10,13 +12,13 @@ import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.facebook.api.impl.FacebookTemplate;
+import org.springframework.social.facebook.api.impl.ComFacebookTemplate;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.linkedin.api.LinkedIn;
 import org.springframework.social.linkedin.api.impl.LinkedInTemplate;
 import org.springframework.social.linkedin.connect.LinkedInConnectionFactory;
 
-import javax.inject.Inject;
+//import org.springframework.social.facebook.api.impl.FacebookTemplate;
 
 /**
  * Created by yangboz on 15/9/20.
@@ -25,6 +27,8 @@ import javax.inject.Inject;
 @EnableSocial
 public class SocialApiConfig {
 
+    private static String sqootApiKey;
+    private static String sqootApiSecret;
     //
 //    @Bean
 //    @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
@@ -34,9 +38,6 @@ public class SocialApiConfig {
 //    }
     @Autowired
     Environment environment;
-
-    private static String sqootApiKey;
-    private static String sqootApiSecret;
 
     public static String getSqootApiKey() {
         return sqootApiKey;
@@ -83,7 +84,7 @@ public class SocialApiConfig {
     @Scope(value = "request", proxyMode = ScopedProxyMode.INTERFACES)
     public Facebook facebook(ConnectionRepository connectionRepository) {
         Connection<Facebook> facebook = connectionRepository.findPrimaryConnection(Facebook.class);
-        return facebook != null ? facebook.getApi() : new FacebookTemplate("");
+        return facebook != null ? facebook.getApi() : new ComFacebookTemplate("");
     }
 
 

@@ -1,7 +1,5 @@
 package crispy_octo_moo.service.impl;
 
-import crispy_octo_moo.domain.FbUserProfile;
-import crispy_octo_moo.dto.JsonObject;
 import crispy_octo_moo.dto.Snap415Token;
 import crispy_octo_moo.repository.FacebookUserRepository;
 import crispy_octo_moo.service.FacebookUserService;
@@ -16,7 +14,7 @@ import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.Post;
 import org.springframework.social.facebook.api.User;
-import org.springframework.social.facebook.api.impl.FacebookTemplate;
+import org.springframework.social.facebook.api.impl.ComFacebookTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -58,12 +56,15 @@ public class FacebookUserServiceImpl implements FacebookUserService {
         LOG.debug("connectionRepository.findAllConnections():" + connectionRepository.findAllConnections().toString());
         Connection<Facebook> connection = connectionRepository.findPrimaryConnection(Facebook.class);
         LOG.debug("Connection<Facebook>:" + connection);
-        Facebook facebook = connection != null ? connection.getApi() : new FacebookTemplate(token.getToken());
+
+        Facebook facebook = connection != null ? connection.getApi() : new ComFacebookTemplate(token.getToken());
         LOG.debug("facebook,isAuthorized():" + facebook.isAuthorized() + "," + facebook.toString());
         //Retrieving a user's profile data.
         //@see: http://docs.spring.io/spring-social-facebook/docs/2.0.1.RELEASE/reference/htmlsingle/
-        //@see:
-        org.springframework.social.facebook.api.User profile = facebook.userOperations().getUserProfile();
+        //@issue:http://stackoverflow.com/questions/34128050/how-do-i-report-a-severe-bug-to-the-spring-social-facebook-team-login-fails-aft
+//        org.springframework.social.facebook.api.User profile = facebook.userOperations().getUserProfile();
+        ComFacebookTemplate facebookTemplate = (ComFacebookTemplate) facebook;
+        org.springframework.social.facebook.api.User profile = facebookTemplate.getUserProfile();
 //        LOG.info("Raw facebook user profile:" + profile.toString());
         LOG.info("Raw facebook user profile,getBirthday:" + profile.getBirthday() + ",getEducation:" + profile.getEducation().toArray().toString()
                 + ",getWork" + profile.getWork().toArray().toString() + ",getRelationshipStatus:" + profile.getRelationshipStatus());
@@ -82,7 +83,7 @@ public class FacebookUserServiceImpl implements FacebookUserService {
 //		String accessToken = "f8FX29g..."; // access token received from Facebook after OAuth authorization
 //		Facebook facebook = new FacebookTemplate(accessToken);
         Connection<Facebook> connection = connectionRepository.findPrimaryConnection(Facebook.class);
-        Facebook facebook = connection != null ? connection.getApi() : new FacebookTemplate(token.getToken());
+        Facebook facebook = connection != null ? connection.getApi() : new ComFacebookTemplate(token.getToken());
         //Retrieving a user's profile data.
         //@see: http://docs.spring.io/spring-social-facebook/docs/2.0.1.RELEASE/reference/htmlsingle/
         PagedList<Post> fbPosts = facebook.feedOperations().getPosts();

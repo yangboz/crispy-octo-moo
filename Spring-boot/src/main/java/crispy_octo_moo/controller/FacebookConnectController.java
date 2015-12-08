@@ -3,36 +3,23 @@
  */
 package crispy_octo_moo.controller;
 
-import javax.inject.Inject;
-import javax.validation.Valid;
-
+import com.wordnik.swagger.annotations.ApiOperation;
 import crispy_octo_moo.consts.Constants;
+import crispy_octo_moo.dto.Snap415Token;
 import crispy_octo_moo.service.FacebookUserService;
 import crispy_octo_moo.service.Snap415PersistenceService;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.social.connect.Connection;
-import org.springframework.social.connect.ConnectionRepository;
-import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.Post;
 import org.springframework.social.facebook.api.User;
-import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.wordnik.swagger.annotations.ApiOperation;
-
-import crispy_octo_moo.domain.FbUserProfile;
-import crispy_octo_moo.dto.JsonObject;
-import crispy_octo_moo.dto.Snap415Token;
-import crispy_octo_moo.repository.FacebookUserRepository;
+import javax.validation.Valid;
 
 /**
  * The Class FacebookConnectController.
