@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "Snap415API.h"
 
 @interface CrispyOctoMooTests : XCTestCase
 
@@ -14,9 +15,14 @@
 
 @implementation CrispyOctoMooTests
 
+Snap415API *_snap415API;
+
+
+
 - (void)setUp {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
+    _snap415API = [Snap415API sharedInstance];
 }
 
 - (void)tearDown {
@@ -27,6 +33,8 @@
 - (void)testExample {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
+    NSArray *overviews = [_snap415API getOverviews];
+    XCTAssertNotNil(overviews);
 }
 
 - (void)testPerformanceExample {

@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		6505C5831C152CFE0040E055 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6505C5821C152CFE0040E055 /* main.m */; };
 		6505C5861C152CFF0040E055 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6505C5851C152CFF0040E055 /* AppDelegate.m */; };
-		6505C5891C152CFF0040E055 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6505C5881C152CFF0040E055 /* FirstViewController.m */; };
-		6505C58C1C152D000040E055 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6505C58B1C152D000040E055 /* SecondViewController.m */; };
+		6505C5891C152CFF0040E055 /* OverviewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6505C5881C152CFF0040E055 /* OverviewsViewController.m */; };
+		6505C58C1C152D000040E055 /* EventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6505C58B1C152D000040E055 /* EventsViewController.m */; };
 		6505C58F1C152D020040E055 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6505C58D1C152D020040E055 /* Main.storyboard */; };
 		6505C5911C152D050040E055 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6505C5901C152D050040E055 /* Assets.xcassets */; };
 		6505C5941C152D060040E055 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6505C5921C152D060040E055 /* LaunchScreen.storyboard */; };
@@ -22,6 +22,7 @@
 		6505C5C91C15902A0040E055 /* Snap415Token.m in Sources */ = {isa = PBXBuildFile; fileRef = 6505C5C81C15902A0040E055 /* Snap415Token.m */; };
 		652204AA1C15BA9000AC45CD /* Snap415UserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 652204A91C15BA9000AC45CD /* Snap415UserProfile.m */; };
 		652204AC1C15E5C100AC45CD /* icons in Resources */ = {isa = PBXBuildFile; fileRef = 652204AB1C15E5C100AC45CD /* icons */; };
+		652204B01C1662AB00AC45CD /* WebSiteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 652204AF1C1662AB00AC45CD /* WebSiteObject.m */; };
 		905ED5A2A9F477941F17EA3F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27D3CDDFF7269ACA3912C959 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -48,10 +49,10 @@
 		6505C5821C152CFE0040E055 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6505C5841C152CFE0040E055 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6505C5851C152CFF0040E055 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		6505C5871C152CFF0040E055 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		6505C5881C152CFF0040E055 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		6505C58A1C152CFF0040E055 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		6505C58B1C152D000040E055 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		6505C5871C152CFF0040E055 /* OverviewsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OverviewsViewController.h; sourceTree = "<group>"; };
+		6505C5881C152CFF0040E055 /* OverviewsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OverviewsViewController.m; sourceTree = "<group>"; };
+		6505C58A1C152CFF0040E055 /* EventsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventsViewController.h; sourceTree = "<group>"; };
+		6505C58B1C152D000040E055 /* EventsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventsViewController.m; sourceTree = "<group>"; };
 		6505C58E1C152D020040E055 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6505C5901C152D050040E055 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6505C5931C152D060040E055 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -72,6 +73,8 @@
 		652204A81C15BA9000AC45CD /* Snap415UserProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Snap415UserProfile.h; sourceTree = "<group>"; };
 		652204A91C15BA9000AC45CD /* Snap415UserProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Snap415UserProfile.m; sourceTree = "<group>"; };
 		652204AB1C15E5C100AC45CD /* icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = icons; sourceTree = "<group>"; };
+		652204AE1C1662AB00AC45CD /* WebSiteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebSiteObject.h; sourceTree = "<group>"; };
+		652204AF1C1662AB00AC45CD /* WebSiteObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebSiteObject.m; sourceTree = "<group>"; };
 		A3D226CB33FD43D1F1418341 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D335C52C33EB0229AEBCDA90 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -134,10 +137,10 @@
 				6505C5C41C158B290040E055 /* models */,
 				6505C5841C152CFE0040E055 /* AppDelegate.h */,
 				6505C5851C152CFF0040E055 /* AppDelegate.m */,
-				6505C5871C152CFF0040E055 /* FirstViewController.h */,
-				6505C5881C152CFF0040E055 /* FirstViewController.m */,
-				6505C58A1C152CFF0040E055 /* SecondViewController.h */,
-				6505C58B1C152D000040E055 /* SecondViewController.m */,
+				6505C5871C152CFF0040E055 /* OverviewsViewController.h */,
+				6505C5881C152CFF0040E055 /* OverviewsViewController.m */,
+				6505C58A1C152CFF0040E055 /* EventsViewController.h */,
+				6505C58B1C152D000040E055 /* EventsViewController.m */,
 				6505C58D1C152D020040E055 /* Main.storyboard */,
 				6505C5901C152D050040E055 /* Assets.xcassets */,
 				6505C5921C152D060040E055 /* LaunchScreen.storyboard */,
@@ -200,6 +203,7 @@
 		6505C5C41C158B290040E055 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				652204AD1C16628300AC45CD /* dto */,
 				6505C5C31C158B200040E055 /* vo */,
 			);
 			name = models;
@@ -210,6 +214,15 @@
 			children = (
 			);
 			name = viewControllers;
+			sourceTree = "<group>";
+		};
+		652204AD1C16628300AC45CD /* dto */ = {
+			isa = PBXGroup;
+			children = (
+				652204AE1C1662AB00AC45CD /* WebSiteObject.h */,
+				652204AF1C1662AB00AC45CD /* WebSiteObject.m */,
+			);
+			name = dto;
 			sourceTree = "<group>";
 		};
 		7F4636ED5CECB36EE4D0EE16 /* Pods */ = {
@@ -406,10 +419,11 @@
 			files = (
 				6505C5C21C1589AC0040E055 /* Snap415API.m in Sources */,
 				6505C5C91C15902A0040E055 /* Snap415Token.m in Sources */,
-				6505C58C1C152D000040E055 /* SecondViewController.m in Sources */,
+				6505C58C1C152D000040E055 /* EventsViewController.m in Sources */,
 				652204AA1C15BA9000AC45CD /* Snap415UserProfile.m in Sources */,
+				652204B01C1662AB00AC45CD /* WebSiteObject.m in Sources */,
 				6505C5861C152CFF0040E055 /* AppDelegate.m in Sources */,
-				6505C5891C152CFF0040E055 /* FirstViewController.m in Sources */,
+				6505C5891C152CFF0040E055 /* OverviewsViewController.m in Sources */,
 				6505C5831C152CFE0040E055 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

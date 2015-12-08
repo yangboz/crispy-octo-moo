@@ -21,6 +21,12 @@
 #define kAPI_events (kAPIEndpointHost @"taxEvents")
 #define kAPI_deals (kAPIEndpointHost @"deals")
 #define kAPI_overviews (kAPIEndpointHost @"overviews")
+//Notification Center post names;
+
+#define kNCpN_get_overviews @"getOverviewsSucc"
+#define kNCpN_get_me @"getMeSucc"
+#define kNCpN_get_events @"getEventsSucc"
+#define kNCpN_get_deals @"getDealsSucc"
 
 @implementation Snap415API
 
@@ -84,6 +90,7 @@
 }
 -(NSArray *)getEvents
 {
+    
     return NULL;
 }
 -(NSArray *)getDeals
@@ -92,6 +99,14 @@
 }
 -(NSArray *)getOverviews
 {
+    [[RKObjectManager sharedManager] getObjectsAtPath:kAPI_overviews parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+            NSLog(@"RKMappingResult: %@", mappingResult.description);
+            NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult forKey:kNCpN_get_overviews];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_get_overviews object:dictObj];
+        }
+        failure:^(RKObjectRequestOperation *operation, NSError *error) {
+            NSLog(@"What do you mean by 'there is no coffee?': %@", error);
+        }];
     return NULL;
 }
 @end

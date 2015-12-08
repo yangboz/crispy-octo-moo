@@ -1,5 +1,5 @@
 //
-//  FirstViewController.h
+//  OverviewsViewController.h
 //  CrispyOctoMoo
 //
 //  Created by yangboz on 12/7/15.
@@ -14,7 +14,7 @@
 
 #import "Snap415API.h"
 
-@interface FirstViewController : UIViewController
+@interface OverviewsViewController : UIViewController
 
 
 @end

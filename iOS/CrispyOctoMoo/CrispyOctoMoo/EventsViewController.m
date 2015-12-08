@@ -1,18 +1,18 @@
 //
-//  SecondViewController.m
+//  EventsViewController.m
 //  CrispyOctoMoo
 //
 //  Created by yangboz on 12/7/15.
 //  Copyright © 2015 SMARTKIT.INFO. All rights reserved.
 //
 
-#import "SecondViewController.h"
+#import "EventsViewController.h"
 
-@interface SecondViewController ()
+@interface EventsViewController ()
 
 @end
 
-@implementation SecondViewController
+@implementation EventsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

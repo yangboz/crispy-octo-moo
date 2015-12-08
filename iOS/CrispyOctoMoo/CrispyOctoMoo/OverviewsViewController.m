@@ -1,23 +1,27 @@
 //
-//  FirstViewController.m
+//  OverviewsViewController.m
 //  CrispyOctoMoo
 //
 //  Created by yangboz on 12/7/15.
 //  Copyright © 2015 SMARTKIT.INFO. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "OverviewsViewController.h"
 
 
 
-@interface FirstViewController()
+@interface OverviewsViewController()
 
 @end
 
-@implementation FirstViewController
+@implementation OverviewsViewController
+
+Snap415API *_snap415API;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //Variables init
+    _snap415API = [Snap415API sharedInstance];
     // Do any additional setup after loading the view, typically from a nib.
     //@see: https://developers.facebook.com/docs/reference/ios/4.6/class/FBSDKLoginButton/
     FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
@@ -30,7 +34,13 @@
     //NotificationCenter
     ///implements of FBSDKLoginButtonDelegate
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fbLoginHandler) name:FBSDKAccessTokenDidChangeNotification object:nil] ;
+    //        $rootScope.loadOverviews();
+    NSArray *overviews = [_snap415API getOverviews];
+    //        $rootScope.loadTaxEvents();
+    //        $rootScope.loadUserMe();
+    
 }
+
 
 - (void)fbLoginHandler{
     NSString *fbUserId = [[FBSDKAccessToken currentAccessToken] userID];

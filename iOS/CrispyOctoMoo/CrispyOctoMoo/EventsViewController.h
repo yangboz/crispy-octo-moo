@@ -1,5 +1,5 @@
 //
-//  SecondViewController.h
+//  EventsViewController.h
 //  CrispyOctoMoo
 //
 //  Created by yangboz on 12/7/15.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SecondViewController : UIViewController
+@interface EventsViewController : UIViewController
 
 
 @end
