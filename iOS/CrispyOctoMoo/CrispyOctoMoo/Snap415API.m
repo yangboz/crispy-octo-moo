@@ -28,6 +28,8 @@
 #define kNCpN_get_events @"getEventsSucc"
 #define kNCpN_get_deals @"getDealsSucc"
 
+#import "WebSiteObject.h"
+
 @implementation Snap415API
 
 - (id)init
@@ -97,16 +99,28 @@
 {
     return NULL;
 }
+
 -(NSArray *)getOverviews
 {
-    [[RKObjectManager sharedManager] getObjectsAtPath:kAPI_overviews parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-            NSLog(@"RKMappingResult: %@", mappingResult.description);
-            NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult forKey:kNCpN_get_overviews];
-            [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_get_overviews object:dictObj];
-        }
-        failure:^(RKObjectRequestOperation *operation, NSError *error) {
-            NSLog(@"What do you mean by 'there is no coffee?': %@", error);
-        }];
+    RKObjectMapping* articleMapping = [RKObjectMapping mappingForClass:[WebSiteObject class]];
+    [articleMapping addAttributeMappingsFromDictionary:@{
+                                                         @"footer": @"footer",
+                                                         @"body": @"body",
+                                                         @"header": @"header"
+                                                         }];
+    
+    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:articleMapping method:RKRequestMethodAny pathPattern:nil keyPath:@"data" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    
+    NSURL *URL = [NSURL URLWithString:kAPI_overviews];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    RKObjectRequestOperation *objectRequestOperation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[ responseDescriptor ]];
+    [objectRequestOperation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        RKLogInfo(@"Load collection of WebSiteObjects: %@", mappingResult.array);
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        RKLogError(@"Operation failed with error: %@", error);
+    }];
+    
+    [objectRequestOperation start];
     return NULL;
 }
 @end
