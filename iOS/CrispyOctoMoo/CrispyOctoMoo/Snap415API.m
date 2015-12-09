@@ -21,12 +21,7 @@
 #define kAPI_events (kAPIEndpointHost @"taxEvents")
 #define kAPI_deals (kAPIEndpointHost @"deals")
 #define kAPI_overviews (kAPIEndpointHost @"overviews")
-//Notification Center post names;
 
-#define kNCpN_get_overviews @"getOverviewsSucc"
-#define kNCpN_get_me @"getMeSucc"
-#define kNCpN_get_events @"getEventsSucc"
-#define kNCpN_get_deals @"getDealsSucc"
 
 #import "WebSiteObject.h"
 
@@ -86,21 +81,17 @@
 //    [manager deleteObject:article path:@"/articles/1234" parameters:nil success:nil failure:nil];
     return YES;
 }
--(NSArray *)getMe
+-(void)getMe
 {
-    return NULL;
 }
--(NSArray *)getEvents
+-(void)loadTaxEvents
 {
-    
-    return NULL;
 }
--(NSArray *)getDeals
+-(void)loadDeals
 {
-    return NULL;
 }
 
--(NSArray *)getOverviews
+-(void)loadOverviews
 {
     RKObjectMapping* articleMapping = [RKObjectMapping mappingForClass:[WebSiteObject class]];
     [articleMapping addAttributeMappingsFromDictionary:@{
@@ -116,11 +107,15 @@
     RKObjectRequestOperation *objectRequestOperation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[ responseDescriptor ]];
     [objectRequestOperation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         RKLogInfo(@"Load collection of WebSiteObjects: %@", mappingResult.array);
+        //
+        NSLog(@"RKMappingResult: %@", mappingResult.description);
+        NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult forKey:kNCpN_load_overviews];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_overviews object:dictObj];
+        
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         RKLogError(@"Operation failed with error: %@", error);
     }];
-    
+    //load begin
     [objectRequestOperation start];
-    return NULL;
 }
 @end

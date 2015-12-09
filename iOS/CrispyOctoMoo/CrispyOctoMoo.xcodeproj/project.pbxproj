@@ -20,6 +20,16 @@
 		6505C5BD1C1534E50040E055 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6505C5BC1C1534E50040E055 /* FBSDKLoginKit.framework */; };
 		6505C5C21C1589AC0040E055 /* Snap415API.m in Sources */ = {isa = PBXBuildFile; fileRef = 6505C5C11C1589AC0040E055 /* Snap415API.m */; };
 		6505C5C91C15902A0040E055 /* Snap415Token.m in Sources */ = {isa = PBXBuildFile; fileRef = 6505C5C81C15902A0040E055 /* Snap415Token.m */; };
+		6517AC271C18886700365394 /* ChildrenCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6517AC261C18886700365394 /* ChildrenCategory.m */; };
+		6517AC2A1C1888AF00365394 /* ChildrenKeywords.m in Sources */ = {isa = PBXBuildFile; fileRef = 6517AC291C1888AF00365394 /* ChildrenKeywords.m */; };
+		6517AC2D1C18892B00365394 /* SqootDeal.m in Sources */ = {isa = PBXBuildFile; fileRef = 6517AC2C1C18892B00365394 /* SqootDeal.m */; };
+		6517AC301C1889B900365394 /* Snap415Deal.m in Sources */ = {isa = PBXBuildFile; fileRef = 6517AC2F1C1889B900365394 /* Snap415Deal.m */; };
+		6517AC331C188B3C00365394 /* SqootMerchant.m in Sources */ = {isa = PBXBuildFile; fileRef = 6517AC321C188B3C00365394 /* SqootMerchant.m */; };
+		6517AC361C188C0900365394 /* SqootDealCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6517AC351C188C0900365394 /* SqootDealCategory.m */; };
+		6517AC391C188CD000365394 /* EITCCreditObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6517AC381C188CD000365394 /* EITCCreditObject.m */; };
+		6517AC3C1C188D6400365394 /* LabelValueObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6517AC3B1C188D6400365394 /* LabelValueObject.m */; };
+		6517AC3F1C188DC400365394 /* LabelGroupObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6517AC3E1C188DC400365394 /* LabelGroupObject.m */; };
+		6517AC421C188E1C00365394 /* LabelObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6517AC411C188E1C00365394 /* LabelObject.m */; };
 		652204AA1C15BA9000AC45CD /* Snap415UserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 652204A91C15BA9000AC45CD /* Snap415UserProfile.m */; };
 		652204AC1C15E5C100AC45CD /* icons in Resources */ = {isa = PBXBuildFile; fileRef = 652204AB1C15E5C100AC45CD /* icons */; };
 		652204B01C1662AB00AC45CD /* WebSiteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 652204AF1C1662AB00AC45CD /* WebSiteObject.m */; };
@@ -69,6 +79,26 @@
 		6505C5C11C1589AC0040E055 /* Snap415API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Snap415API.m; sourceTree = "<group>"; };
 		6505C5C71C15902A0040E055 /* Snap415Token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Snap415Token.h; sourceTree = "<group>"; };
 		6505C5C81C15902A0040E055 /* Snap415Token.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Snap415Token.m; sourceTree = "<group>"; };
+		6517AC251C18886700365394 /* ChildrenCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChildrenCategory.h; path = dto/ChildrenCategory.h; sourceTree = "<group>"; };
+		6517AC261C18886700365394 /* ChildrenCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChildrenCategory.m; path = dto/ChildrenCategory.m; sourceTree = "<group>"; };
+		6517AC281C1888AF00365394 /* ChildrenKeywords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChildrenKeywords.h; path = dto/ChildrenKeywords.h; sourceTree = "<group>"; };
+		6517AC291C1888AF00365394 /* ChildrenKeywords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChildrenKeywords.m; path = dto/ChildrenKeywords.m; sourceTree = "<group>"; };
+		6517AC2B1C18892B00365394 /* SqootDeal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SqootDeal.h; path = dto/SqootDeal.h; sourceTree = "<group>"; };
+		6517AC2C1C18892B00365394 /* SqootDeal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SqootDeal.m; path = dto/SqootDeal.m; sourceTree = "<group>"; };
+		6517AC2E1C1889B900365394 /* Snap415Deal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Snap415Deal.h; path = dto/Snap415Deal.h; sourceTree = "<group>"; };
+		6517AC2F1C1889B900365394 /* Snap415Deal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Snap415Deal.m; path = dto/Snap415Deal.m; sourceTree = "<group>"; };
+		6517AC311C188B3C00365394 /* SqootMerchant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SqootMerchant.h; path = dto/SqootMerchant.h; sourceTree = "<group>"; };
+		6517AC321C188B3C00365394 /* SqootMerchant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SqootMerchant.m; path = dto/SqootMerchant.m; sourceTree = "<group>"; };
+		6517AC341C188C0900365394 /* SqootDealCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SqootDealCategory.h; path = dto/SqootDealCategory.h; sourceTree = "<group>"; };
+		6517AC351C188C0900365394 /* SqootDealCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SqootDealCategory.m; path = dto/SqootDealCategory.m; sourceTree = "<group>"; };
+		6517AC371C188CD000365394 /* EITCCreditObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EITCCreditObject.h; path = dto/EITCCreditObject.h; sourceTree = "<group>"; };
+		6517AC381C188CD000365394 /* EITCCreditObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EITCCreditObject.m; path = dto/EITCCreditObject.m; sourceTree = "<group>"; };
+		6517AC3A1C188D6400365394 /* LabelValueObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LabelValueObject.h; path = dto/LabelValueObject.h; sourceTree = "<group>"; };
+		6517AC3B1C188D6400365394 /* LabelValueObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LabelValueObject.m; path = dto/LabelValueObject.m; sourceTree = "<group>"; };
+		6517AC3D1C188DC400365394 /* LabelGroupObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LabelGroupObject.h; path = dto/LabelGroupObject.h; sourceTree = "<group>"; };
+		6517AC3E1C188DC400365394 /* LabelGroupObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LabelGroupObject.m; path = dto/LabelGroupObject.m; sourceTree = "<group>"; };
+		6517AC401C188E1C00365394 /* LabelObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LabelObject.h; path = dto/LabelObject.h; sourceTree = "<group>"; };
+		6517AC411C188E1C00365394 /* LabelObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LabelObject.m; path = dto/LabelObject.m; sourceTree = "<group>"; };
 		652204A71C15B7B900AC45CD /* CrispyOctoMoo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CrispyOctoMoo-Prefix.pch"; sourceTree = "<group>"; };
 		652204A81C15BA9000AC45CD /* Snap415UserProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Snap415UserProfile.h; sourceTree = "<group>"; };
 		652204A91C15BA9000AC45CD /* Snap415UserProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Snap415UserProfile.m; sourceTree = "<group>"; };
@@ -221,6 +251,26 @@
 			children = (
 				652204AE1C1662AB00AC45CD /* WebSiteObject.h */,
 				652204AF1C1662AB00AC45CD /* WebSiteObject.m */,
+				6517AC251C18886700365394 /* ChildrenCategory.h */,
+				6517AC261C18886700365394 /* ChildrenCategory.m */,
+				6517AC281C1888AF00365394 /* ChildrenKeywords.h */,
+				6517AC291C1888AF00365394 /* ChildrenKeywords.m */,
+				6517AC2B1C18892B00365394 /* SqootDeal.h */,
+				6517AC2C1C18892B00365394 /* SqootDeal.m */,
+				6517AC2E1C1889B900365394 /* Snap415Deal.h */,
+				6517AC2F1C1889B900365394 /* Snap415Deal.m */,
+				6517AC311C188B3C00365394 /* SqootMerchant.h */,
+				6517AC321C188B3C00365394 /* SqootMerchant.m */,
+				6517AC341C188C0900365394 /* SqootDealCategory.h */,
+				6517AC351C188C0900365394 /* SqootDealCategory.m */,
+				6517AC371C188CD000365394 /* EITCCreditObject.h */,
+				6517AC381C188CD000365394 /* EITCCreditObject.m */,
+				6517AC3A1C188D6400365394 /* LabelValueObject.h */,
+				6517AC3B1C188D6400365394 /* LabelValueObject.m */,
+				6517AC3D1C188DC400365394 /* LabelGroupObject.h */,
+				6517AC3E1C188DC400365394 /* LabelGroupObject.m */,
+				6517AC401C188E1C00365394 /* LabelObject.h */,
+				6517AC411C188E1C00365394 /* LabelObject.m */,
 			);
 			name = dto;
 			sourceTree = "<group>";
@@ -417,14 +467,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6517AC361C188C0900365394 /* SqootDealCategory.m in Sources */,
+				6517AC3C1C188D6400365394 /* LabelValueObject.m in Sources */,
+				6517AC271C18886700365394 /* ChildrenCategory.m in Sources */,
+				6517AC391C188CD000365394 /* EITCCreditObject.m in Sources */,
+				6517AC3F1C188DC400365394 /* LabelGroupObject.m in Sources */,
 				6505C5C21C1589AC0040E055 /* Snap415API.m in Sources */,
+				6517AC2A1C1888AF00365394 /* ChildrenKeywords.m in Sources */,
 				6505C5C91C15902A0040E055 /* Snap415Token.m in Sources */,
 				6505C58C1C152D000040E055 /* EventsViewController.m in Sources */,
+				6517AC421C188E1C00365394 /* LabelObject.m in Sources */,
 				652204AA1C15BA9000AC45CD /* Snap415UserProfile.m in Sources */,
 				652204B01C1662AB00AC45CD /* WebSiteObject.m in Sources */,
 				6505C5861C152CFF0040E055 /* AppDelegate.m in Sources */,
 				6505C5891C152CFF0040E055 /* OverviewsViewController.m in Sources */,
 				6505C5831C152CFE0040E055 /* main.m in Sources */,
+				6517AC301C1889B900365394 /* Snap415Deal.m in Sources */,
+				6517AC2D1C18892B00365394 /* SqootDeal.m in Sources */,
+				6517AC331C188B3C00365394 /* SqootMerchant.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

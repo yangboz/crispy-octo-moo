@@ -34,9 +34,12 @@ Snap415API *_snap415API;
     //NotificationCenter
     ///implements of FBSDKLoginButtonDelegate
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fbLoginHandler) name:FBSDKAccessTokenDidChangeNotification object:nil] ;
+    //API call testing here.
     //        $rootScope.loadOverviews();
-    NSArray *overviews = [_snap415API getOverviews];
+    [_snap415API loadOverviews];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadOverviewsHandler:) name:kNCpN_load_overviews object:nil] ;
     //        $rootScope.loadTaxEvents();
+//    [_snap415API loadTaxEvents];
     //        $rootScope.loadUserMe();
     
 }
@@ -79,7 +82,11 @@ Snap415API *_snap415API;
     snap415Token.token = token;
     snap415Token.provider = @"facebook";
     
-    [[Snap415API sharedInstance] syncUserProfile:snap415Token];
+    [_snap415API syncUserProfile:snap415Token];
+}
+
+-(void)loadOverviewsHandler:(NSNotification *) notification{
+    NSLog(@"loadOverviewsHandler:%@",notification.userInfo);
 }
 
 - (void)didReceiveMemoryWarning {
