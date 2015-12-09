@@ -66,8 +66,10 @@ public class FacebookUserServiceImpl implements FacebookUserService {
         ComFacebookTemplate facebookTemplate = (ComFacebookTemplate) facebook;
         org.springframework.social.facebook.api.User profile = facebookTemplate.getUserProfile();
 //        LOG.info("Raw facebook user profile:" + profile.toString());
-        LOG.info("Raw facebook user profile,getBirthday:" + profile.getBirthday() + ",getEducation:" + profile.getEducation().toArray().toString()
-                + ",getWork" + profile.getWork().toArray().toString() + ",getRelationshipStatus:" + profile.getRelationshipStatus());
+//        LOG.info("Raw facebook user profile,getBirthday:" + profile.getBirthday() + ",getEducation:" + profile.getEducation().toArray().toString()
+//                + ",getWork" + profile.getWork().toArray().toString() + ",getRelationshipStatus:" + profile.getRelationshipStatus());
+        LOG.info("Raw facebook user profile,getBirthday:" + profile.getBirthday() + ",getEducation:" + profile.getEducation()
+                + ",getWork" + profile.getWork() + ",getRelationshipStatus:" + profile.getRelationshipStatus());
         return profile;
 //        return this._fbUserDao.save(fbUser);
     }
