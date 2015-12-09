@@ -134,7 +134,7 @@ public class SqootDealServiceImpl implements SqootDealService {
             sqootDealsObject.setQuery(sqootQuery);
             //
             JSONObject jsonObject = new JSONObject(respString);
-            LOG.info("jsonObject:" + jsonObject.toString());
+            LOG.debug("jsonObject:" + jsonObject.toString());
             JSONArray deals = jsonObject.getJSONArray("deals");
             LOG.info("deals:" + deals.toString() + ",len:" + deals.length());
             for (int i = 0; i < deals.length(); i++) {

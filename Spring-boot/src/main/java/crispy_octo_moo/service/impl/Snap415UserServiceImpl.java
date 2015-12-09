@@ -66,13 +66,13 @@ public class Snap415UserServiceImpl implements Snap415UserService {
             find.getProfileBase().setSimplyBirthday(fbUserProfile.getBirthday());
             find.getProfileBase().setSimplyRelationshipStatus(fbUserProfile.getRelationshipStatus());
             List<EducationExperience> educationExperiences = fbUserProfile.getEducation();
-            if (educationExperiences.size() > 0) {
+            if (educationExperiences != null && educationExperiences.size() > 0) {
                 find.getProfileBase().setSimplyEducation(educationExperiences.get(0).getType());
             } else {
                 LOG.info("None of EducationExperience to sync.");
             }
             List<WorkEntry> workEntries = fbUserProfile.getWork();
-            if (workEntries.size() > 0) {
+            if (workEntries != null && workEntries.size() > 0) {
 //                find.getProfileBase().setSimplyWork(workEntries.get(0).getEmployer().getName());
                 find.getProfileBase().setSimplyWork(workEntries.get(0).toString());//XXX:more accurate information.
             } else {
