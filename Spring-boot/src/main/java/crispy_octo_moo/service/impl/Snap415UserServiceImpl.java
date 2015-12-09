@@ -10,20 +10,18 @@ import crispy_octo_moo.repository.Snap415UserProfileRepository;
 import crispy_octo_moo.repository.Snap415UserTaxEventsRepository;
 import crispy_octo_moo.service.FacebookUserService;
 import crispy_octo_moo.service.LinkedInUserService;
-import crispy_octo_moo.service.Snap415PersistenceService;
 import crispy_octo_moo.service.Snap415UserService;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javafx.geometry.Pos;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.social.facebook.api.*;
-import org.springframework.social.linkedin.api.Education;
+import org.springframework.social.facebook.api.EducationExperience;
+import org.springframework.social.facebook.api.User;
+import org.springframework.social.facebook.api.WorkEntry;
 import org.springframework.social.linkedin.api.LinkedInProfile;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by yangboz on 9/23/15.
@@ -75,7 +73,8 @@ public class Snap415UserServiceImpl implements Snap415UserService {
             }
             List<WorkEntry> workEntries = fbUserProfile.getWork();
             if (workEntries.size() > 0) {
-                find.getProfileBase().setSimplyWork(workEntries.get(0).getEmployer().getName());
+//                find.getProfileBase().setSimplyWork(workEntries.get(0).getEmployer().getName());
+                find.getProfileBase().setSimplyWork(workEntries.get(0).toString());//XXX:more accurate information.
             } else {
                 LOG.info("None of WorkEntry to sync.");
             }
