@@ -20,11 +20,10 @@ import javafx.geometry.Pos;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.social.facebook.api.User;
+import org.springframework.social.facebook.api.*;
+import org.springframework.social.linkedin.api.Education;
 import org.springframework.social.linkedin.api.LinkedInProfile;
 import org.springframework.stereotype.Service;
-import org.springframework.social.facebook.api.PagedList;
-import org.springframework.social.facebook.api.Post;
 
 /**
  * Created by yangboz on 9/23/15.
@@ -68,9 +67,18 @@ public class Snap415UserServiceImpl implements Snap415UserService {
             //
             find.getProfileBase().setSimplyBirthday(fbUserProfile.getBirthday());
             find.getProfileBase().setSimplyRelationshipStatus(fbUserProfile.getRelationshipStatus());
-            find.getProfileBase().setSimplyEducation(fbUserProfile.getEducation().get(0).getType());
-            find.getProfileBase().setSimplyWork(fbUserProfile.getWork().get(0).getEmployer().getName());
-
+            List<EducationExperience> educationExperiences = fbUserProfile.getEducation();
+            if (educationExperiences.size() > 0) {
+                find.getProfileBase().setSimplyEducation(educationExperiences.get(0).getType());
+            } else {
+                LOG.info("None of EducationExperience to sync.");
+            }
+            List<WorkEntry> workEntries = fbUserProfile.getWork();
+            if (workEntries.size() > 0) {
+                find.getProfileBase().setSimplyWork(workEntries.get(0).getEmployer().getName());
+            } else {
+                LOG.info("None of WorkEntry to sync.");
+            }
 //            LOG.info("getMe(Snap415UserProfile after NPE):" + find.toString());
             //
         } else if (token.getProvider().equals(SocialProviders.LINKEDIN.getValue())) {
