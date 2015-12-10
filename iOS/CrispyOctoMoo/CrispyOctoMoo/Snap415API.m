@@ -32,6 +32,7 @@
     self = [super init];
     if (self) {
         //
+        
     }
     return self;
 }
@@ -109,7 +110,7 @@
         RKLogInfo(@"Load collection of WebSiteObjects: %@", mappingResult.array);
         //
         NSLog(@"RKMappingResult: %@", mappingResult.description);
-        NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult forKey:kNCpN_load_overviews];
+        NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_load_overviews];
         [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_overviews object:dictObj];
         
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {

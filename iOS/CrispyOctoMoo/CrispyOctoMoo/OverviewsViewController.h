@@ -13,9 +13,13 @@
 #import <FBSDKLoginKit/FBSDKLoginButton.h>
 
 #import "Snap415API.h"
+#import "WebSiteObject.h"
 
-@interface OverviewsViewController : UIViewController
+#define kCellReuseId_overview @"ReuseCellName_overview";
 
+@interface OverviewsViewController : UITableViewController
+
+@property (strong, nonatomic) NSArray *overviewsResult;
 
 @end
 

@@ -9,12 +9,13 @@
 #import "OverviewsViewController.h"
 
 
-
 @interface OverviewsViewController()
 
 @end
 
 @implementation OverviewsViewController
+
+@synthesize overviewsResult;
 
 Snap415API *_snap415API;
 
@@ -41,7 +42,9 @@ Snap415API *_snap415API;
     //        $rootScope.loadTaxEvents();
 //    [_snap415API loadTaxEvents];
     //        $rootScope.loadUserMe();
-    
+    //
+//    self.tableView.dataSource = self;
+//    self.tableView.delegate = self;
 }
 
 
@@ -86,12 +89,49 @@ Snap415API *_snap415API;
 }
 
 -(void)loadOverviewsHandler:(NSNotification *) notification{
-    NSLog(@"loadOverviewsHandler:%@",notification.userInfo);
+//    NSLog(@"loadOverviewsHandler:%@",notification.userInfo);
+    self.overviewsResult = [(NSDictionary *)notification.object objectForKey:kNCpN_load_overviews];
+    NSLog(@"self.overviewsResult:%@",self.overviewsResult.description);
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+//    NSLog(@"self overviewsResult,count:%d",[[self overviewsResult] count]);
+    return [[self overviewsResult] count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = kCellReuseId_overview;
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+//    if (cell == nil) {
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+//    }
+    
+    WebSiteObject *webSiteObject= [self.overviewsResult objectAtIndex:indexPath.row];
+    
+    cell.selectionStyle = UITableViewCellStyleSubtitle;
+    cell.textLabel.text = webSiteObject.header;
+    cell.detailTextLabel.text = webSiteObject.body;
+//    cell.detailTextLabel.text = webSiteObject.footer;
+    
+    return cell;
 }
 
 @end
