@@ -32,6 +32,7 @@
 		6517AC421C188E1C00365394 /* LabelObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6517AC411C188E1C00365394 /* LabelObject.m */; };
 		6517AC451C1905B600365394 /* WebSiteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6517AC441C1905B600365394 /* WebSiteObject.m */; };
 		652204AA1C15BA9000AC45CD /* Snap415UserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 652204A91C15BA9000AC45CD /* Snap415UserProfile.m */; };
+		659A8E391C1A9D6100770B46 /* SocialLoginPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 659A8E371C1A9D6100770B46 /* SocialLoginPopupViewController.m */; };
 		65AC90C51C194C5B00C2C9F0 /* ios7-analytics@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65AC90B91C194C5B00C2C9F0 /* ios7-analytics@1x.png */; };
 		65AC90C61C194C5B00C2C9F0 /* ios7-analytics@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65AC90BA1C194C5B00C2C9F0 /* ios7-analytics@2x.png */; };
 		65AC90C71C194C5B00C2C9F0 /* ios7-analytics@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65AC90BB1C194C5B00C2C9F0 /* ios7-analytics@3x.png */; };
@@ -115,6 +116,8 @@
 		652204A71C15B7B900AC45CD /* CrispyOctoMoo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CrispyOctoMoo-Prefix.pch"; sourceTree = "<group>"; };
 		652204A81C15BA9000AC45CD /* Snap415UserProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Snap415UserProfile.h; sourceTree = "<group>"; };
 		652204A91C15BA9000AC45CD /* Snap415UserProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Snap415UserProfile.m; sourceTree = "<group>"; };
+		659A8E361C1A9D6100770B46 /* SocialLoginPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialLoginPopupViewController.h; sourceTree = "<group>"; };
+		659A8E371C1A9D6100770B46 /* SocialLoginPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialLoginPopupViewController.m; sourceTree = "<group>"; };
 		65AC90B91C194C5B00C2C9F0 /* ios7-analytics@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios7-analytics@1x.png"; sourceTree = "<group>"; };
 		65AC90BA1C194C5B00C2C9F0 /* ios7-analytics@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios7-analytics@2x.png"; sourceTree = "<group>"; };
 		65AC90BB1C194C5B00C2C9F0 /* ios7-analytics@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios7-analytics@3x.png"; sourceTree = "<group>"; };
@@ -185,7 +188,6 @@
 			isa = PBXGroup;
 			children = (
 				65AC90B81C194C4C00C2C9F0 /* icons */,
-				6505C5C51C158B330040E055 /* viewControllers */,
 				6505C5C41C158B290040E055 /* models */,
 				6505C5841C152CFE0040E055 /* AppDelegate.h */,
 				6505C5851C152CFF0040E055 /* AppDelegate.m */,
@@ -200,6 +202,8 @@
 				6505C5811C152CFE0040E055 /* Supporting Files */,
 				6505C5C01C1589AC0040E055 /* Snap415API.h */,
 				6505C5C11C1589AC0040E055 /* Snap415API.m */,
+				659A8E361C1A9D6100770B46 /* SocialLoginPopupViewController.h */,
+				659A8E371C1A9D6100770B46 /* SocialLoginPopupViewController.m */,
 			);
 			path = CrispyOctoMoo;
 			sourceTree = "<group>";
@@ -259,13 +263,6 @@
 				6505C5C31C158B200040E055 /* vo */,
 			);
 			name = models;
-			sourceTree = "<group>";
-		};
-		6505C5C51C158B330040E055 /* viewControllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = viewControllers;
 			sourceTree = "<group>";
 		};
 		652204AD1C16628300AC45CD /* dto */ = {
@@ -521,6 +518,7 @@
 			files = (
 				6517AC451C1905B600365394 /* WebSiteObject.m in Sources */,
 				6517AC361C188C0900365394 /* SqootDealCategory.m in Sources */,
+				659A8E391C1A9D6100770B46 /* SocialLoginPopupViewController.m in Sources */,
 				6517AC3C1C188D6400365394 /* LabelValueObject.m in Sources */,
 				6517AC271C18886700365394 /* ChildrenCategory.m in Sources */,
 				6517AC391C188CD000365394 /* EITCCreditObject.m in Sources */,

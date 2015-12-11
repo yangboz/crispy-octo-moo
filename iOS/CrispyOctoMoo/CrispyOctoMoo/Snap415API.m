@@ -82,7 +82,7 @@
 //    [manager deleteObject:article path:@"/articles/1234" parameters:nil success:nil failure:nil];
     return YES;
 }
--(void)getMe
+-(void)loadMe
 {
 }
 -(void)loadTaxEvents

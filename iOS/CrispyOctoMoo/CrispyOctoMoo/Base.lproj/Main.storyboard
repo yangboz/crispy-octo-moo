@@ -232,6 +232,37 @@
             </objects>
             <point key="canvasLocation" x="-40.5" y="490.5"/>
         </scene>
+        <!--LOGIN-->
+        <scene sceneID="Gek-if-13L">
+            <objects>
+                <viewController storyboardIdentifier="SocialLoginPopupViewController" id="hKU-ZJ-TGC" customClass="SocialLoginPopupViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wU1-rd-ZRU"/>
+                        <viewControllerLayoutGuide type="bottom" id="C7g-kY-7mu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Mjk-WL-NfQ">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="244"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="LOGIN" prompt="Don't worry, we don't post anything without your permission." id="BJe-fz-l21"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="500" height="500"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="size" keyPath="contentSizeInPopup">
+                            <size key="value" width="300" height="200"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="size" keyPath="landscapeContentSizeInPopup">
+                            <size key="value" width="400" height="200"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K5f-7S-yJL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="670.5" y="-1497.75"/>
+        </scene>
     </scenes>
     <resources>
         <image name="deals" width="25" height="25"/>

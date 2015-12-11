@@ -9,11 +9,10 @@
 #import <UIKit/UIKit.h>
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
-#import <FBSDKLoginKit/FBSDKLoginButton.h>
 
 #import "Snap415API.h"
 #import "WebSiteObject.h"
+#import "STPopup.h"
 
 #define kCellReuseId_overview @"ReuseCellName_overview";
 

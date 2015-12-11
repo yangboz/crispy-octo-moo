@@ -34,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>STPopup.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>TransitionKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,12 +47,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>06B635DC700F8F61E298AEA7922BA3BA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>080AF914A09167DB5759A733917B840F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1253B91C09B3D4DE5BD264032F3808F4</key>
+		<key>56864FA9C50ACEDAD11B80FAA3247C5B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -57,12 +67,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7895AF6898A365BE534E9810625AECA7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>BA33744A16973BA4F37AC5E3A81F028E</key>
+		<key>8BA3854117831B3DA83A79DBF770907A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,7 +77,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E6CA36D61A29535D5C76C2BF65F78335</key>
+		<key>DA7D0C5C412D1B7CC7BE81C0D19C70E3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E78774F1E1A4C28E8E549047F4F046AD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
