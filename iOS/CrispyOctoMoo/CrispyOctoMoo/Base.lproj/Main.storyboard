@@ -8,7 +8,7 @@
         <!--Events-->
         <scene sceneID="woE-ko-0xo">
             <objects>
-                <tableViewController id="dES-R9-oIq" sceneMemberID="viewController">
+                <tableViewController id="dES-R9-oIq" customClass="EventsViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ONI-zz-NGb">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -101,12 +101,12 @@
         <scene sceneID="ndJ-er-2RC">
             <objects>
                 <tableViewController id="6qg-AF-cgn" customClass="OverviewsViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="F8u-mw-tF2">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="F8u-mw-tF2">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="qo1-Zg-qQb" detailTextLabel="OKk-Za-FjB" style="IBUITableViewCellStyleSubtitle" id="ttR-fb-l0C">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReuseCellName_overview" textLabel="qo1-Zg-qQb" detailTextLabel="OKk-Za-FjB" style="IBUITableViewCellStyleSubtitle" id="ttR-fb-l0C">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ttR-fb-l0C" id="S2t-Cd-7ca">

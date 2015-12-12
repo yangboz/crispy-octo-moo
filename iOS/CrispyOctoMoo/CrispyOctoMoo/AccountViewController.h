@@ -11,6 +11,7 @@
 #import "Snap415API.h"
 #import "Snap415UserProfile.h"
 #import "STPopup.h"
+#import "Snap415Model.h"
 
 @interface AccountViewController : UITableViewController
 

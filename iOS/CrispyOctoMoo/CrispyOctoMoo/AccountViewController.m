@@ -26,8 +26,9 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     //NotificationCenter
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMeHandler:) name:kNCpN_load_me object:nil] ;
+    self.snap415UserProfileResult = [[Snap415Model sharedInstance] snap415UserProfile];
+    NSLog(@"self.snap415UserProfileResult:%@",self.snap415UserProfileResult.description);
 }
-
 
 -(void)loadMeHandler:(NSNotification *) notification{
     //    NSLog(@"loadMeHandler:%@",notification.userInfo);

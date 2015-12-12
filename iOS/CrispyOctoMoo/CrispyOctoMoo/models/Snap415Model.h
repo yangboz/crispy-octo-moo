@@ -11,12 +11,14 @@
 #import "WebSiteObject.h"
 #import "Snap415UserProfile.h"
 #import "Snap415Token.h"
+#import "Snap415UserTaxEvents.h"
 
 @interface Snap415Model : NSObject
 +(Snap415Model *)sharedInstance;
 
 @property (strong, nonatomic) Snap415Token *snap415Token;
-@property (strong, nonatomic) NSArray *overviewsResult;
-@property (strong, nonatomic) Snap415UserProfile * snap415UserProfileResult;
+@property (strong, nonatomic) NSArray *overviews;
+@property (strong, nonatomic) Snap415UserProfile * snap415UserProfile;
+@property (strong, nonatomic) Snap415UserTaxEvents *snap415UserTaxEvents;
 
 @end

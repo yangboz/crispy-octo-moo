@@ -19,8 +19,9 @@
 #endif
 //@see: https://github.com/yangboz/crispy-octo-moo/wiki/API-Services
 #define kAPI_user_me (@"user/me")
-#define kAPI_events (@"taxEvents")
-#define kAPI_deals (@"deals")
+#define kAPI_tax_events (@"user/events")
+#define kAPI_deals (@"user/deals")
+//#define kAPI_overviews (@"user/overviews")
 #define kAPI_overviews (@"overviews")
 
 
@@ -83,9 +84,10 @@
         NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_load_me];
 //        [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_me object:dictObj];
         //Save to model
-        [Snap415Model sharedInstance].snap415UserProfileResult = (Snap415UserProfile *)[dictObj objectForKey:kNCpN_load_me];
-        //Default API calls.
+        [Snap415Model sharedInstance].snap415UserProfile = (Snap415UserProfile *)[dictObj objectForKey:kNCpN_load_me];
+        //Next API calls.
         [[Snap415API sharedInstance] loadOverviews];
+        [[Snap415API sharedInstance] loadTaxEvents];
         //
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         RKLogError(@"Operation failed with error: %@", error);
@@ -100,6 +102,40 @@
 }
 -(void)loadTaxEvents
 {
+    //
+    RKObjectMapping *responseMapping = [RKObjectMapping mappingForClass:[Snap415UserTaxEvents class]];
+    [responseMapping addAttributeMappingsFromArray:@[@"snap415ID", @"id", @"taxEvents"]];
+    NSIndexSet *statusCodes = RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful); // Anything in 2xx
+    RKObjectMapping *requestMapping = [RKObjectMapping requestMapping]; // objectClass == NSMutableDictionary
+    [requestMapping addAttributeMappingsFromArray:@[@"id", @"token", @"provider"]];
+    
+    RKResponseDescriptor *respDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:responseMapping method:RKRequestMethodAny pathPattern:kAPI_tax_events keyPath:nil statusCodes:statusCodes];
+    
+    // For any object of class Snap415UserTaxEvents, serialize into an NSMutableDictionary using the given mapping and nest
+    // under the 'user/me' key path
+    RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:requestMapping objectClass:[Snap415Token class] rootKeyPath:nil method:RKRequestMethodAny];
+    
+    RKObjectManager *manager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:kAPIEndpointHost]];
+    [manager addRequestDescriptor:requestDescriptor];
+    [manager addResponseDescriptor:respDescriptor];
+    // Set MIME Type to JSON
+    manager.requestSerializationMIMEType = RKMIMETypeJSON;
+    
+    // POST to create
+    [manager postObject: [Snap415Model sharedInstance].snap415Token path:kAPI_tax_events parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        //        NSLog(@"SUCCESS: %@", mappingResult.array);
+        RKLogInfo(@"Load item of Snap415UserTaxEvents: %@", mappingResult.array);
+        //
+        //        NSLog(@"RKMappingResult: %@", mappingResult.description);
+        NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array[0] forKey:kAPI_tax_events];
+        //Save to model
+        [Snap415Model sharedInstance].snap415UserTaxEvents = (Snap415UserTaxEvents *)[dictObj objectForKey:kAPI_tax_events];
+        //Post to NotificationCenter is neccessary.
+        //        [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_me object:dictObj];
+        //
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        RKLogError(@"Operation failed with error: %@", error);
+    }];
 }
 -(void)loadDeals
 {

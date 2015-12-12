@@ -10,7 +10,7 @@
 
 @implementation Snap415Model
 
-@synthesize overviewsResult,snap415UserProfileResult,snap415Token;
+@synthesize overviews,snap415UserProfile,snap415Token,snap415UserTaxEvents;
 
 - (id)init
 {

@@ -10,5 +10,22 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "__30-[Snap415API syncUserProfile:]_block_invoke:Snap415API.m">
+      </ContextState>
+      <ContextState
+         contextName = "__30-[Snap415API syncUserProfile:]_block_invoke_2:Snap415API.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[EventsViewController viewDidLoad]:EventsViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__27-[Snap415API loadTaxEvents]_block_invoke:Snap415API.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "mappingResult.array[0]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

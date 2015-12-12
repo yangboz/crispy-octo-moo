@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Snap415TaxEvent.h"
+#import "Snap415Model.h"
 
-@interface EventsViewController : UIViewController
+#define kCellReuseId_events @"ReuseCellName_events";
 
+@interface EventsViewController : UITableViewController
+
+@property (strong,nonatomic) NSArray *taxEventsResult;
 
 @end
 
