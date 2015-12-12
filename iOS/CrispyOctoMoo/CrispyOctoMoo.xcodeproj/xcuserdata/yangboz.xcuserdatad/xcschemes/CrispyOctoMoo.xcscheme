@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6505C5991C152D060040E055"
-               BuildableName = "CrispyOctoMooTests.xctest"
+               BuildableName = "CrispyOctoMoo.xctest"
                BlueprintName = "CrispyOctoMooTests"
                ReferencedContainer = "container:CrispyOctoMoo.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6505C5A41C152D070040E055"
-               BuildableName = "CrispyOctoMooUITests.xctest"
+               BuildableName = "CrispyOctoMoo.xctest"
                BlueprintName = "CrispyOctoMooUITests"
                ReferencedContainer = "container:CrispyOctoMoo.xcodeproj">
             </BuildableReference>

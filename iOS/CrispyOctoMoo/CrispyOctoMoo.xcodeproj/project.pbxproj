@@ -79,10 +79,10 @@
 		6505C5901C152D050040E055 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6505C5931C152D060040E055 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6505C5951C152D060040E055 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6505C59A1C152D060040E055 /* CrispyOctoMooTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrispyOctoMooTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6505C59A1C152D060040E055 /* CrispyOctoMoo.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrispyOctoMoo.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6505C59E1C152D060040E055 /* CrispyOctoMooTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CrispyOctoMooTests.m; sourceTree = "<group>"; };
 		6505C5A01C152D070040E055 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6505C5A51C152D070040E055 /* CrispyOctoMooUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrispyOctoMooUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6505C5A51C152D070040E055 /* CrispyOctoMoo.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrispyOctoMoo.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6505C5A91C152D080040E055 /* CrispyOctoMooUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CrispyOctoMooUITests.m; sourceTree = "<group>"; };
 		6505C5AB1C152D080040E055 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6505C5B91C1530BD0040E055 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "FacebookSDKs-iOS-20151111/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
@@ -178,8 +178,8 @@
 			isa = PBXGroup;
 			children = (
 				6505C57E1C152CFC0040E055 /* CrispyOctoMoo.app */,
-				6505C59A1C152D060040E055 /* CrispyOctoMooTests.xctest */,
-				6505C5A51C152D070040E055 /* CrispyOctoMooUITests.xctest */,
+				6505C59A1C152D060040E055 /* CrispyOctoMoo.xctest */,
+				6505C5A51C152D070040E055 /* CrispyOctoMoo.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -360,7 +360,7 @@
 			);
 			name = CrispyOctoMooTests;
 			productName = CrispyOctoMooTests;
-			productReference = 6505C59A1C152D060040E055 /* CrispyOctoMooTests.xctest */;
+			productReference = 6505C59A1C152D060040E055 /* CrispyOctoMoo.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		6505C5A41C152D070040E055 /* CrispyOctoMooUITests */ = {
@@ -378,7 +378,7 @@
 			);
 			name = CrispyOctoMooUITests;
 			productName = CrispyOctoMooUITests;
-			productReference = 6505C5A51C152D070040E055 /* CrispyOctoMooUITests.xctest */;
+			productReference = 6505C5A51C152D070040E055 /* CrispyOctoMoo.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -686,7 +686,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GODPAPER.CrispyOctoMoo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = CrispyOctoMoo;
 			};
 			name = Debug;
 		};
@@ -705,7 +705,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GODPAPER.CrispyOctoMoo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = CrispyOctoMoo;
 			};
 			name = Release;
 		};
@@ -716,7 +716,7 @@
 				INFOPLIST_FILE = CrispyOctoMooTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GODPAPER.CrispyOctoMooTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = CrispyOctoMoo;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CrispyOctoMoo.app/CrispyOctoMoo";
 			};
 			name = Debug;
@@ -728,7 +728,7 @@
 				INFOPLIST_FILE = CrispyOctoMooTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GODPAPER.CrispyOctoMooTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = CrispyOctoMoo;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CrispyOctoMoo.app/CrispyOctoMoo";
 			};
 			name = Release;
@@ -739,7 +739,7 @@
 				INFOPLIST_FILE = CrispyOctoMooUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GODPAPER.CrispyOctoMooUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = CrispyOctoMoo;
 				TEST_TARGET_NAME = CrispyOctoMoo;
 				USES_XCTRUNNER = YES;
 			};
@@ -751,7 +751,7 @@
 				INFOPLIST_FILE = CrispyOctoMooUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GODPAPER.CrispyOctoMooUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = CrispyOctoMoo;
 				TEST_TARGET_NAME = CrispyOctoMoo;
 				USES_XCTRUNNER = YES;
 			};
