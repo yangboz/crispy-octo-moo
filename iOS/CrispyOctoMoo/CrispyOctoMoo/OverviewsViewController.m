@@ -15,7 +15,7 @@
 
 @implementation OverviewsViewController
 
-@synthesize overviewsResult;
+@synthesize overviewsResult,snap415UserProfileResult;
 
 Snap415API *_snap415API;
 
@@ -33,6 +33,8 @@ Snap415API *_snap415API;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fbLoginHandler) name:FBSDKAccessTokenDidChangeNotification object:nil] ;
 //    self.tableView.dataSource = self;
 //    self.tableView.delegate = self;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMeHandler:) name:kNCpN_load_me object:nil] ;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadOverviewsHandler:) name:kNCpN_load_overviews object:nil] ;
 }
 
 - (void)fbLoginHandler{
@@ -72,10 +74,16 @@ Snap415API *_snap415API;
     //Dismiss the social login popup.
     [self.popupController dismiss];
     //API call testing here.
-    [_snap415API loadOverviews];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadOverviewsHandler:) name:kNCpN_load_overviews object:nil] ;
+//    [_snap415API loadOverviews];
+
 }
 
+-(void)loadMeHandler:(NSNotification *) notification{
+    //    NSLog(@"loadMeHandler:%@",notification.userInfo);
+    self.snap415UserProfileResult = [(NSDictionary *)notification.object objectForKey:kNCpN_load_me];
+    NSLog(@"snap415UserProfileResult:%@",self.snap415UserProfileResult.description);
+
+}
 
 -(void)loadOverviewsHandler:(NSNotification *) notification{
 //    NSLog(@"loadOverviewsHandler:%@",notification.userInfo);

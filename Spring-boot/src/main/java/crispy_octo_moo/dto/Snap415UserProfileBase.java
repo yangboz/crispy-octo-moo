@@ -5,9 +5,6 @@ package crispy_octo_moo.dto;
  */
 public class Snap415UserProfileBase {
 
-    public Snap415UserProfileBase() {
-    }
-
     //Simplify basic information as required.
     private String simplyRelationshipStatus;
     private Object simplyEducation;
@@ -17,6 +14,9 @@ public class Snap415UserProfileBase {
     private int rwIncome;
     private String rwTaxFilingStatus;
     private int rwNumberOfChildren;
+
+    public Snap415UserProfileBase() {
+    }
 
     public String getSimplyRelationshipStatus() {
         return simplyRelationshipStatus;
@@ -74,10 +74,16 @@ public class Snap415UserProfileBase {
         this.rwNumberOfChildren = rwNumberOfChildren;
     }
 
+    @Override
     public String toString() {
-        return "birthday:" + this.getSimplyBirthday() + ",work:" + this.getSimplyWork() + ",education:" + this.getSimplyEducation()
-                + ",relationshipStatus:" + this.getSimplyRelationshipStatus();
+        return "Snap415UserProfileBase{" +
+                "simplyRelationshipStatus='" + simplyRelationshipStatus + '\'' +
+                ", simplyEducation=" + simplyEducation +
+                ", simplyBirthday='" + simplyBirthday + '\'' +
+                ", simplyWork=" + simplyWork +
+                ", rwIncome=" + rwIncome +
+                ", rwTaxFilingStatus='" + rwTaxFilingStatus + '\'' +
+                ", rwNumberOfChildren=" + rwNumberOfChildren +
+                '}';
     }
-
-
 }

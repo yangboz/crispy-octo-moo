@@ -33,7 +33,11 @@ public class Snap415Token {
 
     @Override
     public String toString() {
-        return "provider:" + getProvider() + ",id:" + getId() + ",token:" + getToken();
+        return "Snap415Token{" +
+                "id='" + id + '\'' +
+                ", token='" + token + '\'' +
+                ", provider='" + provider + '\'' +
+                '}';
     }
 
     public String getProvider() {

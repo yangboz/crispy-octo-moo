@@ -9,5 +9,5 @@
 #import "Snap415UserProfile.h"
 
 @implementation Snap415UserProfile
-
+@synthesize liUserProfile,fbUserProfile,snap415ID,profileBase;
 @end

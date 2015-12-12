@@ -45,6 +45,7 @@
 		65AC90CE1C194C5B00C2C9F0 /* ios7-pulse@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65AC90C21C194C5B00C2C9F0 /* ios7-pulse@1x.png */; };
 		65AC90CF1C194C5B00C2C9F0 /* ios7-pulse@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65AC90C31C194C5B00C2C9F0 /* ios7-pulse@2x.png */; };
 		65AC90D01C194C5B00C2C9F0 /* ios7-pulse@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65AC90C41C194C5B00C2C9F0 /* ios7-pulse@3x.png */; };
+		65C560E41C1BC4A300BF8E19 /* Snap415UserProfileBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C560E31C1BC4A300BF8E19 /* Snap415UserProfileBase.m */; };
 		905ED5A2A9F477941F17EA3F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27D3CDDFF7269ACA3912C959 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -130,6 +131,8 @@
 		65AC90C21C194C5B00C2C9F0 /* ios7-pulse@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios7-pulse@1x.png"; sourceTree = "<group>"; };
 		65AC90C31C194C5B00C2C9F0 /* ios7-pulse@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios7-pulse@2x.png"; sourceTree = "<group>"; };
 		65AC90C41C194C5B00C2C9F0 /* ios7-pulse@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios7-pulse@3x.png"; sourceTree = "<group>"; };
+		65C560E21C1BC4A300BF8E19 /* Snap415UserProfileBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Snap415UserProfileBase.h; path = dto/Snap415UserProfileBase.h; sourceTree = "<group>"; };
+		65C560E31C1BC4A300BF8E19 /* Snap415UserProfileBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Snap415UserProfileBase.m; path = dto/Snap415UserProfileBase.m; sourceTree = "<group>"; };
 		A3D226CB33FD43D1F1418341 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D335C52C33EB0229AEBCDA90 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -245,22 +248,10 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6505C5C31C158B200040E055 /* vo */ = {
-			isa = PBXGroup;
-			children = (
-				6505C5C71C15902A0040E055 /* Snap415Token.h */,
-				6505C5C81C15902A0040E055 /* Snap415Token.m */,
-				652204A81C15BA9000AC45CD /* Snap415UserProfile.h */,
-				652204A91C15BA9000AC45CD /* Snap415UserProfile.m */,
-			);
-			name = vo;
-			sourceTree = "<group>";
-		};
 		6505C5C41C158B290040E055 /* models */ = {
 			isa = PBXGroup;
 			children = (
 				652204AD1C16628300AC45CD /* dto */,
-				6505C5C31C158B200040E055 /* vo */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -268,6 +259,10 @@
 		652204AD1C16628300AC45CD /* dto */ = {
 			isa = PBXGroup;
 			children = (
+				6505C5C71C15902A0040E055 /* Snap415Token.h */,
+				6505C5C81C15902A0040E055 /* Snap415Token.m */,
+				652204A81C15BA9000AC45CD /* Snap415UserProfile.h */,
+				652204A91C15BA9000AC45CD /* Snap415UserProfile.m */,
 				6517AC431C1905B600365394 /* WebSiteObject.h */,
 				6517AC441C1905B600365394 /* WebSiteObject.m */,
 				6517AC251C18886700365394 /* ChildrenCategory.h */,
@@ -290,6 +285,8 @@
 				6517AC3E1C188DC400365394 /* LabelGroupObject.m */,
 				6517AC401C188E1C00365394 /* LabelObject.h */,
 				6517AC411C188E1C00365394 /* LabelObject.m */,
+				65C560E21C1BC4A300BF8E19 /* Snap415UserProfileBase.h */,
+				65C560E31C1BC4A300BF8E19 /* Snap415UserProfileBase.m */,
 			);
 			name = dto;
 			sourceTree = "<group>";
@@ -518,6 +515,7 @@
 			files = (
 				6517AC451C1905B600365394 /* WebSiteObject.m in Sources */,
 				6517AC361C188C0900365394 /* SqootDealCategory.m in Sources */,
+				65C560E41C1BC4A300BF8E19 /* Snap415UserProfileBase.m in Sources */,
 				659A8E391C1A9D6100770B46 /* SocialLoginPopupViewController.m in Sources */,
 				6517AC3C1C188D6400365394 /* LabelValueObject.m in Sources */,
 				6517AC271C18886700365394 /* ChildrenCategory.m in Sources */,

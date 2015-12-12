@@ -19,6 +19,7 @@
 @interface OverviewsViewController : UITableViewController
 
 @property (strong, nonatomic) NSArray *overviewsResult;
+@property (strong, nonatomic) Snap415UserProfile * snap415UserProfileResult;
 
 @end
 

@@ -4,7 +4,6 @@ import com.wordnik.swagger.annotations.ApiOperation;
 import crispy_octo_moo.domain.Snap415UserDeals;
 import crispy_octo_moo.domain.Snap415UserProfile;
 import crispy_octo_moo.domain.Snap415UserTaxEvents;
-import crispy_octo_moo.dto.JsonObject;
 import crispy_octo_moo.dto.Snap415Overview;
 import crispy_octo_moo.dto.Snap415Token;
 import crispy_octo_moo.service.Snap415UserService;
@@ -42,6 +41,7 @@ public class Snap415UserController {
     @RequestMapping(value = "/me", method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST", value = "Response a string describing if the access_token related user profile is successfully received.")
     public Snap415UserProfile getMe(@RequestBody @Valid Snap415Token snap415Token) {
+        LOG.info("getMe requestBody:" + snap415Token.toString());
         return userService.getMe(snap415Token);
     }
 
