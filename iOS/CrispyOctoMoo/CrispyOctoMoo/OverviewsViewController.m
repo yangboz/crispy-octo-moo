@@ -15,14 +15,12 @@
 
 @implementation OverviewsViewController
 
-@synthesize overviewsResult,snap415UserProfileResult;
-
-Snap415API *_snap415API;
+@synthesize overviewsResult;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     //Variables init
-    _snap415API = [Snap415API sharedInstance];
+
 //If social login required.
     STPopupController *popupController = [[STPopupController alloc] initWithRootViewController:[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SocialLoginPopupViewController"]];
     popupController.cornerRadius = 4;
@@ -33,7 +31,6 @@ Snap415API *_snap415API;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fbLoginHandler) name:FBSDKAccessTokenDidChangeNotification object:nil] ;
 //    self.tableView.dataSource = self;
 //    self.tableView.delegate = self;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMeHandler:) name:kNCpN_load_me object:nil] ;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadOverviewsHandler:) name:kNCpN_load_overviews object:nil] ;
 }
 
@@ -69,26 +66,19 @@ Snap415API *_snap415API;
     snap415Token.id = fbUserId;
     snap415Token.token = fbAccessTokenStr;
     snap415Token.provider = @"facebook";
-    
-    [_snap415API syncUserProfile:snap415Token];
-    //Dismiss the social login popup.
-    [self.popupController dismiss];
-    //API call testing here.
-//    [_snap415API loadOverviews];
-
-}
-
--(void)loadMeHandler:(NSNotification *) notification{
-    //    NSLog(@"loadMeHandler:%@",notification.userInfo);
-    self.snap415UserProfileResult = [(NSDictionary *)notification.object objectForKey:kNCpN_load_me];
-    NSLog(@"snap415UserProfileResult:%@",self.snap415UserProfileResult.description);
-
+    //
+    [Snap415Model sharedInstance].snap415Token = snap415Token;
+    //
+    [[Snap415API sharedInstance] syncUserProfile];
 }
 
 -(void)loadOverviewsHandler:(NSNotification *) notification{
-//    NSLog(@"loadOverviewsHandler:%@",notification.userInfo);
-    self.overviewsResult = [(NSDictionary *)notification.object objectForKey:kNCpN_load_overviews];
+    //Dismiss the social login popup.
+    [self.popupController dismiss];
+    //    NSLog(@"loadOverviewsHandler:%@",notification.userInfo);
+        self.overviewsResult = [(NSDictionary *)notification.object objectForKey:kNCpN_load_overviews];
     NSLog(@"self.overviewsResult:%@",self.overviewsResult.description);
+    //
     [self.tableView reloadData];
 }
 

@@ -53,7 +53,7 @@
     return _sharedInstance;
 }
 
--(BOOL)syncUserProfile:(Snap415Token *)snap415Token
+-(void)syncUserProfile
 {
     //
     RKObjectMapping *responseMapping = [RKObjectMapping mappingForClass:[Snap415UserProfile class]];
@@ -75,13 +75,18 @@
     manager.requestSerializationMIMEType = RKMIMETypeJSON;
     
     // POST to create
-    [manager postObject:snap415Token path:kAPI_user_me parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+    [manager postObject: [Snap415Model sharedInstance].snap415Token path:kAPI_user_me parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
 //        NSLog(@"SUCCESS: %@", mappingResult.array);
         RKLogInfo(@"Load item of Snap415UserProfile: %@", mappingResult.array);
         //
         //        NSLog(@"RKMappingResult: %@", mappingResult.description);
         NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_load_me];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_me object:dictObj];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_me object:dictObj];
+        //Save to model
+        [Snap415Model sharedInstance].snap415UserProfileResult = (Snap415UserProfile *)[dictObj objectForKey:kNCpN_load_me];
+        //Default API calls.
+        [[Snap415API sharedInstance] loadOverviews];
+        //
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         RKLogError(@"Operation failed with error: %@", error);
     }];
@@ -92,10 +97,6 @@
 //    
 //    // DELETE to destroy
 //    [manager deleteObject:article path:@"/articles/1234" parameters:nil success:nil failure:nil];
-    return YES;
-}
--(void)loadMe
-{
 }
 -(void)loadTaxEvents
 {

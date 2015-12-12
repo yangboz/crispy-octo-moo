@@ -29,6 +29,7 @@
 
 #import "Snap415Token.h"
 #import "Snap415UserProfile.h"
+#import "Snap415Model.h"
 
 //Notification Center post names;
 #define kNCpN_load_overviews @"loadOverviewsSucc"
@@ -39,8 +40,7 @@
 @interface Snap415API : NSObject
 +(Snap415API *)sharedInstance;
 
--(BOOL)syncUserProfile:(Snap415Token *)snap415Token;
--(void)loadMe;
+-(void)syncUserProfile;
 -(void)loadTaxEvents;
 -(void)loadDeals;
 -(void)loadOverviews;

@@ -46,6 +46,8 @@
 		65AC90CF1C194C5B00C2C9F0 /* ios7-pulse@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65AC90C31C194C5B00C2C9F0 /* ios7-pulse@2x.png */; };
 		65AC90D01C194C5B00C2C9F0 /* ios7-pulse@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65AC90C41C194C5B00C2C9F0 /* ios7-pulse@3x.png */; };
 		65C560E41C1BC4A300BF8E19 /* Snap415UserProfileBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C560E31C1BC4A300BF8E19 /* Snap415UserProfileBase.m */; };
+		65C560EA1C1BEFF800BF8E19 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C560E91C1BEFF800BF8E19 /* AccountViewController.m */; };
+		65C560ED1C1BF32500BF8E19 /* Snap415Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C560EC1C1BF32500BF8E19 /* Snap415Model.m */; };
 		905ED5A2A9F477941F17EA3F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27D3CDDFF7269ACA3912C959 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -133,6 +135,10 @@
 		65AC90C41C194C5B00C2C9F0 /* ios7-pulse@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios7-pulse@3x.png"; sourceTree = "<group>"; };
 		65C560E21C1BC4A300BF8E19 /* Snap415UserProfileBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Snap415UserProfileBase.h; path = dto/Snap415UserProfileBase.h; sourceTree = "<group>"; };
 		65C560E31C1BC4A300BF8E19 /* Snap415UserProfileBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Snap415UserProfileBase.m; path = dto/Snap415UserProfileBase.m; sourceTree = "<group>"; };
+		65C560E81C1BEFF800BF8E19 /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
+		65C560E91C1BEFF800BF8E19 /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
+		65C560EB1C1BF32500BF8E19 /* Snap415Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Snap415Model.h; path = models/Snap415Model.h; sourceTree = "<group>"; };
+		65C560EC1C1BF32500BF8E19 /* Snap415Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Snap415Model.m; path = models/Snap415Model.m; sourceTree = "<group>"; };
 		A3D226CB33FD43D1F1418341 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D335C52C33EB0229AEBCDA90 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -207,6 +213,8 @@
 				6505C5C11C1589AC0040E055 /* Snap415API.m */,
 				659A8E361C1A9D6100770B46 /* SocialLoginPopupViewController.h */,
 				659A8E371C1A9D6100770B46 /* SocialLoginPopupViewController.m */,
+				65C560E81C1BEFF800BF8E19 /* AccountViewController.h */,
+				65C560E91C1BEFF800BF8E19 /* AccountViewController.m */,
 			);
 			path = CrispyOctoMoo;
 			sourceTree = "<group>";
@@ -252,6 +260,8 @@
 			isa = PBXGroup;
 			children = (
 				652204AD1C16628300AC45CD /* dto */,
+				65C560EB1C1BF32500BF8E19 /* Snap415Model.h */,
+				65C560EC1C1BF32500BF8E19 /* Snap415Model.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -529,9 +539,11 @@
 				652204AA1C15BA9000AC45CD /* Snap415UserProfile.m in Sources */,
 				6505C5861C152CFF0040E055 /* AppDelegate.m in Sources */,
 				6505C5891C152CFF0040E055 /* OverviewsViewController.m in Sources */,
+				65C560EA1C1BEFF800BF8E19 /* AccountViewController.m in Sources */,
 				6505C5831C152CFE0040E055 /* main.m in Sources */,
 				6517AC301C1889B900365394 /* Snap415Deal.m in Sources */,
 				6517AC2D1C18892B00365394 /* SqootDeal.m in Sources */,
+				65C560ED1C1BF32500BF8E19 /* Snap415Model.m in Sources */,
 				6517AC331C188B3C00365394 /* SqootMerchant.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
