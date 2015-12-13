@@ -53,6 +53,8 @@
 		65C560F61C1BFE0200BF8E19 /* SqootQueryLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C560F51C1BFE0200BF8E19 /* SqootQueryLocation.m */; };
 		65C560F91C1C011B00BF8E19 /* Snap415TaxEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C560F81C1C011B00BF8E19 /* Snap415TaxEvent.m */; };
 		65C560FC1C1C018300BF8E19 /* Snap415UserTaxEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C560FB1C1C018300BF8E19 /* Snap415UserTaxEvents.m */; };
+		65C560FF1C1C11B000BF8E19 /* SqootDealObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C560FE1C1C11B000BF8E19 /* SqootDealObject.m */; };
+		65C561021C1C13DE00BF8E19 /* DealsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C561011C1C13DE00BF8E19 /* DealsViewController.m */; };
 		905ED5A2A9F477941F17EA3F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27D3CDDFF7269ACA3912C959 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -154,6 +156,10 @@
 		65C560F81C1C011B00BF8E19 /* Snap415TaxEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Snap415TaxEvent.m; path = dto/Snap415TaxEvent.m; sourceTree = "<group>"; };
 		65C560FA1C1C018300BF8E19 /* Snap415UserTaxEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Snap415UserTaxEvents.h; path = dto/Snap415UserTaxEvents.h; sourceTree = "<group>"; };
 		65C560FB1C1C018300BF8E19 /* Snap415UserTaxEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Snap415UserTaxEvents.m; path = dto/Snap415UserTaxEvents.m; sourceTree = "<group>"; };
+		65C560FD1C1C11B000BF8E19 /* SqootDealObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SqootDealObject.h; path = dto/SqootDealObject.h; sourceTree = "<group>"; };
+		65C560FE1C1C11B000BF8E19 /* SqootDealObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SqootDealObject.m; path = dto/SqootDealObject.m; sourceTree = "<group>"; };
+		65C561001C1C13DE00BF8E19 /* DealsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealsViewController.h; sourceTree = "<group>"; };
+		65C561011C1C13DE00BF8E19 /* DealsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealsViewController.m; sourceTree = "<group>"; };
 		A3D226CB33FD43D1F1418341 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D335C52C33EB0229AEBCDA90 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -230,6 +236,8 @@
 				659A8E371C1A9D6100770B46 /* SocialLoginPopupViewController.m */,
 				65C560E81C1BEFF800BF8E19 /* AccountViewController.h */,
 				65C560E91C1BEFF800BF8E19 /* AccountViewController.m */,
+				65C561001C1C13DE00BF8E19 /* DealsViewController.h */,
+				65C561011C1C13DE00BF8E19 /* DealsViewController.m */,
 			);
 			path = CrispyOctoMoo;
 			sourceTree = "<group>";
@@ -322,6 +330,8 @@
 				65C560F81C1C011B00BF8E19 /* Snap415TaxEvent.m */,
 				65C560FA1C1C018300BF8E19 /* Snap415UserTaxEvents.h */,
 				65C560FB1C1C018300BF8E19 /* Snap415UserTaxEvents.m */,
+				65C560FD1C1C11B000BF8E19 /* SqootDealObject.h */,
+				65C560FE1C1C11B000BF8E19 /* SqootDealObject.m */,
 			);
 			name = dto;
 			sourceTree = "<group>";
@@ -560,9 +570,11 @@
 				6505C5C21C1589AC0040E055 /* Snap415API.m in Sources */,
 				6517AC2A1C1888AF00365394 /* ChildrenKeywords.m in Sources */,
 				6505C5C91C15902A0040E055 /* Snap415Token.m in Sources */,
+				65C561021C1C13DE00BF8E19 /* DealsViewController.m in Sources */,
 				65C560F31C1BFDCE00BF8E19 /* SqootQuery.m in Sources */,
 				6505C58C1C152D000040E055 /* EventsViewController.m in Sources */,
 				6517AC421C188E1C00365394 /* LabelObject.m in Sources */,
+				65C560FF1C1C11B000BF8E19 /* SqootDealObject.m in Sources */,
 				652204AA1C15BA9000AC45CD /* Snap415UserProfile.m in Sources */,
 				6505C5861C152CFF0040E055 /* AppDelegate.m in Sources */,
 				6505C5891C152CFF0040E055 /* OverviewsViewController.m in Sources */,

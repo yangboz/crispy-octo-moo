@@ -20,10 +20,10 @@
 //@see: https://github.com/yangboz/crispy-octo-moo/wiki/API-Services
 #define kAPI_user_me (@"user/me")
 #define kAPI_tax_events (@"user/events")
-#define kAPI_deals (@"user/deals")
+#define kAPI_deals (@"deals/by/")//{keywords},default @"car"
+#define kAPI_deals_catetory (@"car")
 //#define kAPI_overviews (@"user/overviews")
 #define kAPI_overviews (@"overviews")
-
 
 #import "WebSiteObject.h"
 
@@ -88,6 +88,7 @@
         //Next API calls.
         [[Snap415API sharedInstance] loadOverviews];
         [[Snap415API sharedInstance] loadTaxEvents];
+        [[Snap415API sharedInstance] loadDeals];
         //
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         RKLogError(@"Operation failed with error: %@", error);
@@ -137,10 +138,35 @@
         RKLogError(@"Operation failed with error: %@", error);
     }];
 }
+//GET only.
 -(void)loadDeals
 {
+    RKObjectMapping* articleMapping = [RKObjectMapping mappingForClass:[SqootDealsObject class]];
+    [articleMapping addAttributeMappingsFromDictionary:@{
+//                                                         @"query": @"query",
+                                                         @"deals": @"deals"
+                                                         }];
+    
+    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:articleMapping method:RKRequestMethodAny pathPattern:nil keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",kAPIEndpointHost,kAPI_deals,kAPI_deals_catetory]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    RKObjectRequestOperation *objectRequestOperation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[ responseDescriptor ]];
+    [objectRequestOperation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        RKLogInfo(@"Load collection of SqootDealsObject: %@", mappingResult.array);
+        [Snap415Model sharedInstance].sqootDealsObject = (SqootDealsObject *)mappingResult.array[0];
+        //Post to Notification Center is neccessary.
+        //        NSLog(@"RKMappingResult: %@", mappingResult.description);
+        NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_load_deals];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_deals object:dictObj];
+        
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        RKLogError(@"Operation failed with error: %@", error);
+    }];
+    //load begin
+    [objectRequestOperation start];
 }
-
+//GET only.
 -(void)loadOverviews
 {
     RKObjectMapping* articleMapping = [RKObjectMapping mappingForClass:[WebSiteObject class]];
@@ -168,4 +194,5 @@
     //load begin
     [objectRequestOperation start];
 }
+
 @end

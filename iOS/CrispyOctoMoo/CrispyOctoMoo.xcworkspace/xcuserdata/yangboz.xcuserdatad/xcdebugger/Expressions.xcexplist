@@ -3,15 +3,7 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[OverviewsViewController loadOverviewsHandler:]:OverviewsViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "notification.object">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "__30-[Snap415API syncUserProfile:]_block_invoke:Snap415API.m">
+         contextName = "__23-[Snap415API loadDeals]_block_invoke:Snap415API.m">
       </ContextState>
       <ContextState
          contextName = "__30-[Snap415API syncUserProfile:]_block_invoke_2:Snap415API.m">
@@ -20,10 +12,35 @@
          contextName = "-[EventsViewController viewDidLoad]:EventsViewController.m">
       </ContextState>
       <ContextState
+         contextName = "-[DealsViewController viewDidLoad]:DealsViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[sqootDealsObject.objectForKey:@&quot;deal&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[EventsViewController tableView:cellForRowAtIndexPath:]:EventsViewController.m">
+      </ContextState>
+      <ContextState
          contextName = "__27-[Snap415API loadTaxEvents]_block_invoke:Snap415API.m">
          <PersistentStrings>
             <PersistentString
                value = "mappingResult.array[0]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[DealsViewController tableView:cellForRowAtIndexPath:]:DealsViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__30-[Snap415API syncUserProfile:]_block_invoke:Snap415API.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[OverviewsViewController loadOverviewsHandler:]:OverviewsViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "notification.object">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

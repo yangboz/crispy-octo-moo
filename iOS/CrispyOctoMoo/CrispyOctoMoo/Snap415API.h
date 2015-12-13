@@ -31,6 +31,8 @@
 #import "Snap415UserProfile.h"
 #import "Snap415Model.h"
 #import "Snap415UserTaxEvents.h"
+#import "SqootDealsObject.h"
+#import "SqootDealObject.h"
 
 //Notification Center post names;
 #define kNCpN_load_overviews @"loadOverviewsSucc"

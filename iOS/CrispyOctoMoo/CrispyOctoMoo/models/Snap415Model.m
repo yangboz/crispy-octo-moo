@@ -10,7 +10,7 @@
 
 @implementation Snap415Model
 
-@synthesize overviews,snap415UserProfile,snap415Token,snap415UserTaxEvents;
+@synthesize overviews,snap415UserProfile,snap415Token,snap415UserTaxEvents,sqootDealsObject;
 
 - (id)init
 {
