@@ -102,6 +102,7 @@
     return [[self overviewsResult] count];
 }
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = kCellReuseId_overview;
@@ -110,15 +111,20 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-    
+
     WebSiteObject *webSiteObject= [self.overviewsResult objectAtIndex:indexPath.row];
     
-    cell.selectionStyle = UITableViewCellStyleSubtitle;
+//    cell.selectionStyle = UITableViewCellStyleSubtitle;
+//    cell.headerLabel.text = webSiteObject.header;
+//    cell.footerLabel.text = webSiteObject.footer;
+//    cell.bodyLabel.text = webSiteObject.body;
+    
     cell.textLabel.text = webSiteObject.header;
-    cell.detailTextLabel.text = webSiteObject.body;
-//    cell.detailTextLabel.text = webSiteObject.footer;
+    cell.detailTextLabel.text = webSiteObject.footer;
+//    cell.bodyLabel.text = webSiteObject.body;
     
     return cell;
 }
+
 
 @end

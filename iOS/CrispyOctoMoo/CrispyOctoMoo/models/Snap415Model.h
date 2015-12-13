@@ -22,5 +22,12 @@
 @property (strong, nonatomic) Snap415UserProfile * snap415UserProfile;
 @property (strong, nonatomic) Snap415UserTaxEvents *snap415UserTaxEvents;
 @property (strong, nonatomic) SqootDealsObject *sqootDealsObject;
+//Account settings
+@property (strong, nonatomic) NSArray *incomeCategories;
+@property (strong, nonatomic) NSArray *filingCategories;
+@property (strong, nonatomic) NSArray *childrenCategories;
+@property (strong, nonatomic) NSArray *childrenKeywords;
+@property (strong, nonatomic) NSArray *mortgageInterests;
+@property (strong, nonatomic) NSArray *EVCredits;
 
 @end

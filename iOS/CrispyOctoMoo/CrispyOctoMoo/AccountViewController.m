@@ -25,18 +25,17 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     //NotificationCenter
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMeHandler:) name:kNCpN_load_me object:nil] ;
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMeHandler:) name:kNCpN_load_me object:nil] ;
     self.snap415UserProfileResult = [[Snap415Model sharedInstance] snap415UserProfile];
     NSLog(@"self.snap415UserProfileResult:%@",self.snap415UserProfileResult.description);
 }
 
--(void)loadMeHandler:(NSNotification *) notification{
-    //    NSLog(@"loadMeHandler:%@",notification.userInfo);
-    self.snap415UserProfileResult = [(NSDictionary *)notification.object objectForKey:kNCpN_load_me];
-    NSLog(@"snap415UserProfileResult:%@",self.snap415UserProfileResult.description);
-    //then loadOverviews.
-    [[Snap415API sharedInstance] loadOverviews];
-}
+//-(void)loadMeHandler:(NSNotification *) notification{
+//    //    NSLog(@"loadMeHandler:%@",notification.userInfo);
+//    self.snap415UserProfileResult = [(NSDictionary *)notification.object objectForKey:kNCpN_load_me];
+//    NSLog(@"snap415UserProfileResult:%@",self.snap415UserProfileResult.description);
+//    //
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -45,15 +44,15 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
-}
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+////#warning Incomplete implementation, return the number of sections
+//    return 3;
+//}
+//
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+////#warning Incomplete implementation, return the number of rows
+//    return 2;
+//}
 
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

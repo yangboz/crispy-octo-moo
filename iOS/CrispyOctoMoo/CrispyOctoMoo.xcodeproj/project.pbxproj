@@ -55,6 +55,9 @@
 		65C560FC1C1C018300BF8E19 /* Snap415UserTaxEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C560FB1C1C018300BF8E19 /* Snap415UserTaxEvents.m */; };
 		65C560FF1C1C11B000BF8E19 /* SqootDealObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C560FE1C1C11B000BF8E19 /* SqootDealObject.m */; };
 		65C561021C1C13DE00BF8E19 /* DealsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C561011C1C13DE00BF8E19 /* DealsViewController.m */; };
+		65C561041C1D363B00BF8E19 /* TableViewCell4Overview.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65C561031C1D363B00BF8E19 /* TableViewCell4Overview.xib */; };
+		65C5610A1C1D37EE00BF8E19 /* TableViewCell4Overview.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C561091C1D37EE00BF8E19 /* TableViewCell4Overview.m */; };
+		65C5610D1C1D55B300BF8E19 /* AccountSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5610C1C1D55B300BF8E19 /* AccountSettingsViewController.m */; };
 		905ED5A2A9F477941F17EA3F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27D3CDDFF7269ACA3912C959 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -160,6 +163,11 @@
 		65C560FE1C1C11B000BF8E19 /* SqootDealObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SqootDealObject.m; path = dto/SqootDealObject.m; sourceTree = "<group>"; };
 		65C561001C1C13DE00BF8E19 /* DealsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealsViewController.h; sourceTree = "<group>"; };
 		65C561011C1C13DE00BF8E19 /* DealsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealsViewController.m; sourceTree = "<group>"; };
+		65C561031C1D363B00BF8E19 /* TableViewCell4Overview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell4Overview.xib; sourceTree = "<group>"; };
+		65C561081C1D37EE00BF8E19 /* TableViewCell4Overview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell4Overview.h; sourceTree = "<group>"; };
+		65C561091C1D37EE00BF8E19 /* TableViewCell4Overview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell4Overview.m; sourceTree = "<group>"; };
+		65C5610B1C1D55B300BF8E19 /* AccountSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountSettingsViewController.h; sourceTree = "<group>"; };
+		65C5610C1C1D55B300BF8E19 /* AccountSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountSettingsViewController.m; sourceTree = "<group>"; };
 		A3D226CB33FD43D1F1418341 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D335C52C33EB0229AEBCDA90 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -238,6 +246,11 @@
 				65C560E91C1BEFF800BF8E19 /* AccountViewController.m */,
 				65C561001C1C13DE00BF8E19 /* DealsViewController.h */,
 				65C561011C1C13DE00BF8E19 /* DealsViewController.m */,
+				65C561031C1D363B00BF8E19 /* TableViewCell4Overview.xib */,
+				65C561081C1D37EE00BF8E19 /* TableViewCell4Overview.h */,
+				65C561091C1D37EE00BF8E19 /* TableViewCell4Overview.m */,
+				65C5610B1C1D55B300BF8E19 /* AccountSettingsViewController.h */,
+				65C5610C1C1D55B300BF8E19 /* AccountSettingsViewController.m */,
 			);
 			path = CrispyOctoMoo;
 			sourceTree = "<group>";
@@ -481,6 +494,7 @@
 				6505C5941C152D060040E055 /* LaunchScreen.storyboard in Resources */,
 				65AC90C61C194C5B00C2C9F0 /* ios7-analytics@2x.png in Resources */,
 				6505C5911C152D050040E055 /* Assets.xcassets in Resources */,
+				65C561041C1D363B00BF8E19 /* TableViewCell4Overview.xib in Resources */,
 				65AC90CB1C194C5B00C2C9F0 /* ios7-person@1x.png in Resources */,
 				65AC90C71C194C5B00C2C9F0 /* ios7-analytics@3x.png in Resources */,
 				65AC90CE1C194C5B00C2C9F0 /* ios7-pulse@1x.png in Resources */,
@@ -569,6 +583,7 @@
 				6517AC3F1C188DC400365394 /* LabelGroupObject.m in Sources */,
 				6505C5C21C1589AC0040E055 /* Snap415API.m in Sources */,
 				6517AC2A1C1888AF00365394 /* ChildrenKeywords.m in Sources */,
+				65C5610D1C1D55B300BF8E19 /* AccountSettingsViewController.m in Sources */,
 				6505C5C91C15902A0040E055 /* Snap415Token.m in Sources */,
 				65C561021C1C13DE00BF8E19 /* DealsViewController.m in Sources */,
 				65C560F31C1BFDCE00BF8E19 /* SqootQuery.m in Sources */,
@@ -577,6 +592,7 @@
 				65C560FF1C1C11B000BF8E19 /* SqootDealObject.m in Sources */,
 				652204AA1C15BA9000AC45CD /* Snap415UserProfile.m in Sources */,
 				6505C5861C152CFF0040E055 /* AppDelegate.m in Sources */,
+				65C5610A1C1D37EE00BF8E19 /* TableViewCell4Overview.m in Sources */,
 				6505C5891C152CFF0040E055 /* OverviewsViewController.m in Sources */,
 				65C560EA1C1BEFF800BF8E19 /* AccountViewController.m in Sources */,
 				65C560F91C1C011B00BF8E19 /* Snap415TaxEvent.m in Sources */,

@@ -47,4 +47,12 @@
 -(void)loadTaxEvents;
 -(void)loadDeals;
 -(void)loadOverviews;
+//Account settings
+-(void)loadIncomeCategories;
+-(void)loadFilingCategories;
+-(void)loadChildrenCategories;
+-(void)loadChildrenKeywords;
+-(void)loadMortgageInterests;
+-(void)loadEVCredits;
+
 @end

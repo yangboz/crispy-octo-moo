@@ -194,5 +194,23 @@
     //load begin
     [objectRequestOperation start];
 }
-
+//Account settings
+-(void)loadIncomeCategories{
+    
+}
+-(void)loadFilingCategories{
+    
+}
+-(void)loadChildrenCategories{
+    
+}
+-(void)loadChildrenKeywords{
+    
+}
+-(void)loadMortgageInterests{
+    
+}
+-(void)loadEVCredits{
+    
+}
 @end
