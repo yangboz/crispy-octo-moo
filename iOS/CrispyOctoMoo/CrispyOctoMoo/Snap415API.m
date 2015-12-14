@@ -19,6 +19,7 @@
 #endif
 //@see: https://github.com/yangboz/crispy-octo-moo/wiki/API-Services
 #define kAPI_user_me (@"user/me")
+#define kAPI_user_profile (@"user/profile/")
 #define kAPI_tax_events (@"user/events")
 #define kAPI_deals (@"deals/by/")//{keywords},default @"car"
 #define kAPI_deals_catetory (@"car")
@@ -61,8 +62,8 @@
         });
     return _sharedInstance;
 }
-
--(void)syncUserProfile
+//Sync the user profile
+-(void)postUserMe
 {
     //
     RKObjectMapping *responseMapping = [RKObjectMapping mappingForClass:[Snap415UserProfile class]];
@@ -86,18 +87,13 @@
     // POST to create
     [manager postObject: [Snap415Model sharedInstance].snap415Token path:kAPI_user_me parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
 //        NSLog(@"SUCCESS: %@", mappingResult.array);
-        RKLogInfo(@"Load item of Snap415UserProfile: %@", mappingResult.array);
+        RKLogInfo(@"Load item of Snap415UserMe: %@", mappingResult.array);
         //
         //        NSLog(@"RKMappingResult: %@", mappingResult.description);
         NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_load_me];
-//        [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_me object:dictObj];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_me object:dictObj];
         //Save to model
-        [Snap415Model sharedInstance].snap415UserProfile = (Snap415UserProfile *)[dictObj objectForKey:kNCpN_load_me];
-        //Next API calls.
-        [[Snap415API sharedInstance] getOverviews];
-        [[Snap415API sharedInstance] getTaxEvents];
-        [[Snap415API sharedInstance] getDeals];
-        //
+        [Snap415Model sharedInstance].me = (Snap415UserProfile *)[dictObj objectForKey:kNCpN_load_me];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         RKLogError(@"Operation failed with error: %@", error);
     }];
@@ -108,6 +104,53 @@
 //    
 //    // DELETE to destroy
 //    [manager deleteObject:article path:@"/articles/1234" parameters:nil success:nil failure:nil];
+}
+-(void)updateUserProfile
+{
+    //
+    RKObjectMapping *responseMapping = [RKObjectMapping mappingForClass:[Snap415UserProfile class]];
+    [responseMapping addAttributeMappingsFromArray:@[@"snap415ID", @"fbUserProfile", @"liUserProfile",@"profileBase"]];
+    //
+    [Snap415Model sharedInstance].me.profileBase.rwIncome = nil;
+    [Snap415Model sharedInstance].me.profileBase.rwNumberOfChildren = 0;
+    [Snap415Model sharedInstance].me.profileBase.rwTaxFilingStatus = nil;
+    //
+    NSIndexSet *statusCodes = RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful); // Anything in 2xx
+    RKObjectMapping *requestMapping = [RKObjectMapping requestMapping]; // objectClass == NSMutableDictionary
+    [requestMapping addAttributeMappingsFromArray:@[@"rwIncome", @"rwTaxFilingStatus", @"rwNumberOfChildren"]];
+    
+    RKResponseDescriptor *respDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:responseMapping method:RKRequestMethodAny pathPattern:kAPI_user_profile keyPath:nil statusCodes:statusCodes];
+    
+    // For any object of class Article, serialize into an NSMutableDictionary using the given mapping and nest
+    // under the 'user/profile' key path
+    RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:requestMapping objectClass:[Snap415Token class] rootKeyPath:nil method:RKRequestMethodAny];
+    
+    RKObjectManager *manager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:kAPIEndpointHost]];
+    [manager addRequestDescriptor:requestDescriptor];
+    [manager addResponseDescriptor:respDescriptor];
+    // Set MIME Type to JSON
+    manager.requestSerializationMIMEType = RKMIMETypeJSON;
+    
+    // PUT to update
+    [manager putObject: [Snap415Model sharedInstance].me.profileBase path:kAPI_user_profile parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        //        NSLog(@"SUCCESS: %@", mappingResult.array);
+        RKLogInfo(@"Load item of Snap415UserProfile: %@", mappingResult.array);
+        //
+        //        NSLog(@"RKMappingResult: %@", mappingResult.description);
+        NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_update_profile];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_update_profile object:dictObj];
+        //Save to model
+        [Snap415Model sharedInstance].me = (Snap415UserProfile *)[dictObj objectForKey:kNCpN_update_profile];
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        RKLogError(@"Operation failed with error: %@", error);
+    }];
+    //
+    // PATCH to update
+    //    article.body = @"New Body";
+    //    [manager patchObject:article path:@"/articles/1234" parameters:nil success:nil failure:nil];
+    //
+    //    // DELETE to destroy
+    //    [manager deleteObject:article path:@"/articles/1234" parameters:nil success:nil failure:nil];
 }
 -(void)getTaxEvents
 {
@@ -344,6 +387,37 @@
     [objectRequestOperation start];
 }
 -(void)postEITCCredit{
+    //
+    RKObjectMapping *responseMapping = [RKObjectMapping mappingForClass:[Snap415UserProfile class]];
+    [responseMapping addAttributeMappingsFromArray:@[]];
+    NSIndexSet *statusCodes = RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful); // Anything in 2xx
+    RKObjectMapping *requestMapping = [RKObjectMapping requestMapping]; // objectClass == NSMutableDictionary
+    [requestMapping addAttributeMappingsFromArray:@[@"relationshipStatus", @"numberOfChildren", @"income"]];
     
+    RKResponseDescriptor *respDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:responseMapping method:RKRequestMethodAny pathPattern:kAPI_EITCCredit keyPath:nil statusCodes:statusCodes];
+    
+    // For any object of class Article, serialize into an NSMutableDictionary using the given mapping and nest
+    // under the 'user/me' key path
+    RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:requestMapping objectClass:[EITCCreditObject class] rootKeyPath:nil method:RKRequestMethodAny];
+    
+    RKObjectManager *manager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:kAPIEndpointHost]];
+    [manager addRequestDescriptor:requestDescriptor];
+    [manager addResponseDescriptor:respDescriptor];
+    // Set MIME Type to JSONx
+    manager.requestSerializationMIMEType = RKMIMETypeJSON;
+    
+    // POST to get EITCCredit result
+    [manager postObject: [Snap415Model sharedInstance].snap415Token path:kAPI_EITCCredit parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        //        NSLog(@"SUCCESS: %@", mappingResult.array);
+        RKLogInfo(@"Post item of EITCCredit result: %@", mappingResult.array);
+        //
+        //        NSLog(@"RKMappingResult: %@", mappingResult.description);
+        NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_get_EITCCredit];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_get_EITCCredit object:dictObj];
+        //Save to model
+        [Snap415Model sharedInstance].me = (Snap415UserProfile *)[dictObj objectForKey:kNCpN_get_EITCCredit];
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        RKLogError(@"Operation failed with error: %@", error);
+    }];
 }
 @end

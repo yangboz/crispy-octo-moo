@@ -58,7 +58,8 @@
     NSDictionary *snap415TaxEventObj= (NSDictionary *)[self.taxEventsResult objectAtIndex:indexPath.row];
     
     cell.selectionStyle = UITableViewCellStyleSubtitle;
-    cell.textLabel.text = [snap415TaxEventObj objectForKey:@"taxCategory"];
+    cell.textLabel.text = [snap415TaxEventObj objectForKey:@"eventDescription"];
+//    cell.textLabel.text = [snap415TaxEventObj objectForKey:@"taxCategory"];
     cell.detailTextLabel.text = [snap415TaxEventObj objectForKey:@"taxCredit"];
     //    cell.detailTextLabel.text = webSiteObject.footer;
     

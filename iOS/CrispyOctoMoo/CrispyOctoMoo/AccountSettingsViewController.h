@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Snap415API.h"
+#import "MBProgressHUD.h"
 
 @interface AccountSettingsViewController : UITableViewController
 

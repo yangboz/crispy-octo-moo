@@ -36,17 +36,20 @@
 #import "LabelObject.h"
 #import "LabelGroupObject.h"
 #import "LabelValueObject.h"
-
+#import "EITCCreditObject.h"
 //Notification Center post names;
 #define kNCpN_load_overviews @"loadOverviewsSucc"
 #define kNCpN_load_me @"loadMeSucc"
+#define kNCpN_update_profile @"updateProfileSucc"
 #define kNCpN_load_tax_events @"loadTaxEventsSucc"
 #define kNCpN_load_deals @"loadDealsSucc"
+#define kNCpN_get_EITCCredit @"getEITCCreditSucc"
 
 @interface Snap415API : NSObject
 +(Snap415API *)sharedInstance;
 
--(void)syncUserProfile;
+-(void)postUserMe;
+-(void)updateUserProfile;
 -(void)getTaxEvents;
 -(void)getDeals;
 -(void)getOverviews;
