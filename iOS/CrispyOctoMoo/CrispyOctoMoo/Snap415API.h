@@ -33,6 +33,9 @@
 #import "Snap415UserTaxEvents.h"
 #import "SqootDealsObject.h"
 #import "SqootDealObject.h"
+#import "LabelObject.h"
+#import "LabelGroupObject.h"
+#import "LabelValueObject.h"
 
 //Notification Center post names;
 #define kNCpN_load_overviews @"loadOverviewsSucc"
@@ -44,15 +47,16 @@
 +(Snap415API *)sharedInstance;
 
 -(void)syncUserProfile;
--(void)loadTaxEvents;
--(void)loadDeals;
--(void)loadOverviews;
+-(void)getTaxEvents;
+-(void)getDeals;
+-(void)getOverviews;
 //Account settings
--(void)loadIncomeCategories;
--(void)loadFilingCategories;
--(void)loadChildrenCategories;
--(void)loadChildrenKeywords;
--(void)loadMortgageInterests;
--(void)loadEVCredits;
+-(void)getIncomeCategories;
+-(void)getFilingCategories;
+-(void)getChildrenCategories;
+-(void)getChildrenKeywords;
+-(void)getMortgageInterests;
+-(void)getEVCredits;
+-(void)postEITCCredit;
 
 @end

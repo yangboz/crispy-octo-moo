@@ -676,7 +676,7 @@ angular.module('starter.controllers', [])
         ChildrenKeywordsService.get({}, function (response) {
             $log.debug("ChildrenKeywordsService.get() success!", response);
             $rootScope.childrenKeywords = response.data;
-            console.log("$rootScope.childrenKeywords:", $rootScope.EVCredits);
+            console.log("$rootScope.childrenKeywords:", $rootScope.childrenKeywords);
         }, function (error) {
             // failure handler
             $log.error("ChildrenKeywordsService.get() failed:", JSON.stringify(error));

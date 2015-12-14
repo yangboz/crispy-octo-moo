@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Snap415API.h"
 
-@interface AccountSettingsViewController : UIViewController
+@interface AccountSettingsViewController : UITableViewController
 
 @end

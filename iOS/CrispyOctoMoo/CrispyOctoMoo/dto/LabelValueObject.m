@@ -9,5 +9,5 @@
 #import "LabelValueObject.h"
 
 @implementation LabelValueObject
-@synthesize label,object;
+@synthesize label,value;
 @end

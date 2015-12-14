@@ -24,6 +24,14 @@
 #define kAPI_deals_catetory (@"car")
 //#define kAPI_overviews (@"user/overviews")
 #define kAPI_overviews (@"overviews")
+//AccountSettings
+#define kAPI_incomeCategories (@"incomeCategory")
+#define kAPI_filingCategories (@"fillingCategory")//:Key
+#define kAPI_childrenCategories (@"childrenCategory")//:Key
+#define kAPI_childrenKeywords (@"cKeywords")//:Index
+#define kAPI_mortgageInterests (@"mInterests")//:Index
+#define kAPI_EVCredits (@"evCredit")//:Key
+#define kAPI_EITCCredit (@"eitcCredit")
 
 #import "WebSiteObject.h"
 
@@ -86,9 +94,9 @@
         //Save to model
         [Snap415Model sharedInstance].snap415UserProfile = (Snap415UserProfile *)[dictObj objectForKey:kNCpN_load_me];
         //Next API calls.
-        [[Snap415API sharedInstance] loadOverviews];
-        [[Snap415API sharedInstance] loadTaxEvents];
-        [[Snap415API sharedInstance] loadDeals];
+        [[Snap415API sharedInstance] getOverviews];
+        [[Snap415API sharedInstance] getTaxEvents];
+        [[Snap415API sharedInstance] getDeals];
         //
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         RKLogError(@"Operation failed with error: %@", error);
@@ -101,7 +109,7 @@
 //    // DELETE to destroy
 //    [manager deleteObject:article path:@"/articles/1234" parameters:nil success:nil failure:nil];
 }
--(void)loadTaxEvents
+-(void)getTaxEvents
 {
     //
     RKObjectMapping *responseMapping = [RKObjectMapping mappingForClass:[Snap415UserTaxEvents class]];
@@ -139,7 +147,7 @@
     }];
 }
 //GET only.
--(void)loadDeals
+-(void)getDeals
 {
     RKObjectMapping* articleMapping = [RKObjectMapping mappingForClass:[SqootDealsObject class]];
     [articleMapping addAttributeMappingsFromDictionary:@{
@@ -167,7 +175,7 @@
     [objectRequestOperation start];
 }
 //GET only.
--(void)loadOverviews
+-(void)getOverviews
 {
     RKObjectMapping* articleMapping = [RKObjectMapping mappingForClass:[WebSiteObject class]];
     [articleMapping addAttributeMappingsFromDictionary:@{
@@ -195,22 +203,147 @@
     [objectRequestOperation start];
 }
 //Account settings
--(void)loadIncomeCategories{
+-(void)getIncomeCategories{
+    RKObjectMapping* labelObjMapping = [RKObjectMapping mappingForClass:[LabelObject class]];
+    [labelObjMapping addAttributeMappingsFromDictionary:@{
+                                                         @"label": @"label"
+                                                         }];
     
-}
--(void)loadFilingCategories{
+    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:labelObjMapping method:RKRequestMethodAny pathPattern:nil keyPath:@"data" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAPIEndpointHost,kAPI_incomeCategories]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    RKObjectRequestOperation *objectRequestOperation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[ responseDescriptor ]];
+    [objectRequestOperation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        RKLogInfo(@"Load collection of IncomeCategories: %@", mappingResult.array);
+        //Post to NotificationCenter if neccessary.
+//        NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_load_overviews];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_overviews object:dictObj];
+        [Snap415Model sharedInstance].incomeCategories = mappingResult.array;
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        RKLogError(@"Operation failed with error: %@", error);
+    }];
+    //load begin
+    [objectRequestOperation start];
 }
--(void)loadChildrenCategories{
+-(void)getFilingCategories{
+    RKObjectMapping* labelGroupObjMapping = [RKObjectMapping mappingForClass:[LabelGroupObject class]];
+    [labelGroupObjMapping addAttributeMappingsFromDictionary:@{
+                                                          @"label": @"label",
+                                                          @"group": @"group"
+                                                          }];
     
-}
--(void)loadChildrenKeywords{
+    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:labelGroupObjMapping method:RKRequestMethodAny pathPattern:nil keyPath:@"data" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAPIEndpointHost,kAPI_filingCategories]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    RKObjectRequestOperation *objectRequestOperation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[ responseDescriptor ]];
+    [objectRequestOperation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        RKLogInfo(@"Load collection of FillingCategories: %@", mappingResult.array);
+        //Post to NotificationCenter if neccessary.
+        //        NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_load_overviews];
+        //        [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_overviews object:dictObj];
+        [Snap415Model sharedInstance].filingCategories = mappingResult.array;
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        RKLogError(@"Operation failed with error: %@", error);
+    }];
+    //load begin
+    [objectRequestOperation start];
 }
--(void)loadMortgageInterests{
+-(void)getChildrenCategories{
+    RKObjectMapping* labelObjMapping = [RKObjectMapping mappingForClass:[LabelObject class]];
+    [labelObjMapping addAttributeMappingsFromDictionary:@{
+                                                               @"label": @"label"
+                                                               }];
     
+    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:labelObjMapping method:RKRequestMethodAny pathPattern:nil keyPath:@"data" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAPIEndpointHost,kAPI_childrenCategories]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    RKObjectRequestOperation *objectRequestOperation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[ responseDescriptor ]];
+    [objectRequestOperation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        RKLogInfo(@"Load collection of ChildrenCategories: %@", mappingResult.array);
+        //Post to NotificationCenter if neccessary.
+        //        NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_load_overviews];
+        //        [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_overviews object:dictObj];
+        [Snap415Model sharedInstance].childrenCategories = mappingResult.array;
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        RKLogError(@"Operation failed with error: %@", error);
+    }];
+    //load begin
+    [objectRequestOperation start];
 }
--(void)loadEVCredits{
+-(void)getChildrenKeywords{
+    RKObjectMapping* labelObjMapping = [RKObjectMapping mappingForClass:[LabelObject class]];
+    [labelObjMapping addAttributeMappingsFromDictionary:@{
+                                                          @"label": @"label"
+                                                          }];
+    
+    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:labelObjMapping method:RKRequestMethodAny pathPattern:nil keyPath:@"data" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAPIEndpointHost,kAPI_childrenKeywords]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    RKObjectRequestOperation *objectRequestOperation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[ responseDescriptor ]];
+    [objectRequestOperation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        RKLogInfo(@"Load collection of ChildrenKeywords: %@", mappingResult.array);
+        //Post to NotificationCenter if neccessary.
+        //        NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_load_overviews];
+        //        [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_overviews object:dictObj];
+        [Snap415Model sharedInstance].childrenKeywords = mappingResult.array;
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        RKLogError(@"Operation failed with error: %@", error);
+    }];
+    //load begin
+    [objectRequestOperation start];
+}
+-(void)getMortgageInterests{
+    RKObjectMapping* labelObjMapping = [RKObjectMapping mappingForClass:[LabelObject class]];
+    [labelObjMapping addAttributeMappingsFromDictionary:@{
+                                                          @"label": @"label"
+                                                          }];
+    
+    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:labelObjMapping method:RKRequestMethodAny pathPattern:nil keyPath:@"data" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAPIEndpointHost,kAPI_mortgageInterests]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    RKObjectRequestOperation *objectRequestOperation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[ responseDescriptor ]];
+    [objectRequestOperation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        RKLogInfo(@"Load collection of MortgageInterests: %@", mappingResult.array);
+        //Post to NotificationCenter if neccessary.
+        //        NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_load_overviews];
+        //        [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_overviews object:dictObj];
+        [Snap415Model sharedInstance].mortgageInterests = mappingResult.array;
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        RKLogError(@"Operation failed with error: %@", error);
+    }];
+    //load begin
+    [objectRequestOperation start];
+}
+-(void)getEVCredits{
+    RKObjectMapping* labelValueObjMapping = [RKObjectMapping mappingForClass:[LabelValueObject class]];
+    [labelValueObjMapping addAttributeMappingsFromDictionary:@{
+                                                          @"label": @"label",
+                                                          @"value": @"value"
+                                                          }];
+    
+    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:labelValueObjMapping method:RKRequestMethodAny pathPattern:nil keyPath:@"data" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAPIEndpointHost,kAPI_EVCredits]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    RKObjectRequestOperation *objectRequestOperation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[ responseDescriptor ]];
+    [objectRequestOperation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        RKLogInfo(@"Load collection of EVCredits: %@", mappingResult.array);
+        //Post to NotificationCenter if neccessary.
+        //        NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_load_overviews];
+        //        [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_overviews object:dictObj];
+        [Snap415Model sharedInstance].EVCredits = mappingResult.array;
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        RKLogError(@"Operation failed with error: %@", error);
+    }];
+    //load begin
+    [objectRequestOperation start];
+}
+-(void)postEITCCredit{
     
 }
 @end

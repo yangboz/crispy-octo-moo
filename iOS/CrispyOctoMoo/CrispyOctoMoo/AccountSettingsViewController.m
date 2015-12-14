@@ -17,6 +17,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    //Snap415API testing
+    [[Snap415API sharedInstance] getIncomeCategories];
+    [[Snap415API sharedInstance] getFilingCategories];
+    [[Snap415API sharedInstance] getChildrenCategories];
+    [[Snap415API sharedInstance] getChildrenKeywords];
+    [[Snap415API sharedInstance] getMortgageInterests];
+    [[Snap415API sharedInstance] getEVCredits];
 }
 
 - (void)didReceiveMemoryWarning {

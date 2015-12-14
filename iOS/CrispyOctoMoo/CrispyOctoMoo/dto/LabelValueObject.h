@@ -10,5 +10,5 @@
 
 @interface LabelValueObject : NSObject
 @property (nonatomic, strong) NSString *label;//
-@property (nonatomic, strong) NSObject *object;//
+@property (nonatomic, strong) NSNumber *value;//
 @end

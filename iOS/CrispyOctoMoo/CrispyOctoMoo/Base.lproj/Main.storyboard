@@ -209,7 +209,7 @@
         <!--Settings-->
         <scene sceneID="pwj-E2-Lvo">
             <objects>
-                <tableViewController id="XSd-3f-rWg" sceneMemberID="viewController">
+                <tableViewController id="XSd-3f-rWg" customClass="AccountSettingsViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Mzx-k2-rrv">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -679,6 +679,6 @@
         <image name="overviews" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iAS-3S-m4s"/>
+        <segue reference="F7v-HQ-RF7"/>
     </inferredMetricsTieBreakers>
 </document>
