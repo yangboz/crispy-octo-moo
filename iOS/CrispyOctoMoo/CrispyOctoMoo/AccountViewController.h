@@ -13,8 +13,9 @@
 #import "STPopup.h"
 #import "Snap415Model.h"
 
-@interface AccountViewController : UITableViewController
+@interface AccountViewController :  UITableViewController<UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) Snap415UserProfile * snap415UserProfileResult;
-
+-(IBAction)addMore:(id)sender;
+@property (nonatomic, weak) IBOutlet UILabel *lbl_first_name;
 @end

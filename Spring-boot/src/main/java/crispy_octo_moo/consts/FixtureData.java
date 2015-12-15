@@ -83,7 +83,6 @@ public class FixtureData {
     public static final List<LabelObject> ChildrenCategory = new ArrayList<LabelObject>() {{
         add(new LabelObject("0"));
         add(new LabelObject("1"));
-        x
         add(new LabelObject("2"));
         add(new LabelObject("3"));
         add(new LabelObject("4"));

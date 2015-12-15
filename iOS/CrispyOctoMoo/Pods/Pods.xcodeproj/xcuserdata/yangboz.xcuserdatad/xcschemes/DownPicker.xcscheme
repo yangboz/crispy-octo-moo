@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'BD70733BE55569C3A52BBCEA'
-               BlueprintName = 'RKValueTransformers'
+               BlueprintIdentifier = 'C8981BF0D9AA362CD5A75FBC'
+               BlueprintName = 'DownPicker'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libRKValueTransformers.a'>
+               BuildableName = 'libDownPicker.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
