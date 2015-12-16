@@ -12,11 +12,11 @@ import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.facebook.api.impl.ComFacebookTemplate;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.linkedin.api.LinkedIn;
 import org.springframework.social.linkedin.api.impl.LinkedInTemplate;
 import org.springframework.social.linkedin.connect.LinkedInConnectionFactory;
+import org.springframework.social.facebook.api.impl.ComFacebookTemplate;
 
 //import org.springframework.social.facebook.api.impl.FacebookTemplate;
 
