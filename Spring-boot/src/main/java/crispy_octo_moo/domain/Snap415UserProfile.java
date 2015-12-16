@@ -10,6 +10,7 @@ package crispy_octo_moo.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import crispy_octo_moo.dto.Snap415UserProfileBase;
+import java.util.ArrayList;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.social.facebook.api.EducationExperience;
@@ -31,9 +32,36 @@ public class Snap415UserProfile extends BaseEntity {
     // Currently, this ID is set the same as the FB user ID
     private String snap415ID;
 
+    // Snap415UserProfile should contain *derived* info from *raw* data such as FB Profile
+    // *derived* info includes (eg)
+    //      Marriage Status
+    //      Income
+    //      Child list
+    private boolean _isMarried = false;
+    private int _incomeAmount = 12345; // TODO: needs to be set by user in app...
+    // TODO: this isn't the perfect place to put child and EV purchase info
+    private List<Snap415Child> _children = new ArrayList<Snap415Child>();
+    private List<Snap415ElectricVehicle> _evPurchases = new ArrayList<Snap415ElectricVehicle>();
+
     private User fbUserProfile;
     private LinkedInProfile liUserProfile;
     private Snap415UserProfileBase profileBase = new Snap415UserProfileBase();
+
+    public int getIncomeAmount() { return _incomeAmount; }
+
+    public boolean getIsMarried() { return _isMarried; }
+    public void setIsMarried(boolean isMarried) {
+        _isMarried = isMarried;
+    }
+
+    public int getChildCount() { return _children.size(); }
+    public void addChild(Snap415Child child) {
+        _children.add(child);
+    }
+
+    public void addElectricVehicle(Snap415ElectricVehicle evPurchase) {
+        _evPurchases.add(evPurchase);
+    }
 
     public User getFbUserProfile() {
         return fbUserProfile;
