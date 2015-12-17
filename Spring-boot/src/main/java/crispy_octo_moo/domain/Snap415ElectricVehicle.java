@@ -20,20 +20,20 @@ import java.util.List;
 public class Snap415ElectricVehicle extends Snap415EventBase {
 
     // _isCustomerProvided==true
-    public Snap415ElectricVehicle(int birthYear, int birthMonth, birthDate)
-      : base(Snap415EventType.ElectricVehiclePurchase, post, birthYear, birthMonth) {
+    public Snap415ElectricVehicle(int birthYear, int birthMonth, int birthDate) {
+      super(Snap415EventType.ElectricVehiclePurchase, birthYear, birthMonth, birthDate);
     }
 
-    public Snap415ElectricVehicle(Snap415FBPost post, int birthYear, int birthMonth, birthDate)
-      : base(Snap415EventType.ElectricVehiclePurchase, post, birthYear, birthMonth, birthDate) {
+    public Snap415ElectricVehicle(Snap415FBPost post, int birthYear, int birthMonth, int birthDate) {
+      super(Snap415EventType.ElectricVehiclePurchase, post, birthYear, birthMonth, birthDate);
     }
-    public Snap415ElectricVehicle(Snap415FBPost post, int birthYear, int birthMonth)
-      : base(Snap415EventType.ElectricVehiclePurchase, post, birthYear, birthMonth) {
+    public Snap415ElectricVehicle(Snap415FBPost post, int birthYear, int birthMonth) {
+      super(Snap415EventType.ElectricVehiclePurchase, post, birthYear, birthMonth);
     }
-    public Snap415ElectricVehicle(Snap415FBPost post, int birthYear)
-      : base(Snap415EventType.ElectricVehiclePurchase, post, birthYear) {
+    public Snap415ElectricVehicle(Snap415FBPost post, int birthYear) {
+      super(Snap415EventType.ElectricVehiclePurchase, post, birthYear);
     }
     public Snap415ElectricVehicle(Snap415FBPost post) {
-      : base(Snap415EventType.ElectricVehiclePurchase, post) {
+      super(Snap415EventType.ElectricVehiclePurchase, post);
     }
 }

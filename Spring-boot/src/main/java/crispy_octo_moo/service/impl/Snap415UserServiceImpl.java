@@ -59,10 +59,9 @@ public class Snap415UserServiceImpl implements Snap415UserService {
         if (token.getProvider().equals(SocialProviders.FACEBOOK.getValue())) {
             //DTO things.
             User fbUserProfile = fbUserService.getUserProfile(token);
-//
+
             find.setFbUserProfile(fbUserProfile);
             LOG.info("fbUserProfile:" + fbUserProfile);
-            //
             find.getProfileBase().setSimplyBirthday(fbUserProfile.getBirthday());
             find.getProfileBase().setSimplyRelationshipStatus(fbUserProfile.getRelationshipStatus());
             List<EducationExperience> educationExperiences = fbUserProfile.getEducation();
@@ -73,13 +72,10 @@ public class Snap415UserServiceImpl implements Snap415UserService {
             }
             List<WorkEntry> workEntries = fbUserProfile.getWork();
             if (workEntries != null && workEntries.size() > 0) {
-//                find.getProfileBase().setSimplyWork(workEntries.get(0).getEmployer().getName());
                 find.getProfileBase().setSimplyWork(workEntries.get(0).toString());//XXX:more accurate information.
             } else {
                 LOG.info("None of WorkEntry to sync.");
             }
-//            LOG.info("getMe(Snap415UserProfile after NPE):" + find.toString());
-            //
         } else if (token.getProvider().equals(SocialProviders.LINKEDIN.getValue())) {
             LinkedInProfile liUserProfile = linkedInUserService.getUserProfile(token);
             find.setLiUserProfile(liUserProfile);
@@ -122,15 +118,14 @@ public class Snap415UserServiceImpl implements Snap415UserService {
         String Snap415ID = snap415UserProfile.getSnap415ID();
 
         Snap415UserTaxEvents result = _userTaxEventsDao.findBySnap415ID(Snap415ID);
-
-        ArrayList<Snap415TaxEvent> events = result.getTaxEvents();
-
-        for (Snap415TaxEvent temp : events) {
-            if (temp.getTaxCategory().equals(TaxCategories.EITC.getValue())) {
-                LOG.info("update:" + temp.getTaxCategory() + " " + temp.getTaxCredit());
+        if (result != null) {
+            ArrayList<Snap415TaxEvent> events = result.getTaxEvents();
+            for (Snap415TaxEvent temp : events) {
+                if (temp.getTaxCategory().equals(TaxCategories.EITC.getValue())) {
+                    LOG.info("update:" + temp.getTaxCategory() + " " + temp.getTaxCredit());
+                }
             }
         }
-
 
         return result;
     }
