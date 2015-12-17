@@ -1,9 +1,3 @@
-./README_101.md
-    This doc contains many links, including
-        links to docs for this project
-        links to frameworks used in the project tech stack
-        links to 101 docs for the frameworks
-
 # crispy-octo-moo
 Meteor/Ionic based walkthrough. Spring-boot RESTful with MongoDb,Spring-Social provider...
 

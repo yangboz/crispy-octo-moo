@@ -4,8 +4,7 @@ import java.util.Date;
 
 public class Snap415FBPost {
 
-    private Date _dataSyncTime; // time it was sync'ed from FB to Snap415 store
-    private Date createdTime; // time it was posted on FB|etc.
+    private Date createdTime;
     private String story;
 
     public Date getCreatedTime() {
