@@ -18,3 +18,4 @@ deploy/
 .classpath
 bin
 /target/
+.metadata
