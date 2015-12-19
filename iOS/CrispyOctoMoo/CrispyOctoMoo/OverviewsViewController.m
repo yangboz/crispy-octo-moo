@@ -16,6 +16,7 @@
 @implementation OverviewsViewController
 
 @synthesize overviewsResult;
+static NSString *CellIdentifier = @"TableViewCell4Overview";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -32,6 +33,7 @@
 //    self.tableView.dataSource = self;
 //    self.tableView.delegate = self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadOverviewsHandler:) name:kNCpN_load_overviews object:nil] ;
+
 }
 
 - (void)fbLoginHandler{
@@ -123,25 +125,36 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = kCellReuseId_overview;
-//    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    UITableViewCell *cell = [tableView
-                             dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    //
+    TableViewCell4Overview *cell  = (TableViewCell4Overview *) [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if(!cell)
+    {
+        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"TableViewCell4Overview" owner:nil options:nil];
+        
+        for(id currentObject in topLevelObjects)
+        {
+            if([currentObject isKindOfClass:[TableViewCell4Overview class]])
+            {
+                cell = (TableViewCell4Overview *)currentObject;
+                break;
+            }
+        }
     }
-
+//
     WebSiteObject *webSiteObject= [self.overviewsResult objectAtIndex:indexPath.row];
     
 //    cell.selectionStyle = UITableViewCellStyleSubtitle;
-//    cell.headerLabel.text = webSiteObject.header;
-//    cell.footerLabel.text = webSiteObject.footer;
-//    cell.bodyLabel.text = webSiteObject.body;
+    cell.headerTextV.text = webSiteObject.header;
+    NSAttributedString *attributedString_footer = [[NSAttributedString alloc] initWithData:[webSiteObject.footer dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+    cell.footerTextV.attributedText = attributedString_footer;
+//    cell.footerTextV.text = webSiteObject.footer;
+//    cell.bodyTextV.text = webSiteObject.body;
     
-    cell.textLabel.text = webSiteObject.header;
-    cell.detailTextLabel.text = webSiteObject.footer;
-//    cell.bodyLabel.text = webSiteObject.body;
+//    cell.textLabel.text = webSiteObject.header;
+//    cell.detailTextLabel.text = webSiteObject.footer;
+    
+    NSAttributedString *attributedString_body = [[NSAttributedString alloc] initWithData:[webSiteObject.body dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+    cell.bodyTextV.attributedText = attributedString_body;
     
     return cell;
 }

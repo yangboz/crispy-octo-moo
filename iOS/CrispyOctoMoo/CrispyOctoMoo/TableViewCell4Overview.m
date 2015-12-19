@@ -9,6 +9,7 @@
 #import "TableViewCell4Overview.h"
 
 @implementation TableViewCell4Overview
+@synthesize headerTextV,footerTextV,bodyTextV;
 
 - (void)awakeFromNib {
     // Initialization code

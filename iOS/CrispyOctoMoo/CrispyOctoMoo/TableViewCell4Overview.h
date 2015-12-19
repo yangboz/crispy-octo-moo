@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface TableViewCell4Overview : UITableViewCell
-@property (nonatomic, weak) IBOutlet UILabel *headerLabel;
-@property (nonatomic, weak) IBOutlet UILabel *bodyLabel;
-@property (nonatomic, weak) IBOutlet UILabel *footerLabel;
+@property (nonatomic, weak) IBOutlet UITextView *headerTextV;
+@property (nonatomic, weak) IBOutlet UITextView *bodyTextV;
+@property (nonatomic, weak) IBOutlet UITextView *footerTextV;
 @end

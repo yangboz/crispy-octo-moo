@@ -16,8 +16,6 @@
 #import "TableViewCell4Overview.h"
 #import "MBProgressHUD.h"
 
-#define kCellReuseId_overview @"TableViewCell4Overview";
-
 @interface OverviewsViewController : UITableViewController
 @property (strong, nonatomic) NSArray *overviewsResult;
 @end
