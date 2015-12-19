@@ -90,7 +90,7 @@
         RKLogInfo(@"Load item of Snap415UserMe: %@", mappingResult.array);
         //
         //        NSLog(@"RKMappingResult: %@", mappingResult.description);
-        NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_load_me];
+        NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array[0] forKey:kNCpN_load_me];
         [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_me object:dictObj];
         //Save to model
         [Snap415Model sharedInstance].me = (Snap415UserProfile *)[dictObj objectForKey:kNCpN_load_me];

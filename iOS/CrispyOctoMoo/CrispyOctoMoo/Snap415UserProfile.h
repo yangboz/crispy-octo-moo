@@ -11,7 +11,7 @@
 
 @interface Snap415UserProfile : NSObject
 @property (nonatomic, strong) NSString *snap415ID;//social user id;
-@property(nonatomic,strong) NSObject *fbUserProfile;
+@property(nonatomic,strong) NSDictionary *fbUserProfile;
 @property(nonatomic,strong) NSObject *liUserProfile;
 @property(nonatomic,strong) Snap415UserProfileBase *profileBase;
 @end

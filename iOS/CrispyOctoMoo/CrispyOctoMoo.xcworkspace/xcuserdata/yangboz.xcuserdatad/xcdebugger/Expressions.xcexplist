@@ -3,19 +3,46 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "__23-[Snap415API loadDeals]_block_invoke:Snap415API.m">
+         contextName = "__24-[Snap415API postUserMe]_block_invoke:Snap415API.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[dictObj objectForkey:loadMeSucc]">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__30-[Snap415API syncUserProfile:]_block_invoke_2:Snap415API.m">
+         contextName = "-[OverviewsViewController loadOverviewsHandler:]:OverviewsViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "notification.object">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[EventsViewController viewDidLoad]:EventsViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__30-[Snap415API syncUserProfile:]_block_invoke:Snap415API.m">
       </ContextState>
       <ContextState
          contextName = "-[DealsViewController viewDidLoad]:DealsViewController.m">
          <PersistentStrings>
             <PersistentString
                value = "[sqootDealsObject.objectForKey:@&quot;deal&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[DealsViewController tableView:cellForRowAtIndexPath:]:DealsViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__23-[Snap415API loadDeals]_block_invoke:Snap415API.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[AccountViewController viewDidLoad]:AccountViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.snap415UserProfileResult[0]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -31,18 +58,7 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[DealsViewController tableView:cellForRowAtIndexPath:]:DealsViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "__30-[Snap415API syncUserProfile:]_block_invoke:Snap415API.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[OverviewsViewController loadOverviewsHandler:]:OverviewsViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "notification.object">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "__30-[Snap415API syncUserProfile:]_block_invoke_2:Snap415API.m">
       </ContextState>
    </ContextStates>
 </VariablesViewState>
