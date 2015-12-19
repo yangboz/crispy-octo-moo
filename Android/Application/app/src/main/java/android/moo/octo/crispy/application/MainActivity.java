@@ -18,8 +18,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+import android.moo.octo.crispy.application.EditNameDialog.EditNameDialogListener;
 
-public class MainActivity extends AppCompatActivity {
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity implements EditNameDialogListener{
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -63,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        showEditDialog();
     }
 
 
@@ -160,4 +164,16 @@ public class MainActivity extends AppCompatActivity {
             return rootView;
         }
     }
+
+    private void showEditDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        EditNameDialog editNameDialog = new EditNameDialog();
+        editNameDialog.show(fm, "dlg_edit_name");
+    }
+
+    @Override
+    public void onFinishEditDialog(String inputText) {
+        Toast.makeText(this, "Hi, " + inputText, Toast.LENGTH_SHORT).show();
+    }
+
 }
