@@ -27,5 +27,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *lbl_fine_print;
 @property (weak, nonatomic) IBOutlet UILabel *lbl_merchant;
 @property (weak, nonatomic) IBOutlet UILabel *lbl_share;
-
+//IBActions
+-(IBAction) dismiss:(id) sender;
 @end

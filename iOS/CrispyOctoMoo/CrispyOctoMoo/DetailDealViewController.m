@@ -28,7 +28,7 @@ NSDictionary * dealDict;
 }
 - (void)viewDidAppear:(BOOL)animated
 {
-//    NSLog(@"self.dealData:%@",self.dealData.description);
+    NSLog(@"self.dealData:%@",self.dealData.description);
     dealDict = (NSDictionary *)[self.dealData objectForKey:@"deal"];
     NSLog(@"dealDict:%@",dealDict.description);
     //IBOutlet set values.
@@ -56,6 +56,11 @@ NSDictionary * dealDict;
     self.lbl_merchant.text = [(NSObject *)[dealDict objectForKey:@"merchant"] description];
     self.lbl_share.text = (NSString *)[dealDict objectForKey:@"untracked_url"];
     
+}
+//@see: http://stackoverflow.com/questions/12961345/uinavigationcontroller-not-showing-back-button
+-(IBAction) dismiss:(id) sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*

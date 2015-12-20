@@ -562,7 +562,13 @@
                             <outlet property="delegate" destination="w3S-5p-JPs" id="fcB-2f-59c"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Title" id="ZvJ-4G-f1P"/>
+                    <navigationItem key="navigationItem" title="Title" id="9l6-JT-v87">
+                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="oxd-RH-KYb">
+                            <connections>
+                                <action selector="dismiss:" destination="w3S-5p-JPs" id="xL0-Ir-AMI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="lbl_category" destination="ebO-d2-mb8" id="SfD-gU-pha"/>
                         <outlet property="lbl_created" destination="pFM-Yp-2YW" id="Ef5-gg-Ua4"/>
@@ -584,7 +590,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TBM-9r-wGr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2906.25" y="490.5"/>
+            <point key="canvasLocation" x="2944.5" y="490.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fcr-Ot-DpU">
@@ -595,7 +601,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="w3S-5p-JPs" kind="relationship" relationship="rootViewController" id="fxl-Lj-2OT"/>
+                        <segue destination="w3S-5p-JPs" kind="relationship" relationship="rootViewController" id="3d9-MU-GeF"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qhq-yN-zkD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -641,7 +647,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="WIT-WG-auA" kind="showDetail" identifier="showDealDetail" id="Ig6-TC-guE"/>
+                                    <segue destination="WIT-WG-auA" kind="show" identifier="showDealDetail" id="teF-W9-yUZ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
