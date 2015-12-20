@@ -81,9 +81,9 @@ NSDictionary *fbUserProfile;
 }
 
 -(IBAction)addMore:(id)sender{
-    STPopupController *popupController = [[STPopupController alloc] initWithRootViewController:[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"DetailMePopupViewController"]];
-    popupController.cornerRadius = 4;
-    [popupController presentInViewController:self];
+//    STPopupController *popupController = [[STPopupController alloc] initWithRootViewController:[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"DetailMePopupViewController"]];
+//    popupController.cornerRadius = 4;
+//    [popupController presentInViewController:self];
 }
 
 #pragma mark - Table view data source

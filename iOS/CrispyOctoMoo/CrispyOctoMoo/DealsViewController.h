@@ -11,8 +11,6 @@
 #import "Snap415Model.h"
 #import "SqootDeal.h"
 
-#define kCellReuseId_deals @"ReuseCellName_deals";
-
 @interface DealsViewController : UITableViewController
 @property (strong,nonatomic) NSArray *sqootDealObjectsResult;
 @end
