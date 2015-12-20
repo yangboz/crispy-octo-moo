@@ -10,6 +10,7 @@
 
 #import "Snap415Model.h"
 #import "SqootDeal.h"
+#import "DetailDealViewController.h"
 
 @interface DealsViewController : UITableViewController
 @property (strong,nonatomic) NSArray *sqootDealObjectsResult;

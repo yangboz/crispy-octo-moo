@@ -15,7 +15,7 @@
 @implementation EventsViewController
 
 @synthesize taxEventsResult;
-static NSString *CellIdentifier = @"TableViewCell4Events";
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -50,12 +50,13 @@ static NSString *CellIdentifier = @"TableViewCell4Events";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath *)indexPath
 {
+    static NSString *CellIdentifier = @"TableViewCell4Events";
     //
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
+//    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-    }
+//    if (cell == nil) {
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+//    }
 
 //
     NSDictionary *snap415TaxEventObj= (NSDictionary *)[self.taxEventsResult objectAtIndex:indexPath.row];

@@ -1,18 +1,18 @@
 //
-//  DetailMePopupViewController.m
+//  DetailMeViewController.m
 //  CrispyOctoMoo
 //
 //  Created by yangboz on 12/15/15.
 //  Copyright © 2015 SMARTKIT.INFO. All rights reserved.
 //
 
-#import "DetailMePopupViewController.h"
+#import "DetailMeViewController.h"
 
-@interface DetailMePopupViewController ()
+@interface DetailMeViewController ()
 
 @end
 
-@implementation DetailMePopupViewController
+@implementation DetailMeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

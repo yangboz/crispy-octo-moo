@@ -35,9 +35,9 @@ NSDictionary *fbUserProfile;
     self.snap415UserProfileResult = [[Snap415Model sharedInstance] me];
     NSLog(@"self.snap415UserProfileResult:%@",self.snap415UserProfileResult.description);
     snap415UserProfileBase = self.snap415UserProfileResult.profileBase;
-    NSLog(@"snap415UserProfileBase:%@",snap415UserProfileBase.description);
+//    NSLog(@"snap415UserProfileBase:%@",snap415UserProfileBase.description);
     fbUserProfile = self.snap415UserProfileResult.fbUserProfile;
-    NSLog(@"fbUserProfile:%@",fbUserProfile.description);
+//    NSLog(@"fbUserProfile:%@",fbUserProfile.description);
 //    self.view = [[UIView alloc]initWithFrame:CGRectMake(0,0,320,480)];
 }
 

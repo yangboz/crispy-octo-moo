@@ -1,5 +1,5 @@
 //
-//  DetailMePopupViewController.h
+//  DetailMeViewController.h
 //  CrispyOctoMoo
 //
 //  Created by yangboz on 12/15/15.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DownPicker.h"
-@interface DetailMePopupViewController : UIViewController
+@interface DetailMeViewController : UIViewController
 @property (nonatomic, weak) IBOutlet UITextField *tf_fillingCategory;
 @property (strong, nonatomic) DownPicker *downPicker_fillingCategory;
 @end
