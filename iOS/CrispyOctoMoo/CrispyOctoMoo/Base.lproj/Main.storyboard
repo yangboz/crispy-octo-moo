@@ -56,7 +56,7 @@
             </objects>
             <point key="canvasLocation" x="1524" y="-229.5"/>
         </scene>
-        <!--Deal-->
+        <!--Title-->
         <scene sceneID="gBX-we-ycM">
             <objects>
                 <tableViewController id="w3S-5p-JPs" customClass="DetailDealViewController" sceneMemberID="viewController">
@@ -66,14 +66,6 @@
                         <sections>
                             <tableViewSection headerTitle="Basic" id="o9O-XS-Tll">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="agz-W0-E5Q">
-                                        <rect key="frame" x="0.0" y="50" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="agz-W0-E5Q" id="rO9-Kp-S3O">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="qQD-7k-HCG" detailTextLabel="8cJ-6c-sD8" style="IBUITableViewCellStyleValue2" id="uyG-xv-TqY">
                                         <rect key="frame" x="0.0" y="94" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -228,14 +220,6 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="More" id="RMd-FJ-JTn">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KpM-46-p6h">
-                                        <rect key="frame" x="0.0" y="365" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KpM-46-p6h" id="r09-tl-oqK">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="bgC-wu-j26" detailTextLabel="1Nq-4i-7bU" style="IBUITableViewCellStyleValue2" id="Lnu-Q4-wva">
                                         <rect key="frame" x="0.0" y="409" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -388,7 +372,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="LInks:" id="Won-4F-eLq">
+                            <tableViewSection headerTitle="Links:" id="Won-4F-eLq">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="yF0-0x-v9H" detailTextLabel="JMy-Ob-Kgj" style="IBUITableViewCellStyleValue2" id="n0P-ms-z0Z">
                                         <rect key="frame" x="0.0" y="680" width="600" height="44"/>
@@ -578,7 +562,25 @@
                             <outlet property="delegate" destination="w3S-5p-JPs" id="fcB-2f-59c"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Deal" id="ZgG-eE-ync"/>
+                    <navigationItem key="navigationItem" title="Title" id="ZvJ-4G-f1P"/>
+                    <connections>
+                        <outlet property="lbl_category" destination="ebO-d2-mb8" id="SfD-gU-pha"/>
+                        <outlet property="lbl_created" destination="pFM-Yp-2YW" id="Ef5-gg-Ua4"/>
+                        <outlet property="lbl_dAmount" destination="XJX-3y-ceR" id="NNF-V4-omI"/>
+                        <outlet property="lbl_dPercentage" destination="ZLk-Ro-f8d" id="4xg-51-XQ3"/>
+                        <outlet property="lbl_description" destination="JMy-Ob-Kgj" id="eqP-ET-tbL"/>
+                        <outlet property="lbl_expires" destination="CZs-4e-a8S" id="EM8-fN-XHX"/>
+                        <outlet property="lbl_fine_print" destination="B9J-RX-UxF" id="fhk-g4-5ka"/>
+                        <outlet property="lbl_image_url" destination="4It-C3-o30" id="pb4-k5-BFT"/>
+                        <outlet property="lbl_link_url" destination="udC-Ld-gIR" id="p20-NV-iXJ"/>
+                        <outlet property="lbl_merchant" destination="7D6-EB-4i5" id="tqm-EP-fFc"/>
+                        <outlet property="lbl_nSold" destination="F4s-vE-KZe" id="4nt-0X-VoM"/>
+                        <outlet property="lbl_price" destination="1Nq-4i-7bU" id="HSF-Y9-nj4"/>
+                        <outlet property="lbl_provider" destination="8iv-9G-BAV" id="TFz-UL-f4h"/>
+                        <outlet property="lbl_share" destination="9gE-Wu-dQG" id="Omg-fX-PMV"/>
+                        <outlet property="lbl_title" destination="8cJ-6c-sD8" id="rTL-h7-hKj"/>
+                        <outlet property="lbl_value" destination="S4j-Ii-1YM" id="Wpe-gb-C4X"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TBM-9r-wGr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -639,7 +641,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="WIT-WG-auA" kind="showDetail" identifier="showDealDetail" id="2eh-bY-fSf"/>
+                                    <segue destination="WIT-WG-auA" kind="showDetail" identifier="showDealDetail" id="Ig6-TC-guE"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
