@@ -13,6 +13,7 @@
 @end
 
 @implementation DetailDealViewController
+@synthesize dealData;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,6 +23,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    NSLog(@"self.dealData:%@",self.dealData.description);
+    NSLog(@"self.dealData.deal:%@",[(NSDictionary *)[self.dealData objectForKey:@"deal"] description]);
 }
 
 /*

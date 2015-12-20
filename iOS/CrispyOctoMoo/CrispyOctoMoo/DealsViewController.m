@@ -88,8 +88,9 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        DetailDealViewController *detailViewController = [segue destinationViewController];
+    if ([[segue identifier] isEqualToString:@"showDealDetail"]) {
+        UINavigationController *uiNavController = [segue destinationViewController];
+        DetailDealViewController *detailViewController = [uiNavController.childViewControllers objectAtIndex:0];
         
         detailViewController.dealData = [sqootDealObjectsResult objectAtIndex:[self.tableView indexPathForSelectedRow].row];
         NSLog(@"detailViewController.dealData:%@",detailViewController.dealData.description);
