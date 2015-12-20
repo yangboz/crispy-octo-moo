@@ -45,6 +45,7 @@ public class FacebookConnectController {
     @RequestMapping(value = "/profile", method = RequestMethod.POST)
     @ApiOperation(httpMethod = "POST", value = "Response a string describing if the access_token related user profile is successfully received.")
     public User getUserProfile(@RequestBody @Valid Snap415Token snap415Token) {
+        LOG.info(String.format("[getUserProfile(%1$s)...", snap415Token));
         snap415PersistenceService.persistUserProfile(snap415Token);
         snap415PersistenceService.persistUserPosts(snap415Token);
         snap415PersistenceService.persistUserTaxEvents(snap415Token);

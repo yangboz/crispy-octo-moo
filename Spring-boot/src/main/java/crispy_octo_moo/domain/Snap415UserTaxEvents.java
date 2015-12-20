@@ -20,7 +20,7 @@ public class Snap415UserTaxEvents {
     //This is the user id for linking a user's profile to a user entity
     private String snap415ID;
 
-    private ArrayList<Snap415TaxEvent> taxEvents;
+    private List<Snap415TaxEvent> taxEvents = new ArrayList<>();
 
 
     public String getId() {
@@ -39,13 +39,14 @@ public class Snap415UserTaxEvents {
         snap415ID = snap415id;
     }
 
-    public ArrayList<Snap415TaxEvent> getTaxEvents() {
+    public List<Snap415TaxEvent> getTaxEvents() {
         return taxEvents;
     }
 
-    public void setTaxEvents(ArrayList<Snap415TaxEvent> taxEvents) {
+    public void setTaxEvents(List<Snap415TaxEvent> taxEvents) {
         this.taxEvents = taxEvents;
     }
+    public void addTaxEvent(Snap415TaxEvent taxEvent) { this.taxEvents.add(taxEvent);}
 
     @Override
     public String toString() {

@@ -1,9 +1,13 @@
 package crispy_octo_moo.domain;
 
+import crispy_octo_moo.rule.CreditRule;
+
+
 public class Snap415TaxEvent {
     private String taxCategory = "UNKNOWN";
-    private String taxCredit = "UNKNOWN";
+    private String taxCredit = "UNKNOWN"; // TODO: remove this
     private String eventDescription;
+    private CreditRule _creditRule; // which rule triggered the event?
 
     public String getTaxCategory() {
         return taxCategory;
@@ -20,6 +24,7 @@ public class Snap415TaxEvent {
     public void setTaxCredit(String taxCredit) {
         this.taxCredit = taxCredit;
     }
+    public void setCreditRule(CreditRule rule){_creditRule = rule;}
 
     public String getEventDescription() {
         return eventDescription;

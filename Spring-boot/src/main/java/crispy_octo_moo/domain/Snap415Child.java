@@ -20,20 +20,20 @@ import java.util.List;
 public class Snap415Child extends Snap415EventBase {
 
     // _isCustomerProvided==true
-    public Snap415Child(int birthYear, int birthMonth, int birthDate) {
-      super(Snap415EventType.ChildBirth, birthYear, birthMonth, birthDate);
+    public Snap415Child(String snap415ID, int birthYear, int birthMonth, int birthDate) {
+      super(snap415ID, Snap415EventType.ChildBirth, birthYear, birthMonth, birthDate);
     }
 
-    public Snap415Child(Snap415FBPost post, int birthYear, int birthMonth, int birthDate) {
-      super(Snap415EventType.ChildBirth, post, birthYear, birthMonth, birthDate);
+    public Snap415Child(String snap415ID, String        postId, int birthYear, int birthMonth, int birthDate) {
+      super(snap415ID, Snap415EventType.ChildBirth, postId, birthYear, birthMonth, birthDate);
     }
-    public Snap415Child(Snap415FBPost post, int birthYear, int birthMonth) {
-      super(Snap415EventType.ChildBirth, post, birthYear, birthMonth);
+    public Snap415Child(String snap415ID, String        postId, int birthYear, int birthMonth) {
+      super(snap415ID, Snap415EventType.ChildBirth, postId, birthYear, birthMonth);
     }
-    public Snap415Child(Snap415FBPost post, int birthYear) {
-      super(Snap415EventType.ChildBirth, post, birthYear);
+    public Snap415Child(String snap415ID, String        postId, int birthYear) {
+      super(snap415ID, Snap415EventType.ChildBirth, postId, birthYear);
     }
-    public Snap415Child(Snap415FBPost post) {
-      super(Snap415EventType.ChildBirth, post);
+    public Snap415Child(String snap415ID, String        postId) {
+      super(snap415ID, Snap415EventType.ChildBirth, postId);
     }
 }

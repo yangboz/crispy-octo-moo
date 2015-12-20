@@ -56,6 +56,7 @@ public class Snap415UserServiceImpl implements Snap415UserService {
             find = new Snap415UserProfile();
             find.setSnap415ID(token.getIdentifier());
         }
+
         if (token.getProvider().equals(SocialProviders.FACEBOOK.getValue())) {
             //DTO things.
             User fbUserProfile = fbUserService.getUserProfile(token);
@@ -90,6 +91,7 @@ public class Snap415UserServiceImpl implements Snap415UserService {
 
         }
         //Synchronize the Social user profile to DB.
+        // TODO: save should be delegated to Snap415PersistenceServiceImpl
         return _userProfileDao.save(find);
     }
 
@@ -119,7 +121,7 @@ public class Snap415UserServiceImpl implements Snap415UserService {
 
         Snap415UserTaxEvents result = _userTaxEventsDao.findBySnap415ID(Snap415ID);
         if (result != null) {
-            ArrayList<Snap415TaxEvent> events = result.getTaxEvents();
+            List<Snap415TaxEvent> events = result.getTaxEvents();
             for (Snap415TaxEvent temp : events) {
                 if (temp.getTaxCategory().equals(TaxCategories.EITC.getValue())) {
                     LOG.info("update:" + temp.getTaxCategory() + " " + temp.getTaxCredit());

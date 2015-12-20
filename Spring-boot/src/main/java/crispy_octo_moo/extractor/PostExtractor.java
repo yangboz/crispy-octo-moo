@@ -3,34 +3,42 @@ package crispy_octo_moo.extractor;
 import crispy_octo_moo.domain.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.util.ArrayList;
-
+import java.util.*;
 import java.util.Calendar;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.Post;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * An extractor that extracts info from FB Post.
  */
 public class PostExtractor {
+    private static final Logger LOG = LoggerFactory.getLogger(PostExtractor.class);
+
     /**
      * Extracts events from given post and place the vents in given profile...
      *   input:  posts
-     *   output: profile (update)
+     *   output: container
      * TODO: one post at a time?
      */
-    public static void extract(Snap415UserPosts posts, Snap415UserProfile profile) {
+    private static void extract(Snap415UserPosts posts, ExtractedData container) {
+        LOG.info(String.format("[extract(%1$d-posts)...", posts.getPosts().size()));
         for(Snap415FBPost fbPost : posts.getPosts()) {
-            String story = fbPost.getStory();
+            extract(fbPost, container);
+        }
+    }
 
-            if (story.trim().length() > 0) {
-                            extractChild(fbPost, story.toLowerCase(), profile);
-                            extractElectricVehicle(fbPost, story.toLowerCase(), profile);
-                            extractProfile(fbPost, story.toLowerCase(), profile);
-            }
+    public static void extract(Snap415FBPost fbPost, ExtractedData container) {
+        String story = fbPost.getStory();
+        if (story.trim().length() > 0) {
+            String storyLowerCase = story.toLowerCase();
+            extractChild(fbPost, storyLowerCase, container);
+            extractElectricVehicle(fbPost, storyLowerCase, container);
+            extractMarriageStatus(fbPost, storyLowerCase, container);
         }
     }
 
@@ -40,7 +48,7 @@ public class PostExtractor {
     // congrats new wed!
     // wedding reception
     // wedded
-    public static void extractProfile(Snap415FBPost fbPost, String fbPostStory, Snap415UserProfile profile) {
+    public static void extractMarriageStatus(Snap415FBPost fbPost, String fbPostStory, ExtractedData container) {
         boolean isMarried = false;
         isMarried = isMarried ||
           (
@@ -51,7 +59,7 @@ public class PostExtractor {
             )
           );
         if (isMarried) {
-            profile.setIsMarried(isMarried);
+            container._isMarried = isMarried;
         }
     }
 
@@ -63,7 +71,8 @@ public class PostExtractor {
     // Chrystal was born 
     // congrates on your new born! She is so cute/adorable/precious/beautiful/pretty!
     // he just looks like you
-    public static void extractChild(Snap415FBPost fbPost, String fbPostStory, Snap415UserProfile profile) {
+    private static void extractChild(Snap415FBPost fbPost, String fbPostStory, ExtractedData container) {
+        LOG.info(String.format("[extractChild(%1$s)...", fbPost.getPostId()));
         boolean isChildBorn = false;
         isChildBorn = isChildBorn ||
           (
@@ -84,10 +93,16 @@ public class PostExtractor {
             )
           && (fbPostStory.indexOf("congrat") >= 0)
           );
+
         if (isChildBorn) {
             // TODO: getYear etc. is deprecated
-            Snap415Child child = new Snap415Child(fbPost, fbPost.getCreatedTime().getYear(), fbPost.getCreatedTime().getMonth(), fbPost.getCreatedTime().getDate());
-            profile.addChild(child);
+            // TODO: using Post.CreatedTime as child' DOB is problematic at best
+            // TODO: need to de-dup as different posts may refer to same child
+            // TODO: need to find cases of twins, triplets, etc.
+            LOG.info(String.format("  isChildBorn!"));
+            Date postCreatedTime = fbPost.getCreatedTime();
+            Snap415Child child = new Snap415Child(fbPost.getPostId(), postCreatedTime.getYear(), postCreatedTime.getMonth(), postCreatedTime.getDate());
+            container._children.add(child);
         }
     }
 
@@ -101,7 +116,8 @@ public class PostExtractor {
     // byd e6
     // EV
     // Electric car
-    public static void extractElectricVehicle(Snap415FBPost fbPost, String fbPostStory, Snap415UserProfile profile) {
+    private static void extractElectricVehicle(Snap415FBPost fbPost, String fbPostStory, ExtractedData container) {
+        LOG.info(String.format("[extractElectricVehicle(%1$s)...", fbPost.getPostId()));
         boolean boughtEV = false;
         boughtEV = boughtEV ||
           (
@@ -125,10 +141,13 @@ public class PostExtractor {
               ||(fbPostStory.indexOf("ev") >= 0)
               )
           );
-            if (boughtEV) {
-                // TODO: getYear etc. is deprecated
-                Snap415ElectricVehicle electricVehicle = new Snap415ElectricVehicle(fbPost, fbPost.getCreatedTime().getYear(), fbPost.getCreatedTime().getMonth(), fbPost.getCreatedTime().getDate());
-                profile.addElectricVehicle(electricVehicle);
-            }
+
+        if (boughtEV) {
+            LOG.info(String.format("  boughtEV!"));
+            // TODO: getYear etc. is deprecated
+            Date postCreatedTime = fbPost.getCreatedTime();
+            Snap415ElectricVehicle electricVehicle = new Snap415ElectricVehicle(fbPost.getPostId(), postCreatedTime.getYear(), postCreatedTime.getMonth(), postCreatedTime.getDate());
+          container._evPurchases.add(electricVehicle);
+        }
     }
 }

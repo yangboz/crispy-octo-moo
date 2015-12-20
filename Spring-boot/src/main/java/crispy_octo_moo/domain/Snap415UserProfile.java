@@ -41,6 +41,7 @@ public class Snap415UserProfile extends BaseEntity {
     private int _incomeAmount = 12345; // TODO: needs to be set by user in app...
     // TODO: this isn't the perfect place to put child and EV purchase info
     private List<Snap415Child> _children = new ArrayList<Snap415Child>();
+    private int _childCount = 0;
     private List<Snap415ElectricVehicle> _evPurchases = new ArrayList<Snap415ElectricVehicle>();
 
     private User fbUserProfile;
@@ -54,7 +55,7 @@ public class Snap415UserProfile extends BaseEntity {
         _isMarried = isMarried;
     }
 
-    public int getChildCount() { return _children.size(); }
+    public int getChildCount() { return _childCount; }
     public void addChild(Snap415Child child) {
         _children.add(child);
     }

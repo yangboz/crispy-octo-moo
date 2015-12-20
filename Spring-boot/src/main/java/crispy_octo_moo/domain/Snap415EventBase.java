@@ -19,18 +19,20 @@ import java.util.List;
 @SuppressWarnings("serial")
 @Document(collection = "snap415_event_base")
 public abstract class Snap415EventBase extends BaseEntity {
+    protected String snap415ID;
     protected Snap415EventType _eventType;
     protected Integer _eventYear;
     protected Integer _eventMonth;
     protected Integer _eventDate;
 
     // the source posts based on whic we derived
-    protected List<Snap415FBPost> _sourcePosts = new ArrayList<Snap415FBPost>();
+    protected List<String> _sourcePostIds = new ArrayList<String>();
     // is the event info provided by customer in the app ? (vs derived from Facebook/etc.)
     protected boolean _isCustomerProvided = false;
 
     // _isCustomerProvided==true
-    public Snap415EventBase(Snap415EventType eventType, int eventYear, int eventMonth, int eventDate) {
+    public Snap415EventBase(String snap415ID, Snap415EventType eventType, int eventYear, int eventMonth, int eventDate) {
+        this.snap415ID = snap415ID;
         _eventType = eventType;
         _isCustomerProvided = true;
         _eventYear = eventYear;
@@ -38,52 +40,57 @@ public abstract class Snap415EventBase extends BaseEntity {
         _eventDate = eventDate;
     }
 
-    public Snap415EventBase(Snap415EventType eventType, Snap415FBPost post, int eventYear, int eventMonth, int eventDate) {
+    public Snap415EventBase(String snap415ID, Snap415EventType eventType, String      postId, int eventYear, int eventMonth, int eventDate) {
+        this.snap415ID = snap415ID;
         _eventDate = eventDate;
         _eventMonth = eventMonth;
         _eventYear = eventYear;
         _eventType = eventType;
-        _sourcePosts.add(post);
+        _sourcePostIds.add(postId);
     }
-    public Snap415EventBase(Snap415EventType eventType, Snap415FBPost post, int eventYear, int eventMonth) {
+    public Snap415EventBase(String snap415ID, Snap415EventType eventType, String      postId, int eventYear, int eventMonth) {
+        this.snap415ID = snap415ID;
         _eventMonth = eventMonth;
         _eventYear = eventYear;
         _eventType = eventType;
-        _sourcePosts.add(post);
+        _sourcePostIds.add(postId);
     }
-    public Snap415EventBase(Snap415EventType eventType, Snap415FBPost post, int eventYear) {
+    public Snap415EventBase(String snap415ID, Snap415EventType eventType, String      postId, int eventYear) {
+        this.snap415ID = snap415ID;
         _eventYear = eventYear;
         _eventType = eventType;
-        _sourcePosts.add(post);
+        _sourcePostIds.add(postId);
     }
-    public Snap415EventBase(Snap415EventType eventType, Snap415FBPost post) {
+    public Snap415EventBase(String snap415ID, Snap415EventType eventType, String      postId) {
+        this.snap415ID = snap415ID;
         _eventType = eventType;
-        _sourcePosts.add(post);
+        _sourcePostIds.add(postId);
     }
 
-    public void addSource(Snap415FBPost post) {
-        _sourcePosts.add(post);
+    public void addSource(String postId) {
+        _sourcePostIds.add(postId);
     }
 
     public String toString() {
-        return String.format("{_eventType=%6s, _isCustomerProvided=%1$b, eventDate=%2$d-%3$d-%4$d, _sourcePosts=%5s}",
+        return String.format("{this.snap415ID=%7$s, _eventType=%6$s, _isCustomerProvided=%1$b, eventDate=%2$d-%3$d-%4$d, _sourcePostIds=%5$s}",
             _isCustomerProvided,
             _eventYear,
             _eventMonth,
             _eventDate,
-            toString(_sourcePosts),
-            _eventType
+            toString(_sourcePostIds),
+            _eventType,
+            this.snap415ID
         );
     }
 
-    protected static String toString(List<Snap415FBPost> posts) {
+    protected static String toString(List<String> postIds) {
         StringBuffer buffer = new StringBuffer(999);
         buffer.append("[");
-        if (posts != null) {
-            for (int i=0; i<posts.size(); i++) {
+        if (postIds != null) {
+            for (int i=0; i<postIds.size(); i++) {
                 if (i > 0) buffer.append(", ");
-                Snap415FBPost post = posts.get(i);
-                buffer.append(post.toString());
+                String postId = postIds.get(i);
+                buffer.append(postId);
             }
         }
         buffer.append("]");

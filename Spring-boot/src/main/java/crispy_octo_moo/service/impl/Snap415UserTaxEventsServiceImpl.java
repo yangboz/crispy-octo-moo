@@ -3,6 +3,7 @@ package crispy_octo_moo.service.impl;
 import java.util.ArrayList;
 
 import crispy_octo_moo.consts.TaxCategories;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class Snap415UserTaxEventsServiceImpl implements Snap415UserTaxEventsServ
 
         Snap415UserTaxEvents snap415UserTaxEvents = _userTaxEventsDao.findBySnap415ID(snap415id);
 
-        ArrayList<Snap415TaxEvent> events = snap415UserTaxEvents.getTaxEvents();
+        List<Snap415TaxEvent> events = snap415UserTaxEvents.getTaxEvents();
 
         for (Snap415TaxEvent temp : events) {
             LOG.info("getTaxCategory:" + temp.getTaxCategory());
