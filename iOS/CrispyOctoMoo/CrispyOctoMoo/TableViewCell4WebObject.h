@@ -1,5 +1,5 @@
 //
-//  TableViewCell4Overview.h
+//  TableViewCell4WebObject.h
 //  CrispyOctoMoo
 //
 //  Created by yangboz on 12/13/15.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TableViewCell4Overview : UITableViewCell
+@interface TableViewCell4WebObject : UITableViewCell
 @property (nonatomic, weak) IBOutlet UITextView *headerTextV;
 @property (nonatomic, weak) IBOutlet UITextView *bodyTextV;
 @property (nonatomic, weak) IBOutlet UITextView *footerTextV;

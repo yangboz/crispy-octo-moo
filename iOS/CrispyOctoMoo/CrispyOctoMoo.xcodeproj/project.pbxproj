@@ -33,7 +33,7 @@
 		6517AC451C1905B600365394 /* WebSiteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6517AC441C1905B600365394 /* WebSiteObject.m */; };
 		652204AA1C15BA9000AC45CD /* Snap415UserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 652204A91C15BA9000AC45CD /* Snap415UserProfile.m */; };
 		657487981C1FA2F40099A4DB /* DetailMePopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 657487971C1FA2F40099A4DB /* DetailMePopupViewController.m */; };
-		657C00CA1C254382001E411B /* TableViewCell4Overview.xib in Resources */ = {isa = PBXBuildFile; fileRef = 657C00C91C254382001E411B /* TableViewCell4Overview.xib */; };
+		657C00CA1C254382001E411B /* TableViewCell4WebObject.xib in Resources */ = {isa = PBXBuildFile; fileRef = 657C00C91C254382001E411B /* TableViewCell4WebObject.xib */; };
 		659A8E391C1A9D6100770B46 /* SocialLoginPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 659A8E371C1A9D6100770B46 /* SocialLoginPopupViewController.m */; };
 		65AC90C51C194C5B00C2C9F0 /* ios7-analytics@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65AC90B91C194C5B00C2C9F0 /* ios7-analytics@1x.png */; };
 		65AC90C61C194C5B00C2C9F0 /* ios7-analytics@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65AC90BA1C194C5B00C2C9F0 /* ios7-analytics@2x.png */; };
@@ -57,7 +57,7 @@
 		65C560FC1C1C018300BF8E19 /* Snap415UserTaxEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C560FB1C1C018300BF8E19 /* Snap415UserTaxEvents.m */; };
 		65C560FF1C1C11B000BF8E19 /* SqootDealObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C560FE1C1C11B000BF8E19 /* SqootDealObject.m */; };
 		65C561021C1C13DE00BF8E19 /* DealsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C561011C1C13DE00BF8E19 /* DealsViewController.m */; };
-		65C5610A1C1D37EE00BF8E19 /* TableViewCell4Overview.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C561091C1D37EE00BF8E19 /* TableViewCell4Overview.m */; };
+		65C5610A1C1D37EE00BF8E19 /* TableViewCell4WebObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C561091C1D37EE00BF8E19 /* TableViewCell4WebObject.m */; };
 		65C5610D1C1D55B300BF8E19 /* AccountSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C5610C1C1D55B300BF8E19 /* AccountSettingsViewController.m */; };
 		905ED5A2A9F477941F17EA3F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27D3CDDFF7269ACA3912C959 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -132,7 +132,7 @@
 		652204A91C15BA9000AC45CD /* Snap415UserProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Snap415UserProfile.m; sourceTree = "<group>"; };
 		657487961C1FA2F40099A4DB /* DetailMePopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailMePopupViewController.h; sourceTree = "<group>"; };
 		657487971C1FA2F40099A4DB /* DetailMePopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailMePopupViewController.m; sourceTree = "<group>"; };
-		657C00C91C254382001E411B /* TableViewCell4Overview.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell4Overview.xib; sourceTree = "<group>"; };
+		657C00C91C254382001E411B /* TableViewCell4WebObject.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell4WebObject.xib; sourceTree = "<group>"; };
 		659A8E361C1A9D6100770B46 /* SocialLoginPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialLoginPopupViewController.h; sourceTree = "<group>"; };
 		659A8E371C1A9D6100770B46 /* SocialLoginPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialLoginPopupViewController.m; sourceTree = "<group>"; };
 		65AC90B91C194C5B00C2C9F0 /* ios7-analytics@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios7-analytics@1x.png"; sourceTree = "<group>"; };
@@ -167,8 +167,8 @@
 		65C560FE1C1C11B000BF8E19 /* SqootDealObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SqootDealObject.m; path = dto/SqootDealObject.m; sourceTree = "<group>"; };
 		65C561001C1C13DE00BF8E19 /* DealsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealsViewController.h; sourceTree = "<group>"; };
 		65C561011C1C13DE00BF8E19 /* DealsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealsViewController.m; sourceTree = "<group>"; };
-		65C561081C1D37EE00BF8E19 /* TableViewCell4Overview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell4Overview.h; sourceTree = "<group>"; };
-		65C561091C1D37EE00BF8E19 /* TableViewCell4Overview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell4Overview.m; sourceTree = "<group>"; };
+		65C561081C1D37EE00BF8E19 /* TableViewCell4WebObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell4WebObject.h; sourceTree = "<group>"; };
+		65C561091C1D37EE00BF8E19 /* TableViewCell4WebObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell4WebObject.m; sourceTree = "<group>"; };
 		65C5610B1C1D55B300BF8E19 /* AccountSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountSettingsViewController.h; sourceTree = "<group>"; };
 		65C5610C1C1D55B300BF8E19 /* AccountSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountSettingsViewController.m; sourceTree = "<group>"; };
 		A3D226CB33FD43D1F1418341 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -249,13 +249,13 @@
 				65C560E91C1BEFF800BF8E19 /* AccountViewController.m */,
 				65C561001C1C13DE00BF8E19 /* DealsViewController.h */,
 				65C561011C1C13DE00BF8E19 /* DealsViewController.m */,
-				65C561081C1D37EE00BF8E19 /* TableViewCell4Overview.h */,
-				65C561091C1D37EE00BF8E19 /* TableViewCell4Overview.m */,
+				65C561081C1D37EE00BF8E19 /* TableViewCell4WebObject.h */,
+				65C561091C1D37EE00BF8E19 /* TableViewCell4WebObject.m */,
 				65C5610B1C1D55B300BF8E19 /* AccountSettingsViewController.h */,
 				65C5610C1C1D55B300BF8E19 /* AccountSettingsViewController.m */,
 				657487961C1FA2F40099A4DB /* DetailMePopupViewController.h */,
 				657487971C1FA2F40099A4DB /* DetailMePopupViewController.m */,
-				657C00C91C254382001E411B /* TableViewCell4Overview.xib */,
+				657C00C91C254382001E411B /* TableViewCell4WebObject.xib */,
 			);
 			path = CrispyOctoMoo;
 			sourceTree = "<group>";
@@ -498,7 +498,7 @@
 				65AC90C91C194C5B00C2C9F0 /* ios7-bookmarks@2x.png in Resources */,
 				6505C5941C152D060040E055 /* LaunchScreen.storyboard in Resources */,
 				65AC90C61C194C5B00C2C9F0 /* ios7-analytics@2x.png in Resources */,
-				657C00CA1C254382001E411B /* TableViewCell4Overview.xib in Resources */,
+				657C00CA1C254382001E411B /* TableViewCell4WebObject.xib in Resources */,
 				6505C5911C152D050040E055 /* Assets.xcassets in Resources */,
 				65AC90CB1C194C5B00C2C9F0 /* ios7-person@1x.png in Resources */,
 				65AC90C71C194C5B00C2C9F0 /* ios7-analytics@3x.png in Resources */,
@@ -598,7 +598,7 @@
 				65C560FF1C1C11B000BF8E19 /* SqootDealObject.m in Sources */,
 				652204AA1C15BA9000AC45CD /* Snap415UserProfile.m in Sources */,
 				6505C5861C152CFF0040E055 /* AppDelegate.m in Sources */,
-				65C5610A1C1D37EE00BF8E19 /* TableViewCell4Overview.m in Sources */,
+				65C5610A1C1D37EE00BF8E19 /* TableViewCell4WebObject.m in Sources */,
 				6505C5891C152CFF0040E055 /* OverviewsViewController.m in Sources */,
 				65C560EA1C1BEFF800BF8E19 /* AccountViewController.m in Sources */,
 				65C560F91C1C011B00BF8E19 /* Snap415TaxEvent.m in Sources */,

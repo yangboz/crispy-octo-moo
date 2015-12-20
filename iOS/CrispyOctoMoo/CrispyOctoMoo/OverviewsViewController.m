@@ -16,7 +16,7 @@
 @implementation OverviewsViewController
 
 @synthesize overviewsResult;
-static NSString *CellIdentifier = @"TableViewCell4Overview";
+static NSString *CellIdentifier = @"TableViewCell4WebObject";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -126,16 +126,16 @@ static NSString *CellIdentifier = @"TableViewCell4Overview";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath *)indexPath
 {
     //
-    TableViewCell4Overview *cell  = (TableViewCell4Overview *) [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    TableViewCell4WebObject *cell  = (TableViewCell4WebObject *) [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if(!cell)
     {
-        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"TableViewCell4Overview" owner:nil options:nil];
+        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"TableViewCell4WebObject" owner:nil options:nil];
         
         for(id currentObject in topLevelObjects)
         {
-            if([currentObject isKindOfClass:[TableViewCell4Overview class]])
+            if([currentObject isKindOfClass:[TableViewCell4WebObject class]])
             {
-                cell = (TableViewCell4Overview *)currentObject;
+                cell = (TableViewCell4WebObject *)currentObject;
                 break;
             }
         }

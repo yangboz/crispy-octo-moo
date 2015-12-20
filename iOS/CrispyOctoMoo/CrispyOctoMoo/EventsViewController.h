@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Snap415TaxEvent.h"
 #import "Snap415Model.h"
-
-#define kCellReuseId_events @"ReuseCellName_events";
+#import "TableViewCell4WebObject.h"
 
 @interface EventsViewController : UITableViewController
 

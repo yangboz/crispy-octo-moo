@@ -6,9 +6,9 @@
 //  Copyright © 2015 SMARTKIT.INFO. All rights reserved.
 //
 
-#import "TableViewCell4Overview.h"
+#import "TableViewCell4WebObject.h"
 
-@implementation TableViewCell4Overview
+@implementation TableViewCell4WebObject
 @synthesize headerTextV,footerTextV,bodyTextV;
 
 - (void)awakeFromNib {

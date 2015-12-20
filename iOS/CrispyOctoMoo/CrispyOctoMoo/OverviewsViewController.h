@@ -13,7 +13,7 @@
 #import "Snap415API.h"
 #import "WebSiteObject.h"
 #import "STPopup.h"
-#import "TableViewCell4Overview.h"
+#import "TableViewCell4WebObject.h"
 #import "MBProgressHUD.h"
 
 @interface OverviewsViewController : UITableViewController

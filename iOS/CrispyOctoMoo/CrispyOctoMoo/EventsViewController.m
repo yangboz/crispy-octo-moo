@@ -15,6 +15,7 @@
 @implementation EventsViewController
 
 @synthesize taxEventsResult;
+static NSString *CellIdentifier = @"TableViewCell4Events";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -46,28 +47,24 @@
     return [[self taxEventsResult] count];
 }
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:  (NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = kCellReuseId_events;
-//    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    UITableViewCell *cell = [tableView
-                             dequeueReusableCellWithIdentifier:CellIdentifier];
+    //
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-    
+
+//
     NSDictionary *snap415TaxEventObj= (NSDictionary *)[self.taxEventsResult objectAtIndex:indexPath.row];
-    
-    cell.selectionStyle = UITableViewCellStyleSubtitle;
-    if ([[snap415TaxEventObj objectForKey:@"eventDescription" ] isKindOfClass:[NSNull class]])
+    //    cell.selectionStyle = UITableViewCellStyleSubtitle;
+    if (![[snap415TaxEventObj objectForKey:@"eventDescription" ] isKindOfClass:[NSNull class]])
     {
-        cell.textLabel.text = [snap415TaxEventObj objectForKey:@"taxCategory"];
-    }else{
-        cell.textLabel.text = [snap415TaxEventObj objectForKey:@"eventDescription"];
-    }
-    cell.detailTextLabel.text = [snap415TaxEventObj objectForKey:@"taxCredit"];
-    
+        cell.textLabel.text = [snap415TaxEventObj objectForKey:@"eventDescription"];//taxCategory
+        cell.detailTextLabel.text = [snap415TaxEventObj objectForKey:@"taxCredit"];
+     }
     return cell;
 }
 
