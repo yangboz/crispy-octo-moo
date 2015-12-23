@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[DetailMeViewController doneHandler:]:DetailMeViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tf_fillingCategory.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "__24-[Snap415API postUserMe]_block_invoke:Snap415API.m">
          <PersistentStrings>
             <PersistentString

@@ -260,11 +260,11 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     RKObjectRequestOperation *objectRequestOperation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[ responseDescriptor ]];
     [objectRequestOperation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        [Snap415Model sharedInstance].incomeCategories = mappingResult.array;
         RKLogInfo(@"Load collection of IncomeCategories: %@", mappingResult.array);
         //Post to NotificationCenter if neccessary.
-//        NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_load_overviews];
-//        [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_overviews object:dictObj];
-        [Snap415Model sharedInstance].incomeCategories = mappingResult.array;
+        NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_load_income_categories];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_income_categories object:dictObj];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         RKLogError(@"Operation failed with error: %@", error);
     }];
@@ -285,10 +285,10 @@
     RKObjectRequestOperation *objectRequestOperation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[ responseDescriptor ]];
     [objectRequestOperation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         RKLogInfo(@"Load collection of FillingCategories: %@", mappingResult.array);
-        //Post to NotificationCenter if neccessary.
-        //        NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_load_overviews];
-        //        [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_overviews object:dictObj];
         [Snap415Model sharedInstance].filingCategories = mappingResult.array;
+        //Post to NotificationCenter if neccessary.
+        NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_load_filing_categories];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_filing_categories object:dictObj];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         RKLogError(@"Operation failed with error: %@", error);
     }];
@@ -308,10 +308,10 @@
     RKObjectRequestOperation *objectRequestOperation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[ responseDescriptor ]];
     [objectRequestOperation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         RKLogInfo(@"Load collection of ChildrenCategories: %@", mappingResult.array);
-        //Post to NotificationCenter if neccessary.
-        //        NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_load_overviews];
-        //        [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_overviews object:dictObj];
         [Snap415Model sharedInstance].childrenCategories = mappingResult.array;
+        //Post to NotificationCenter if neccessary.
+        NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_load_children_categories];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_children_categories object:dictObj];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         RKLogError(@"Operation failed with error: %@", error);
     }];
@@ -330,11 +330,12 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     RKObjectRequestOperation *objectRequestOperation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[ responseDescriptor ]];
     [objectRequestOperation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        [Snap415Model sharedInstance].childrenKeywords = mappingResult.array;
         RKLogInfo(@"Load collection of ChildrenKeywords: %@", mappingResult.array);
         //Post to NotificationCenter if neccessary.
-        //        NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_load_overviews];
-        //        [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_overviews object:dictObj];
-        [Snap415Model sharedInstance].childrenKeywords = mappingResult.array;
+        NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_load_children_keywords];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_children_keywords object:dictObj];
+        
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         RKLogError(@"Operation failed with error: %@", error);
     }];
@@ -353,11 +354,12 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     RKObjectRequestOperation *objectRequestOperation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[ responseDescriptor ]];
     [objectRequestOperation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        [Snap415Model sharedInstance].mortgageInterests = mappingResult.array;
         RKLogInfo(@"Load collection of MortgageInterests: %@", mappingResult.array);
         //Post to NotificationCenter if neccessary.
-        //        NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_load_overviews];
-        //        [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_overviews object:dictObj];
-        [Snap415Model sharedInstance].mortgageInterests = mappingResult.array;
+        NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_load_mortgage_interests];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_mortgage_interests object:dictObj];
+        
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         RKLogError(@"Operation failed with error: %@", error);
     }];
@@ -377,11 +379,12 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     RKObjectRequestOperation *objectRequestOperation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[ responseDescriptor ]];
     [objectRequestOperation setCompletionBlockWithSuccess:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        [Snap415Model sharedInstance].EVCredits = mappingResult.array;
         RKLogInfo(@"Load collection of EVCredits: %@", mappingResult.array);
         //Post to NotificationCenter if neccessary.
-        //        NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_load_overviews];
-        //        [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_overviews object:dictObj];
-        [Snap415Model sharedInstance].EVCredits = mappingResult.array;
+        NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_load_EVCredits];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_EVCredits object:dictObj];
+        
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         RKLogError(@"Operation failed with error: %@", error);
     }];

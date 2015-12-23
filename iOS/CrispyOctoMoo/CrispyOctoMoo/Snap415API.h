@@ -44,6 +44,13 @@
 #define kNCpN_load_tax_events @"loadTaxEventsSucc"
 #define kNCpN_load_deals @"loadDealsSucc"
 #define kNCpN_get_EITCCredit @"getEITCCreditSucc"
+//
+#define kNCpN_load_income_categories @"loadIncomeCategories"
+#define kNCpN_load_filing_categories @"loadFilingCategories"
+#define kNCpN_load_children_categories @"loadChildrenCategories"
+#define kNCpN_load_children_keywords @"loadChildrenKeywords"
+#define kNCpN_load_mortgage_interests @"loadMortgageInterests"
+#define kNCpN_load_EVCredits @"loadEVCredits"
 
 @interface Snap415API : NSObject
 +(Snap415API *)sharedInstance;

@@ -19,25 +19,13 @@
     // Do any additional setup after loading the view.
     //NSNotificationCenter Oberserver
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCompleteHandler:) name:kNCpN_update_profile object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadFilingCategoriesCompleteHandler:) name:kNCpN_load_filing_categories object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    // Do any additional setup after appearing the view.
-    // create the array of data
-    NSMutableArray* bandArray = [[NSMutableArray alloc] init];
-    
-    // add some sample data
-    [bandArray addObject:@"Offsprings"];
-    [bandArray addObject:@"Radiohead"];
-    [bandArray addObject:@"Muse"];
-    [bandArray addObject:@"R.E.M."];
-    [bandArray addObject:@"The Killers"];
-    [bandArray addObject:@"Social Distortion"];
-    
-    // bind yourTextField to DownPicker
-    self.downPicker_fillingCategory = [[DownPicker alloc] initWithTextField:self.tf_fillingCategory withData:bandArray];
+    //API call
+    [[Snap415API sharedInstance] getFilingCategories];
 }
 
 
@@ -67,6 +55,21 @@
 //update user profile complete
 - (void)updateCompleteHandler:(NSNotification *) notification{
     [self dismissViewControllerAnimated:YES completion:nil];
+    //Update the taxEvents tab view.
+    [[Snap415API sharedInstance] getTaxEvents];
+}
+- (void)loadFilingCategoriesCompleteHandler:(NSNotification *) notification{
+    // Do any additional setup after appearing the view.
+    NSArray *filingCategories = [Snap415Model sharedInstance].filingCategories;
+    // create the array of data
+    NSMutableArray* bindArray = [[NSMutableArray alloc] init];
+    for (int i=0; i<filingCategories.count; i++) {
+        NSString *label = [(LabelGroupObject *)[filingCategories objectAtIndex:i] label];
+        [bindArray addObject:label];
+    }
+    NSLog(@"bindArray of filingCategories label strings:%@",bindArray.description);
+    // bind yourTextField to DownPicker
+    self.downPicker_fillingCategory = [[DownPicker alloc] initWithTextField:self.tf_fillingCategory withData:bindArray];
 }
 
 @end
