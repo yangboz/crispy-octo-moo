@@ -25,7 +25,7 @@ PODS:
     - TransitionKit (~> 2.2)
   - RKValueTransformers (1.1.2)
   - SOCKit (1.1)
-  - STPopup (1.4.0)
+  - STPopup (1.5.0)
   - TransitionKit (2.2.1)
 
 DEPENDENCIES:
@@ -42,7 +42,7 @@ SPEC CHECKSUMS:
   RestKit: 112fba5bd1f97598aac0db7981863d5fdc0263a2
   RKValueTransformers: 66ac5e4f077fdbe3496e792d89eeff4c3eb67701
   SOCKit: c7376ac262bea9115b8f749358f762522a47d392
-  STPopup: 7ad4d4edf323979cb581d59b2fb3f24c190f31e5
+  STPopup: 0c5bfe21b39ce422593f93d8f7f5df3d1bc6d1d3
   TransitionKit: 9ceccda4cd0cdc0a05ef85eb235e5a3292c3c250
 
 COCOAPODS: 0.39.0

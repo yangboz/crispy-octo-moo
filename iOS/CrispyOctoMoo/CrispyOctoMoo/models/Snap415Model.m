@@ -11,6 +11,9 @@
 @implementation Snap415Model
 
 @synthesize overviews,me,snap415Token,snap415UserTaxEvents,sqootDealsObject;
+@synthesize incomeCategories,filingCategories,childrenCategories
+,childrenKeywords,mortgageInterests,EVCredits;
+@synthesize profile;
 
 - (id)init
 {

@@ -111,9 +111,9 @@
     RKObjectMapping *responseMapping = [RKObjectMapping mappingForClass:[Snap415UserProfile class]];
     [responseMapping addAttributeMappingsFromArray:@[@"snap415ID", @"fbUserProfile", @"liUserProfile",@"profileBase"]];
     //
-    [Snap415Model sharedInstance].me.profileBase.rwIncome = nil;
-    [Snap415Model sharedInstance].me.profileBase.rwNumberOfChildren = 0;
-    [Snap415Model sharedInstance].me.profileBase.rwTaxFilingStatus = nil;
+//    [Snap415Model sharedInstance].me.profileBase.rwIncome = nil;
+//    [Snap415Model sharedInstance].me.profileBase.rwNumberOfChildren = 0;
+//    [Snap415Model sharedInstance].me.profileBase.rwTaxFilingStatus = nil;
     //
     NSIndexSet *statusCodes = RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful); // Anything in 2xx
     RKObjectMapping *requestMapping = [RKObjectMapping requestMapping]; // objectClass == NSMutableDictionary
@@ -130,11 +130,13 @@
     [manager addResponseDescriptor:respDescriptor];
     // Set MIME Type to JSON
     manager.requestSerializationMIMEType = RKMIMETypeJSON;
-    
+    //
+    NSString *pathStr = [[NSString alloc] initWithFormat:@"%@%@",kAPI_user_profile,
+    [Snap415Model sharedInstance].snap415Token.id];
     // PUT to update
-    [manager putObject: [Snap415Model sharedInstance].me.profileBase path:kAPI_user_profile parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+    [manager putObject: [Snap415Model sharedInstance].me.profileBase path:pathStr parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         //        NSLog(@"SUCCESS: %@", mappingResult.array);
-        RKLogInfo(@"Load item of Snap415UserProfile: %@", mappingResult.array);
+        RKLogInfo(@"Update item of Snap415UserProfile: %@", mappingResult.array);
         //
         //        NSLog(@"RKMappingResult: %@", mappingResult.description);
         NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_update_profile];

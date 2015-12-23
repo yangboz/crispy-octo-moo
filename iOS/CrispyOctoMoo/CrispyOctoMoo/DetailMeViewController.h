@@ -7,8 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Snap415API.h"
 #import "DownPicker.h"
-@interface DetailMeViewController : UIViewController
-@property (nonatomic, weak) IBOutlet UITextField *tf_fillingCategory;
+@interface DetailMeViewController : UITableViewController
+
+@property (nonatomic, strong) IBOutlet UITextField *tf_fillingCategory;
+@property (strong, nonatomic) IBOutlet UISlider *sl_numberOfChildren;
+@property (strong, nonatomic) IBOutlet UISlider *sl_income;
 @property (strong, nonatomic) DownPicker *downPicker_fillingCategory;
+- (IBAction)doneHandler:(id)sender;
+
 @end

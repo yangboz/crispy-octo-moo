@@ -16,7 +16,7 @@
 @interface AccountViewController :  UITableViewController
 
 @property (strong, nonatomic) Snap415UserProfile * snap415UserProfileResult;
--(IBAction)addMore:(id)sender;
+
 //Basic
 @property (nonatomic, weak) IBOutlet UILabel *lbl_firstName;
 @property (nonatomic, weak) IBOutlet UILabel *lbl_gender;

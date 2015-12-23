@@ -17,6 +17,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    //NSNotificationCenter Oberserver
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCompleteHandler:) name:kNCpN_update_profile object:nil];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -52,5 +55,18 @@
     // Pass the selected object to the new view controller.
 }
 */
+//Update user profile service.
+- (IBAction)doneHandler:(id)sender {
+    //
+    [Snap415Model sharedInstance].me.profileBase.rwIncome = [NSNumber numberWithFloat: self.sl_income.value];
+    [Snap415Model sharedInstance].me.profileBase.rwNumberOfChildren = [NSNumber numberWithFloat:self.sl_numberOfChildren.value];
+    [Snap415Model sharedInstance].me.profileBase.rwTaxFilingStatus = self.tf_fillingCategory.text;
+    NSLog(@"updateUserProfile with income:%@,numberOfChildren:%@,taxFillingStatus:%@",[Snap415Model sharedInstance].me.profileBase.rwIncome,[Snap415Model sharedInstance].me.profileBase.rwNumberOfChildren,[Snap415Model sharedInstance].me.profileBase.rwTaxFilingStatus);
+    [[Snap415API sharedInstance] updateUserProfile];
+}
+//update user profile complete
+- (void)updateCompleteHandler:(NSNotification *) notification{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end

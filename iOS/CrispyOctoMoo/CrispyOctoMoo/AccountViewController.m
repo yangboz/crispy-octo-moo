@@ -80,44 +80,14 @@ NSDictionary *fbUserProfile;
     // Dispose of any resources that can be recreated.
 }
 
--(IBAction)addMore:(id)sender{
-//    STPopupController *popupController = [[STPopupController alloc] initWithRootViewController:[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"DetailMePopupViewController"]];
-//    popupController.cornerRadius = 4;
-//    [popupController presentInViewController:self];
-}
 
-#pragma mark - Table view data source
 
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//    // Return the number of sections.
-//    return 1;
-//}
-//
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//    // Return the number of rows in the section.
-//    return [[fbUserProfile allKeys] count];
-//}
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    static NSString *CellIdentifier = @"Cell";
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-//    if (cell == nil) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-//    }
-//    // Configure the cell...
-//    NSArray *allKeys = [fbUserProfile allKeys];
-//    NSArray *allValues = [fbUserProfile allValues];
-//    NSString *key = [allKeys objectAtIndex:indexPath.row];
-//    cell.textLabel.text = key;
-//    if (![[allValues objectAtIndex:indexPath.row] isKindOfClass:[NSNull class]]){
-//        NSString *value = [allValues objectAtIndex:indexPath.row];
-//        cell.detailTextLabel.text = value;
-//        NSLog(@"index:%d,key-value:%@-%@",indexPath.row,key,value);
-//    }
-//    return cell;
-//}
+// #pragma mark - Navigation
+// // In a storyboard-based application, you will often want to do a little preparation before navigation
+// - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+// // Get the new view controller using [segue destinationViewController].
+// // Pass the selected object to the new view controller.
+// }
+
 
 @end

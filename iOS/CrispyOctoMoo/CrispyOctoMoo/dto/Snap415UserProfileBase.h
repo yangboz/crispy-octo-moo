@@ -16,7 +16,7 @@
 @property(nonatomic,strong) NSObject *simplyWork;
 //Also allow user input,read and write
 @property(nonatomic,strong) NSNumber *rwIncome;
-@property(nonatomic,strong) NSNumber *rwTaxFilingStatus;
+@property(nonatomic,strong) NSString *rwTaxFilingStatus;
 @property(nonatomic,strong) NSNumber *rwNumberOfChildren;
 
 @end
