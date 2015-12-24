@@ -13,14 +13,16 @@
 @synthesize overviews,me,snap415Token,snap415UserTaxEvents,sqootDealsObject;
 @synthesize incomeCategories,filingCategories,childrenCategories
 ,childrenKeywords,mortgageInterests,EVCredits;
-@synthesize profile;
+@synthesize profile,eitcCreditObject;
 
 - (id)init
 {
     self = [super init];
     if (self) {
         //
-        
+        [Snap415Model sharedInstance].me = [[Snap415UserProfileBase alloc] init];
+        [Snap415Model sharedInstance].profile = [[Snap415SimpleProfile alloc] init];
+        [Snap415Model sharedInstance].eitcCreditObject = [[EITCCreditObject alloc] init];
     }
     return self;
 }

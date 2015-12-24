@@ -46,10 +46,12 @@
 //Update user profile service.
 - (IBAction)doneHandler:(id)sender {
     //
-    [Snap415Model sharedInstance].me.profileBase.rwIncome = [NSNumber numberWithFloat: self.sl_income.value];
-    [Snap415Model sharedInstance].me.profileBase.rwNumberOfChildren = [NSNumber numberWithFloat:self.sl_numberOfChildren.value];
-    [Snap415Model sharedInstance].me.profileBase.rwTaxFilingStatus = self.tf_fillingCategory.text;
-    NSLog(@"updateUserProfile with income:%@,numberOfChildren:%@,taxFillingStatus:%@",[Snap415Model sharedInstance].me.profileBase.rwIncome,[Snap415Model sharedInstance].me.profileBase.rwNumberOfChildren,[Snap415Model sharedInstance].me.profileBase.rwTaxFilingStatus);
+    [Snap415Model sharedInstance].profile = [[Snap415SimpleProfile alloc] init];
+    [Snap415Model sharedInstance].profile.income = [NSNumber numberWithFloat: self.sl_income.value];
+    NSLog(@"updateUserProfile with simpleProfile.income:%@",[Snap415Model sharedInstance].profile.income);
+    [Snap415Model sharedInstance].profile.children = [NSNumber numberWithFloat:self.sl_numberOfChildren.value];
+    [Snap415Model sharedInstance].profile.filingCategory = self.tf_fillingCategory.text;
+    NSLog(@"updateUserProfile with simpleProfile:%@",[Snap415Model sharedInstance].profile.description);
     [[Snap415API sharedInstance] updateUserProfile];
 }
 //update user profile complete

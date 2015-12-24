@@ -93,7 +93,7 @@
         NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array[0] forKey:kNCpN_load_me];
         [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_me object:dictObj];
         //Save to model
-        [Snap415Model sharedInstance].me = (Snap415UserProfile *)[dictObj objectForKey:kNCpN_load_me];
+        [Snap415Model sharedInstance].me = (Snap415UserProfileBase*)[dictObj objectForKey:kNCpN_load_me];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         RKLogError(@"Operation failed with error: %@", error);
     }];
@@ -111,13 +111,9 @@
     RKObjectMapping *responseMapping = [RKObjectMapping mappingForClass:[Snap415UserProfile class]];
     [responseMapping addAttributeMappingsFromArray:@[@"snap415ID", @"fbUserProfile", @"liUserProfile",@"profileBase"]];
     //
-//    [Snap415Model sharedInstance].me.profileBase.rwIncome = nil;
-//    [Snap415Model sharedInstance].me.profileBase.rwNumberOfChildren = 0;
-//    [Snap415Model sharedInstance].me.profileBase.rwTaxFilingStatus = nil;
-    //
     NSIndexSet *statusCodes = RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful); // Anything in 2xx
     RKObjectMapping *requestMapping = [RKObjectMapping requestMapping]; // objectClass == NSMutableDictionary
-    [requestMapping addAttributeMappingsFromArray:@[@"rwIncome", @"rwTaxFilingStatus", @"rwNumberOfChildren"]];
+    [requestMapping addAttributeMappingsFromArray:@[@"income", @"children", @"filingCategory",@"iconUrl"]];
     
     RKResponseDescriptor *respDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:responseMapping method:RKRequestMethodAny pathPattern:kAPI_user_profile keyPath:nil statusCodes:statusCodes];
     
@@ -134,7 +130,7 @@
     NSString *pathStr = [[NSString alloc] initWithFormat:@"%@%@",kAPI_user_profile,
     [Snap415Model sharedInstance].snap415Token.id];
     // PUT to update
-    [manager putObject: [Snap415Model sharedInstance].me.profileBase path:pathStr parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+    [manager putObject: [Snap415Model sharedInstance].profile path:pathStr parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         //        NSLog(@"SUCCESS: %@", mappingResult.array);
         RKLogInfo(@"Update item of Snap415UserProfile: %@", mappingResult.array);
         //
@@ -142,7 +138,7 @@
         NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_update_profile];
         [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_update_profile object:dictObj];
         //Save to model
-        [Snap415Model sharedInstance].me = (Snap415UserProfile *)[dictObj objectForKey:kNCpN_update_profile];
+        [Snap415Model sharedInstance].me = (Snap415UserProfileBase *)[dictObj objectForKey:kNCpN_update_profile];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         RKLogError(@"Operation failed with error: %@", error);
     }];
@@ -412,7 +408,7 @@
     manager.requestSerializationMIMEType = RKMIMETypeJSON;
     
     // POST to get EITCCredit result
-    [manager postObject: [Snap415Model sharedInstance].snap415Token path:kAPI_EITCCredit parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+    [manager postObject: [Snap415Model sharedInstance].eitcCreditObject path:kAPI_EITCCredit parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         //        NSLog(@"SUCCESS: %@", mappingResult.array);
         RKLogInfo(@"Post item of EITCCredit result: %@", mappingResult.array);
         //
@@ -420,7 +416,7 @@
         NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_get_EITCCredit];
         [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_get_EITCCredit object:dictObj];
         //Save to model
-        [Snap415Model sharedInstance].me = (Snap415UserProfile *)[dictObj objectForKey:kNCpN_get_EITCCredit];
+        [Snap415Model sharedInstance].me = (Snap415UserProfileBase *)[dictObj objectForKey:kNCpN_get_EITCCredit];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         RKLogError(@"Operation failed with error: %@", error);
     }];

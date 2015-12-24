@@ -29,57 +29,34 @@ static NSString *CellIdentifier = @"TableViewCell4WebObject";
 
     //NotificationCenter
     ///implements of FBSDKLoginButtonDelegate
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fbLoginHandler) name:FBSDKAccessTokenDidChangeNotification object:nil] ;
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fbLoginHandler) name:FBSDKAccessTokenDidChangeNotification object:nil];
 //    self.tableView.dataSource = self;
 //    self.tableView.delegate = self;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadOverviewsHandler:) name:kNCpN_load_overviews object:nil] ;
-
+    //NotificationCenter handler
+    ///implements of FBSDKLoginButtonDelegate
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fbLoginHandler) name:FBSDKAccessTokenDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMeHandler:) name:kNCpN_load_me object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadOverviewsHandler:) name:kNCpN_load_overviews object:nil];
+    //Loading begin
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 
 - (void)fbLoginHandler{
     NSString *fbUserId = [[FBSDKAccessToken currentAccessToken] userID];
     NSString *fbAccessTokenStr = [[FBSDKAccessToken currentAccessToken] tokenString];
     NSLog(@"fbAccessToken id:%@,token:%@",fbUserId,fbAccessTokenStr);
-    //@TODO:Cache it.@see:https://developers.facebook.com/tools/debug/accesstoken
-    //    CacheService.set(Enum.localStorageKeys.OAUTH_OBJ_SOCIAL, JSON.stringify($rootScope.oauth_obj_fb), 1 * 60 * 60);//1443168000 (in about an hour)
-    //retrieve,handlers(parse,assemble,storage)
-    //    [self syncFbProfile];
-    
-    //facebook user profile handler
-    //    $rootScope.fbUser = user;
-    //    console.log("$rootScope.fbUser:", $rootScope.fbUser);
-    //    $rootScope.hideLoading();
-    //Sync the Facebook with token then get user profile.
-    //    FbUserProfileService.save({
-    //        'provider': Enum.socialProviders.FACEBOOK,
-    //        'id': user.id,
-    //        'token': $rootScope.oauth_obj_fb.accessToken
-    //    }, function (response) {
-    //        $log.debug("FbUserProfileService.get() success!", response);
-    //        //Default load overviews.
-    //        $rootScope.loadOverviews();
-    //        $rootScope.loadTaxEvents();
-    //        $rootScope.loadUserMe();
-    //    }, function (error) {
-    //        // failure handler
-    //        $log.error("FbUserProfileService.get() failed:", JSON.stringify(error));
-    //    });
+    //
     Snap415Token *snap415Token = [[Snap415Token alloc] init];
     snap415Token.id = fbUserId;
     snap415Token.token = fbAccessTokenStr;
     snap415Token.provider = @"facebook";
-    //PostUserProfile with snap415Token.
-    [Snap415Model sharedInstance].snap415Token = snap415Token;
-    [[Snap415API sharedInstance] postUserMe];
-    //Loading begin
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    //NotificationCenter handler
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMeHandler:) name:kNCpN_load_me object:nil];
+//TODO:PostUserProfile with snap415Token.
+//    [Snap415Model sharedInstance].snap415Token = snap415Token;
+//    [[Snap415API sharedInstance] postUserMe];
+    //
 }
 
 -(void)loadMeHandler:(NSNotification *) notification{
-    //Dismiss the social login popup.
-    [self.popupController dismiss];
     //If you need to run your long-running task in the main thread, you should perform it with a slight delay, so UIKit will have enough time to update the UI (i.e., draw the HUD) before you block the main thread with your task.
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.01 * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){

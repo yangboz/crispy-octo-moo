@@ -172,7 +172,12 @@
 }
 
 - (IBAction)EITCCreditCalculate:(id)sender{
-    
+    //
+    [Snap415Model sharedInstance].eitcCreditObject = [[EITCCreditObject alloc] init];
+    [Snap415Model sharedInstance].eitcCreditObject.income = @([self.tf_incomeCategory.text integerValue]);
+    [Snap415Model sharedInstance].eitcCreditObject.numberOfChildren = @([self.tf_childrenCategory.text integerValue]);
+    [Snap415Model sharedInstance].eitcCreditObject.relationshipStatus = [Snap415Model sharedInstance].me.simplyRelationshipStatus;
+    //
     [[Snap415API sharedInstance] postEITCCredit];
 }
 

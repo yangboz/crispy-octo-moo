@@ -27,6 +27,8 @@
     loginButton.readPermissions = @[@"public_profile", @"email", @"user_friends" ];
     //  @[@"id",@"name",@"email",@"relationship_status",@"work",@"birthday",@"location", @"posts", @"family"];//@"education",
     [self.view addSubview:loginButton];
+    ///implements of FBSDKLoginButtonDelegate
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fbLoginHandler) name:FBSDKAccessTokenDidChangeNotification object:nil] ;
 }
 
 
@@ -44,5 +46,10 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)fbLoginHandler{
+    //
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end

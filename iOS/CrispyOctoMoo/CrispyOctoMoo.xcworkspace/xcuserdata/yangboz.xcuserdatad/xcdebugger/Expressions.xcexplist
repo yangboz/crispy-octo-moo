@@ -6,6 +6,9 @@
          contextName = "-[DetailMeViewController doneHandler:]:DetailMeViewController.m">
          <PersistentStrings>
             <PersistentString
+               value = "self.sl_income.value">
+            </PersistentString>
+            <PersistentString
                value = "self.tf_fillingCategory.text">
             </PersistentString>
          </PersistentStrings>

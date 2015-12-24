@@ -13,16 +13,18 @@
 #import "Snap415Token.h"
 #import "Snap415UserTaxEvents.h"
 #import "SqootDealsObject.h"
+#import "EITCCreditObject.h"
+#import "Snap415SimpleProfile.h"
 
 @interface Snap415Model : NSObject
 +(Snap415Model *)sharedInstance;
 
 @property (strong, nonatomic) Snap415Token *snap415Token;
 @property (strong, nonatomic) NSArray *overviews;
-@property (strong, nonatomic) Snap415UserProfile * me;
+@property (strong, nonatomic) Snap415UserProfileBase * me;
 @property (strong, nonatomic) Snap415UserTaxEvents *snap415UserTaxEvents;
 @property (strong, nonatomic) SqootDealsObject *sqootDealsObject;
-@property (strong, nonatomic) NSDictionary *profile;//{income:0,children:0,filingCategory:'',iconUrl:''};
+@property (strong, nonatomic) Snap415SimpleProfile *profile;//{income:0,children:0,filingCategory:'',iconUrl:''};
 //Account settings
 @property (strong, nonatomic) NSArray *incomeCategories;
 @property (strong, nonatomic) NSArray *filingCategories;
@@ -30,5 +32,5 @@
 @property (strong, nonatomic) NSArray *childrenKeywords;
 @property (strong, nonatomic) NSArray *mortgageInterests;
 @property (strong, nonatomic) NSArray *EVCredits;
-
+@property (strong, nonatomic) EITCCreditObject *eitcCreditObject;
 @end
