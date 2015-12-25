@@ -89,13 +89,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CrispyOctoMoo/OverviewsViewController.m"
-            timestampString = "472659108.3723"
+            filePath = "CrispyOctoMoo/Snap415API.m"
+            timestampString = "472666335.625449"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "-fbLoginHandler"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "-postUserMe"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CrispyOctoMoo/Snap415API.m"
+            timestampString = "472666336.971072"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "-postUserMe"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

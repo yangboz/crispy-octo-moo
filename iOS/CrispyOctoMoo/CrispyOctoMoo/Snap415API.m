@@ -83,7 +83,7 @@
     [manager addResponseDescriptor:respDescriptor];
     // Set MIME Type to JSON
     manager.requestSerializationMIMEType = RKMIMETypeJSON;
-    
+//    NSLog(@"[Snap415Model sharedInstance].snap415Token:%@",[Snap415Model sharedInstance].snap415Token);
     // POST to create
     [manager postObject: [Snap415Model sharedInstance].snap415Token path:kAPI_user_me parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
 //        NSLog(@"SUCCESS: %@", mappingResult.array);

@@ -50,10 +50,13 @@ static NSString *CellIdentifier = @"TableViewCell4WebObject";
     snap415Token.id = fbUserId;
     snap415Token.token = fbAccessTokenStr;
     snap415Token.provider = @"facebook";
-//TODO:PostUserProfile with snap415Token.
-//    [Snap415Model sharedInstance].snap415Token = snap415Token;
-//    [[Snap415API sharedInstance] postUserMe];
     //
+    [Snap415Model sharedInstance].snap415Token = snap415Token;
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    //PostUserProfile with snap415Token.
+    [[Snap415API sharedInstance] postUserMe];
 }
 
 -(void)loadMeHandler:(NSNotification *) notification{
