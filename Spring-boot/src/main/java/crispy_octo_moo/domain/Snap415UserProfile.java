@@ -10,30 +10,24 @@ package crispy_octo_moo.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import crispy_octo_moo.dto.Snap415UserProfileBase;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.social.facebook.api.EducationExperience;
 import org.springframework.social.facebook.api.User;
-import org.springframework.social.facebook.api.WorkEntry;
 import org.springframework.social.linkedin.api.LinkedInProfile;
-
-import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @SuppressWarnings("serial")
 @Document(collection = "snap415_user_profile")
 public class Snap415UserProfile extends BaseEntity {
 
-    public Snap415UserProfile() {
-    }
-
     // This is the App's user ID to associate profile, posts, tax events, deals together
     // Currently, this ID is set the same as the FB user ID
     private String snap415ID;
-
     private User fbUserProfile;
     private LinkedInProfile liUserProfile;
     private Snap415UserProfileBase profileBase = new Snap415UserProfileBase();
+
+    public Snap415UserProfile() {
+    }
 
     public User getFbUserProfile() {
         return fbUserProfile;

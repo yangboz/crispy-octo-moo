@@ -3,30 +3,23 @@
  */
 package crispy_octo_moo.controller;
 
-import javax.validation.Valid;
-import javax.ws.rs.core.MediaType;
-
+import com.wordnik.swagger.annotations.ApiOperation;
 import crispy_octo_moo.domain.Snap415UserProfile;
 import crispy_octo_moo.domain.Snap415UserTaxEvents;
+import crispy_octo_moo.dto.JsonObject;
+import crispy_octo_moo.dto.Snap415RwUserProfile;
 import crispy_octo_moo.dto.Snap415UserProfileBase;
 import crispy_octo_moo.repository.Snap415UserProfileRepository;
-import crispy_octo_moo.service.EITCCreditService;
 import crispy_octo_moo.service.Snap415UserTaxEventsService;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.wordnik.swagger.annotations.ApiOperation;
-
-import crispy_octo_moo.dto.JsonObject;
+import javax.validation.Valid;
+import javax.ws.rs.core.MediaType;
 
 /**
  * The Class Snap415UserProfileController.
@@ -71,8 +64,10 @@ public class Snap415UserProfileController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ApiOperation(httpMethod = "PUT", value = "Response a string describing if the  user info is successfully updated or not.")
-    public Snap415UserProfile update(@PathVariable("id") String id, @RequestBody Snap415UserProfileBase user) {
-        Snap415UserProfile findProfile = this._userDao.findOne(id);
+//    public Snap415UserProfile update(@PathVariable("id") String id, @RequestBody Snap415UserProfileBase user) {
+    public Snap415UserProfile update(@PathVariable("id") String id, @RequestBody Snap415RwUserProfile user) {
+//        Snap415UserProfile findProfile = this._userDao.findOne(id);
+        Snap415UserProfile findProfile = this._userDao.findBySnap415ID(id);
         Snap415UserProfileBase findProfileBase = findProfile.getProfileBase();
 //        findProfile.setId(id);
 //        findProfile.setSnap415ID(id);//Currently using FB ID.
@@ -98,6 +93,7 @@ public class Snap415UserProfileController {
         LOG.info("updateEITECCredit() result:" + snap415UserTaxEvents.toString());
 
         //return this._userDao.save(findProfile);
+        LOG.info("updated userProfile result:" + findProfile.toString());
         return findProfile;
     }
 

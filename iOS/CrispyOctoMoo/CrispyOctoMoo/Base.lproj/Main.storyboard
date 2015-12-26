@@ -1392,18 +1392,21 @@
                         <sections>
                             <tableViewSection id="rEl-RN-bFC">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="jit-bQ-R2r">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="jit-bQ-R2r">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jit-bQ-R2r" id="ATR-uF-xVG">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="500" minValue="1" maxValue="10000" translatesAutoresizingMaskIntoConstraints="NO" id="UP5-BY-Rya">
-                                                    <rect key="frame" x="95" y="13" width="200" height="31"/>
+                                                <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="500" minValue="1" maxValue="10000" translatesAutoresizingMaskIntoConstraints="NO" id="UP5-BY-Rya" customClass="NYSliderPopover">
+                                                    <rect key="frame" x="93" y="41" width="200" height="31"/>
+                                                    <connections>
+                                                        <action selector="sl_incomeValueChanged:" destination="ErE-96-dnW" eventType="touchUpInside" id="F5Z-kJ-LMx"/>
+                                                    </connections>
                                                 </slider>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Income:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vbu-m6-Emh">
-                                                    <rect key="frame" x="8" y="14" width="61" height="21"/>
+                                                    <rect key="frame" x="8" y="48" width="61" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1411,40 +1414,43 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="CMh-fR-6Bk">
-                                        <rect key="frame" x="0.0" y="44" width="600" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="CMh-fR-6Bk">
+                                        <rect key="frame" x="0.0" y="80" width="600" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CMh-fR-6Bk" id="IlW-RX-J2w">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Number Of Children:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b0W-J2-JgR">
-                                                    <rect key="frame" x="8" y="11" width="158" height="21"/>
+                                                    <rect key="frame" x="8" y="44" width="158" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="8" translatesAutoresizingMaskIntoConstraints="NO" id="C5e-nY-SGT">
-                                                    <rect key="frame" x="189" y="8" width="100" height="31"/>
+                                                <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="8" translatesAutoresizingMaskIntoConstraints="NO" id="C5e-nY-SGT" customClass="NYSliderPopover">
+                                                    <rect key="frame" x="189" y="41" width="100" height="31"/>
+                                                    <connections>
+                                                        <action selector="sl_numOfChildrenValueChanged:" destination="ErE-96-dnW" eventType="touchUpInside" id="tA2-RT-sPa"/>
+                                                    </connections>
                                                 </slider>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="MF3-t6-qtV">
-                                        <rect key="frame" x="0.0" y="88" width="600" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="MF3-t6-qtV">
+                                        <rect key="frame" x="0.0" y="160" width="600" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MF3-t6-qtV" id="kTE-7q-GgI">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tax Filling Status:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71B-eJ-VB6">
-                                                    <rect key="frame" x="8" y="14" width="134" height="21"/>
+                                                    <rect key="frame" x="8" y="31" width="134" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Itl-9S-bmb">
-                                                    <rect key="frame" x="150" y="8" width="200" height="30"/>
+                                                    <rect key="frame" x="150" y="25" width="200" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
@@ -1452,7 +1458,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="CrQ-cd-HQV">
-                                        <rect key="frame" x="0.0" y="132" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="240" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CrQ-cd-HQV" id="wHF-he-fm8">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -1478,8 +1484,8 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="sl_income" destination="UP5-BY-Rya" id="7wZ-hz-zmG"/>
-                        <outlet property="sl_numberOfChildren" destination="C5e-nY-SGT" id="JcV-oO-YZk"/>
+                        <outlet property="nyslider_income" destination="UP5-BY-Rya" id="Iie-X9-aSF"/>
+                        <outlet property="nyslider_numOfchildren" destination="C5e-nY-SGT" id="XIb-E8-Zww"/>
                         <outlet property="tf_fillingCategory" destination="Itl-9S-bmb" id="5Mk-eV-gj5"/>
                     </connections>
                 </tableViewController>

@@ -83,9 +83,11 @@
     [manager addResponseDescriptor:respDescriptor];
     // Set MIME Type to JSON
     manager.requestSerializationMIMEType = RKMIMETypeJSON;
-//    NSLog(@"[Snap415Model sharedInstance].snap415Token:%@",[Snap415Model sharedInstance].snap415Token);
+    //
+    NSLog(@"RKObjectManager:%@",manager.baseURL);
     // POST to create
-    [manager postObject: [Snap415Model sharedInstance].snap415Token path:kAPI_user_me parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+    [manager postObject: [Snap415Model sharedInstance].snap415Token path:
+kAPI_user_me parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
 //        NSLog(@"SUCCESS: %@", mappingResult.array);
         RKLogInfo(@"Load item of Snap415UserMe: %@", mappingResult.array);
         //
@@ -108,14 +110,19 @@
 -(void)updateUserProfile
 {
     //
+    NSString *pathStr = [[NSString alloc] initWithFormat:@"%@%@_%@",kAPI_user_profile,[Snap415Model sharedInstance].snap415Token.provider,
+                         [Snap415Model sharedInstance].snap415Token.id];
+    NSString *paramStr = [[NSString alloc] initWithFormat:@"%@_%@",[Snap415Model sharedInstance].snap415Token.provider,
+                          [Snap415Model sharedInstance].snap415Token.id];
+    //
     RKObjectMapping *responseMapping = [RKObjectMapping mappingForClass:[Snap415UserProfile class]];
     [responseMapping addAttributeMappingsFromArray:@[@"snap415ID", @"fbUserProfile", @"liUserProfile",@"profileBase"]];
     //
     NSIndexSet *statusCodes = RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful); // Anything in 2xx
     RKObjectMapping *requestMapping = [RKObjectMapping requestMapping]; // objectClass == NSMutableDictionary
-    [requestMapping addAttributeMappingsFromArray:@[@"income", @"children", @"filingCategory",@"iconUrl"]];
+    [requestMapping addAttributeMappingsFromArray:@[@"rwIncome", @"rwTaxFilingStatus", @"rwNumberOfChildren"]];
     
-    RKResponseDescriptor *respDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:responseMapping method:RKRequestMethodAny pathPattern:kAPI_user_profile keyPath:nil statusCodes:statusCodes];
+    RKResponseDescriptor *respDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:responseMapping method:RKRequestMethodAny pathPattern:pathStr keyPath:nil statusCodes:statusCodes];
     
     // For any object of class Article, serialize into an NSMutableDictionary using the given mapping and nest
     // under the 'user/profile' key path
@@ -126,11 +133,9 @@
     [manager addResponseDescriptor:respDescriptor];
     // Set MIME Type to JSON
     manager.requestSerializationMIMEType = RKMIMETypeJSON;
-    //
-    NSString *pathStr = [[NSString alloc] initWithFormat:@"%@%@",kAPI_user_profile,
-    [Snap415Model sharedInstance].snap415Token.id];
+
     // PUT to update
-    [manager putObject: [Snap415Model sharedInstance].profile path:pathStr parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+    [manager putObject: [Snap415Model sharedInstance].profile path:pathStr parameters:@{@"id":paramStr} success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         //        NSLog(@"SUCCESS: %@", mappingResult.array);
         RKLogInfo(@"Update item of Snap415UserProfile: %@", mappingResult.array);
         //
@@ -139,8 +144,20 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_update_profile object:dictObj];
         //Save to model
         [Snap415Model sharedInstance].me = (Snap415UserProfileBase *)[dictObj objectForKey:kNCpN_update_profile];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success"
+//                                                        message:@"Update User Profile Successful!"
+//                                                       delegate:self
+//                                              cancelButtonTitle:@"OK"
+//                                              otherButtonTitles:nil];
+//        [alert show];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         RKLogError(@"Operation failed with error: %@", error);
+        UIAlertView *alertError = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                             message:@"Update User Profile Error!"
+                                                            delegate:self
+                                                   cancelButtonTitle:@"OK"
+                                                   otherButtonTitles:nil];
+        [alertError show];
     }];
     //
     // PATCH to update

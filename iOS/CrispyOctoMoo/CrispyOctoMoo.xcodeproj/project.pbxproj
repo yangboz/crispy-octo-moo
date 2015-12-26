@@ -36,6 +36,9 @@
 		657C00CA1C254382001E411B /* TableViewCell4WebObject.xib in Resources */ = {isa = PBXBuildFile; fileRef = 657C00C91C254382001E411B /* TableViewCell4WebObject.xib */; };
 		657C00CD1C2684EE001E411B /* DetailDealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 657C00CC1C2684EE001E411B /* DetailDealViewController.m */; };
 		658B4D4D1C2AE13F00297F7A /* Snap415SimpleProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 658B4D4C1C2AE13F00297F7A /* Snap415SimpleProfile.m */; };
+		658B4D531C2D9F5B00297F7A /* Snap415RwUserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 658B4D521C2D9F5B00297F7A /* Snap415RwUserProfile.m */; };
+		658B4D5B1C2EADD600297F7A /* NYPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 658B4D581C2EADD600297F7A /* NYPopover.m */; };
+		658B4D5C1C2EADD600297F7A /* NYSliderPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 658B4D5A1C2EADD600297F7A /* NYSliderPopover.m */; };
 		659A8E391C1A9D6100770B46 /* SocialLoginPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 659A8E371C1A9D6100770B46 /* SocialLoginPopupViewController.m */; };
 		65AC90C51C194C5B00C2C9F0 /* ios7-analytics@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65AC90B91C194C5B00C2C9F0 /* ios7-analytics@1x.png */; };
 		65AC90C61C194C5B00C2C9F0 /* ios7-analytics@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65AC90BA1C194C5B00C2C9F0 /* ios7-analytics@2x.png */; };
@@ -139,6 +142,12 @@
 		657C00CC1C2684EE001E411B /* DetailDealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailDealViewController.m; sourceTree = "<group>"; };
 		658B4D4B1C2AE13F00297F7A /* Snap415SimpleProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Snap415SimpleProfile.h; sourceTree = "<group>"; };
 		658B4D4C1C2AE13F00297F7A /* Snap415SimpleProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Snap415SimpleProfile.m; sourceTree = "<group>"; };
+		658B4D511C2D9F5B00297F7A /* Snap415RwUserProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Snap415RwUserProfile.h; path = dto/Snap415RwUserProfile.h; sourceTree = "<group>"; };
+		658B4D521C2D9F5B00297F7A /* Snap415RwUserProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Snap415RwUserProfile.m; path = dto/Snap415RwUserProfile.m; sourceTree = "<group>"; };
+		658B4D571C2EADD600297F7A /* NYPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYPopover.h; sourceTree = "<group>"; };
+		658B4D581C2EADD600297F7A /* NYPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYPopover.m; sourceTree = "<group>"; };
+		658B4D591C2EADD600297F7A /* NYSliderPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYSliderPopover.h; sourceTree = "<group>"; };
+		658B4D5A1C2EADD600297F7A /* NYSliderPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYSliderPopover.m; sourceTree = "<group>"; };
 		659A8E361C1A9D6100770B46 /* SocialLoginPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialLoginPopupViewController.h; sourceTree = "<group>"; };
 		659A8E371C1A9D6100770B46 /* SocialLoginPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialLoginPopupViewController.m; sourceTree = "<group>"; };
 		65AC90B91C194C5B00C2C9F0 /* ios7-analytics@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios7-analytics@1x.png"; sourceTree = "<group>"; };
@@ -234,6 +243,7 @@
 		6505C5801C152CFD0040E055 /* CrispyOctoMoo */ = {
 			isa = PBXGroup;
 			children = (
+				658B4D561C2EAD8A00297F7A /* NYSliderPopover */,
 				657C00D11C268C33001E411B /* tableViewCells */,
 				65AC90B81C194C4C00C2C9F0 /* icons */,
 				6505C5C41C158B290040E055 /* models */,
@@ -361,6 +371,8 @@
 				65C560FE1C1C11B000BF8E19 /* SqootDealObject.m */,
 				658B4D4B1C2AE13F00297F7A /* Snap415SimpleProfile.h */,
 				658B4D4C1C2AE13F00297F7A /* Snap415SimpleProfile.m */,
+				658B4D511C2D9F5B00297F7A /* Snap415RwUserProfile.h */,
+				658B4D521C2D9F5B00297F7A /* Snap415RwUserProfile.m */,
 			);
 			name = dto;
 			sourceTree = "<group>";
@@ -370,6 +382,17 @@
 			children = (
 			);
 			name = tableViewCells;
+			sourceTree = "<group>";
+		};
+		658B4D561C2EAD8A00297F7A /* NYSliderPopover */ = {
+			isa = PBXGroup;
+			children = (
+				658B4D571C2EADD600297F7A /* NYPopover.h */,
+				658B4D581C2EADD600297F7A /* NYPopover.m */,
+				658B4D591C2EADD600297F7A /* NYSliderPopover.h */,
+				658B4D5A1C2EADD600297F7A /* NYSliderPopover.m */,
+			);
+			name = NYSliderPopover;
 			sourceTree = "<group>";
 		};
 		65AC90B81C194C4C00C2C9F0 /* icons */ = {
@@ -606,7 +629,10 @@
 				658B4D4D1C2AE13F00297F7A /* Snap415SimpleProfile.m in Sources */,
 				6517AC3F1C188DC400365394 /* LabelGroupObject.m in Sources */,
 				657C00CD1C2684EE001E411B /* DetailDealViewController.m in Sources */,
+				658B4D5C1C2EADD600297F7A /* NYSliderPopover.m in Sources */,
 				6505C5C21C1589AC0040E055 /* Snap415API.m in Sources */,
+				658B4D5B1C2EADD600297F7A /* NYPopover.m in Sources */,
+				658B4D531C2D9F5B00297F7A /* Snap415RwUserProfile.m in Sources */,
 				6517AC2A1C1888AF00365394 /* ChildrenKeywords.m in Sources */,
 				65C5610D1C1D55B300BF8E19 /* AccountSettingsViewController.m in Sources */,
 				6505C5C91C15902A0040E055 /* Snap415Token.m in Sources */,

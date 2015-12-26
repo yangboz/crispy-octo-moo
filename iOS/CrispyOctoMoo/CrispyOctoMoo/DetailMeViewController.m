@@ -14,12 +14,16 @@
 
 @implementation DetailMeViewController
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     //NSNotificationCenter Oberserver
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCompleteHandler:) name:kNCpN_update_profile object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadFilingCategoriesCompleteHandler:) name:kNCpN_load_filing_categories object:nil];
+    //Initial text
+    [self updateSlidersPopoverText];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -28,12 +32,23 @@
     [[Snap415API sharedInstance] getFilingCategories];
 }
 
+- (void)updateSlidersPopoverText
+{
+    self.nyslider_income.popover.textLabel.text = [NSString stringWithFormat:@"%.2f", self.nyslider_income.value];
+    self.nyslider_numOfchildren.popover.textLabel.text = [NSString stringWithFormat:@"%.2f", self.nyslider_numOfchildren.value];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)sl_incomeValueChanged:(id)sender{
+    [self updateSlidersPopoverText];
+}
+- (IBAction)sl_numOfChildrenValueChanged:(id)sender{
+    [self updateSlidersPopoverText];
+}
 /*
 #pragma mark - Navigation
 
@@ -46,17 +61,20 @@
 //Update user profile service.
 - (IBAction)doneHandler:(id)sender {
     //
-    [Snap415Model sharedInstance].profile = [[Snap415SimpleProfile alloc] init];
-    [Snap415Model sharedInstance].profile.income = [NSNumber numberWithFloat: self.sl_income.value];
-    NSLog(@"updateUserProfile with simpleProfile.income:%@",[Snap415Model sharedInstance].profile.income);
-    [Snap415Model sharedInstance].profile.children = [NSNumber numberWithFloat:self.sl_numberOfChildren.value];
-    [Snap415Model sharedInstance].profile.filingCategory = self.tf_fillingCategory.text;
+    [Snap415Model sharedInstance].profile = [[Snap415RwUserProfile alloc] init];
+    [Snap415Model sharedInstance].profile.rwIncome = [NSNumber numberWithFloat: self.nyslider_income.value];
+    NSLog(@"updateUserProfile with simpleProfile.income:%@",[Snap415Model sharedInstance].profile.rwIncome);
+    [Snap415Model sharedInstance].profile.rwNumberOfChildren = [NSNumber numberWithFloat:self.nyslider_numOfchildren.value];
+    [Snap415Model sharedInstance].profile.rwTaxFilingStatus = self.tf_fillingCategory.text;
     NSLog(@"updateUserProfile with simpleProfile:%@",[Snap415Model sharedInstance].profile.description);
     [[Snap415API sharedInstance] updateUserProfile];
 }
+
 //update user profile complete
 - (void)updateCompleteHandler:(NSNotification *) notification{
-    [self dismissViewControllerAnimated:YES completion:nil];
+    //UINavigation back.
+//    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popToRootViewControllerAnimated:YES];
     //Update the taxEvents tab view.
     [[Snap415API sharedInstance] getTaxEvents];
 }

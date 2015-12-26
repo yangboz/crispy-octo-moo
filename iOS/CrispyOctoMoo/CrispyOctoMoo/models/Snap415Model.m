@@ -20,9 +20,6 @@
     self = [super init];
     if (self) {
         //
-        [Snap415Model sharedInstance].me = [[Snap415UserProfileBase alloc] init];
-        [Snap415Model sharedInstance].profile = [[Snap415SimpleProfile alloc] init];
-        [Snap415Model sharedInstance].eitcCreditObject = [[EITCCreditObject alloc] init];
     }
     return self;
 }

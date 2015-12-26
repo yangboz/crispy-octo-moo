@@ -37,6 +37,7 @@
 #import "LabelGroupObject.h"
 #import "LabelValueObject.h"
 #import "EITCCreditObject.h"
+#import "Snap415RwUserProfile.h"
 //Notification Center post names;
 #define kNCpN_load_overviews @"loadOverviewsSucc"
 #define kNCpN_load_me @"loadMeSucc"
