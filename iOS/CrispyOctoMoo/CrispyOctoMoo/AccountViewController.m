@@ -17,7 +17,8 @@
 @implementation AccountViewController
 @synthesize snap415UserProfileResult;
 
-Snap415UserProfileBase *snap415UserProfileBase;
+//Snap415UserProfileBase *snap415UserProfileBase;
+NSDictionary *snap415UserProfileBase;
 NSDictionary *fbUserProfile;
 
 - (void)viewDidLoad {
@@ -57,10 +58,10 @@ NSDictionary *fbUserProfile;
  //
     self.lbl_firstName.text = (NSString *)[fbUserProfile objectForKey:@"firstName"];
     self.lbl_gender.text = (NSString *)[fbUserProfile objectForKey:@"gender"];
-    self.lbl_simplyRelationshipStatus.text = (NSString *)[snap415UserProfileBase simplyRelationshipStatus];
-    self.lbl_simplyEducation.text = (NSString *)[snap415UserProfileBase  simplyEducation];
-    self.lbl_simplyBirthday.text = (NSString *)[snap415UserProfileBase simplyBirthday];
-    self.lbl_simplyWork.text = (NSString *)[snap415UserProfileBase simplyWork];
+    self.lbl_simplyRelationshipStatus.text = [snap415UserProfileBase objectForKey:@"simplyRelationshipStatus"];
+    self.lbl_simplyEducation.text = [snap415UserProfileBase objectForKey:@"simplyEducation"];
+    self.lbl_simplyBirthday.text = [snap415UserProfileBase objectForKey:@"simplyBirthday"];
+    self.lbl_simplyWork.text = [snap415UserProfileBase objectForKey:@"simplyWork"];
  //
     self.lbl_city.text = (NSString *)[fbUserProfile objectForKey:@"city"];
     self.lbl_residents.text = [[NSString alloc] initWithFormat:@"birthday at %@ Years",(NSString *)[fbUserProfile objectForKey:@"birthday"]];

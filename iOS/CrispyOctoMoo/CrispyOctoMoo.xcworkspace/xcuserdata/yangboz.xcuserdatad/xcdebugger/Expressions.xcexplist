@@ -17,6 +17,12 @@
          contextName = "__24-[Snap415API postUserMe]_block_invoke:Snap415API.m">
          <PersistentStrings>
             <PersistentString
+               value = "[Snap415Model sharedInstance].me">
+            </PersistentString>
+            <PersistentString
+               value = "[dictObj objectForKey:kNCpN_load_me]">
+            </PersistentString>
+            <PersistentString
                value = "[dictObj objectForkey:loadMeSucc]">
             </PersistentString>
          </PersistentStrings>
@@ -44,10 +50,47 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "__31-[Snap415API updateUserProfile]_block_invoke_2:Snap415API.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[AccountSettingsViewController EITCCreditCalculate:]:AccountSettingsViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[Snap415Model sharedInstance].me">
+            </PersistentString>
+            <PersistentString
+               value = "[Snap415Model sharedInstance].profile">
+            </PersistentString>
+            <PersistentString
+               value = "[Snap415Model sharedInstance].me.profileBase">
+            </PersistentString>
+            <PersistentString
+               value = "[Snap415Model sharedInstance].eitcCreditObject">
+            </PersistentString>
+            <PersistentString
+               value = " [Snap415Model sharedInstance].eitcCreditObject.relationshipStatus">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[DealsViewController tableView:cellForRowAtIndexPath:]:DealsViewController.m">
       </ContextState>
       <ContextState
+         contextName = "__28-[Snap415API postEITCCredit]_block_invoke:Snap415API.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[Snap415API postUserMe]:Snap415API.m">
+      </ContextState>
+      <ContextState
          contextName = "__23-[Snap415API loadDeals]_block_invoke:Snap415API.m">
+      </ContextState>
+      <ContextState
+         contextName = "__31-[Snap415API updateUserProfile]_block_invoke:Snap415API.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[Snap415Model sharedInstance].me">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[AccountViewController viewDidLoad]:AccountViewController.m">

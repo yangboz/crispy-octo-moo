@@ -13,5 +13,6 @@
 @property (nonatomic, strong) NSString *snap415ID;//social user id;
 @property(nonatomic,strong) NSDictionary *fbUserProfile;
 @property(nonatomic,strong) NSObject *liUserProfile;
-@property(nonatomic,strong) Snap415UserProfileBase *profileBase;
+//@property(nonatomic,strong) Snap415UserProfileBase *profileBase;
+@property(nonatomic,strong) NSDictionary *profileBase;
 @end

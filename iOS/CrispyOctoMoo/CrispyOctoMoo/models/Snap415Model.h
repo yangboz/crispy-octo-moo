@@ -21,7 +21,7 @@
 
 @property (strong, nonatomic) Snap415Token *snap415Token;
 @property (strong, nonatomic) NSArray *overviews;
-@property (strong, nonatomic) Snap415UserProfileBase * me;
+@property (strong, nonatomic) Snap415UserProfile * me;
 @property (strong, nonatomic) Snap415UserTaxEvents *snap415UserTaxEvents;
 @property (strong, nonatomic) SqootDealsObject *sqootDealsObject;
 @property (strong, nonatomic) Snap415RwUserProfile *profile;//{income:0,children:0,filingCategory:'',iconUrl:''};

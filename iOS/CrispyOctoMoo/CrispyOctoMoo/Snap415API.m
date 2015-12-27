@@ -95,7 +95,10 @@ kAPI_user_me parameters:nil success:^(RKObjectRequestOperation *operation, RKMap
         NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array[0] forKey:kNCpN_load_me];
         [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_load_me object:dictObj];
         //Save to model
-        [Snap415Model sharedInstance].me = (Snap415UserProfileBase*)[dictObj objectForKey:kNCpN_load_me];
+        [Snap415Model sharedInstance].me = (Snap415UserProfile*)[dictObj objectForKey:kNCpN_load_me];
+        NSLog(@"[Snap415Model sharedInstance].me:%@",[Snap415Model sharedInstance].me.description);
+    NSLog(@"[Snap415Model sharedInstance].me.profileBase:%@",[Snap415Model sharedInstance].me.profileBase.description);
+    NSLog(@"[Snap415Model sharedInstance].me.profileBase.simplyRelationshipStatus:%@",[[Snap415Model sharedInstance].me.profileBase  objectForKey:@"simplyRelationshipStatus"] );
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         RKLogError(@"Operation failed with error: %@", error);
     }];
@@ -142,8 +145,8 @@ kAPI_user_me parameters:nil success:^(RKObjectRequestOperation *operation, RKMap
         //        NSLog(@"RKMappingResult: %@", mappingResult.description);
         NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_update_profile];
         [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_update_profile object:dictObj];
-        //Save to model
-        [Snap415Model sharedInstance].me = (Snap415UserProfileBase *)[dictObj objectForKey:kNCpN_update_profile];
+//Save to model
+//        [Snap415Model sharedInstance].me = [dictObj objectForKey:kNCpN_update_profile];
 //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success"
 //                                                        message:@"Update User Profile Successful!"
 //                                                       delegate:self
@@ -412,7 +415,7 @@ kAPI_user_me parameters:nil success:^(RKObjectRequestOperation *operation, RKMap
     RKObjectMapping *requestMapping = [RKObjectMapping requestMapping]; // objectClass == NSMutableDictionary
     [requestMapping addAttributeMappingsFromArray:@[@"relationshipStatus", @"numberOfChildren", @"income"]];
     
-    RKResponseDescriptor *respDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:responseMapping method:RKRequestMethodAny pathPattern:kAPI_EITCCredit keyPath:nil statusCodes:statusCodes];
+    RKResponseDescriptor *respDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:responseMapping method:RKRequestMethodAny pathPattern:kAPI_EITCCredit keyPath:@"data" statusCodes:statusCodes];
     
     // For any object of class Article, serialize into an NSMutableDictionary using the given mapping and nest
     // under the 'user/me' key path
@@ -432,8 +435,14 @@ kAPI_user_me parameters:nil success:^(RKObjectRequestOperation *operation, RKMap
         //        NSLog(@"RKMappingResult: %@", mappingResult.description);
         NSDictionary *dictObj = [NSDictionary dictionaryWithObject:mappingResult.array forKey:kNCpN_get_EITCCredit];
         [[NSNotificationCenter defaultCenter] postNotificationName:kNCpN_get_EITCCredit object:dictObj];
-        //Save to model
-        [Snap415Model sharedInstance].me = (Snap415UserProfileBase *)[dictObj objectForKey:kNCpN_get_EITCCredit];
+        //Display calculated result;
+        NSString *resultStr = [[NSString alloc] initWithFormat: @"EITCCreditService calculated result:%@",@"0" ];
+        UIAlertView *alertError = [[UIAlertView alloc] initWithTitle:@"Congratulations!"
+            message:resultStr
+            delegate:self
+            cancelButtonTitle:@"OK"
+            otherButtonTitles:nil];
+        [alertError show];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         RKLogError(@"Operation failed with error: %@", error);
     }];

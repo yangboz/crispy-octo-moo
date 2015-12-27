@@ -34,8 +34,8 @@
 
 - (void)updateSlidersPopoverText
 {
-    self.nyslider_income.popover.textLabel.text = [NSString stringWithFormat:@"%.2f", self.nyslider_income.value];
-    self.nyslider_numOfchildren.popover.textLabel.text = [NSString stringWithFormat:@"%.2f", self.nyslider_numOfchildren.value];
+    self.nyslider_income.popover.textLabel.text = [NSString stringWithFormat:@"%.0f", self.nyslider_income.value];
+    self.nyslider_numOfchildren.popover.textLabel.text = [NSString stringWithFormat:@"%.0f", self.nyslider_numOfchildren.value];
 }
 
 - (void)didReceiveMemoryWarning {

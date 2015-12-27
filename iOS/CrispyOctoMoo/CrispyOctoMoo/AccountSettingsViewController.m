@@ -41,6 +41,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadChildrenKeywordsCompleteHandler:) name:kNCpN_load_children_keywords object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMortgageInterestsCompleteHandler:) name:kNCpN_load_mortgage_interests object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadEVCreditsCompleteHandler:) name:kNCpN_load_EVCredits object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postEITCCreditCompleteHandler:) name:kNCpN_get_EITCCredit object:nil];
     
 }
 
@@ -148,9 +149,16 @@
     [Snap415Model sharedInstance].eitcCreditObject = [[EITCCreditObject alloc] init];
     [Snap415Model sharedInstance].eitcCreditObject.income = @([self.tf_incomeCategory.text integerValue]);
     [Snap415Model sharedInstance].eitcCreditObject.numberOfChildren = @([self.tf_childrenCategory.text integerValue]);
-    [Snap415Model sharedInstance].eitcCreditObject.relationshipStatus = [Snap415Model sharedInstance].me.simplyRelationshipStatus;
+    //
+    if (![[Snap415Model sharedInstance].me isKindOfClass:[NSNull class]])
+    {
+        [Snap415Model sharedInstance].eitcCreditObject.relationshipStatus = [[Snap415Model sharedInstance].me.profileBase objectForKey:@"simplyRelationshipStatus"];
+    }
     //
     [[Snap415API sharedInstance] postEITCCredit];
+}
+- (void)postEITCCreditCompleteHandler:(NSNotification *) notification{
+//    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end
