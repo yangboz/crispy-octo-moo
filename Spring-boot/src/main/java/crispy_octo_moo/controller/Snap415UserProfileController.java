@@ -64,10 +64,10 @@ public class Snap415UserProfileController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ApiOperation(httpMethod = "PUT", value = "Response a string describing if the  user info is successfully updated or not.")
-//    public Snap415UserProfile update(@PathVariable("id") String id, @RequestBody Snap415UserProfileBase user) {
-    public Snap415UserProfile update(@PathVariable("id") String id, @RequestBody Snap415RwUserProfile user) {
-//        Snap415UserProfile findProfile = this._userDao.findOne(id);
-        Snap415UserProfile findProfile = this._userDao.findBySnap415ID(id);
+    public Snap415UserProfile update(@PathVariable("id") String id, @RequestBody Snap415UserProfileBase user) {
+//    public Snap415UserProfile update(@PathVariable("id") String id, @RequestBody Snap415RwUserProfile user) {
+        Snap415UserProfile findProfile = this._userDao.findOne(id);
+//        Snap415UserProfile findProfile = this._userDao.findBySnap415ID(id);
         Snap415UserProfileBase findProfileBase = findProfile.getProfileBase();
 //        findProfile.setId(id);
 //        findProfile.setSnap415ID(id);//Currently using FB ID.
