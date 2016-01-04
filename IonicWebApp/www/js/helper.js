@@ -18,12 +18,12 @@ var _environments = {
         }
     },
     dev: {
-        host: 'http://ec2-54-218-63-45.us-west-2.compute.amazonaws.com',
+        host: 'http://54.201.26.68',
         config: {
             /**
              * Add any config properties you want in here for this environment
              */
-            api_endpoint_base: 'http://ec2-54-218-63-45.us-west-2.compute.amazonaws.com:8083/api',
+            api_endpoint_base: 'http://54.201.26.68/:8083/api',
             api_version: '/v1/',
             ga_track_code:'UA-70169433-1'
         }

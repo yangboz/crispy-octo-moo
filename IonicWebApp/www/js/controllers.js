@@ -272,17 +272,20 @@ angular.module('starter.controllers', [])
         //retrieve facebook user profile by web;
         $scope.fbProfileRetrieve_web = function(){
           ngFB.api({
-            path: '/me',
-            params: {fields: 'id,name'}
+            path: '/me'
+            ,params: {fields: 'id,name,email,gender,location'}
           }).then(
             function (user) {
+              $log.debug('fbProfileRetrieve_web succeeded, response: ', user);  
               $scope.fbProfileHandler(user);
+              $rootScope.hideLoading();
             },
             function (error) {
               alert('Facebook error: ' + error);
               console.error('Facebook error: ' + error);
+              $rootScope.hideLoading();
             });
-          $rootScope.hideLoading();
+          
         };
         //
         $scope.fbProfileRetrieve_mobile = function(){
@@ -595,11 +598,14 @@ angular.module('starter.controllers', [])
             $rootScope.me.rwIncome = $scope.profile.income;
             $rootScope.me.rwTaxFilingStatus = $scope.profile.filingCategory.label;
             $rootScope.me.rwNumberOfChildren = $scope.profile.children;
-            var rawProfileIconUrl = "http://graph.facebook.com/"+$rootScope.me.fbUserProfile.id+"/picture?width=270&height=270";
+            var rawProfileIconUrl = "http://graph.facebook.com/"+$rootScope.fbUser.id+"/picture?width=270&height=270";
             $log.info("rawProfileIconUrl:"+rawProfileIconUrl);
             $scope.profile.iconUrl = $sce.trustAsResourceUrl(rawProfileIconUrl);
             //
-            UserProfileService.update({Id:$rootScope.me.id},$rootScope.me, function (response) {
+            $log.info("$rootScope.fbUser:"+$rootScope.fbUser);
+            var snap415Id = Enum.socialProviders.FACEBOOK+"_"+$rootScope.fbUser.id;
+            $log.info("UserProfileService.update() with snap415Id:"+snap415Id);
+            UserProfileService.update({Id:snap415Id},$rootScope.me, function (response) {
                 $log.debug("UserProfileService.update() success!", response);
                 $rootScope.me = response;
                 $rootScope.detailModal_me.hide();
