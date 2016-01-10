@@ -1,8 +1,9 @@
 package crispy_octo_moo.dto;
 
-import com.sun.tools.javac.util.List;
 import crispy_octo_moo.utils.TypedMap;
 import crispy_octo_moo.utils.TypedMapKey;
+
+import java.util.List;
 
 /**
  * Created by yangboz on 1/7/16.
@@ -11,6 +12,7 @@ import crispy_octo_moo.utils.TypedMapKey;
  */
 public class ExtractedTypedMap extends TypedMap {
     public TypedMapKey<String> KEY1 = new TypedMapKey<String>("key1");
+    public TypedMapKey<List<String>> KEY2 = new TypedMapKey<List<String>>("key2");
 
     @Override
     public String toString() {
@@ -19,6 +21,4 @@ public class ExtractedTypedMap extends TypedMap {
                 ", KEY2=" + KEY2 +
                 '}';
     }
-
-    public TypedMapKey<List<String>> KEY2 = new TypedMapKey<List<String>>("key2");
 }
