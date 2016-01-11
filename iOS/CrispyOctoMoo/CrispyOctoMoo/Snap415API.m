@@ -13,7 +13,7 @@
 //@see: http://stackoverflow.com/questions/5643514/how-to-define-an-nsstring-for-global-use
 //#define DEV @"dev_aws"
 #ifdef DEV
-#define kAPIEndpointHost @"http://54.201.26.68:8083/api/v1/"
+#define kAPIEndpointHost @"http://52.33.35.75:8083/api/v1/"
 #else//LOCAL
 #define kAPIEndpointHost @"http://localhost:8083/api/v1/"
 #endif
