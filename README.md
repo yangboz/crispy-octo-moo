@@ -15,9 +15,9 @@ https://ionicthemes.com/tutorials/about/native-facebook-login-with-ionic-framewo
 
 # Jenkins:
 
-Spring-boot: [![Build Status](http://ec2-54-201-26-68.us-west-2.compute.amazonaws.com:8080/job/DEV_Snap415_JavaSpringBoot/badge/icon)](http://ec2-54-201-26-68.us-west-2.compute.amazonaws.com:8080/job/DEV_Snap415_JavaSpringBoot/)
+Spring-boot: [![Build Status](http://52.33.35.75:8080/job/DEV_Snap415_JavaSpringBoot/badge/icon)](http://52.33.35.75:8080//job/DEV_Snap415_JavaSpringBoot/)
 
-IonicWebApp: [![Build Status](http://ec2-54-201-26-68.us-west-2.compute.amazonaws.com:8080/job/DEV_Snap415_IonicWebApp/badge/icon)](http://ec2-54-201-26-68.us-west-2.compute.amazonaws.com:8080/job/DEV_Snap415_IonicWebApp/)
+IonicWebApp: [![Build Status](http://52.33.35.75:8080/job/DEV_Snap415_IonicWebApp/badge/icon)](http://52.33.35.75:8080/job/DEV_Snap415_IonicWebApp/)
 
 # TODO:
 
