@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -56,7 +56,7 @@
             </objects>
             <point key="canvasLocation" x="1524" y="-229.5"/>
         </scene>
-        <!--Title-->
+        <!--SqootDetail-->
         <scene sceneID="gBX-we-ycM">
             <objects>
                 <tableViewController id="w3S-5p-JPs" customClass="DetailDealViewController" sceneMemberID="viewController">
@@ -563,7 +563,7 @@
                             <outlet property="delegate" destination="w3S-5p-JPs" id="fcB-2f-59c"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Title" id="9l6-JT-v87">
+                    <navigationItem key="navigationItem" title="SqootDetail" id="9l6-JT-v87">
                         <barButtonItem key="rightBarButtonItem" systemItem="stop" id="oxd-RH-KYb">
                             <connections>
                                 <action selector="dismiss:" destination="w3S-5p-JPs" id="xL0-Ir-AMI"/>
@@ -1460,16 +1460,18 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="CrQ-cd-HQV">
                                         <rect key="frame" x="0.0" y="180" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CrQ-cd-HQV" id="wHF-he-fm8">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" tableViewCell="CrQ-cd-HQV" id="wHF-he-fm8">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nXr-jb-plK">
                                                     <rect key="frame" x="277" y="7" width="46" height="30"/>
                                                     <state key="normal" title="Done"/>
+                                                    <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
+                                                        <rect key="frame" x="270" y="0.0" width="60" height="43"/>
+                                                    </variation>
                                                     <connections>
                                                         <action selector="doneHandler:" destination="nWI-p8-ew2" eventType="touchUpInside" id="52U-hP-CIA"/>
-                                                        <action selector="doneHandler:" destination="ErE-96-dnW" eventType="touchUpOutside" id="FX5-4h-ThB"/>
                                                     </connections>
                                                 </button>
                                             </subviews>

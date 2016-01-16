@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SqootMerchant.h"
 
 @interface DetailDealViewController : UITableViewController
 @property(nonatomic,strong) NSDictionary *dealData;

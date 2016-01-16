@@ -68,12 +68,20 @@ NSDictionary *fbUserProfile;
     NSObject *familyObj = [fbUserProfile objectForKey:@"family"];
     self.lbl_family.text = familyObj.description;
     //
-    NSObject *locationObj = [fbUserProfile objectForKey:@"location"];
-    self.lbl_location.text = locationObj.description;
-    NSObject *workObj = [fbUserProfile objectForKey:@"work"];
-    self.lbl_workStatus.text = workObj.description;;
-    NSObject *educationObj = [fbUserProfile objectForKey:@"education"];
-    self.lbl_education.text = educationObj.description;;
+    NSDictionary *locationObj = [fbUserProfile objectForKey:@"location"];
+    if (![locationObj isKindOfClass:[NSNull class]]){
+        self.lbl_location.text = [locationObj objectForKey:@"name"];
+    }
+    NSDictionary *workObj = [(NSArray *)[fbUserProfile objectForKey:@"work"] objectAtIndex:0];
+    if (![workObj isKindOfClass:[NSNull class]]){
+        self.lbl_workStatus.text = [(NSDictionary *)[workObj objectForKey:@"employer"] objectForKey:@"name"];
+    }
+    NSDictionary *educationObj = [(NSArray *)[fbUserProfile objectForKey:@"education"] objectAtIndex:0];
+    if (![educationObj isKindOfClass:[NSNull class]]){
+        NSDictionary *schoolObj = (NSDictionary *)[educationObj objectForKey:@"school"];
+        NSString *educationStr = [[NSString alloc]  initWithFormat:@"%@(%@)",[schoolObj objectForKey:@"name"],[educationObj objectForKey:@"type"]];
+        self.lbl_education.text = educationStr;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

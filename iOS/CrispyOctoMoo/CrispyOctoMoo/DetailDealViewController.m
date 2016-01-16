@@ -49,11 +49,16 @@ NSDictionary * dealDict;
 //    self.lbl_nSold.text = [(NSNumber *)[dealDict objectForKey:@"number_sold"] stringValue];
     self.lbl_nSold.text = (NSString *)[dealDict objectForKey:@"number_sold"];
     //
-    self.lbl_description.text = (NSString *)[dealDict objectForKey:@"description"];
+//    self.lbl_description.text = (NSString *)[dealDict objectForKey:@"description"];
+    if (![[dealDict objectForKey:@"description"] isKindOfClass:[NSNull class]]){
+    NSAttributedString *attributedString_description = [[NSAttributedString alloc] initWithData:[(NSString *)[dealDict objectForKey:@"description"] dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+    self.lbl_description.attributedText = attributedString_description;
+    }
     self.lbl_image_url.text = (NSString *)[dealDict objectForKey:@"image_url"];
     self.lbl_link_url.text = (NSString *)[dealDict objectForKey:@"url"];
     self.lbl_fine_print.text = (NSString *)[dealDict objectForKey:@"fine_print"];
-    self.lbl_merchant.text = [(NSObject *)[dealDict objectForKey:@"merchant"] description];
+    NSDictionary *sqootMerchant = (NSDictionary *)[dealDict objectForKey:@"merchant"];
+    self.lbl_merchant.text = [sqootMerchant objectForKey:@"name"];
     self.lbl_share.text = (NSString *)[dealDict objectForKey:@"untracked_url"];
     
 }
