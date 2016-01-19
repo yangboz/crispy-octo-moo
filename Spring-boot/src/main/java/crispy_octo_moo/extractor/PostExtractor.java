@@ -34,11 +34,14 @@ public class PostExtractor {
 
     public static void extract(Snap415FBPost fbPost, ExtractedData container) {
         String story = fbPost.getStory();
-        if (story.trim().length() > 0) {
-            String storyLowerCase = story.toLowerCase();
-            extractChild(fbPost, storyLowerCase, container);
-            extractElectricVehicle(fbPost, storyLowerCase, container);
-            extractMarriageStatus(fbPost, storyLowerCase, container);
+        if(story != null)
+        {
+	        if (story.trim().length() > 0) {
+	            String storyLowerCase = story.toLowerCase();
+	            extractChild(fbPost, storyLowerCase, container);
+	            extractElectricVehicle(fbPost, storyLowerCase, container);
+	            extractMarriageStatus(fbPost, storyLowerCase, container);
+	        }
         }
     }
 
