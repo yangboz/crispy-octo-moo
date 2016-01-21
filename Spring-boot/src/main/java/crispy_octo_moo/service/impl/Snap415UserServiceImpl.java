@@ -73,7 +73,8 @@ public class Snap415UserServiceImpl implements Snap415UserService {
             }
             List<WorkEntry> workEntries = fbUserProfile.getWork();
             if (workEntries != null && workEntries.size() > 0) {
-                find.getProfileBase().setSimplyWork(workEntries.get(0).toString());//XXX:more accurate information.
+            	find.getProfileBase().setSimplyWork(workEntries.get(0).getEmployer().getName());
+                //find.getProfileBase().setSimplyWork(workEntries.get(0).toString());//XXX:more accurate information.
             } else {
                 LOG.info("None of WorkEntry to sync.");
             }
