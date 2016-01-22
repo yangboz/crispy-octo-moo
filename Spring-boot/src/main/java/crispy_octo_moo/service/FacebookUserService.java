@@ -2,6 +2,8 @@ package crispy_octo_moo.service;
 
 import crispy_octo_moo.domain.FbUserProfile;
 import crispy_octo_moo.dto.Snap415Token;
+
+import org.springframework.social.facebook.api.FamilyMember;
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.Post;
 import org.springframework.social.facebook.api.User;
@@ -12,6 +14,8 @@ import org.springframework.social.facebook.api.User;
 public interface FacebookUserService {
 
     User getUserProfile(Snap415Token token);
+    
+    PagedList<FamilyMember> getUserFamilyMembers(Snap415Token token);
 
     PagedList<Post> getUserPost(Snap415Token token);
 }

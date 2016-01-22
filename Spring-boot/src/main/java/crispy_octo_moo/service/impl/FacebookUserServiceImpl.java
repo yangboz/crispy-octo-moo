@@ -11,6 +11,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.facebook.api.FamilyMember;
+import org.springframework.social.facebook.api.FriendOperations;
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.Post;
 import org.springframework.social.facebook.api.User;
@@ -65,6 +67,8 @@ public class FacebookUserServiceImpl implements FacebookUserService {
 //        org.springframework.social.facebook.api.User profile = facebook.userOperations().getUserProfile();
         ComFacebookTemplate facebookTemplate = (ComFacebookTemplate) facebook;
         org.springframework.social.facebook.api.User profile = facebookTemplate.getUserProfile();
+		
+		
 //        LOG.info("Raw facebook user profile:" + profile.toString());
 //        LOG.info("Raw facebook user profile,getBirthday:" + profile.getBirthday() + ",getEducation:" + profile.getEducation().toArray().toString()
 //                + ",getWork" + profile.getWork().toArray().toString() + ",getRelationshipStatus:" + profile.getRelationshipStatus());
@@ -73,6 +77,38 @@ public class FacebookUserServiceImpl implements FacebookUserService {
         return profile;
 //        return this._fbUserDao.save(fbUser);
     }
+    
+    @Override
+    public PagedList<FamilyMember> getUserFamilyMembers(Snap415Token token) {
+        /**
+         * Programmatically signs in the user with the given the user ID.
+         * @see: spring-social-showcase-boot(SignInUtil)
+         */
+        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(token.getId(), null, null));
+        //
+//		String accessToken = "f8FX29g..."; // access token received from Facebook after OAuth authorization
+//		Facebook facebook = new FacebookTemplate(accessToken);
+        LOG.debug("connectionRepository.findAllConnections():" + connectionRepository.findAllConnections().toString());
+        Connection<Facebook> connection = connectionRepository.findPrimaryConnection(Facebook.class);
+        LOG.debug("Connection<Facebook>:" + connection);
+
+        Facebook facebook = connection != null ? connection.getApi() : new ComFacebookTemplate(token.getToken());
+        LOG.debug("facebook,isAuthorized():" + facebook.isAuthorized() + "," + facebook.toString());
+        ComFacebookTemplate facebookTemplate = (ComFacebookTemplate) facebook;
+        FriendOperations friendOps1 = facebookTemplate.friendOperations();
+        PagedList<FamilyMember> familymembers = friendOps1.getFamily();
+		
+//        LOG.info("Raw facebook user profile:" + profile.toString());
+//        LOG.info("Raw facebook user profile,getBirthday:" + profile.getBirthday() + ",getEducation:" + profile.getEducation().toArray().toString()
+//                + ",getWork" + profile.getWork().toArray().toString() + ",getRelationshipStatus:" + profile.getRelationshipStatus());
+        if(!familymembers.isEmpty())
+        	LOG.info("get family memebers:" + familymembers.get(0).getRelationship());
+        else
+        	LOG.info("get family memebers: None");
+        return familymembers;
+//        
+    }
+
 
     @Override
     public PagedList<Post> getUserPost(Snap415Token token) {

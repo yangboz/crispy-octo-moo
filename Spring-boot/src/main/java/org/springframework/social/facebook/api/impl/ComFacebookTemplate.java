@@ -1,5 +1,6 @@
 package org.springframework.social.facebook.api.impl;
 
+import org.springframework.social.facebook.api.FamilyMember;
 import org.springframework.social.facebook.api.User;
 
 /**
@@ -57,4 +58,6 @@ public class ComFacebookTemplate extends FacebookTemplate {
     public User getUserProfile() {
         return this.fetchObject("me", User.class, MY_PROFILE_FIELDS);
     }
+    
+   
 }
