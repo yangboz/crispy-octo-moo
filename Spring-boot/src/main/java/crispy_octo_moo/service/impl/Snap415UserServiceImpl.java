@@ -11,6 +11,7 @@ import crispy_octo_moo.repository.Snap415UserTaxEventsRepository;
 import crispy_octo_moo.service.FacebookUserService;
 import crispy_octo_moo.service.LinkedInUserService;
 import crispy_octo_moo.service.Snap415UserService;
+import junit.framework.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,17 +121,20 @@ public class Snap415UserServiceImpl implements Snap415UserService {
         Snap415UserProfile snap415UserProfile = this.getMe(token);
 
         String Snap415ID = snap415UserProfile.getSnap415ID();
-
+        //@see: http://javarevisited.blogspot.sg/2013/05/ava-tips-and-best-practices-to-avoid-nullpointerexception-program-application.html
+//        @NotNull
         Snap415UserTaxEvents result = _userTaxEventsDao.findBySnap415ID(Snap415ID);
+        Assert.assertNotNull(result);
+        //
+        if (null != result) {
+            ArrayList<Snap415TaxEvent> events = result.getTaxEvents();
 
-        ArrayList<Snap415TaxEvent> events = result.getTaxEvents();
-
-        for (Snap415TaxEvent temp : events) {
-            if (temp.getTaxCategory().equals(TaxCategories.EITC.getValue())) {
-                LOG.info("update:" + temp.getTaxCategory() + " " + temp.getTaxCredit());
+            for (Snap415TaxEvent temp : events) {
+                if (temp.getTaxCategory().equals(TaxCategories.EITC.getValue())) {
+                    LOG.info("update:" + temp.getTaxCategory() + " " + temp.getTaxCredit());
+                }
             }
         }
-
 
         return result;
     }
