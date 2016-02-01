@@ -4,19 +4,14 @@ import com.wordnik.swagger.annotations.ApiOperation;
 import crispy_octo_moo.consts.FixtureData;
 import crispy_octo_moo.dto.EITCCreditObject;
 import crispy_octo_moo.dto.JsonObject;
+import crispy_octo_moo.service.EITCCreditService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.ws.rs.core.MediaType;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by yangboz on 9/27/15.
@@ -26,6 +21,9 @@ import java.util.List;
 public class EITCCreditController {
 
     private final Logger LOG = LoggerFactory.getLogger(EITCCreditController.class);
+
+    @Autowired
+    private EITCCreditService eitcCreditService;
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON)
     @ApiOperation(httpMethod = "POST", value = "Response a string describing if the EITCCredit info is successfully created or not.")
@@ -52,5 +50,11 @@ public class EITCCreditController {
         LOG.info("eitccreditdetail:" + eitccreditdetail);
 
         return new JsonObject(eitccreditdetail);
+    }
+
+    @RequestMapping(value = "/{snap415Id}", method = RequestMethod.GET)
+    @ApiOperation(httpMethod = "GET", value = "Response a string describing if the snap415Id related value is successfully get or not.")
+    public JsonObject get(@PathVariable("snap415Id") String snap415Id) {
+        return new JsonObject(eitcCreditService.getEITCCredit(snap415Id));
     }
 }

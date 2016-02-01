@@ -4,8 +4,10 @@ import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.response.ValidatableResponse;
 import crispy_octo_moo.Application;
+import crispy_octo_moo.domain.Snap415UserProfile;
 import crispy_octo_moo.dto.EITCCreditObject;
 import org.apache.http.HttpStatus;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import static com.jayway.restassured.RestAssured.given;
+import static com.jayway.restassured.RestAssured.when;
 
 /**
  * Created by yangboz on 02/01/16.
@@ -30,11 +33,13 @@ public class EITCControllerTest {
 
     @Value("${local.server.port}")   // 6
             int port;
+    Snap415UserProfile mickey;
 
     @Before
     public void setUp() {
         // 7
-
+        mickey = new Snap415UserProfile();
+        mickey.setSnap415ID("facebook_10206030920185106");
         // 9
         RestAssured.port = port;
 //        RestAssured.port = 8082;
@@ -63,4 +68,21 @@ public class EITCControllerTest {
                         then().
                         statusCode(HttpStatus.SC_OK);
     }
+
+    // 10
+    @Test
+    public void testGet() {
+        String mickeyId = mickey.getSnap415ID();
+
+        ValidatableResponse resp =
+                when().
+                        get("/api/v1/eitcCredit/{snap415Id}", mickeyId)
+                        .then()
+                        .statusCode(HttpStatus.SC_OK)
+//                .body("data",Matchers.notNullValue());
+                        .body("data", Matchers.greaterThanOrEqualTo(0));
+//                body("id", Matchers.is(mickeyId));
+//                System.out.println(resp.toString());
+    }
+
 }
