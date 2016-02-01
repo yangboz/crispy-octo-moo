@@ -29,3 +29,5 @@ http://www.javacodegeeks.com/2013/03/customize-spring-social-connect-framework-f
 
 https://github.com/exacode/spring-social-mongodb
 
+http://examples.javacodegeeks.com/enterprise-java/jboss-drools/drools-decision-table-example/
+

@@ -1,13 +1,23 @@
 package crispy_octo_moo.service.impl;
 
+import crispy_octo_moo.domain.Snap415UserProfile;
+import crispy_octo_moo.dto.drools.Customer;
+import crispy_octo_moo.dto.drools.Product;
+import crispy_octo_moo.repository.Snap415UserProfileRepository;
+import crispy_octo_moo.service.EITCCreditService;
+import org.kie.api.io.ResourceType;
+import org.kie.internal.KnowledgeBase;
+import org.kie.internal.KnowledgeBaseFactory;
+import org.kie.internal.builder.DecisionTableConfiguration;
+import org.kie.internal.builder.DecisionTableInputType;
+import org.kie.internal.builder.KnowledgeBuilder;
+import org.kie.internal.builder.KnowledgeBuilderFactory;
+import org.kie.internal.io.ResourceFactory;
+import org.kie.internal.runtime.StatelessKnowledgeSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import crispy_octo_moo.domain.Snap415UserProfile;
-import crispy_octo_moo.repository.Snap415UserProfileRepository;
-import crispy_octo_moo.service.EITCCreditService;
 
 @Service
 public class EITCCreditServiceImpl implements EITCCreditService {
@@ -22,6 +32,24 @@ public class EITCCreditServiceImpl implements EITCCreditService {
     private int numberofChildren;
     private int income;
     private int eitccredit;
+
+    //
+    private StatelessKnowledgeSession statelessKnowledgeSession;
+
+    //@see:http://examples.javacodegeeks.com/enterprise-java/jboss-drools/drools-decision-table-example/
+    private static KnowledgeBase createKnowledgeBaseFromSpreadsheet()
+            throws Exception {
+        DecisionTableConfiguration decisionTableConfiguration = KnowledgeBuilderFactory.newDecisionTableConfiguration();
+        decisionTableConfiguration.setInputType(DecisionTableInputType.XLS);
+        KnowledgeBuilder knowledgeBuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+        knowledgeBuilder.add(ResourceFactory.newClassPathResource("shopping_cart_customer.xls"), ResourceType.DTABLE, decisionTableConfiguration);
+        if (knowledgeBuilder.hasErrors()) {
+            throw new RuntimeException(knowledgeBuilder.getErrors().toString());
+        }
+        KnowledgeBase knowledgeBase = KnowledgeBaseFactory.newKnowledgeBase();
+        knowledgeBase.addKnowledgePackages(knowledgeBuilder.getKnowledgePackages());
+        return knowledgeBase;
+    }
 
     @Override
     public int getEITCCredit(String snap415id) {
@@ -59,10 +87,39 @@ public class EITCCreditServiceImpl implements EITCCreditService {
                 eitccredit = 6242;
         }
 
+        //Using Drools
+        try {
+            KnowledgeBase knowledgeBase = this.createKnowledgeBaseFromSpreadsheet();
+            statelessKnowledgeSession = knowledgeBase.newStatelessKnowledgeSession();
+
+            Customer customer = new Customer();
+            Product p1 = new Product("Laptop", 15000);
+            Product p2 = new Product("Mobile", 5000);
+            Product p3 = new Product("Books", 2000);
+            customer.addItem(p1, 1);
+            customer.addItem(p2, 2);
+            customer.addItem(p3, 5);
+            customer.setCoupon("DISC01");
+
+            statelessKnowledgeSession.execute(customer);
+
+            System.out.println("First Customer\n" + customer);
+
+            Customer newCustomer = Customer.newCustomer();
+            newCustomer.addItem(p1, 1);
+            newCustomer.addItem(p2, 2);
+
+            statelessKnowledgeSession.execute(newCustomer);
+
+            System.out.println("*********************************");
+            System.out.println("Second Customer\n" + newCustomer);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         LOG.info("eitccredt =" + eitccredit);
+
 
         return eitccredit;
     }
-
-
 }
