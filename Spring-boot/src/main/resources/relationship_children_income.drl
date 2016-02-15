@@ -1,0 +1,60 @@
+//Decision tables for EITCCredit
+import crispy_octo_moo.dto.EITCCreditObject;
+
+rule "Married,0,20330,503"
+when
+  eITCCreditObject:EITCCreditObject (relationshipStatus=="Married", numberOfChildren==0, income<=20330)
+then
+  eITCCreditObject.setCredit(503);
+end
+rule "Married,1,44651,3359"
+when
+  eITCCreditObject:EITCCreditObject (relationshipStatus=="Married", numberOfChildren==1, income==44651)
+then
+  eITCCreditObject.setCredit(3359);
+end
+
+rule "Married,2,49974,5548"
+when
+  eITCCreditObject:EITCCreditObject (relationshipStatus=="Married", numberOfChildren==2, income==49974)
+then
+  eITCCreditObject.setCredit(5548);
+end
+
+rule "Married,3,53267,6242"
+when
+  eITCCreditObject:EITCCreditObject (relationshipStatus=="Married", numberOfChildren>=3, income==53267)
+then
+  eITCCreditObject.setCredit(6242);
+end
+rule "Single,0,14820,503"
+when
+  eITCCreditObject:EITCCreditObject (relationshipStatus=="Single", numberOfChildren==0, income==14820)
+then
+  eITCCreditObject.setCredit(503);
+end
+rule "Married,1,39131,3359"
+when
+  eITCCreditObject:EITCCreditObject (relationshipStatus=="Single", numberOfChildren==1, income==39131)
+then
+  eITCCreditObject.setCredit(3359);
+end
+rule "Married,2,44454"
+when
+  eITCCreditObject:EITCCreditObject (relationshipStatus=="Single", numberOfChildren==2, income==44454)
+then
+  eITCCreditObject.setCredit(5548);
+end
+rule "Married,3,47747"
+when
+  eITCCreditObject:EITCCreditObject (relationshipStatus=="Single", numberOfChildren>=3, income==47747)
+then
+  eITCCreditObject.setCredit(6242);
+end
+
+rule "In a relationship,0,0,-1"
+when
+  eITCCreditObject:EITCCreditObject (relationshipStatus=="In a relationship")
+then
+  eITCCreditObject.setCredit(-1);
+end

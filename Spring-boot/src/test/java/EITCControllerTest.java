@@ -43,6 +43,8 @@ public class EITCControllerTest {
         // 9
         RestAssured.port = port;
 //        RestAssured.port = 8082;
+//        String i = 1 + 1 + '1' + 1 + 1 + 1 + 1 + "1";
+//        System.out.println(i);
     }
 
     private String getApiPath() {
@@ -53,7 +55,10 @@ public class EITCControllerTest {
 
     @Test
     public void testCreate() throws JsonProcessingException {
-        EITCCreditObject anewMikey = new EITCCreditObject("Married", 3, 1500);
+//        EITCCreditObject anewMikey = new EITCCreditObject("Married", 0, 20330);//Married,0,20330,503
+        EITCCreditObject anewMikey = new EITCCreditObject("Married", 1, 44651);//Married,1,44651,3359
+//        EITCCreditObject anewMikey = new EITCCreditObject("Married", 2, 49974);//Married,2,49974,5548
+//        EITCCreditObject anewMikey = new EITCCreditObject("Married", 3, 53267);//Married,3,53267,6242
         //Object to JSON in String
         ObjectMapper mapper = new ObjectMapper();
         String updateJsonStr = mapper.writeValueAsString(anewMikey);
@@ -80,7 +85,7 @@ public class EITCControllerTest {
                         .then()
                         .statusCode(HttpStatus.SC_OK)
 //                .body("data",Matchers.notNullValue());
-                        .body("data", Matchers.greaterThanOrEqualTo(0));
+                        .body("data", Matchers.lessThanOrEqualTo(0));
 //                body("id", Matchers.is(mickeyId));
 //                System.out.println(resp.toString());
     }

@@ -1,7 +1,6 @@
 package crispy_octo_moo.controller;
 
 import com.wordnik.swagger.annotations.ApiOperation;
-import crispy_octo_moo.consts.FixtureData;
 import crispy_octo_moo.dto.EITCCreditObject;
 import crispy_octo_moo.dto.JsonObject;
 import crispy_octo_moo.service.EITCCreditService;
@@ -32,24 +31,24 @@ public class EITCCreditController {
 //        List<Integer> incomeFixture = new ArrayList<Integer>(20330, 44651, 49974, 53267);
 //        List<Integer> numberofChildrenThresholds = new ArrayList<Integer>(0, 1, 2, 3);
 //        List<String> creditFixture = new ArrayList<String>("$503", "$3359", "$5548", "$6242", "unknown");
-        String eitccreditdetail = "EITC Credit:";
+//        String eitccreditdetail = "EITC Credit:";
 //        return {
 //                get: function ($relationship_status, $numberofChildren, $income) {
-        if (value.relationshipStatus == "Married") {//"Married"
-            for (int i = 0; i < FixtureData.numberofChildrenThresholds.size(); i++) {
-                if (value.income < FixtureData.incomeFixture.get(i)) {
-                    eitccreditdetail = "EITC Credit:" + FixtureData.creditFixture.get(i);
-                } else {
-                    eitccreditdetail = "EITC Credit: unknown";
-                }
-            }
-        } else {
-            eitccreditdetail = "EITC Credit: unknown";
-        }
+//        if (value.relationshipStatus == "Married") {//"Married"
+//            for (int i = 0; i < FixtureData.numberofChildrenThresholds.size(); i++) {
+//                if (value.income < FixtureData.incomeFixture.get(i)) {
+//                    eitccreditdetail = "EITC Credit:" + FixtureData.creditFixture.get(i);
+//                } else {
+//                    eitccreditdetail = "EITC Credit: unknown";
+//                }
+//            }
+//        } else {
+//            eitccreditdetail = "EITC Credit: unknown";
+//        }
+//
+//        LOG.info("eitccreditdetail:" + eitccreditdetail);
 
-        LOG.info("eitccreditdetail:" + eitccreditdetail);
-
-        return new JsonObject(eitccreditdetail);
+        return new JsonObject(eitcCreditService.getEITCCredit(value));
     }
 
     @RequestMapping(value = "/{snap415Id}", method = RequestMethod.GET)
