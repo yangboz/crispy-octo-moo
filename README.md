@@ -15,7 +15,7 @@ https://ionicthemes.com/tutorials/about/native-facebook-login-with-ionic-framewo
 
 # Jenkins:
 
-Spring-boot: [![Build Status](http://52.33.35.75:8080/job/DEV_Snap415_JavaSpringBoot/badge/icon)](http://52.33.35.75:8080//job/DEV_Snap415_JavaSpringBoot/)
+Spring-boot: [![Build Status](http://118.190.96.120:8080/buildStatus/icon?job=crispy-octo-moo)](http://118.190.96.120:8080/job/crispy-octo-moo/)
 
 IonicWebApp: [![Build Status](http://52.33.35.75:8080/job/DEV_Snap415_IonicWebApp/badge/icon)](http://52.33.35.75:8080/job/DEV_Snap415_IonicWebApp/)
 
